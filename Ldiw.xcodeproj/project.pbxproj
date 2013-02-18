@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13B1DF4C16D23AE000A5BF60 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */; };
 		534CCF0F16D210590004532F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF0E16D210590004532F /* UIKit.framework */; };
 		534CCF1116D210590004532F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1016D210590004532F /* Foundation.framework */; };
 		534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1216D210590004532F /* CoreGraphics.framework */; };
@@ -16,7 +17,6 @@
 		534CCF2116D210590004532F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF2016D210590004532F /* AppDelegate.m */; };
 		534CCF2316D210590004532F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF2216D210590004532F /* Default.png */; };
 		534CCF2516D210590004532F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF2416D210590004532F /* Default@2x.png */; };
-		534CCF2716D210590004532F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF2616D210590004532F /* Default-568h@2x.png */; };
 		534CCF2A16D210590004532F /* Ldiw.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF2816D210590004532F /* Ldiw.xcdatamodeld */; };
 		534CCF3316D213280004532F /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF3216D213280004532F /* Database.m */; };
 		534CCF4B16D22D9C0004532F /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF3916D22D9C0004532F /* AFHTTPClient.m */; };
@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		534CCF0B16D210590004532F /* Ldiw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ldiw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		534CCF0E16D210590004532F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		534CCF1016D210590004532F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,7 +49,6 @@
 		534CCF2016D210590004532F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		534CCF2216D210590004532F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		534CCF2416D210590004532F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		534CCF2616D210590004532F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		534CCF2916D210590004532F /* Ldiw.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ldiw.xcdatamodel; sourceTree = "<group>"; };
 		534CCF3116D213280004532F /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		534CCF3216D213280004532F /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				534CCF1E16D210590004532F /* Ldiw-Prefix.pch */,
 				534CCF2216D210590004532F /* Default.png */,
 				534CCF2416D210590004532F /* Default@2x.png */,
-				534CCF2616D210590004532F /* Default-568h@2x.png */,
+				13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -264,8 +264,8 @@
 				534CCF1B16D210590004532F /* InfoPlist.strings in Resources */,
 				534CCF2316D210590004532F /* Default.png in Resources */,
 				534CCF2516D210590004532F /* Default@2x.png in Resources */,
-				534CCF2716D210590004532F /* Default-568h@2x.png in Resources */,
 				534CCF5D16D22F770004532F /* MainViewController.xib in Resources */,
+				13B1DF4C16D23AE000A5BF60 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +420,7 @@
 				534CCF2F16D210590004532F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
