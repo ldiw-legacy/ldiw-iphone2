@@ -1,0 +1,161 @@
+10
+
+dir
+0
+svn+ssh://lauri@svn.dev.mobi.ee/var/lib/svnm/speed-ios/Ldiw/Ldiw
+svn+ssh://lauri@svn.dev.mobi.ee/var/lib/svnm/speed-ios
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8fc4cb5b-a055-4957-bc51-06cb503c4932
+
+main.m
+file
+
+
+
+add
+
+Default@2x.png
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+Ldiw-Info.plist
+file
+
+
+
+add
+
+en.lproj
+dir
+
+
+
+add
+
+Ldiw.xcdatamodeld
+dir
+
+
+
+add
+
+Database.h
+file
+
+
+
+add
+
+Database.m
+file
+
+
+
+add
+
+AppDelegate.h
+file
+
+
+
+add
+
+Constants.h
+file
+
+
+
+add
+
+Ldiw-Prefix.pch
+file
+
+
+
+add
+
+MainViewController.xib
+file
+
+
+
+add
+
+AppDelegate.m
+file
+
+
+
+add
+
+Default.png
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+Default-568h@2x.png
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+MainViewController.h
+file
+
+
+
+add
+
+MainViewController.m
+file
+
+
+
+add
+
