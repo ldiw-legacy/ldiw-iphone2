@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		13B1DF4C16D23AE000A5BF60 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */; };
+		13B1DF5A16D2779200A5BF60 /* _TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF4F16D2779200A5BF60 /* _TypicalValues.m */; };
+		13B1DF5B16D2779200A5BF60 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5116D2779200A5BF60 /* _WastePoint.m */; };
+		13B1DF5C16D2779200A5BF60 /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5316D2779200A5BF60 /* _WPField.m */; };
+		13B1DF5D16D2779200A5BF60 /* TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5516D2779200A5BF60 /* TypicalValues.m */; };
+		13B1DF5E16D2779200A5BF60 /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5716D2779200A5BF60 /* WastePoint.m */; };
+		13B1DF5F16D2779200A5BF60 /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5916D2779200A5BF60 /* WPField.m */; };
 		534CCF0F16D210590004532F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF0E16D210590004532F /* UIKit.framework */; };
 		534CCF1116D210590004532F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1016D210590004532F /* Foundation.framework */; };
 		534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1216D210590004532F /* CoreGraphics.framework */; };
@@ -36,6 +42,18 @@
 
 /* Begin PBXFileReference section */
 		13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		13B1DF4E16D2779200A5BF60 /* _TypicalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValues.h; sourceTree = "<group>"; };
+		13B1DF4F16D2779200A5BF60 /* _TypicalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TypicalValues.m; sourceTree = "<group>"; };
+		13B1DF5016D2779200A5BF60 /* _WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WastePoint.h; sourceTree = "<group>"; };
+		13B1DF5116D2779200A5BF60 /* _WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WastePoint.m; sourceTree = "<group>"; };
+		13B1DF5216D2779200A5BF60 /* _WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WPField.h; sourceTree = "<group>"; };
+		13B1DF5316D2779200A5BF60 /* _WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WPField.m; sourceTree = "<group>"; };
+		13B1DF5416D2779200A5BF60 /* TypicalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValues.h; sourceTree = "<group>"; };
+		13B1DF5516D2779200A5BF60 /* TypicalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValues.m; sourceTree = "<group>"; };
+		13B1DF5616D2779200A5BF60 /* WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePoint.h; sourceTree = "<group>"; };
+		13B1DF5716D2779200A5BF60 /* WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePoint.m; sourceTree = "<group>"; };
+		13B1DF5816D2779200A5BF60 /* WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPField.h; sourceTree = "<group>"; };
+		13B1DF5916D2779200A5BF60 /* WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPField.m; sourceTree = "<group>"; };
 		534CCF0B16D210590004532F /* Ldiw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ldiw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		534CCF0E16D210590004532F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		534CCF1016D210590004532F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,6 +114,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13B1DF4D16D2779200A5BF60 /* databaseObjects */ = {
+			isa = PBXGroup;
+			children = (
+				13B1DF4E16D2779200A5BF60 /* _TypicalValues.h */,
+				13B1DF4F16D2779200A5BF60 /* _TypicalValues.m */,
+				13B1DF5016D2779200A5BF60 /* _WastePoint.h */,
+				13B1DF5116D2779200A5BF60 /* _WastePoint.m */,
+				13B1DF5216D2779200A5BF60 /* _WPField.h */,
+				13B1DF5316D2779200A5BF60 /* _WPField.m */,
+				13B1DF5416D2779200A5BF60 /* TypicalValues.h */,
+				13B1DF5516D2779200A5BF60 /* TypicalValues.m */,
+				13B1DF5616D2779200A5BF60 /* WastePoint.h */,
+				13B1DF5716D2779200A5BF60 /* WastePoint.m */,
+				13B1DF5816D2779200A5BF60 /* WPField.h */,
+				13B1DF5916D2779200A5BF60 /* WPField.m */,
+			);
+			path = databaseObjects;
+			sourceTree = "<group>";
+		};
 		534CCF0216D210580004532F = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +194,7 @@
 		534CCF3016D213000004532F /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				13B1DF4D16D2779200A5BF60 /* databaseObjects */,
 				534CCF2816D210590004532F /* Ldiw.xcdatamodeld */,
 				534CCF3116D213280004532F /* Database.h */,
 				534CCF3216D213280004532F /* Database.m */,
@@ -306,6 +344,12 @@
 				534CCF5216D22D9C0004532F /* AFXMLRequestOperation.m in Sources */,
 				534CCF5316D22D9C0004532F /* UIImageView+AFNetworking.m in Sources */,
 				534CCF5C16D22F770004532F /* MainViewController.m in Sources */,
+				13B1DF5A16D2779200A5BF60 /* _TypicalValues.m in Sources */,
+				13B1DF5B16D2779200A5BF60 /* _WastePoint.m in Sources */,
+				13B1DF5C16D2779200A5BF60 /* _WPField.m in Sources */,
+				13B1DF5D16D2779200A5BF60 /* TypicalValues.m in Sources */,
+				13B1DF5E16D2779200A5BF60 /* WastePoint.m in Sources */,
+				13B1DF5F16D2779200A5BF60 /* WPField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
