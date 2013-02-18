@@ -35,6 +35,7 @@
 		534CCF6116D256620004532F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6016D256620004532F /* NetworkRequest.m */; };
 		534CCF6416D2598B0004532F /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6316D2598B0004532F /* ServerRequest.m */; };
 		534CCF6816D25A2B0004532F /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6716D25A2B0004532F /* LocationManager.m */; };
+		534CCF6A16D279980004532F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF6916D279980004532F /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		534CCF6316D2598B0004532F /* ServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerRequest.m; sourceTree = "<group>"; };
 		534CCF6616D25A2B0004532F /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		534CCF6716D25A2B0004532F /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		534CCF6916D279980004532F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534CCF6A16D279980004532F /* CoreLocation.framework in Frameworks */,
 				534CCF5716D22DE40004532F /* MobileCoreServices.framework in Frameworks */,
 				534CCF5516D22DC60004532F /* SystemConfiguration.framework in Frameworks */,
 				534CCF0F16D210590004532F /* UIKit.framework in Frameworks */,
@@ -126,6 +129,7 @@
 		534CCF0D16D210590004532F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				534CCF6916D279980004532F /* CoreLocation.framework */,
 				534CCF5616D22DE40004532F /* MobileCoreServices.framework */,
 				534CCF5416D22DC60004532F /* SystemConfiguration.framework */,
 				534CCF0E16D210590004532F /* UIKit.framework */,

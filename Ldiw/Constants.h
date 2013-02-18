@@ -15,3 +15,6 @@
 #else
 #define MSLog(s, ...) //
 #endif
+
+#define kFirstServerUrl @"http://intranet.letsdoitworld.org/"
+#define kServerRequestPath  @"?q=get-api-base-url.json"
