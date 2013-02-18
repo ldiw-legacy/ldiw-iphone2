@@ -3,6 +3,18 @@
 
 #import "_TypicalValues.h"
 
+const struct TypicalValuesAttributes TypicalValuesAttributes = {
+	.key = @"key",
+	.value = @"value",
+};
+
+const struct TypicalValuesRelationships TypicalValuesRelationships = {
+	.wpField = @"wpField",
+};
+
+const struct TypicalValuesFetchedProperties TypicalValuesFetchedProperties = {
+};
+
 @implementation TypicalValuesID
 @end
 
@@ -26,7 +38,7 @@
 	return (TypicalValuesID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 
@@ -53,13 +65,7 @@
 @dynamic wpField;
 
 	
-- (NSMutableSet*)wpFieldSet {
-	[self willAccessValueForKey:@"wpField"];
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"wpField"];
-	[self didAccessValueForKey:@"wpField"];
-	return result;
-}
-	
+
 
 
 

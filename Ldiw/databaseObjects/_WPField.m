@@ -3,6 +3,24 @@
 
 #import "_WPField.h"
 
+const struct WPFieldAttributes WPFieldAttributes = {
+	.edit_instructions = @"edit_instructions",
+	.field_name = @"field_name",
+	.label = @"label",
+	.max = @"max",
+	.min = @"min",
+	.suffix = @"suffix",
+	.type = @"type",
+};
+
+const struct WPFieldRelationships WPFieldRelationships = {
+	.typicalValues = @"typicalValues",
+	.wastePoint = @"wastePoint",
+};
+
+const struct WPFieldFetchedProperties WPFieldFetchedProperties = {
+};
+
 @implementation WPFieldID
 @end
 
@@ -26,16 +44,18 @@
 	return (WPFieldID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 	if ([key isEqualToString:@"maxValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"max"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"minValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"min"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 
 	return keyPaths;
@@ -69,21 +89,21 @@
 
 
 
-- (short)maxValue {
+- (int16_t)maxValue {
 	NSNumber *result = [self max];
 	return [result shortValue];
 }
 
-- (void)setMaxValue:(short)value_ {
+- (void)setMaxValue:(int16_t)value_ {
 	[self setMax:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveMaxValue {
+- (int16_t)primitiveMaxValue {
 	NSNumber *result = [self primitiveMax];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveMaxValue:(short)value_ {
+- (void)setPrimitiveMaxValue:(int16_t)value_ {
 	[self setPrimitiveMax:[NSNumber numberWithShort:value_]];
 }
 
@@ -95,21 +115,21 @@
 
 
 
-- (short)minValue {
+- (int16_t)minValue {
 	NSNumber *result = [self min];
 	return [result shortValue];
 }
 
-- (void)setMinValue:(short)value_ {
+- (void)setMinValue:(int16_t)value_ {
 	[self setMin:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveMinValue {
+- (int16_t)primitiveMinValue {
 	NSNumber *result = [self primitiveMin];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveMinValue:(short)value_ {
+- (void)setPrimitiveMinValue:(int16_t)value_ {
 	[self setPrimitiveMin:[NSNumber numberWithShort:value_]];
 }
 
@@ -136,11 +156,18 @@
 	
 - (NSMutableSet*)typicalValuesSet {
 	[self willAccessValueForKey:@"typicalValues"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"typicalValues"];
+  
 	[self didAccessValueForKey:@"typicalValues"];
 	return result;
 }
 	
+
+@dynamic wastePoint;
+
+	
+
 
 
 

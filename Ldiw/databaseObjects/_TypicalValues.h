@@ -4,6 +4,18 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct TypicalValuesAttributes {
+	__unsafe_unretained NSString *key;
+	__unsafe_unretained NSString *value;
+} TypicalValuesAttributes;
+
+extern const struct TypicalValuesRelationships {
+	__unsafe_unretained NSString *wpField;
+} TypicalValuesRelationships;
+
+extern const struct TypicalValuesFetchedProperties {
+} TypicalValuesFetchedProperties;
+
 @class WPField;
 
 
@@ -21,7 +33,9 @@
 
 
 
-@property (nonatomic, strong) NSString *key;
+
+@property (nonatomic, strong) NSString* key;
+
 
 
 //- (BOOL)validateKey:(id*)value_ error:(NSError**)error_;
@@ -29,7 +43,9 @@
 
 
 
-@property (nonatomic, strong) NSString *value;
+
+@property (nonatomic, strong) NSString* value;
+
 
 
 //- (BOOL)validateValue:(id*)value_ error:(NSError**)error_;
@@ -38,9 +54,10 @@
 
 
 
-@property (nonatomic, strong) NSSet* wpField;
+@property (nonatomic, strong) WPField *wpField;
 
-- (NSMutableSet*)wpFieldSet;
+//- (BOOL)validateWpField:(id*)value_ error:(NSError**)error_;
+
 
 
 
@@ -48,11 +65,6 @@
 @end
 
 @interface _TypicalValues (CoreDataGeneratedAccessors)
-
-- (void)addWpField:(NSSet*)value_;
-- (void)removeWpField:(NSSet*)value_;
-- (void)addWpFieldObject:(WPField*)value_;
-- (void)removeWpFieldObject:(WPField*)value_;
 
 @end
 
@@ -72,8 +84,8 @@
 
 
 
-- (NSMutableSet*)primitiveWpField;
-- (void)setPrimitiveWpField:(NSMutableSet*)value;
+- (WPField*)primitiveWpField;
+- (void)setPrimitiveWpField:(WPField*)value;
 
 
 @end

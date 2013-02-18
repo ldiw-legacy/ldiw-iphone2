@@ -4,7 +4,26 @@
 #import <CoreData/CoreData.h>
 
 
-@class WastePoint;
+extern const struct WastePointAttributes {
+	__unsafe_unretained NSString *comp_biodegradable;
+	__unsafe_unretained NSString *comp_construction;
+	__unsafe_unretained NSString *comp_dagerous;
+	__unsafe_unretained NSString *comp_large;
+	__unsafe_unretained NSString *comp_other;
+	__unsafe_unretained NSString *id;
+	__unsafe_unretained NSString *latitude;
+	__unsafe_unretained NSString *longitude;
+	__unsafe_unretained NSString *wp_description;
+} WastePointAttributes;
+
+extern const struct WastePointRelationships {
+	__unsafe_unretained NSString *wpfields;
+} WastePointRelationships;
+
+extern const struct WastePointFetchedProperties {
+} WastePointFetchedProperties;
+
+@class WPField;
 
 
 
@@ -28,79 +47,93 @@
 
 
 
-@property (nonatomic, strong) NSNumber *comp_biodegradable;
+
+@property (nonatomic, strong) NSNumber* comp_biodegradable;
 
 
-@property short comp_biodegradableValue;
-- (short)comp_biodegradableValue;
-- (void)setComp_biodegradableValue:(short)value_;
+
+@property int16_t comp_biodegradableValue;
+- (int16_t)comp_biodegradableValue;
+- (void)setComp_biodegradableValue:(int16_t)value_;
 
 //- (BOOL)validateComp_biodegradable:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *comp_construction;
+
+@property (nonatomic, strong) NSNumber* comp_construction;
 
 
-@property short comp_constructionValue;
-- (short)comp_constructionValue;
-- (void)setComp_constructionValue:(short)value_;
+
+@property int16_t comp_constructionValue;
+- (int16_t)comp_constructionValue;
+- (void)setComp_constructionValue:(int16_t)value_;
 
 //- (BOOL)validateComp_construction:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *comp_dagerous;
+
+@property (nonatomic, strong) NSNumber* comp_dagerous;
 
 
-@property short comp_dagerousValue;
-- (short)comp_dagerousValue;
-- (void)setComp_dagerousValue:(short)value_;
+
+@property int16_t comp_dagerousValue;
+- (int16_t)comp_dagerousValue;
+- (void)setComp_dagerousValue:(int16_t)value_;
 
 //- (BOOL)validateComp_dagerous:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *comp_large;
+
+@property (nonatomic, strong) NSNumber* comp_large;
 
 
-@property short comp_largeValue;
-- (short)comp_largeValue;
-- (void)setComp_largeValue:(short)value_;
+
+@property int16_t comp_largeValue;
+- (int16_t)comp_largeValue;
+- (void)setComp_largeValue:(int16_t)value_;
 
 //- (BOOL)validateComp_large:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *comp_other;
+
+@property (nonatomic, strong) NSNumber* comp_other;
 
 
-@property short comp_otherValue;
-- (short)comp_otherValue;
-- (void)setComp_otherValue:(short)value_;
+
+@property int16_t comp_otherValue;
+- (int16_t)comp_otherValue;
+- (void)setComp_otherValue:(int16_t)value_;
 
 //- (BOOL)validateComp_other:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *id;
+
+@property (nonatomic, strong) NSNumber* id;
 
 
-@property int idValue;
-- (int)idValue;
-- (void)setIdValue:(int)value_;
+
+@property int32_t idValue;
+- (int32_t)idValue;
+- (void)setIdValue:(int32_t)value_;
 
 //- (BOOL)validateId:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *latitude;
+
+@property (nonatomic, strong) NSNumber* latitude;
+
 
 
 @property float latitudeValue;
@@ -112,7 +145,9 @@
 
 
 
-@property (nonatomic, strong) NSNumber *longitude;
+
+@property (nonatomic, strong) NSNumber* longitude;
+
 
 
 @property float longitudeValue;
@@ -124,7 +159,9 @@
 
 
 
-@property (nonatomic, strong) NSString *wp_description;
+
+@property (nonatomic, strong) NSString* wp_description;
+
 
 
 //- (BOOL)validateWp_description:(id*)value_ error:(NSError**)error_;
@@ -133,9 +170,10 @@
 
 
 
-@property (nonatomic, strong) NSSet* wpfields;
+@property (nonatomic, strong) NSSet *wpfields;
 
 - (NSMutableSet*)wpfieldsSet;
+
 
 
 
@@ -146,8 +184,8 @@
 
 - (void)addWpfields:(NSSet*)value_;
 - (void)removeWpfields:(NSSet*)value_;
-- (void)addWpfieldsObject:(WastePoint*)value_;
-- (void)removeWpfieldsObject:(WastePoint*)value_;
+- (void)addWpfieldsObject:(WPField*)value_;
+- (void)removeWpfieldsObject:(WPField*)value_;
 
 @end
 
@@ -157,8 +195,8 @@
 - (NSNumber*)primitiveComp_biodegradable;
 - (void)setPrimitiveComp_biodegradable:(NSNumber*)value;
 
-- (short)primitiveComp_biodegradableValue;
-- (void)setPrimitiveComp_biodegradableValue:(short)value_;
+- (int16_t)primitiveComp_biodegradableValue;
+- (void)setPrimitiveComp_biodegradableValue:(int16_t)value_;
 
 
 
@@ -166,8 +204,8 @@
 - (NSNumber*)primitiveComp_construction;
 - (void)setPrimitiveComp_construction:(NSNumber*)value;
 
-- (short)primitiveComp_constructionValue;
-- (void)setPrimitiveComp_constructionValue:(short)value_;
+- (int16_t)primitiveComp_constructionValue;
+- (void)setPrimitiveComp_constructionValue:(int16_t)value_;
 
 
 
@@ -175,8 +213,8 @@
 - (NSNumber*)primitiveComp_dagerous;
 - (void)setPrimitiveComp_dagerous:(NSNumber*)value;
 
-- (short)primitiveComp_dagerousValue;
-- (void)setPrimitiveComp_dagerousValue:(short)value_;
+- (int16_t)primitiveComp_dagerousValue;
+- (void)setPrimitiveComp_dagerousValue:(int16_t)value_;
 
 
 
@@ -184,8 +222,8 @@
 - (NSNumber*)primitiveComp_large;
 - (void)setPrimitiveComp_large:(NSNumber*)value;
 
-- (short)primitiveComp_largeValue;
-- (void)setPrimitiveComp_largeValue:(short)value_;
+- (int16_t)primitiveComp_largeValue;
+- (void)setPrimitiveComp_largeValue:(int16_t)value_;
 
 
 
@@ -193,8 +231,8 @@
 - (NSNumber*)primitiveComp_other;
 - (void)setPrimitiveComp_other:(NSNumber*)value;
 
-- (short)primitiveComp_otherValue;
-- (void)setPrimitiveComp_otherValue:(short)value_;
+- (int16_t)primitiveComp_otherValue;
+- (void)setPrimitiveComp_otherValue:(int16_t)value_;
 
 
 
@@ -202,8 +240,8 @@
 - (NSNumber*)primitiveId;
 - (void)setPrimitiveId:(NSNumber*)value;
 
-- (int)primitiveIdValue;
-- (void)setPrimitiveIdValue:(int)value_;
+- (int32_t)primitiveIdValue;
+- (void)setPrimitiveIdValue:(int32_t)value_;
 
 
 

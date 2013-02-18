@@ -4,7 +4,26 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct WPFieldAttributes {
+	__unsafe_unretained NSString *edit_instructions;
+	__unsafe_unretained NSString *field_name;
+	__unsafe_unretained NSString *label;
+	__unsafe_unretained NSString *max;
+	__unsafe_unretained NSString *min;
+	__unsafe_unretained NSString *suffix;
+	__unsafe_unretained NSString *type;
+} WPFieldAttributes;
+
+extern const struct WPFieldRelationships {
+	__unsafe_unretained NSString *typicalValues;
+	__unsafe_unretained NSString *wastePoint;
+} WPFieldRelationships;
+
+extern const struct WPFieldFetchedProperties {
+} WPFieldFetchedProperties;
+
 @class TypicalValues;
+@class WastePoint;
 
 
 
@@ -26,7 +45,9 @@
 
 
 
-@property (nonatomic, strong) NSString *edit_instructions;
+
+@property (nonatomic, strong) NSString* edit_instructions;
+
 
 
 //- (BOOL)validateEdit_instructions:(id*)value_ error:(NSError**)error_;
@@ -34,7 +55,9 @@
 
 
 
-@property (nonatomic, strong) NSString *field_name;
+
+@property (nonatomic, strong) NSString* field_name;
+
 
 
 //- (BOOL)validateField_name:(id*)value_ error:(NSError**)error_;
@@ -42,7 +65,9 @@
 
 
 
-@property (nonatomic, strong) NSString *label;
+
+@property (nonatomic, strong) NSString* label;
+
 
 
 //- (BOOL)validateLabel:(id*)value_ error:(NSError**)error_;
@@ -50,31 +75,37 @@
 
 
 
-@property (nonatomic, strong) NSNumber *max;
+
+@property (nonatomic, strong) NSNumber* max;
 
 
-@property short maxValue;
-- (short)maxValue;
-- (void)setMaxValue:(short)value_;
+
+@property int16_t maxValue;
+- (int16_t)maxValue;
+- (void)setMaxValue:(int16_t)value_;
 
 //- (BOOL)validateMax:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *min;
+
+@property (nonatomic, strong) NSNumber* min;
 
 
-@property short minValue;
-- (short)minValue;
-- (void)setMinValue:(short)value_;
+
+@property int16_t minValue;
+- (int16_t)minValue;
+- (void)setMinValue:(int16_t)value_;
 
 //- (BOOL)validateMin:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSString *suffix;
+
+@property (nonatomic, strong) NSString* suffix;
+
 
 
 //- (BOOL)validateSuffix:(id*)value_ error:(NSError**)error_;
@@ -82,7 +113,9 @@
 
 
 
-@property (nonatomic, strong) NSString *type;
+
+@property (nonatomic, strong) NSString* type;
+
 
 
 //- (BOOL)validateType:(id*)value_ error:(NSError**)error_;
@@ -91,9 +124,17 @@
 
 
 
-@property (nonatomic, strong) NSSet* typicalValues;
+@property (nonatomic, strong) NSSet *typicalValues;
 
 - (NSMutableSet*)typicalValuesSet;
+
+
+
+
+@property (nonatomic, strong) WastePoint *wastePoint;
+
+//- (BOOL)validateWastePoint:(id*)value_ error:(NSError**)error_;
+
 
 
 
@@ -133,8 +174,8 @@
 - (NSNumber*)primitiveMax;
 - (void)setPrimitiveMax:(NSNumber*)value;
 
-- (short)primitiveMaxValue;
-- (void)setPrimitiveMaxValue:(short)value_;
+- (int16_t)primitiveMaxValue;
+- (void)setPrimitiveMaxValue:(int16_t)value_;
 
 
 
@@ -142,8 +183,8 @@
 - (NSNumber*)primitiveMin;
 - (void)setPrimitiveMin:(NSNumber*)value;
 
-- (short)primitiveMinValue;
-- (void)setPrimitiveMinValue:(short)value_;
+- (int16_t)primitiveMinValue;
+- (void)setPrimitiveMinValue:(int16_t)value_;
 
 
 
@@ -163,6 +204,11 @@
 
 - (NSMutableSet*)primitiveTypicalValues;
 - (void)setPrimitiveTypicalValues:(NSMutableSet*)value;
+
+
+
+- (WastePoint*)primitiveWastePoint;
+- (void)setPrimitiveWastePoint:(WastePoint*)value;
 
 
 @end

@@ -3,6 +3,25 @@
 
 #import "_WastePoint.h"
 
+const struct WastePointAttributes WastePointAttributes = {
+	.comp_biodegradable = @"comp_biodegradable",
+	.comp_construction = @"comp_construction",
+	.comp_dagerous = @"comp_dagerous",
+	.comp_large = @"comp_large",
+	.comp_other = @"comp_other",
+	.id = @"id",
+	.latitude = @"latitude",
+	.longitude = @"longitude",
+	.wp_description = @"wp_description",
+};
+
+const struct WastePointRelationships WastePointRelationships = {
+	.wpfields = @"wpfields",
+};
+
+const struct WastePointFetchedProperties WastePointFetchedProperties = {
+};
+
 @implementation WastePointID
 @end
 
@@ -26,40 +45,48 @@
 	return (WastePointID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 	if ([key isEqualToString:@"comp_biodegradableValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"comp_biodegradable"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"comp_constructionValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"comp_construction"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"comp_dagerousValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"comp_dagerous"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"comp_largeValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"comp_large"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"comp_otherValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"comp_other"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"idValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"id"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"latitudeValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"latitude"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"longitudeValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"longitude"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 
 	return keyPaths;
@@ -72,21 +99,21 @@
 
 
 
-- (short)comp_biodegradableValue {
+- (int16_t)comp_biodegradableValue {
 	NSNumber *result = [self comp_biodegradable];
 	return [result shortValue];
 }
 
-- (void)setComp_biodegradableValue:(short)value_ {
+- (void)setComp_biodegradableValue:(int16_t)value_ {
 	[self setComp_biodegradable:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveComp_biodegradableValue {
+- (int16_t)primitiveComp_biodegradableValue {
 	NSNumber *result = [self primitiveComp_biodegradable];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveComp_biodegradableValue:(short)value_ {
+- (void)setPrimitiveComp_biodegradableValue:(int16_t)value_ {
 	[self setPrimitiveComp_biodegradable:[NSNumber numberWithShort:value_]];
 }
 
@@ -98,21 +125,21 @@
 
 
 
-- (short)comp_constructionValue {
+- (int16_t)comp_constructionValue {
 	NSNumber *result = [self comp_construction];
 	return [result shortValue];
 }
 
-- (void)setComp_constructionValue:(short)value_ {
+- (void)setComp_constructionValue:(int16_t)value_ {
 	[self setComp_construction:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveComp_constructionValue {
+- (int16_t)primitiveComp_constructionValue {
 	NSNumber *result = [self primitiveComp_construction];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveComp_constructionValue:(short)value_ {
+- (void)setPrimitiveComp_constructionValue:(int16_t)value_ {
 	[self setPrimitiveComp_construction:[NSNumber numberWithShort:value_]];
 }
 
@@ -124,21 +151,21 @@
 
 
 
-- (short)comp_dagerousValue {
+- (int16_t)comp_dagerousValue {
 	NSNumber *result = [self comp_dagerous];
 	return [result shortValue];
 }
 
-- (void)setComp_dagerousValue:(short)value_ {
+- (void)setComp_dagerousValue:(int16_t)value_ {
 	[self setComp_dagerous:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveComp_dagerousValue {
+- (int16_t)primitiveComp_dagerousValue {
 	NSNumber *result = [self primitiveComp_dagerous];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveComp_dagerousValue:(short)value_ {
+- (void)setPrimitiveComp_dagerousValue:(int16_t)value_ {
 	[self setPrimitiveComp_dagerous:[NSNumber numberWithShort:value_]];
 }
 
@@ -150,21 +177,21 @@
 
 
 
-- (short)comp_largeValue {
+- (int16_t)comp_largeValue {
 	NSNumber *result = [self comp_large];
 	return [result shortValue];
 }
 
-- (void)setComp_largeValue:(short)value_ {
+- (void)setComp_largeValue:(int16_t)value_ {
 	[self setComp_large:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveComp_largeValue {
+- (int16_t)primitiveComp_largeValue {
 	NSNumber *result = [self primitiveComp_large];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveComp_largeValue:(short)value_ {
+- (void)setPrimitiveComp_largeValue:(int16_t)value_ {
 	[self setPrimitiveComp_large:[NSNumber numberWithShort:value_]];
 }
 
@@ -176,21 +203,21 @@
 
 
 
-- (short)comp_otherValue {
+- (int16_t)comp_otherValue {
 	NSNumber *result = [self comp_other];
 	return [result shortValue];
 }
 
-- (void)setComp_otherValue:(short)value_ {
+- (void)setComp_otherValue:(int16_t)value_ {
 	[self setComp_other:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveComp_otherValue {
+- (int16_t)primitiveComp_otherValue {
 	NSNumber *result = [self primitiveComp_other];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveComp_otherValue:(short)value_ {
+- (void)setPrimitiveComp_otherValue:(int16_t)value_ {
 	[self setPrimitiveComp_other:[NSNumber numberWithShort:value_]];
 }
 
@@ -202,21 +229,21 @@
 
 
 
-- (int)idValue {
+- (int32_t)idValue {
 	NSNumber *result = [self id];
 	return [result intValue];
 }
 
-- (void)setIdValue:(int)value_ {
+- (void)setIdValue:(int32_t)value_ {
 	[self setId:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveIdValue {
+- (int32_t)primitiveIdValue {
 	NSNumber *result = [self primitiveId];
 	return [result intValue];
 }
 
-- (void)setPrimitiveIdValue:(int)value_ {
+- (void)setPrimitiveIdValue:(int32_t)value_ {
 	[self setPrimitiveId:[NSNumber numberWithInt:value_]];
 }
 
@@ -288,11 +315,14 @@
 	
 - (NSMutableSet*)wpfieldsSet {
 	[self willAccessValueForKey:@"wpfields"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"wpfields"];
+  
 	[self didAccessValueForKey:@"wpfields"];
 	return result;
 }
 	
+
 
 
 
