@@ -14,6 +14,7 @@
 		13B1DF5D16D2779200A5BF60 /* TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5516D2779200A5BF60 /* TypicalValues.m */; };
 		13B1DF5E16D2779200A5BF60 /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5716D2779200A5BF60 /* WastePoint.m */; };
 		13B1DF5F16D2779200A5BF60 /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5916D2779200A5BF60 /* WPField.m */; };
+		13B1DF6116D27AE900A5BF60 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */; };
 		534CCF0F16D210590004532F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF0E16D210590004532F /* UIKit.framework */; };
 		534CCF1116D210590004532F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1016D210590004532F /* Foundation.framework */; };
 		534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1216D210590004532F /* CoreGraphics.framework */; };
@@ -134,6 +135,7 @@
 		13B1DF5716D2779200A5BF60 /* WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePoint.m; sourceTree = "<group>"; };
 		13B1DF5816D2779200A5BF60 /* WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPField.h; sourceTree = "<group>"; };
 		13B1DF5916D2779200A5BF60 /* WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPField.m; sourceTree = "<group>"; };
+		13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		534CCF0B16D210590004532F /* Ldiw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ldiw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		534CCF0E16D210590004532F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		534CCF1016D210590004532F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -265,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13B1DF6116D27AE900A5BF60 /* CoreLocation.framework in Frameworks */,
 				534CCF5716D22DE40004532F /* MobileCoreServices.framework in Frameworks */,
 				534CCF5516D22DC60004532F /* SystemConfiguration.framework in Frameworks */,
 				534CCF0F16D210590004532F /* UIKit.framework in Frameworks */,
@@ -317,6 +320,7 @@
 		534CCF0D16D210590004532F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */,
 				534CCF5616D22DE40004532F /* MobileCoreServices.framework */,
 				534CCF5416D22DC60004532F /* SystemConfiguration.framework */,
 				534CCF0E16D210590004532F /* UIKit.framework */,

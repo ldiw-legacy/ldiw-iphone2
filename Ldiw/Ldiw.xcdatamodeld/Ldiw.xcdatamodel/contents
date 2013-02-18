@@ -12,8 +12,8 @@
         <attribute name="comp_large" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="comp_other" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="lat" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="long" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="wp_description" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="wpfields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="wpfields" inverseEntity="WastePoint" syncable="YES"/>
     </entity>

@@ -100,26 +100,26 @@
 
 
 
-@property (nonatomic, strong) NSNumber *lat;
+@property (nonatomic, strong) NSNumber *latitude;
 
 
-@property float latValue;
-- (float)latValue;
-- (void)setLatValue:(float)value_;
+@property float latitudeValue;
+- (float)latitudeValue;
+- (void)setLatitudeValue:(float)value_;
 
-//- (BOOL)validateLat:(id*)value_ error:(NSError**)error_;
-
-
+//- (BOOL)validateLatitude:(id*)value_ error:(NSError**)error_;
 
 
-@property (nonatomic, strong) NSNumber *long;
 
 
-@property float longValue;
-- (float)longValue;
-- (void)setLongValue:(float)value_;
+@property (nonatomic, strong) NSNumber *longitude;
 
-//- (BOOL)validateLong:(id*)value_ error:(NSError**)error_;
+
+@property float longitudeValue;
+- (float)longitudeValue;
+- (void)setLongitudeValue:(float)value_;
+
+//- (BOOL)validateLongitude:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -208,20 +208,20 @@
 
 
 
-- (NSNumber*)primitiveLat;
-- (void)setPrimitiveLat:(NSNumber*)value;
+- (NSNumber*)primitiveLatitude;
+- (void)setPrimitiveLatitude:(NSNumber*)value;
 
-- (float)primitiveLatValue;
-- (void)setPrimitiveLatValue:(float)value_;
-
-
+- (float)primitiveLatitudeValue;
+- (void)setPrimitiveLatitudeValue:(float)value_;
 
 
-- (NSNumber*)primitiveLong;
-- (void)setPrimitiveLong:(NSNumber*)value;
 
-- (float)primitiveLongValue;
-- (void)setPrimitiveLongValue:(float)value_;
+
+- (NSNumber*)primitiveLongitude;
+- (void)setPrimitiveLongitude:(NSNumber*)value;
+
+- (float)primitiveLongitudeValue;
+- (void)setPrimitiveLongitudeValue:(float)value_;
 
 
 

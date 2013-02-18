@@ -53,12 +53,12 @@
 		NSSet *affectingKey = [NSSet setWithObject:@"id"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
-	if ([key isEqualToString:@"latValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"lat"];
+	if ([key isEqualToString:@"latitudeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"latitude"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
-	if ([key isEqualToString:@"longValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"long"];
+	if ([key isEqualToString:@"longitudeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"longitude"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 
@@ -224,52 +224,52 @@
 
 
 
-@dynamic lat;
+@dynamic latitude;
 
 
 
-- (float)latValue {
-	NSNumber *result = [self lat];
+- (float)latitudeValue {
+	NSNumber *result = [self latitude];
 	return [result floatValue];
 }
 
-- (void)setLatValue:(float)value_ {
-	[self setLat:[NSNumber numberWithFloat:value_]];
+- (void)setLatitudeValue:(float)value_ {
+	[self setLatitude:[NSNumber numberWithFloat:value_]];
 }
 
-- (float)primitiveLatValue {
-	NSNumber *result = [self primitiveLat];
+- (float)primitiveLatitudeValue {
+	NSNumber *result = [self primitiveLatitude];
 	return [result floatValue];
 }
 
-- (void)setPrimitiveLatValue:(float)value_ {
-	[self setPrimitiveLat:[NSNumber numberWithFloat:value_]];
+- (void)setPrimitiveLatitudeValue:(float)value_ {
+	[self setPrimitiveLatitude:[NSNumber numberWithFloat:value_]];
 }
 
 
 
 
 
-@dynamic long;
+@dynamic longitude;
 
 
 
-- (float)longValue {
-	NSNumber *result = [self long];
+- (float)longitudeValue {
+	NSNumber *result = [self longitude];
 	return [result floatValue];
 }
 
-- (void)setLongValue:(float)value_ {
-	[self setLong:[NSNumber numberWithFloat:value_]];
+- (void)setLongitudeValue:(float)value_ {
+	[self setLongitude:[NSNumber numberWithFloat:value_]];
 }
 
-- (float)primitiveLongValue {
-	NSNumber *result = [self primitiveLong];
+- (float)primitiveLongitudeValue {
+	NSNumber *result = [self primitiveLongitude];
 	return [result floatValue];
 }
 
-- (void)setPrimitiveLongValue:(float)value_ {
-	[self setPrimitiveLong:[NSNumber numberWithFloat:value_]];
+- (void)setPrimitiveLongitudeValue:(float)value_ {
+	[self setPrimitiveLongitude:[NSNumber numberWithFloat:value_]];
 }
 
 

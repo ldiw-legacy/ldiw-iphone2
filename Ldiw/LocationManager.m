@@ -76,7 +76,7 @@
   } else {
     MSLog(@"Bad location info %@", newLocation);
   }
-  [[NSNotificationCenter defaultCenter] postNotificationName:kLocationChanged object:nil];
+//  [[NSNotificationCenter defaultCenter] postNotificationName:kLocationChanged object:nil];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
