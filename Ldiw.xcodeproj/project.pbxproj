@@ -32,6 +32,9 @@
 		534CCF5716D22DE40004532F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF5616D22DE40004532F /* MobileCoreServices.framework */; };
 		534CCF5C16D22F770004532F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF5A16D22F770004532F /* MainViewController.m */; };
 		534CCF5D16D22F770004532F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF5B16D22F770004532F /* MainViewController.xib */; };
+		534CCF6116D256620004532F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6016D256620004532F /* NetworkRequest.m */; };
+		534CCF6416D2598B0004532F /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6316D2598B0004532F /* ServerRequest.m */; };
+		534CCF6816D25A2B0004532F /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6716D25A2B0004532F /* LocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,12 @@
 		534CCF5916D22F770004532F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		534CCF5A16D22F770004532F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		534CCF5B16D22F770004532F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		534CCF5F16D256620004532F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkRequest.h; sourceTree = "<group>"; };
+		534CCF6016D256620004532F /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkRequest.m; sourceTree = "<group>"; };
+		534CCF6216D2598B0004532F /* ServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerRequest.h; sourceTree = "<group>"; };
+		534CCF6316D2598B0004532F /* ServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerRequest.m; sourceTree = "<group>"; };
+		534CCF6616D25A2B0004532F /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		534CCF6716D25A2B0004532F /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +139,8 @@
 		534CCF1616D210590004532F /* Ldiw */ = {
 			isa = PBXGroup;
 			children = (
+				534CCF6516D25A130004532F /* Util */,
+				534CCF5E16D255A80004532F /* Network */,
 				534CCF5816D22F4C0004532F /* ViewController */,
 				534CCF3016D213000004532F /* Database */,
 				534CCF1F16D210590004532F /* AppDelegate.h */,
@@ -207,6 +218,26 @@
 				534CCF5B16D22F770004532F /* MainViewController.xib */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		534CCF5E16D255A80004532F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				534CCF5F16D256620004532F /* NetworkRequest.h */,
+				534CCF6016D256620004532F /* NetworkRequest.m */,
+				534CCF6216D2598B0004532F /* ServerRequest.h */,
+				534CCF6316D2598B0004532F /* ServerRequest.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		534CCF6516D25A130004532F /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				534CCF6616D25A2B0004532F /* LocationManager.h */,
+				534CCF6716D25A2B0004532F /* LocationManager.m */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +337,9 @@
 				534CCF5216D22D9C0004532F /* AFXMLRequestOperation.m in Sources */,
 				534CCF5316D22D9C0004532F /* UIImageView+AFNetworking.m in Sources */,
 				534CCF5C16D22F770004532F /* MainViewController.m in Sources */,
+				534CCF6116D256620004532F /* NetworkRequest.m in Sources */,
+				534CCF6416D2598B0004532F /* ServerRequest.m in Sources */,
+				534CCF6816D25A2B0004532F /* LocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
