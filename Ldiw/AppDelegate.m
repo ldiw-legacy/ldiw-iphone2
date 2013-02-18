@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "LocationManager.h"
 
 @implementation AppDelegate
 
@@ -15,6 +16,9 @@
 {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   // Override point for customization after application launch.
+
+  [self loadServerInformation];
+  
   MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
   
   UITabBarController *tabBar = [[UITabBarController alloc] init];
@@ -24,6 +28,11 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (void)loadServerInformation {
+  MSLog(@"Load server information");
+  
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
