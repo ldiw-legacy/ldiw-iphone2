@@ -10,6 +10,7 @@
 #import "HeaderView.h"
 #import "WastepointRequest.h"
 
+#import "ActivityCustomCell.h"
 #define kTitlePositionAdjustment 8.0
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
@@ -50,6 +51,10 @@
   } failure:^(NSError *error){
   
   }];
+
+  //Tabelview
+  UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
+  [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)nearbyPressed:(UIButton *)sender
@@ -112,11 +117,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 8;
+  return 18;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return nil;
+
+  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+  if (!cell) {
+    cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+  }
+  cell.cellTitleLabel.text=@"just testing";
+  return cell;
 }
-- (IBAction)segmentedControl:(id)sender {
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 150;
 }
+
 @end

@@ -8,11 +8,15 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "LocationManager.h"
+#import "ActivityViewController.h"
+#import "ServerRequest.h"
 #import "BaseUrlRequest.h"
 #import "LocationManager.h"
 #import "ActivityViewController.h"
 #import "Database+Server.h"
 #import "Database.h"
+
 
 @implementation AppDelegate
 
