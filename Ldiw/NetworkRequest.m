@@ -9,28 +9,14 @@
 #import "NetworkRequest.h"
 #import "AFJSONRequestOperation.h"
 
-#define kBaseDebugUrl @"http://munizapp.sidan.is/mobile/munizapp/"
-#define kBaseProductionUrl @"http://munizapp.com/mobile/munizapp/"
-
-
 @implementation NetworkRequest
-
-
-+ (NSString*) baseUrl {
-#if DEBUG
-  return kBaseDebugUrl;
-#else
-  return kBaseProductionUrl;
-#endif
-}
-
 
 + (id)sharedHTTPClient
 {
   static NetworkRequest *_sharedClient = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-     NSURL *requestURL = [NSURL URLWithString:[self baseUrl]];
+     NSURL *requestURL = [NSURL URLWithString:kFirstServerUrl];
     _sharedClient = [[NetworkRequest alloc] initWithBaseURL:requestURL];
   });
   return _sharedClient;

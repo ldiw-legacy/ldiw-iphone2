@@ -8,6 +8,8 @@
 
 #import "NetworkRequest.h"
 
-@interface ServerRequest : NetworkRequest
+@interface ServerRequest : NSObject
+
++ (void)loadServerInfoForCurrentLocationWithSuccess:(void (^)())success failure:(void (^)())failure;
 
 @end

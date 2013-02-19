@@ -9,6 +9,7 @@
 #import "AFHTTPClient.h"
 
 @interface NetworkRequest : AFHTTPClient
+
 + (id)sharedHTTPClient;
 
 @end
