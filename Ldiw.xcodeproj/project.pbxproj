@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13B1DF4C16D23AE000A5BF60 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */; };
 		13B1DF5A16D2779200A5BF60 /* _TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF4F16D2779200A5BF60 /* _TypicalValues.m */; };
 		13B1DF5B16D2779200A5BF60 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5116D2779200A5BF60 /* _WastePoint.m */; };
 		13B1DF5C16D2779200A5BF60 /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5316D2779200A5BF60 /* _WPField.m */; };
@@ -21,8 +20,6 @@
 		534CCF1B16D210590004532F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF1916D210590004532F /* InfoPlist.strings */; };
 		534CCF1D16D210590004532F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF1C16D210590004532F /* main.m */; };
 		534CCF2116D210590004532F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF2016D210590004532F /* AppDelegate.m */; };
-		534CCF2316D210590004532F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF2216D210590004532F /* Default.png */; };
-		534CCF2516D210590004532F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF2416D210590004532F /* Default@2x.png */; };
 		534CCF2A16D210590004532F /* Ldiw.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF2816D210590004532F /* Ldiw.xcdatamodeld */; };
 		534CCF3316D213280004532F /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF3216D213280004532F /* Database.m */; };
 		534CCF4B16D22D9C0004532F /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF3916D22D9C0004532F /* AFHTTPClient.m */; };
@@ -129,10 +126,13 @@
 		C581F31516D30F3C003A2FA2 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31416D30F3C003A2FA2 /* HeaderView.m */; };
 		C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31716D36952003A2FA2 /* ActivityCustomCell.m */; };
 		C581F31A16D36993003A2FA2 /* ActivityCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */; };
+		C583437716D3B312005F3330 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437416D3B312005F3330 /* Default.png */; };
+		C583437816D3B312005F3330 /* Default5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437516D3B312005F3330 /* Default5@2x.png */; };
+		C583437916D3B312005F3330 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437616D3B312005F3330 /* Default@2x.png */; };
+		C583437B16D3B335005F3330 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437A16D3B335005F3330 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		13B1DF4E16D2779200A5BF60 /* _TypicalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValues.h; sourceTree = "<group>"; };
 		13B1DF4F16D2779200A5BF60 /* _TypicalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TypicalValues.m; sourceTree = "<group>"; };
 		13B1DF5016D2779200A5BF60 /* _WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WastePoint.h; sourceTree = "<group>"; };
@@ -157,8 +157,6 @@
 		534CCF1E16D210590004532F /* Ldiw-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ldiw-Prefix.pch"; sourceTree = "<group>"; };
 		534CCF1F16D210590004532F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		534CCF2016D210590004532F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		534CCF2216D210590004532F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		534CCF2416D210590004532F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		534CCF2916D210590004532F /* Ldiw.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ldiw.xcdatamodel; sourceTree = "<group>"; };
 		534CCF3116D213280004532F /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		534CCF3216D213280004532F /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
@@ -289,6 +287,10 @@
 		C581F31616D36952003A2FA2 /* ActivityCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCustomCell.h; sourceTree = "<group>"; };
 		C581F31716D36952003A2FA2 /* ActivityCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCustomCell.m; sourceTree = "<group>"; };
 		C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCustomCell.xib; sourceTree = "<group>"; };
+		C583437416D3B312005F3330 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		C583437516D3B312005F3330 /* Default5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default5@2x.png"; sourceTree = "<group>"; };
+		C583437616D3B312005F3330 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		C583437A16D3B335005F3330 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +337,7 @@
 		534CCF0216D210580004532F = {
 			isa = PBXGroup;
 			children = (
+				C583437A16D3B335005F3330 /* Default-568h@2x.png */,
 				534CCF1616D210590004532F /* Ldiw */,
 				534CCF0D16D210590004532F /* Frameworks */,
 				534CCF0C16D210590004532F /* Products */,
@@ -389,9 +392,6 @@
 				534CCF1916D210590004532F /* InfoPlist.strings */,
 				534CCF1C16D210590004532F /* main.m */,
 				534CCF1E16D210590004532F /* Ldiw-Prefix.pch */,
-				534CCF2216D210590004532F /* Default.png */,
-				534CCF2416D210590004532F /* Default@2x.png */,
-				13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -484,6 +484,7 @@
 		C581F26516D278E6003A2FA2 /* iOS ASSETS */ = {
 			isa = PBXGroup;
 			children = (
+				C583437316D3B312005F3330 /* splash */,
 				C581F26616D278E6003A2FA2 /* 020 Empty Friends */,
 				C581F26A16D278E6003A2FA2 /* Badges 2x */,
 				C581F27316D278E6003A2FA2 /* Body */,
@@ -641,6 +642,16 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		C583437316D3B312005F3330 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				C583437416D3B312005F3330 /* Default.png */,
+				C583437516D3B312005F3330 /* Default5@2x.png */,
+				C583437616D3B312005F3330 /* Default@2x.png */,
+			);
+			path = splash;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -694,10 +705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				534CCF1B16D210590004532F /* InfoPlist.strings in Resources */,
-				534CCF2316D210590004532F /* Default.png in Resources */,
-				534CCF2516D210590004532F /* Default@2x.png in Resources */,
 				534CCF5D16D22F770004532F /* MainViewController.xib in Resources */,
-				13B1DF4C16D23AE000A5BF60 /* Default-568h@2x.png in Resources */,
 				C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */,
 				C581F2BC16D278E6003A2FA2 /* fb_connect_normal@2x.png in Resources */,
 				C581F2BD16D278E6003A2FA2 /* fb_connect_pressed@2x.png in Resources */,
@@ -777,6 +785,10 @@
 				C581F30716D278E6003A2FA2 /* titlebar_bg@2x.png in Resources */,
 				C581F30C16D27B04003A2FA2 /* ActivityViewController.xib in Resources */,
 				C581F31A16D36993003A2FA2 /* ActivityCustomCell.xib in Resources */,
+				C583437716D3B312005F3330 /* Default.png in Resources */,
+				C583437816D3B312005F3330 /* Default5@2x.png in Resources */,
+				C583437916D3B312005F3330 /* Default@2x.png in Resources */,
+				C583437B16D3B335005F3330 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
