@@ -18,4 +18,6 @@
 
 + (Database *)sharedInstance;
 
+- (id)findCoreDataObjectNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate;
+
 @end

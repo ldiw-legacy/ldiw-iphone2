@@ -70,6 +70,8 @@
 {
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
     if (_locationBlock) {
+      MSLog(@"Got goot location, call newLocation block");
+
       _locationBlock(newLocation);
     }
     [locManager stopUpdatingLocation];

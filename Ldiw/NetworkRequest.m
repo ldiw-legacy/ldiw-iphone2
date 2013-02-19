@@ -8,6 +8,7 @@
 
 #import "NetworkRequest.h"
 #import "AFJSONRequestOperation.h"
+#import "Database+Server.h"
 
 @implementation NetworkRequest
 
@@ -16,8 +17,8 @@
   static NetworkRequest *_sharedClient = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-     NSURL *requestURL = [NSURL URLWithString:kFirstServerUrl];
-    _sharedClient = [[NetworkRequest alloc] initWithBaseURL:requestURL];
+    NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
+    _sharedClient = [[NetworkRequest alloc] initWithBaseURL:serverBaseUrl];
   });
   return _sharedClient;
 }
@@ -44,7 +45,7 @@
 {
   
   NSMutableURLRequest *request = [super requestWithMethod:method path:path parameters:parameters];
-  [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
+//  [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
   //  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   return request;

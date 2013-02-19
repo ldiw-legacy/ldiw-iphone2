@@ -11,6 +11,10 @@
 #import "LocationManager.h"
 #import "ActivityViewController.h"
 #import "ServerRequest.h"
+#import "BaseUrlRequest.h"
+#import "LocationManager.h"
+#import "ActivityViewController.h"
+
 
 @implementation AppDelegate
 
@@ -19,7 +23,7 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   // Override point for customization after application launch.
 
-[self loadServerInformation];
+  [self loadServerInformation];
   
   MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
   MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
@@ -36,7 +40,7 @@
 }
 
 - (void)loadServerInformation {
-  [ServerRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+  [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
     MSLog(@"Server info load success");
   } failure:^(void) {
     MSLog(@"Server info loading fail");
