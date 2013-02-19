@@ -8,10 +8,12 @@
 
 #import "ActivityViewController.h"
 #import "HeaderView.h"
+#import "Database+Server.h"
 #import "WastepointRequest.h"
-
 #import "ActivityCustomCell.h"
+
 #define kTitlePositionAdjustment 8.0
+
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
 @end
@@ -44,8 +46,11 @@
   [self.headerView.nearbyButton addTarget:self action:@selector(nearbyPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.friendsButton addTarget:self action:@selector(friendsPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
-
+  
   self.headerView.nearbyButton.selected = YES;
+
+  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
+
   
   [WastepointRequest getWPList:^(NSArray* responseArray) {
     MSLog(@"Response array %@", responseArray);
@@ -105,9 +110,9 @@
   item0.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
   item1.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
   item2.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item0.title = NSLocalizedString(@"Activity", nil);
-  item1.title = NSLocalizedString(@"NewPoint", nil);
-  item2.title = NSLocalizedString(@"My Account", nil);
+  item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
+  item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
+  item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
 }
 - (void)didReceiveMemoryWarning
   

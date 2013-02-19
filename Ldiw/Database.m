@@ -12,7 +12,6 @@
 // Base database methods
 - (NSArray *)listCoreObjectsNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate;
 - (NSArray *)listCoreObjectsNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sDescriptors;
-- (NSArray *)listCoreObjectsNamed:(NSString *)modelName;
 - (NSFetchedResultsController *)fetchedResultsControllerUsingFetchRequest:(NSFetchRequest *)request;
 - (NSFetchedResultsController *)fetchedResultsControllerUsingFetchRequest:(NSFetchRequest *)request sectionKeyPath:(NSString *)sectionKeyPath;
 - (NSFetchedResultsController *)fetchedControllerForObject:(NSString *)entityName withPredicate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sDescriptors;

@@ -50,6 +50,57 @@
   return server.baseUrlSuffix;
 }
 
+- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues{
+  WPField *wpField = [self findWPFieldWithFieldName:(NSString *)fieldName orLabel:(NSString *)label];
+  
+  if (!wpField) {
+    wpField = [WPField insertInManagedObjectContext:[self managedObjectContext]];
+    [wpField setField_name:fieldName];
+    [wpField setEdit_instructions:editInstructions];
+    [wpField setLabel:label];
+    [wpField setMax:max];
+    [wpField setMin:min];
+    [wpField setSuffix:suffix];
+    [wpField setType:type];
+    
+    for (NSString *string in typicalValues) {
+      MSLog(@"%@", string);
+    }
+    [self saveContext];
+  }
+  
+  return wpField;
+}
+
+- (WPField *)findWPFieldWithFieldName:(NSString *)fieldName orLabel:(NSString *)label
+{
+  if (!fieldName) {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label == %@", label];
+    WPField *wpField = [self findCoreDataObjectNamed:@"WPField" withPredicate:predicate];
+    return wpField;
+  } else {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"field_name == %@", fieldName];
+    WPField *wpField = [self findCoreDataObjectNamed:@"WPField" withPredicate:predicate];
+    return wpField;
+  }
+}
+
+//- (TypicalValu *)createTypicalValue
+//{
+//  TypicalValues  = [self findCoreDataObjectNamed:@"WPField" withPredicate:predicate];
+//  return wpField;
+//}
+
+- (NSArray *)lisTypicalValues {
+  NSArray *returnArray = [self listCoreObjectsNamed:@"TypicalValue"];
+  return returnArray;
+}
+
+- (NSArray *)listAllWPFields {
+  NSArray *returnArray = [self listCoreObjectsNamed:@"WPField"];
+  return returnArray;
+}
+
 - (BOOL)needToLoadServerInfotmation {
   NSString *baseUrl = [self serverBaseUrl];
   BOOL result = (baseUrl.length == 0);
