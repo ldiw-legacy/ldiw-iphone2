@@ -8,7 +8,10 @@
 
 #import "ActivityViewController.h"
 #import "HeaderView.h"
+#import "Database+Server.h"
+
 #define kTitlePositionAdjustment 8.0
+
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
 @end
@@ -42,7 +45,7 @@
   [self.headerView.nearbyButton addTarget:self action:@selector(nearbyPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.friendsButton addTarget:self action:@selector(friendsPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
-  
+  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
 }
 - (void)nearbyPressed:(UIButton *)sender
 {
