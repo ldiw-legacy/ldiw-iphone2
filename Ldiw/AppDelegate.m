@@ -7,15 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
 #import "LocationManager.h"
-#import "ActivityViewController.h"
 #import "ServerRequest.h"
 #import "BaseUrlRequest.h"
 #import "LocationManager.h"
-#import "ActivityViewController.h"
 #import "Database+Server.h"
 #import "Database.h"
+#import "LoginViewController.h"
 
 
 @implementation AppDelegate
@@ -27,14 +25,11 @@
 
   [self loadServerInformation];
   
-  MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
-  MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
-  ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
-  UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
-  
-  UITabBarController *tabBar = [[UITabBarController alloc] init];
-  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,mainViewController,mainVC, nil]];
-  [self.window setRootViewController:tabBar];
+
+  LoginViewController *lvc=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
+
+
+  [self.window setRootViewController:lvc];
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];

@@ -11,5 +11,6 @@
 @interface DesignHelper : NSObject
 
 +(void)setUpHeaderViewButton:(UIButton *)button;
++(void)setLoginButtonTitle:(UIButton *)button;
 
 @end

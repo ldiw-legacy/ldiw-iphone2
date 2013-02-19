@@ -35,7 +35,18 @@
   [self.bgView.layer setCornerRadius:kbgCornerRadius];
   [bgView setClipsToBounds:YES];
   [self addSubview:self.bgView];
-  //CGRect rect=CGRectMake(20, 20, 100, 30);
+  UIImage *pointMaker=[UIImage imageNamed:@"pointmarker_feed"];
+  UIImage *userIcon= [UIImage imageNamed:@"pointmarker_feed"];
+  CGRect firstrect=CGRectMake(5, 5, pointMaker.size.width, pointMaker.size.height);
+  CGRect secondrect=CGRectOffset(firstrect, pointMaker.size.width+ 2, 0);
+  UIImageView *firstImageView=[[UIImageView alloc] initWithFrame:firstrect];
+  UIImageView *secondImageView=[[UIImageView alloc] initWithFrame:secondrect];
+  firstImageView.image=userIcon;
+  secondImageView.image=pointMaker;
+
+  [self.bgView addSubview:firstImageView];
+  [self.bgView addSubview:secondImageView];
+
   //self.cellTitleLabel=[[UILabel alloc] initWithFrame:rect];
   //[self addSubview:cellTitleLabel];
 }

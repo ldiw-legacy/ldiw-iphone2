@@ -33,7 +33,6 @@
   [super viewDidLoad];
   [self setUpTabbar];
  
-  [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
@@ -45,6 +44,8 @@
   [self.headerView.nearbyButton addTarget:self action:@selector(nearbyPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.friendsButton addTarget:self action:@selector(friendsPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+  self.headerView.nearbyButton.selected = YES;
   
   [WastepointRequest getWPList:^(NSArray* responseArray) {
     MSLog(@"Response array %@", responseArray);
@@ -56,6 +57,7 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 }
+
 
 - (void)nearbyPressed:(UIButton *)sender
 {
