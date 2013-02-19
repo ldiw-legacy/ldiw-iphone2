@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "LocationManager.h"
+#import "ActivityViewController.h"
 
 @implementation AppDelegate
 
@@ -17,12 +18,15 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   // Override point for customization after application launch.
 
-  [self loadServerInformation];
+[self loadServerInformation];
   
   MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
+  MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
+  ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
+  UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
   
   UITabBarController *tabBar = [[UITabBarController alloc] init];
-  [tabBar setViewControllers:[NSArray arrayWithObjects:mainViewController, nil]];
+  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,mainViewController,mainVC, nil]];
   [self.window setRootViewController:tabBar];
   
   self.window.backgroundColor = [UIColor whiteColor];
