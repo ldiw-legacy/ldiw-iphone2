@@ -14,7 +14,6 @@
 		13B1DF5D16D2779200A5BF60 /* TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5516D2779200A5BF60 /* TypicalValues.m */; };
 		13B1DF5E16D2779200A5BF60 /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5716D2779200A5BF60 /* WastePoint.m */; };
 		13B1DF5F16D2779200A5BF60 /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5916D2779200A5BF60 /* WPField.m */; };
-		13B1DF6116D27AE900A5BF60 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */; };
 		534CCF0F16D210590004532F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF0E16D210590004532F /* UIKit.framework */; };
 		534CCF1116D210590004532F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1016D210590004532F /* Foundation.framework */; };
 		534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1216D210590004532F /* CoreGraphics.framework */; };
@@ -124,6 +123,8 @@
 		C581F30C16D27B04003A2FA2 /* ActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C581F30A16D27B04003A2FA2 /* ActivityViewController.xib */; };
 		C581F31116D308D3003A2FA2 /* DesignHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31016D308D3003A2FA2 /* DesignHelper.m */; };
 		C581F31516D30F3C003A2FA2 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31416D30F3C003A2FA2 /* HeaderView.m */; };
+		C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31716D36952003A2FA2 /* ActivityCustomCell.m */; };
+		C581F31A16D36993003A2FA2 /* ActivityCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -273,6 +274,9 @@
 		C581F31016D308D3003A2FA2 /* DesignHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignHelper.m; sourceTree = "<group>"; };
 		C581F31316D30F3C003A2FA2 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		C581F31416D30F3C003A2FA2 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		C581F31616D36952003A2FA2 /* ActivityCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCustomCell.h; sourceTree = "<group>"; };
+		C581F31716D36952003A2FA2 /* ActivityCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCustomCell.m; sourceTree = "<group>"; };
+		C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCustomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -610,6 +614,9 @@
 			children = (
 				C581F31316D30F3C003A2FA2 /* HeaderView.h */,
 				C581F31416D30F3C003A2FA2 /* HeaderView.m */,
+				C581F31616D36952003A2FA2 /* ActivityCustomCell.h */,
+				C581F31716D36952003A2FA2 /* ActivityCustomCell.m */,
+				C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -749,6 +756,7 @@
 				C581F30616D278E6003A2FA2 /* subtab_right_pressed@2x.png in Resources */,
 				C581F30716D278E6003A2FA2 /* titlebar_bg@2x.png in Resources */,
 				C581F30C16D27B04003A2FA2 /* ActivityViewController.xib in Resources */,
+				C581F31A16D36993003A2FA2 /* ActivityCustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +809,7 @@
 				C581F30B16D27B04003A2FA2 /* ActivityViewController.m in Sources */,
 				C581F31116D308D3003A2FA2 /* DesignHelper.m in Sources */,
 				C581F31516D30F3C003A2FA2 /* HeaderView.m in Sources */,
+				C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

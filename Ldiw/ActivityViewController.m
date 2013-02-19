@@ -8,6 +8,7 @@
 
 #import "ActivityViewController.h"
 #import "HeaderView.h"
+#import "ActivityCustomCell.h"
 #define kTitlePositionAdjustment 8.0
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
@@ -42,7 +43,11 @@
   [self.headerView.nearbyButton addTarget:self action:@selector(nearbyPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.friendsButton addTarget:self action:@selector(friendsPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
-  
+
+  //Tabelview
+  UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
+  [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
+
 }
 - (void)nearbyPressed:(UIButton *)sender
 {
@@ -103,11 +108,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 8;
+  return 18;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return nil;
+
+  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+  if (!cell) {
+    cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+  }
+  cell.cellTitleLabel.text=@"just testing";
+  return cell;
 }
-- (IBAction)segmentedControl:(id)sender {
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 150;
 }
+
 @end

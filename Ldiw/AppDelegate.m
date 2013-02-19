@@ -8,12 +8,9 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-<<<<<<< HEAD
 #import "LocationManager.h"
 #import "ActivityViewController.h"
-=======
 #import "ServerRequest.h"
->>>>>>> a7277825c468b2a0ec09f737315557cea2f681c6
 
 @implementation AppDelegate
 
