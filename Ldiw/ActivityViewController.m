@@ -106,9 +106,9 @@
   item0.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
   item1.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
   item2.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item0.title = NSLocalizedString(@"Activity", nil);
-  item1.title = NSLocalizedString(@"NewPoint", nil);
-  item2.title = NSLocalizedString(@"My Account", nil);
+  item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
+  item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
+  item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
 }
 - (void)didReceiveMemoryWarning
   
