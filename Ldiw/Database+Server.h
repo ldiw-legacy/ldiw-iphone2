@@ -13,4 +13,5 @@
 - (void)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
 - (NSString *)serverBaseUrl;
 - (NSString *)serverSuffix;
+- (BOOL)needToLoadServerInfotmation;
 @end

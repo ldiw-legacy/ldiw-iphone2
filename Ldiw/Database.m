@@ -21,7 +21,6 @@
 - (NSArray *)listCoreObjectsNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sDescriptors distinctValues:(BOOL)distinct;
 - (id)findCoreDataObjectNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate limit:(int)limit;
 
-- (void)saveContext;
 - (NSManagedObjectContext *)managedObjectContext;
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSURL *)applicationDocumentsDirectory;

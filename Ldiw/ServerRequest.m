@@ -14,8 +14,7 @@
 
 + (void)getWPFieldsWithSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
   // URL: GET <api_base_url>/waste-point-extra-fields.json
-  NSString *path = [NSString stringWithFormat:@"%@%@", [[Database sharedInstance] serverSuffix], kGetWPFieldsPath];
-  [[self sharedHTTPClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  [[self sharedHTTPClient] getPath:kGetWPFieldsPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSError *jsonError;
     
     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&jsonError];

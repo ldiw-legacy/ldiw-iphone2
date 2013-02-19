@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (Database *)sharedInstance;
+- (void)saveContext;
 
 - (id)findCoreDataObjectNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate;
 

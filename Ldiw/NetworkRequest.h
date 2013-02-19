@@ -11,5 +11,4 @@
 @interface NetworkRequest : AFHTTPClient
 
 + (id)sharedHTTPClient;
-
 @end

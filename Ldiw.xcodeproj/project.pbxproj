@@ -43,6 +43,8 @@
 		534CCF7216D34B5B0004532F /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6F16D34B5B0004532F /* _Server.m */; };
 		534CCF7316D34B5B0004532F /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7116D34B5B0004532F /* Server.m */; };
 		534CCF7616D34D450004532F /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7516D34D450004532F /* ServerRequest.m */; };
+		534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7816D3725C0004532F /* WastepointRequest.m */; };
+		534CCF7C16D39F6E0004532F /* parseCSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7B16D39F6E0004532F /* parseCSV.m */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
 		C581F2BC16D278E6003A2FA2 /* fb_connect_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */; };
 		C581F2BD16D278E6003A2FA2 /* fb_connect_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26916D278E6003A2FA2 /* fb_connect_pressed@2x.png */; };
@@ -200,6 +202,10 @@
 		534CCF7116D34B5B0004532F /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		534CCF7416D34D450004532F /* ServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerRequest.h; sourceTree = "<group>"; };
 		534CCF7516D34D450004532F /* ServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerRequest.m; sourceTree = "<group>"; };
+		534CCF7716D3725C0004532F /* WastepointRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastepointRequest.h; sourceTree = "<group>"; };
+		534CCF7816D3725C0004532F /* WastepointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastepointRequest.m; sourceTree = "<group>"; };
+		534CCF7A16D39F6E0004532F /* parseCSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = parseCSV.h; path = Ldiw/apis/CCsvParser/parseCSV.h; sourceTree = "<group>"; };
+		534CCF7B16D39F6E0004532F /* parseCSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = parseCSV.m; path = Ldiw/apis/CCsvParser/parseCSV.m; sourceTree = "<group>"; };
 		C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e_friendsgraphic@2x.png"; sourceTree = "<group>"; };
 		C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_connect_normal@2x.png"; sourceTree = "<group>"; };
 		C581F26916D278E6003A2FA2 /* fb_connect_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_connect_pressed@2x.png"; sourceTree = "<group>"; };
@@ -412,6 +418,7 @@
 		534CCF3616D22D870004532F /* Apis */ = {
 			isa = PBXGroup;
 			children = (
+				534CCF7D16D39F7D0004532F /* CSVParser */,
 				534CCF3716D22D9C0004532F /* AFNetworking */,
 			);
 			name = Apis;
@@ -466,6 +473,8 @@
 				534CCF6316D2598B0004532F /* BaseUrlRequest.m */,
 				534CCF7416D34D450004532F /* ServerRequest.h */,
 				534CCF7516D34D450004532F /* ServerRequest.m */,
+				534CCF7716D3725C0004532F /* WastepointRequest.h */,
+				534CCF7816D3725C0004532F /* WastepointRequest.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -479,6 +488,15 @@
 				C581F31016D308D3003A2FA2 /* DesignHelper.m */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		534CCF7D16D39F7D0004532F /* CSVParser */ = {
+			isa = PBXGroup;
+			children = (
+				534CCF7A16D39F6E0004532F /* parseCSV.h */,
+				534CCF7B16D39F6E0004532F /* parseCSV.m */,
+			);
+			name = CSVParser;
 			sourceTree = "<group>";
 		};
 		C581F26516D278E6003A2FA2 /* iOS ASSETS */ = {
@@ -845,6 +863,8 @@
 				C581F30B16D27B04003A2FA2 /* ActivityViewController.m in Sources */,
 				C581F31116D308D3003A2FA2 /* DesignHelper.m in Sources */,
 				C581F31516D30F3C003A2FA2 /* HeaderView.m in Sources */,
+				534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */,
+				534CCF7C16D39F6E0004532F /* parseCSV.m in Sources */,
 				C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
