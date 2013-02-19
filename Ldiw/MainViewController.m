@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self setTitle:@"Main"];
+  //[self setTitle:@"Main"];
 }
 
 - (void)didReceiveMemoryWarning
