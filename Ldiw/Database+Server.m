@@ -23,6 +23,7 @@
   NSArray *urlPartsArray = [baseUrl componentsSeparatedByString:@"?"];
   if ([urlPartsArray count] > 1) {
     suffix = [NSString stringWithFormat:@"?%@", [urlPartsArray objectAtIndex:1]];
+    baseUrl = [urlPartsArray objectAtIndex:0];
   }
   
   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"baseUrl == %@", baseUrl];
@@ -36,6 +37,7 @@
   [server setBaseUrlSuffix:suffix];
   [server setBaseUrl:baseUrl];
   [server setSafeBBox:safeBBox];
+  [self saveContext];
 }
 
 - (NSString *)serverBaseUrl {
@@ -97,6 +99,12 @@
 - (NSArray *)listAllWPFields {
   NSArray *returnArray = [self listCoreObjectsNamed:@"WPField"];
   return returnArray;
+}
+
+- (BOOL)needToLoadServerInfotmation {
+  NSString *baseUrl = [self serverBaseUrl];
+  BOOL result = (baseUrl.length == 0);
+  return result;
 }
 
 @end

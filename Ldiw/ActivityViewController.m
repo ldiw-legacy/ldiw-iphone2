@@ -9,6 +9,8 @@
 #import "ActivityViewController.h"
 #import "HeaderView.h"
 #import "Database+Server.h"
+#import "WastepointRequest.h"
+#import "ActivityCustomCell.h"
 
 #define kTitlePositionAdjustment 8.0
 
@@ -39,20 +41,32 @@
 
   //Segmented control in headerview
  
-  UIImage *image2=[UIImage imageNamed:@"feed_subtab_bg"];
+  UIImage *image2 = [UIImage imageNamed:@"feed_subtab_bg"];
   self.headerView =[[HeaderView alloc] initWithFrame:CGRectMake(0, 0, image2.size.width, image2.size.height)];
   [self.view addSubview:self.headerView];
   [self.headerView.nearbyButton addTarget:self action:@selector(nearbyPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.friendsButton addTarget:self action:@selector(friendsPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
+  
+  [WastepointRequest getWPList:^(NSArray* responseArray) {
+    MSLog(@"Response array %@", responseArray);
+  } failure:^(NSError *error){
+  
+  }];
+
+  //Tabelview
+  UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
+  [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 }
+
 - (void)nearbyPressed:(UIButton *)sender
 {
   self.headerView.nearbyButton.selected=YES;
   self.headerView.friendsButton.selected=NO;
   self.headerView.showMapButton.selected=NO;
 }
+
 - (void)friendsPressed:(UIButton *)sender
 {
   self.headerView.nearbyButton.selected=NO;
@@ -69,17 +83,17 @@
 
 - (void) setUpTabbar {
 
-  UITabBar *tabbar=self.tabBarController.tabBar;
-  tabbar.clipsToBounds=NO;
+  UITabBar *tabbar = self.tabBarController.tabBar;
+  tabbar.clipsToBounds = NO;
 
-  UIImage *selectedImage0=[UIImage imageNamed:@"tab_feed_pressed"];
-  UIImage *unselctedImage0=[UIImage imageNamed:@"tab_feed_normal"];
+  UIImage *selectedImage0 = [UIImage imageNamed:@"tab_feed_pressed"];
+  UIImage *unselctedImage0 = [UIImage imageNamed:@"tab_feed_normal"];
 
-  UIImage *selectedImage1=[UIImage imageNamed:@"tab_addpoint_pressed"];
-  UIImage *unselctedImage1=[UIImage imageNamed:@"tab_addpoint_normal"];
+  UIImage *selectedImage1 = [UIImage imageNamed:@"tab_addpoint_pressed"];
+  UIImage *unselctedImage1 = [UIImage imageNamed:@"tab_addpoint_normal"];
 
-  UIImage *selectedImage2=[UIImage imageNamed:@"tab_account_pressed"];
-  UIImage *unselctedImage2=[UIImage imageNamed:@"tab_account_normal"];
+  UIImage *selectedImage2 = [UIImage imageNamed:@"tab_account_pressed"];
+  UIImage *unselctedImage2 = [UIImage imageNamed:@"tab_account_normal"];
 
   UITabBarItem *item0 = [tabbar.items objectAtIndex:0];
   UITabBarItem *item1 = [tabbar.items objectAtIndex:1];
@@ -106,11 +120,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 8;
+  return 18;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return nil;
+
+  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+  if (!cell) {
+    cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+  }
+  cell.cellTitleLabel.text=@"just testing";
+  return cell;
 }
-- (IBAction)segmentedControl:(id)sender {
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 150;
 }
+
 @end

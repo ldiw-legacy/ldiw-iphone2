@@ -17,4 +17,5 @@
 
 - (NSArray *)listAllWPFields;
 - (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues;
+- (BOOL)needToLoadServerInfotmation;
 @end

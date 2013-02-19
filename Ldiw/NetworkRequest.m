@@ -24,6 +24,9 @@
 }
 
 - (id)initWithBaseURL:(NSURL *)url {
+  if (!url) {
+    return nil;
+  }
   self = [super initWithBaseURL:url];
   if (!self) {
     return nil;
@@ -43,14 +46,13 @@
 
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters
 {
-  
-  NSMutableURLRequest *request = [super requestWithMethod:method path:path parameters:parameters];
+  NSString *pathWithPrefix = [NSString stringWithFormat:@"%@/%@", [[Database sharedInstance] serverSuffix], path];
+  NSMutableURLRequest *request = [super requestWithMethod:method path:pathWithPrefix parameters:parameters];
 //  [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
   //  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   return request;
 }
-
 - (void)enqueueHTTPRequestOperation:(AFHTTPRequestOperation *)operation
 {
   [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRea)
