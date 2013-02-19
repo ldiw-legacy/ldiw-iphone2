@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Server" representedClassName="Server" syncable="YES">
+        <attribute name="baseUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="baseUrlSuffix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="safeBBox" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="TypicalValues" representedClassName="TypicalValues" syncable="YES">
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,5 +37,6 @@
         <element name="TypicalValues" positionX="160" positionY="192" width="128" height="90"/>
         <element name="WastePoint" positionX="160" positionY="192" width="128" height="195"/>
         <element name="WPField" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="Server" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

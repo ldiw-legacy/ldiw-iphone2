@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "ServerRequest.h"
+#import "BaseUrlRequest.h"
 
 @implementation AppDelegate
 
@@ -31,7 +31,7 @@
 }
 
 - (void)loadServerInformation {
-  [ServerRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+  [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
     MSLog(@"Server info load success");
   } failure:^(void) {
     MSLog(@"Server info loading fail");

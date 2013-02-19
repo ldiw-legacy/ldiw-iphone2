@@ -433,6 +433,7 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
                                       path:(NSString *)path
                                 parameters:(NSDictionary *)parameters
 {
+  NSLog(@"Request method %@ andPath %@ andParameters %@", method, path, parameters);
     NSParameterAssert(method);
 
     if (!path) {

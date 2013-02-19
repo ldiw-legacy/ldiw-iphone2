@@ -10,7 +10,6 @@
 
 @interface Database (Private)
 // Base database methods
-- (id)findCoreDataObjectNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate;
 - (NSArray *)listCoreObjectsNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate;
 - (NSArray *)listCoreObjectsNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sDescriptors;
 - (NSArray *)listCoreObjectsNamed:(NSString *)modelName;
