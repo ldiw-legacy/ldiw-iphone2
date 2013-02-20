@@ -19,6 +19,7 @@
 #define kTypeKey @"type"
 #define kEditInstructionsKey @"edit_instructions"
 #define kTypicalValuesKey @"typical_values"
+#define kAllowedValuesKey @"allowed_values"
 
 @implementation ServerRequest
 
@@ -39,8 +40,9 @@
       NSNumber *max = [wpDict objectForKey:kMaxKey];
       NSNumber *mix = [wpDict objectForKey:kMinKey];
       NSArray *typicalValues = [wpDict objectForKey:kTypicalValuesKey];
+      NSArray *allowedValues = [wpDict objectForKey:kAllowedValuesKey];
       
-      [[Database sharedInstance] createWPFieldWithFieldName:fieldName andEditInstructions:editInstructions andLabel:label andMaxValue:max andMinValue:mix andSuffix:suffix andType:type andTypicalValues:typicalValues];
+      [[Database sharedInstance] createWPFieldWithFieldName:fieldName andEditInstructions:editInstructions andLabel:label andMaxValue:max andMinValue:mix andSuffix:suffix andType:type andTypicalValues:typicalValues andAllowedValues:allowedValues];
     }
     
     success(responseArray);
