@@ -11,6 +11,7 @@
 #import "ActivityViewController.h"
 #import "DesignHelper.h"
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
+#define kExternalWebLink @"https://www.letsdoitworld.org/user/register"
 
 @interface LoginViewController ()
 
@@ -43,11 +44,20 @@
   self.view.backgroundColor=kDarkBackgroundColor;
   [DesignHelper setLoginButtonTitle:self.facebookLoginButton];
   [DesignHelper setLoginButtonTitle:self.registerButton];
+  [self.registerButton setTitle:NSLocalizedString(@"login.register", nil)     forState:UIControlStateNormal];
+  [self.facebookLoginButton setTitle:NSLocalizedString(@"login.facebook", nil) forState:UIControlStateNormal];
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)signin:(UIButton *)sender {
   [self resignFirstResponder];
   [self gotoActivityView];
+}
+
+- (IBAction)registerAccount:(UIButton *)sender {
+    [[UIApplication sharedApplication] openURL: [NSURL URLWithString:kExternalWebLink]];
+}
+
+- (IBAction)loginFB:(id)sender {
 }
 
 -(void)gotoActivityView

@@ -51,12 +51,12 @@
 
   MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
 
-  
-  [WastepointRequest getWPList:^(NSArray* responseArray) {
-    MSLog(@"Response array %@", responseArray);
-  } failure:^(NSError *error){
-  
-  }];
+//  
+//  [WastepointRequest getWPList:^(NSArray* responseArray) {
+//    MSLog(@"Response array %@", responseArray);
+//  } failure:^(NSError *error){
+//  
+//  }];
 
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];

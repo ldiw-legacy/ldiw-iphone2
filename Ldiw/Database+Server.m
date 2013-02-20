@@ -8,11 +8,13 @@
 
 #import "Database+Server.h"
 #import "Server.h"
+#import "LocationManager.h"
 
 @implementation Database (Server)
 
 - (void)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox {
-  MSLog(@"Save server with baseUrl %@", baseUrl);
+  MSLog(@"Save server with baseUrl %@ and bbox %@", baseUrl, safeBBox);
+  [self deleteAllWPFields];
   
   // Note that returned api_base_url may or may not include a query portion ('?').
   // This requires correct handling for functions needing GET parameters:
@@ -31,6 +33,8 @@
 
   if (server) {
     [self.managedObjectContext deleteObject:server];
+    
+    
   }
   
   server = [Server insertInManagedObjectContext:self.managedObjectContext];
@@ -48,6 +52,18 @@
 - (NSString *)serverSuffix {
   Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
   return server.baseUrlSuffix;
+}
+
+- (NSString *)bBox {
+  Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
+  return server.safeBBox;
+}
+
+- (void)deleteAllWPFields {
+  NSArray *fields = [self listAllWPFields];
+  for (WPField *field in fields) {
+    [self.managedObjectContext deleteObject:field];
+  }
 }
 
 - (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues{
@@ -128,10 +144,13 @@
   return returnArray;
 }
 
-- (BOOL)needToLoadServerInfotmation {
-  NSString *baseUrl = [self serverBaseUrl];
-  BOOL result = (baseUrl.length == 0);
-  return result;
+- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL))resultBlock {
+  [[LocationManager sharedManager] currentLocationIsInsideBox:[self bBox] withResultBlock:^(BOOL locationIsInsideBox) {
+    NSString *baseUrl = [self serverBaseUrl];
+    BOOL serverInfoIsAvailable = (baseUrl.length == 0);
+    BOOL needToLoadServerInfo = !serverInfoIsAvailable || !locationIsInsideBox;
+    resultBlock(needToLoadServerInfo);
+  }];
 }
 
 @end

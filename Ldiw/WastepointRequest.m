@@ -34,12 +34,21 @@
 // http://api.letsdoitworld.org/?q=api/waste_points.csv&max_results=10&nearest_points_to=26.7167,58.3833
     NSString *path = [NSString stringWithFormat:@"%@&%@%d&%@%@", kGetWPListPath, kMaxResultsKey, 1000, kNearestPointToKey, locationString];
     
-    
     NSString *baseUrlString = [[Database sharedInstance] serverBaseUrl];
     NSString *baseUrlSuffix = [[Database sharedInstance] serverSuffix];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", baseUrlString, baseUrlSuffix, path]];
+
+    NSString *url = [NSString stringWithFormat:@"%@%@/%@", baseUrlString, baseUrlSuffix, path];
     MSLog(@"Get WP list from: %@", url);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSString *language = [LocationManager getPhoneLanguage];
+    NSDictionary *parameters;
+    if (language) {
+      parameters = [NSDictionary dictionaryWithObject:language forKey:kLanguageCodeKey];
+    }
+    MSLog(@"GET WP list with parameters:%@", parameters);
+    
+    NSURLRequest *request = [[[AFHTTPClient alloc] init] requestWithMethod:@"GET" path:url parameters:parameters];
+    
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       NSData *responseData = (NSData *)responseObject;
