@@ -11,6 +11,7 @@
 #import "Database+Server.h"
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
+#import "BaseUrlRequest.h"
 
 #define kTitlePositionAdjustment 8.0
 
@@ -50,17 +51,11 @@
   self.headerView.nearbyButton.selected = YES;
 
   MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
-
-//  
-//  [WastepointRequest getWPList:^(NSArray* responseArray) {
-//    MSLog(@"Response array %@", responseArray);
-//  } failure:^(NSError *error){
-//  
-//  }];
-
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
+
+  [self loadServerInformation];
 }
 
 
@@ -138,6 +133,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return 150;
+}
+
+- (void)loadWastePointList {
+  [WastepointRequest getWPList:^(NSArray* responseArray) {
+    MSLog(@"Response array %@", responseArray);
+  } failure:^(NSError *error){
+    MSLog(@"Failed to load WP list");
+  }];
+}
+
+- (void)loadServerInformation {
+  [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
+    if (result) {
+      MSLog(@"Need to load base server information");
+      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+        [self loadWastePointList];
+      } failure:^(void) {
+        MSLog(@"Server info loading fail");
+      }];
+    }
+  }];
 }
 
 @end

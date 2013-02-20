@@ -79,6 +79,8 @@
     [wpField setSuffix:suffix];
     [wpField setType:type];
     
+    for (NSString *string in typicalValues) {
+//      MSLog(@"%@", string);
     if (typicalValues) {
       for (NSArray *array in typicalValues) {
         NSString *key;
