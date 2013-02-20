@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13B6C7E316D3D35300B72B4A /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D416D3D35300B72B4A /* _Server.m */; };
-		13B6C7E416D3D35300B72B4A /* _TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D616D3D35300B72B4A /* _TypicalValues.m */; };
-		13B6C7E516D3D35300B72B4A /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D816D3D35300B72B4A /* _WastePoint.m */; };
-		13B6C7E616D3D35300B72B4A /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DA16D3D35300B72B4A /* _WPField.m */; };
 		13A42DD816D4A16000B92C17 /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD116D4A16000B92C17 /* _Server.m */; };
 		13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD316D4A16000B92C17 /* _TypicalValue.m */; };
 		13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD516D4A16000B92C17 /* _WastePoint.m */; };
@@ -143,10 +139,10 @@
 		C583438016D3C5A0005F3330 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C583437E16D3C5A0005F3330 /* LoginViewController.xib */; };
 		C583438216D3ED90005F3330 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C583438116D3ED8F005F3330 /* QuartzCore.framework */; };
 		C583438516D4018C005F3330 /* Caecilia-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C583438416D4018C005F3330 /* Caecilia-Heavy.otf */; };
+		C583438816D4CF98005F3330 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C583438716D4CF97005F3330 /* LoginRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-
 		13A42DD016D4A16000B92C17 /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
 		13A42DD116D4A16000B92C17 /* _Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Server.m; sourceTree = "<group>"; };
 		13A42DD216D4A16000B92C17 /* _TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValue.h; sourceTree = "<group>"; };
@@ -318,6 +314,8 @@
 		C583437E16D3C5A0005F3330 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		C583438116D3ED8F005F3330 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C583438416D4018C005F3330 /* Caecilia-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Caecilia-Heavy.otf"; sourceTree = "<group>"; };
+		C583438616D4CF96005F3330 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
+		C583438716D4CF97005F3330 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,6 +497,8 @@
 			children = (
 				534CCF5F16D256620004532F /* NetworkRequest.h */,
 				534CCF6016D256620004532F /* NetworkRequest.m */,
+				C583438616D4CF96005F3330 /* LoginRequest.h */,
+				C583438716D4CF97005F3330 /* LoginRequest.m */,
 				534CCF6216D2598B0004532F /* BaseUrlRequest.h */,
 				534CCF6316D2598B0004532F /* BaseUrlRequest.m */,
 				534CCF7416D34D450004532F /* ServerRequest.h */,
@@ -911,6 +911,7 @@
 				13A42DDE16D4A19100B92C17 /* TypicalValue.m in Sources */,
 				538DC21416D3AF08002D7925 /* Database+WP.m in Sources */,
 				C583437F16D3C5A0005F3330 /* LoginViewController.m in Sources */,
+				C583438816D4CF98005F3330 /* LoginRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

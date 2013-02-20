@@ -39,8 +39,8 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="152030077">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{86, 14}, {149, 71}}</string>
+						<int key="NSvFlags">293</int>
+						<string key="NSFrame">{{86, 15}, {145, 65}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="687051022"/>
@@ -55,7 +55,7 @@
 					</object>
 					<object class="IBUIImageView" id="687051022">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">288</int>
 						<string key="NSFrame">{{20, 93}, {280, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
@@ -442,25 +442,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">LoginViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="loginFB:">id</string>
-						<string key="registerAccount:">UIButton</string>
-						<string key="signin:">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="loginFB:">
-							<string key="name">loginFB:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="registerAccount:">
-							<string key="name">registerAccount:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="signin:">
-							<string key="name">signin:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="facebookLoginButton">UIButton</string>
 						<string key="loginPasswordLabel">UITextField</string>
