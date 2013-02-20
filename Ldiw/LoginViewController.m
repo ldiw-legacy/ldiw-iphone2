@@ -44,6 +44,8 @@
   self.view.backgroundColor=kDarkBackgroundColor;
   [DesignHelper setLoginButtonTitle:self.facebookLoginButton];
   [DesignHelper setLoginButtonTitle:self.registerButton];
+  [self.registerButton setTitle:NSLocalizedString(@"login.register", nil)     forState:UIControlStateNormal];
+  [self.facebookLoginButton setTitle:NSLocalizedString(@"login.facebook", nil) forState:UIControlStateNormal];
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)signin:(UIButton *)sender {
