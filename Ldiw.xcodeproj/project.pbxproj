@@ -45,6 +45,7 @@
 		534CCF7616D34D450004532F /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7516D34D450004532F /* ServerRequest.m */; };
 		534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7816D3725C0004532F /* WastepointRequest.m */; };
 		534CCF7C16D39F6E0004532F /* parseCSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7B16D39F6E0004532F /* parseCSV.m */; };
+		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
 		C581F2BC16D278E6003A2FA2 /* fb_connect_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */; };
@@ -133,6 +134,10 @@
 		C583437816D3B312005F3330 /* Default5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437516D3B312005F3330 /* Default5@2x.png */; };
 		C583437916D3B312005F3330 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437616D3B312005F3330 /* Default@2x.png */; };
 		C583437B16D3B335005F3330 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437A16D3B335005F3330 /* Default-568h@2x.png */; };
+		C583437F16D3C5A0005F3330 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C583437D16D3C5A0005F3330 /* LoginViewController.m */; };
+		C583438016D3C5A0005F3330 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C583437E16D3C5A0005F3330 /* LoginViewController.xib */; };
+		C583438216D3ED90005F3330 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C583438116D3ED8F005F3330 /* QuartzCore.framework */; };
+		C583438516D4018C005F3330 /* Caecilia-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C583438416D4018C005F3330 /* Caecilia-Heavy.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +212,8 @@
 		534CCF7816D3725C0004532F /* WastepointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastepointRequest.m; sourceTree = "<group>"; };
 		534CCF7A16D39F6E0004532F /* parseCSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = parseCSV.h; path = Ldiw/apis/CCsvParser/parseCSV.h; sourceTree = "<group>"; };
 		534CCF7B16D39F6E0004532F /* parseCSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = parseCSV.m; path = Ldiw/apis/CCsvParser/parseCSV.m; sourceTree = "<group>"; };
+		538DC21216D3AF08002D7925 /* Database+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WP.h"; sourceTree = "<group>"; };
+		538DC21316D3AF08002D7925 /* Database+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WP.m"; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e_friendsgraphic@2x.png"; sourceTree = "<group>"; };
 		C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_connect_normal@2x.png"; sourceTree = "<group>"; };
@@ -284,7 +291,7 @@
 		C581F2B716D278E6003A2FA2 /* subtab_middle_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subtab_middle_pressed@2x.png"; sourceTree = "<group>"; };
 		C581F2B816D278E6003A2FA2 /* subtab_right_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subtab_right_normal@2x.png"; sourceTree = "<group>"; };
 		C581F2B916D278E6003A2FA2 /* subtab_right_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subtab_right_pressed@2x.png"; sourceTree = "<group>"; };
-		C581F2BA16D278E6003A2FA2 /* titlebar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar_bg@2x.png"; sourceTree = "<group>"; };
+		C581F2BA16D278E6003A2FA2 /* titlebar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "titlebar_bg@2x.png"; path = "../Title Bar/titlebar_bg@2x.png"; sourceTree = "<group>"; };
 		C581F30816D27B04003A2FA2 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		C581F30916D27B04003A2FA2 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		C581F30A16D27B04003A2FA2 /* ActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityViewController.xib; sourceTree = "<group>"; };
@@ -299,6 +306,11 @@
 		C583437516D3B312005F3330 /* Default5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default5@2x.png"; sourceTree = "<group>"; };
 		C583437616D3B312005F3330 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		C583437A16D3B335005F3330 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C583437C16D3C5A0005F3330 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		C583437D16D3C5A0005F3330 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		C583437E16D3C5A0005F3330 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		C583438116D3ED8F005F3330 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C583438416D4018C005F3330 /* Caecilia-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Caecilia-Heavy.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,9 +318,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C583438216D3ED90005F3330 /* QuartzCore.framework in Frameworks */,
 				534CCF6A16D279980004532F /* CoreLocation.framework in Frameworks */,
-				534CCF5716D22DE40004532F /* MobileCoreServices.framework in Frameworks */,
 				534CCF5516D22DC60004532F /* SystemConfiguration.framework in Frameworks */,
+				534CCF5716D22DE40004532F /* MobileCoreServices.framework in Frameworks */,
 				534CCF0F16D210590004532F /* UIKit.framework in Frameworks */,
 				534CCF1116D210590004532F /* Foundation.framework in Frameworks */,
 				534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */,
@@ -345,6 +358,7 @@
 		534CCF0216D210580004532F = {
 			isa = PBXGroup;
 			children = (
+				C583438116D3ED8F005F3330 /* QuartzCore.framework */,
 				C583437A16D3B335005F3330 /* Default-568h@2x.png */,
 				534CCF1616D210590004532F /* Ldiw */,
 				534CCF0D16D210590004532F /* Frameworks */,
@@ -413,6 +427,8 @@
 				534CCF3216D213280004532F /* Database.m */,
 				534CCF6B16D34B110004532F /* Database+Server.h */,
 				534CCF6C16D34B110004532F /* Database+Server.m */,
+				538DC21216D3AF08002D7925 /* Database+WP.h */,
+				538DC21316D3AF08002D7925 /* Database+WP.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -462,6 +478,9 @@
 				C581F30916D27B04003A2FA2 /* ActivityViewController.m */,
 				C581F30A16D27B04003A2FA2 /* ActivityViewController.xib */,
 				534CCF5B16D22F770004532F /* MainViewController.xib */,
+				C583437C16D3C5A0005F3330 /* LoginViewController.h */,
+				C583437D16D3C5A0005F3330 /* LoginViewController.m */,
+				C583437E16D3C5A0005F3330 /* LoginViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -505,6 +524,7 @@
 		C581F26516D278E6003A2FA2 /* iOS ASSETS */ = {
 			isa = PBXGroup;
 			children = (
+				C583438316D4016B005F3330 /* Font */,
 				C583437316D3B312005F3330 /* splash */,
 				C581F26616D278E6003A2FA2 /* 020 Empty Friends */,
 				C581F26A16D278E6003A2FA2 /* Badges 2x */,
@@ -574,6 +594,7 @@
 				C581F28E16D278E6003A2FA2 /* wastetype_glass@2x.png */,
 				C581F28F16D278E6003A2FA2 /* wastetype_other@2x.png */,
 				C581F29016D278E6003A2FA2 /* wastetype_paper@2x.png */,
+				C581F2BA16D278E6003A2FA2 /* titlebar_bg@2x.png */,
 				C581F29116D278E6003A2FA2 /* wastetype_plastic@2x.png */,
 				C581F29216D278E6003A2FA2 /* wastetype_xxl@2x.png */,
 			);
@@ -633,7 +654,6 @@
 				C581F2B116D278E6003A2FA2 /* logo_titlebar@2x.png */,
 				C581F2B216D278E6003A2FA2 /* spotdetail_subtitle_bg@2x.png */,
 				C581F2B316D278E6003A2FA2 /* Sub-Tab */,
-				C581F2BA16D278E6003A2FA2 /* titlebar_bg@2x.png */,
 			);
 			path = "Title Bar";
 			sourceTree = "<group>";
@@ -671,6 +691,14 @@
 				C583437616D3B312005F3330 /* Default@2x.png */,
 			);
 			path = splash;
+			sourceTree = "<group>";
+		};
+		C583438316D4016B005F3330 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				C583438416D4018C005F3330 /* Caecilia-Heavy.otf */,
+			);
+			name = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -810,6 +838,8 @@
 				C583437816D3B312005F3330 /* Default5@2x.png in Resources */,
 				C583437916D3B312005F3330 /* Default@2x.png in Resources */,
 				C583437B16D3B335005F3330 /* Default-568h@2x.png in Resources */,
+				C583438016D3C5A0005F3330 /* LoginViewController.xib in Resources */,
+				C583438516D4018C005F3330 /* Caecilia-Heavy.otf in Resources */,
 				5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -870,6 +900,8 @@
 				13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */,
 				13A42DDB16D4A16000B92C17 /* _WPField.m in Sources */,
 				13A42DDE16D4A19100B92C17 /* TypicalValue.m in Sources */,
+				538DC21416D3AF08002D7925 /* Database+WP.m in Sources */,
+				C583437F16D3C5A0005F3330 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

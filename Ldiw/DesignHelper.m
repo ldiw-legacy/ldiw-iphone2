@@ -18,9 +18,16 @@
   [button setTitleColor:kHeaderButtonTitleColorNormal forState:UIControlStateNormal];
   [button setTitleShadowColor:kHeaderButtonTitleShadowColor forState:UIControlStateSelected];
   [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-  button.titleLabel.shadowOffset=CGSizeMake (0,1);
-  button.titleLabel.shadowColor=kHeaderButtonTitleShadowColor;
-  button.titleLabel.font=[UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+  button.titleLabel.shadowOffset = CGSizeMake (0,1);
+  button.titleLabel.shadowColor = kHeaderButtonTitleShadowColor;
+  button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+}
+
++(void)setLoginButtonTitle:(UIButton *)button
+{
+  [button setTitleColor:kHeaderButtonTitleColorSelected forState:UIControlStateHighlighted];
+  button.titleLabel.font = [UIFont fontWithName:@"Caecilia-Heavy" size:18];
+  
 }
 
 @end
