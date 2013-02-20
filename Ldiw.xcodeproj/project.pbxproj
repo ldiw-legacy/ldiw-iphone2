@@ -7,21 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13B1DF4C16D23AE000A5BF60 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */; };
-		13B6C7E316D3D35300B72B4A /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D416D3D35300B72B4A /* _Server.m */; };
-		13B6C7E416D3D35300B72B4A /* _TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D616D3D35300B72B4A /* _TypicalValues.m */; };
-		13B6C7E516D3D35300B72B4A /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D816D3D35300B72B4A /* _WastePoint.m */; };
-		13B6C7E616D3D35300B72B4A /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DA16D3D35300B72B4A /* _WPField.m */; };
+		13A42DD816D4A16000B92C17 /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD116D4A16000B92C17 /* _Server.m */; };
+		13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD316D4A16000B92C17 /* _TypicalValue.m */; };
+		13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD516D4A16000B92C17 /* _WastePoint.m */; };
+		13A42DDB16D4A16000B92C17 /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD716D4A16000B92C17 /* _WPField.m */; };
+		13A42DDE16D4A19100B92C17 /* TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DDD16D4A19100B92C17 /* TypicalValue.m */; };
 		13B6C7E716D3D35300B72B4A /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DC16D3D35300B72B4A /* Server.m */; };
-		13B6C7E816D3D35300B72B4A /* TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DE16D3D35300B72B4A /* TypicalValues.m */; };
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
 		13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E216D3D35300B72B4A /* WPField.m */; };
-		13B1DF5A16D2779200A5BF60 /* _TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF4F16D2779200A5BF60 /* _TypicalValues.m */; };
-		13B1DF5B16D2779200A5BF60 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5116D2779200A5BF60 /* _WastePoint.m */; };
-		13B1DF5C16D2779200A5BF60 /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5316D2779200A5BF60 /* _WPField.m */; };
-		13B1DF5D16D2779200A5BF60 /* TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5516D2779200A5BF60 /* TypicalValues.m */; };
-		13B1DF5E16D2779200A5BF60 /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5716D2779200A5BF60 /* WastePoint.m */; };
-		13B1DF5F16D2779200A5BF60 /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1DF5916D2779200A5BF60 /* WPField.m */; };
 		534CCF0F16D210590004532F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF0E16D210590004532F /* UIKit.framework */; };
 		534CCF1116D210590004532F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1016D210590004532F /* Foundation.framework */; };
 		534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1216D210590004532F /* CoreGraphics.framework */; };
@@ -148,32 +141,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13B1DF4B16D23AE000A5BF60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		13B1DF4E16D2779200A5BF60 /* _TypicalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValues.h; sourceTree = "<group>"; };
-		13B1DF4F16D2779200A5BF60 /* _TypicalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TypicalValues.m; sourceTree = "<group>"; };
-		13B1DF5016D2779200A5BF60 /* _WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WastePoint.h; sourceTree = "<group>"; };
-		13B1DF5116D2779200A5BF60 /* _WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WastePoint.m; sourceTree = "<group>"; };
-		13B1DF5216D2779200A5BF60 /* _WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WPField.h; sourceTree = "<group>"; };
-		13B1DF5316D2779200A5BF60 /* _WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WPField.m; sourceTree = "<group>"; };
-		13B1DF5416D2779200A5BF60 /* TypicalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValues.h; sourceTree = "<group>"; };
-		13B1DF5516D2779200A5BF60 /* TypicalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValues.m; sourceTree = "<group>"; };
-		13B1DF5616D2779200A5BF60 /* WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePoint.h; sourceTree = "<group>"; };
-		13B1DF5716D2779200A5BF60 /* WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePoint.m; sourceTree = "<group>"; };
-		13B1DF5816D2779200A5BF60 /* WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPField.h; sourceTree = "<group>"; };
-		13B1DF5916D2779200A5BF60 /* WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPField.m; sourceTree = "<group>"; };
+		13A42DD016D4A16000B92C17 /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
+		13A42DD116D4A16000B92C17 /* _Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Server.m; sourceTree = "<group>"; };
+		13A42DD216D4A16000B92C17 /* _TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValue.h; sourceTree = "<group>"; };
+		13A42DD316D4A16000B92C17 /* _TypicalValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TypicalValue.m; sourceTree = "<group>"; };
+		13A42DD416D4A16000B92C17 /* _WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WastePoint.h; sourceTree = "<group>"; };
+		13A42DD516D4A16000B92C17 /* _WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WastePoint.m; sourceTree = "<group>"; };
+		13A42DD616D4A16000B92C17 /* _WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WPField.h; sourceTree = "<group>"; };
+		13A42DD716D4A16000B92C17 /* _WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WPField.m; sourceTree = "<group>"; };
+		13A42DDC16D4A19100B92C17 /* TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValue.h; sourceTree = "<group>"; };
+		13A42DDD16D4A19100B92C17 /* TypicalValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValue.m; sourceTree = "<group>"; };
 		13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		13B6C7D316D3D35300B72B4A /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
-		13B6C7D416D3D35300B72B4A /* _Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Server.m; sourceTree = "<group>"; };
-		13B6C7D516D3D35300B72B4A /* _TypicalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValues.h; sourceTree = "<group>"; };
-		13B6C7D616D3D35300B72B4A /* _TypicalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TypicalValues.m; sourceTree = "<group>"; };
-		13B6C7D716D3D35300B72B4A /* _WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WastePoint.h; sourceTree = "<group>"; };
-		13B6C7D816D3D35300B72B4A /* _WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WastePoint.m; sourceTree = "<group>"; };
-		13B6C7D916D3D35300B72B4A /* _WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WPField.h; sourceTree = "<group>"; };
-		13B6C7DA16D3D35300B72B4A /* _WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WPField.m; sourceTree = "<group>"; };
 		13B6C7DB16D3D35300B72B4A /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		13B6C7DC16D3D35300B72B4A /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
-		13B6C7DD16D3D35300B72B4A /* TypicalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValues.h; sourceTree = "<group>"; };
-		13B6C7DE16D3D35300B72B4A /* TypicalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValues.m; sourceTree = "<group>"; };
 		13B6C7DF16D3D35300B72B4A /* WastePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePoint.h; sourceTree = "<group>"; };
 		13B6C7E016D3D35300B72B4A /* WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePoint.m; sourceTree = "<group>"; };
 		13B6C7E116D3D35300B72B4A /* WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPField.h; sourceTree = "<group>"; };
@@ -355,22 +335,22 @@
 		13B6C7D216D3D35300B72B4A /* databaseObjects */ = {
 			isa = PBXGroup;
 			children = (
-				13B6C7D316D3D35300B72B4A /* _Server.h */,
-				13B6C7D416D3D35300B72B4A /* _Server.m */,
-				13B6C7D516D3D35300B72B4A /* _TypicalValues.h */,
-				13B6C7D616D3D35300B72B4A /* _TypicalValues.m */,
-				13B6C7D716D3D35300B72B4A /* _WastePoint.h */,
-				13B6C7D816D3D35300B72B4A /* _WastePoint.m */,
-				13B6C7D916D3D35300B72B4A /* _WPField.h */,
-				13B6C7DA16D3D35300B72B4A /* _WPField.m */,
+				13A42DD016D4A16000B92C17 /* _Server.h */,
+				13A42DD116D4A16000B92C17 /* _Server.m */,
+				13A42DD216D4A16000B92C17 /* _TypicalValue.h */,
+				13A42DD316D4A16000B92C17 /* _TypicalValue.m */,
+				13A42DD416D4A16000B92C17 /* _WastePoint.h */,
+				13A42DD516D4A16000B92C17 /* _WastePoint.m */,
+				13A42DD616D4A16000B92C17 /* _WPField.h */,
+				13A42DD716D4A16000B92C17 /* _WPField.m */,
 				13B6C7DB16D3D35300B72B4A /* Server.h */,
 				13B6C7DC16D3D35300B72B4A /* Server.m */,
-				13B6C7DD16D3D35300B72B4A /* TypicalValues.h */,
-				13B6C7DE16D3D35300B72B4A /* TypicalValues.m */,
 				13B6C7DF16D3D35300B72B4A /* WastePoint.h */,
 				13B6C7E016D3D35300B72B4A /* WastePoint.m */,
 				13B6C7E116D3D35300B72B4A /* WPField.h */,
 				13B6C7E216D3D35300B72B4A /* WPField.m */,
+				13A42DDC16D4A19100B92C17 /* TypicalValue.h */,
+				13A42DDD16D4A19100B92C17 /* TypicalValue.m */,
 			);
 			path = databaseObjects;
 			sourceTree = "<group>";
@@ -909,17 +889,17 @@
 				C581F30B16D27B04003A2FA2 /* ActivityViewController.m in Sources */,
 				C581F31116D308D3003A2FA2 /* DesignHelper.m in Sources */,
 				C581F31516D30F3C003A2FA2 /* HeaderView.m in Sources */,
-				13B6C7E316D3D35300B72B4A /* _Server.m in Sources */,
-				13B6C7E416D3D35300B72B4A /* _TypicalValues.m in Sources */,
-				13B6C7E516D3D35300B72B4A /* _WastePoint.m in Sources */,
-				13B6C7E616D3D35300B72B4A /* _WPField.m in Sources */,
 				13B6C7E716D3D35300B72B4A /* Server.m in Sources */,
-				13B6C7E816D3D35300B72B4A /* TypicalValues.m in Sources */,
 				13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */,
 				13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */,
 				534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */,
 				534CCF7C16D39F6E0004532F /* parseCSV.m in Sources */,
 				C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */,
+				13A42DD816D4A16000B92C17 /* _Server.m in Sources */,
+				13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */,
+				13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */,
+				13A42DDB16D4A16000B92C17 /* _WPField.m in Sources */,
+				13A42DDE16D4A19100B92C17 /* TypicalValue.m in Sources */,
 				538DC21416D3AF08002D7925 /* Database+WP.m in Sources */,
 				C583437F16D3C5A0005F3330 /* LoginViewController.m in Sources */,
 			);
