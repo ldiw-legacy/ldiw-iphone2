@@ -14,6 +14,7 @@
 		13A42DDE16D4A19100B92C17 /* TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DDD16D4A19100B92C17 /* TypicalValue.m */; };
 		13A42DE316D4DF4F00B92C17 /* _AllowedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DE016D4DF4F00B92C17 /* _AllowedValue.m */; };
 		13A42DE416D4DF4F00B92C17 /* AllowedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DE216D4DF4F00B92C17 /* AllowedValue.m */; };
+		13A42DE616D4EDC800B92C17 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DE516D4EDC800B92C17 /* FacebookSDK.framework */; };
 		13B6C7E716D3D35300B72B4A /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DC16D3D35300B72B4A /* Server.m */; };
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
 		13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E216D3D35300B72B4A /* WPField.m */; };
@@ -159,6 +160,7 @@
 		13A42DE016D4DF4F00B92C17 /* _AllowedValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AllowedValue.m; sourceTree = "<group>"; };
 		13A42DE116D4DF4F00B92C17 /* AllowedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllowedValue.h; sourceTree = "<group>"; };
 		13A42DE216D4DF4F00B92C17 /* AllowedValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllowedValue.m; sourceTree = "<group>"; };
+		13A42DE516D4EDC800B92C17 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		13B6C7DB16D3D35300B72B4A /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		13B6C7DC16D3D35300B72B4A /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				534CCF1116D210590004532F /* Foundation.framework in Frameworks */,
 				534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */,
 				534CCF1516D210590004532F /* CoreData.framework in Frameworks */,
+				13A42DE616D4EDC800B92C17 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +396,7 @@
 		534CCF0D16D210590004532F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				13A42DE516D4EDC800B92C17 /* FacebookSDK.framework */,
 				538DC21516D4B04A002D7925 /* MapKit.framework */,
 				C583438116D3ED8F005F3330 /* QuartzCore.framework */,
 				534CCF6916D279980004532F /* CoreLocation.framework */,
@@ -1000,6 +1004,10 @@
 		534CCF2E16D210590004532F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ldiw/Ldiw-Prefix.pch";
 				INFOPLIST_FILE = "Ldiw/Ldiw-Info.plist";
@@ -1012,6 +1020,10 @@
 		534CCF2F16D210590004532F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ldiw/Ldiw-Prefix.pch";
 				INFOPLIST_FILE = "Ldiw/Ldiw-Info.plist";

@@ -102,7 +102,6 @@
         {
           value = [array objectAtIndex:1];
         }
-        
         [self createTypicalValueWithKey:key andValue:value forWPField:wpField];
       }
     }
@@ -134,7 +133,6 @@
         [self createAllowedValueWithKey:key andValue:value forWPField:wpField];
       }
     }
-    
     [self saveContext];
   }
   
