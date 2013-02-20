@@ -9,7 +9,7 @@
 #import "ServerRequest.h"
 #import "Database+Server.h"
 
-#define kGetWPFieldsPath @"/waste-point-extra-fields.json"
+#define kGetWPFieldsPath @"waste-point-extra-fields.json"
 
 #define kFieldNameKey @"field_name"
 #define kLabelKey @"label"
@@ -39,8 +39,6 @@
       NSNumber *max = [wpDict objectForKey:kMaxKey];
       NSNumber *mix = [wpDict objectForKey:kMinKey];
       NSArray *typicalValues = [wpDict objectForKey:kTypicalValuesKey];
-      
-      
       
       [[Database sharedInstance] createWPFieldWithFieldName:fieldName andEditInstructions:editInstructions andLabel:label andMaxValue:max andMinValue:mix andSuffix:suffix andType:type andTypicalValues:typicalValues];
     }

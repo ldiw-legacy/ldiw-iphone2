@@ -8,6 +8,7 @@
 
 #import "Database.h"
 #import "WPField.h"
+#import "TypicalValue.h"
 
 @interface Database (Server)
 

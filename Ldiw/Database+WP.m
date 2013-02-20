@@ -25,7 +25,7 @@
   
   CSVParser *parser = [[CSVParser alloc] init];
   NSArray *parsedArray = [parser parseData:csvData];
-  MSLog(@"Parsed array: %@", parsedArray);
+  MSLog(@"Parsed array count: %i", parsedArray.count);
   NSMutableArray *resultArray = [NSMutableArray array];
   
   NSArray *fieldArray = [parsedArray objectAtIndex:0];
@@ -37,7 +37,6 @@
       NSString *key = [fieldArray objectAtIndex:j];
       [oneElementDict setObject:object forKey:key];
     }
-    
     
     [resultArray addObject:oneElementDict];
   }
