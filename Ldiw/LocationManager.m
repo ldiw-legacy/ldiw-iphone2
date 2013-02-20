@@ -152,4 +152,14 @@
   }];
 }
 
+
++(NSString*) getPhoneLanguage {
+  NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+  if (language.length >= 2) {
+    return [language substringToIndex:2];
+  } else {
+    return nil;
+  }
+}
+
 @end

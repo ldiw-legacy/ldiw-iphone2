@@ -18,3 +18,6 @@
 
 #define kFirstServerUrl @"http://intranet.letsdoitworld.org/"
 #define kServerRequestPath  @"?q=get-api-base-url.json"
+
+#define kLanguageCodeKey @"language_code"
+

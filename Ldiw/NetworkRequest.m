@@ -9,6 +9,8 @@
 #import "NetworkRequest.h"
 #import "AFJSONRequestOperation.h"
 #import "Database+Server.h"
+#import "LocationManager.h"
+
 
 @implementation NetworkRequest
 
@@ -49,7 +51,11 @@
   NSString *pathWithPrefix = [NSString stringWithFormat:@"%@/%@", [[Database sharedInstance] serverSuffix], path];
   NSMutableURLRequest *request = [super requestWithMethod:method path:pathWithPrefix parameters:parameters];
 //  [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
-  //  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+  NSString *language = [LocationManager getPhoneLanguage];
+  if (language) {
+    [request setValue:language forHTTPHeaderField:kLanguageCodeKey];
+  }
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   return request;
 }
