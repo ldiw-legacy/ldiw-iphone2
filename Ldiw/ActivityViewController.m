@@ -8,10 +8,12 @@
 
 #import "ActivityViewController.h"
 #import "HeaderView.h"
+#import "Database+Server.h"
 #import "WastepointRequest.h"
-
 #import "ActivityCustomCell.h"
+
 #define kTitlePositionAdjustment 8.0
+
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
 @end
@@ -33,7 +35,6 @@
   [super viewDidLoad];
   [self setUpTabbar];
  
-  [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
@@ -46,6 +47,11 @@
   [self.headerView.friendsButton addTarget:self action:@selector(friendsPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   
+  self.headerView.nearbyButton.selected = YES;
+
+  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
+
+  
   [WastepointRequest getWPList:^(NSArray* responseArray) {
     MSLog(@"Response array %@", responseArray);
   } failure:^(NSError *error){
@@ -56,6 +62,7 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 }
+
 
 - (void)nearbyPressed:(UIButton *)sender
 {
@@ -103,9 +110,9 @@
   item0.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
   item1.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
   item2.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item0.title = NSLocalizedString(@"Activity", nil);
-  item1.title = NSLocalizedString(@"NewPoint", nil);
-  item2.title = NSLocalizedString(@"My Account", nil);
+  item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
+  item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
+  item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
 }
 - (void)didReceiveMemoryWarning
   

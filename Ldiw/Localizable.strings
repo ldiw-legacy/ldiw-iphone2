@@ -1,0 +1,16 @@
+
+
+// Tab names on tabbar
+
+tabBar.activityTabName = "Activity";
+tabBar.newPointTabText = "NewPoint";
+tabBar.myAccountTabText = "My Account";
+
+
+
+
+// Top bar buttons in Activities view
+
+activities.nearbyButton = "Nearby";
+activities.friendsButton = "Friends";
+activities.showMapButton = "Show Map";

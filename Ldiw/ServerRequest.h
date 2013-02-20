@@ -10,6 +10,6 @@
 
 @interface ServerRequest : NetworkRequest
 
-+ (void)getWPFieldsWithSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
++ (void)getWPFieldsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
  
 @end

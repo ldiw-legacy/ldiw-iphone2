@@ -43,7 +43,7 @@
       NSString *baseUrl = [responseDict objectForKey:kBaseUrlKey];
       NSString *safeBox = [responseDict objectForKey:kSafeBBoxKey];
       [[Database sharedInstance] addServerWithBaseUrl:baseUrl andSafeBBox:safeBox];
-      [ServerRequest getWPFieldsWithSuccess:^(NSDictionary *successDict) {
+      [ServerRequest getWPFieldsWithSuccess:^(NSArray *successDict) {
         success();
       } failure:^(NSError *error) {
         MSLog(@"Error %@", error);
