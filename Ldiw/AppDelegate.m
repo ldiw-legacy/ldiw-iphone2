@@ -7,11 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "LocationManager.h"
-#import "ServerRequest.h"
-#import "BaseUrlRequest.h"
-#import "LocationManager.h"
-#import "Database+Server.h"
 #import "Database.h"
 #import "LoginViewController.h"
 
@@ -21,10 +16,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  // Override point for customization after application launch.
-
-  [self loadServerInformation];
-  
+  // Override point for customization after application launch  
 
   LoginViewController *lvc=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
 
@@ -34,19 +26,6 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
   return YES;
-}
-
-- (void)loadServerInformation {
-  [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
-    if (result) {
-      MSLog(@"Need to load base server information");
-      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-        MSLog(@"Server info load success");
-      } failure:^(void) {
-        MSLog(@"Server info loading fail");
-      }];
-    }
-  }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

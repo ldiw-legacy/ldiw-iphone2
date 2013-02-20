@@ -80,7 +80,7 @@
     [wpField setType:type];
     
     for (NSString *string in typicalValues) {
-      MSLog(@"%@", string);
+//      MSLog(@"%@", string);
     }
     [self saveContext];
   }
