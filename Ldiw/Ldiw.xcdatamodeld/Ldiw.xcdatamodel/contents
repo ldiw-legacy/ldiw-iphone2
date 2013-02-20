@@ -5,10 +5,10 @@
         <attribute name="baseUrlSuffix" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="safeBBox" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="TypicalValues" representedClassName="TypicalValues" syncable="YES">
+    <entity name="TypicalValue" representedClassName="TypicalValue" syncable="YES">
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="wpField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WPField" inverseName="typicalValues" inverseEntity="WPField" syncable="YES"/>
+        <relationship name="wpField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WPField" inverseName="typicalValue" inverseEntity="WPField" syncable="YES"/>
     </entity>
     <entity name="WastePoint" representedClassName="WastePoint" syncable="YES">
         <attribute name="comp_biodegradable" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -30,12 +30,12 @@
         <attribute name="min" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="suffix" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="typicalValues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TypicalValues" inverseName="wpField" inverseEntity="TypicalValues" syncable="YES"/>
+        <relationship name="typicalValue" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TypicalValue" inverseName="wpField" inverseEntity="TypicalValue" syncable="YES"/>
         <relationship name="wastePoint" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="wpfields" inverseEntity="WastePoint" syncable="YES"/>
     </entity>
     <elements>
         <element name="Server" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="TypicalValues" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="TypicalValue" positionX="160" positionY="192" width="128" height="90"/>
         <element name="WastePoint" positionX="160" positionY="192" width="128" height="195"/>
         <element name="WPField" positionX="160" positionY="192" width="128" height="180"/>
     </elements>
