@@ -9,7 +9,7 @@
 #import "ServerRequest.h"
 #import "Database+Server.h"
 
-#define kGetWPFieldsPath @"/waste-point-extra-fields.json"
+#define kGetWPFieldsPath @"waste-point-extra-fields.json"
 
 #define kFieldNameKey @"field_name"
 #define kLabelKey @"label"

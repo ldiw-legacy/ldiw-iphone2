@@ -37,15 +37,16 @@
 }
 
 - (void)loadServerInformation {
- 
-  if ([[Database sharedInstance] needToLoadServerInfotmation]) {
-    MSLog(@"Need to load base server information");
-    [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-      MSLog(@"Server info load success");
-    } failure:^(void) {
-      MSLog(@"Server info loading fail");
-    }];
-  }
+  [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
+    if (result) {
+      MSLog(@"Need to load base server information");
+      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+        MSLog(@"Server info load success");
+      } failure:^(void) {
+        MSLog(@"Server info loading fail");
+      }];
+    }
+  }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

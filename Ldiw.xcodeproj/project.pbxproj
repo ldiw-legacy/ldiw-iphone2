@@ -46,6 +46,7 @@
 		534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7816D3725C0004532F /* WastepointRequest.m */; };
 		534CCF7C16D39F6E0004532F /* parseCSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7B16D39F6E0004532F /* parseCSV.m */; };
 		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
+		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
 		C581F2BC16D278E6003A2FA2 /* fb_connect_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */; };
@@ -214,6 +215,7 @@
 		534CCF7B16D39F6E0004532F /* parseCSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = parseCSV.m; path = Ldiw/apis/CCsvParser/parseCSV.m; sourceTree = "<group>"; };
 		538DC21216D3AF08002D7925 /* Database+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WP.h"; sourceTree = "<group>"; };
 		538DC21316D3AF08002D7925 /* Database+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WP.m"; sourceTree = "<group>"; };
+		538DC21516D4B04A002D7925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e_friendsgraphic@2x.png"; sourceTree = "<group>"; };
 		C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_connect_normal@2x.png"; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */,
 				C583438216D3ED90005F3330 /* QuartzCore.framework in Frameworks */,
 				534CCF6A16D279980004532F /* CoreLocation.framework in Frameworks */,
 				534CCF5516D22DC60004532F /* SystemConfiguration.framework in Frameworks */,
@@ -358,7 +361,6 @@
 		534CCF0216D210580004532F = {
 			isa = PBXGroup;
 			children = (
-				C583438116D3ED8F005F3330 /* QuartzCore.framework */,
 				C583437A16D3B335005F3330 /* Default-568h@2x.png */,
 				534CCF1616D210590004532F /* Ldiw */,
 				534CCF0D16D210590004532F /* Frameworks */,
@@ -378,6 +380,8 @@
 		534CCF0D16D210590004532F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				538DC21516D4B04A002D7925 /* MapKit.framework */,
+				C583438116D3ED8F005F3330 /* QuartzCore.framework */,
 				534CCF6916D279980004532F /* CoreLocation.framework */,
 				13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */,
 				534CCF5616D22DE40004532F /* MobileCoreServices.framework */,

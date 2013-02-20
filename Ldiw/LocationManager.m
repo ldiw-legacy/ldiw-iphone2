@@ -7,6 +7,7 @@
 //
 
 #import "LocationManager.h"
+#import <MapKit/MapKit.h>
 
 @implementation LocationManager
 @synthesize locManager, geocoder, locationManagerStart;
@@ -69,12 +70,11 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
+    [locManager stopUpdatingLocation];
     if (_locationBlock) {
       MSLog(@"Got goot location, call newLocation block");
-
       _locationBlock(newLocation);
     }
-    [locManager stopUpdatingLocation];
   } else {
     MSLog(@"Bad location info %@", newLocation);
   }
@@ -124,6 +124,32 @@
   
   // The newLocation is good to use
   return YES;
+}
+
+- (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result))resultBlock {
+  //    box = "26.2167,57.8833,27.2167,58.8833";
+  NSArray *boxObjects = [box componentsSeparatedByString:@","];
+  if ([boxObjects count] != 4) {
+    MSLog(@"Wrong number of box objects. Have %d, need 4. String: %@", [boxObjects count], box);
+    resultBlock(NO);
+  }
+
+  double topLeftX = [[boxObjects objectAtIndex:0] doubleValue];
+  double topLeftY = [[boxObjects objectAtIndex:1] doubleValue];
+  double botRightX = [[boxObjects objectAtIndex:2] doubleValue];
+  double botRightY = [[boxObjects objectAtIndex:3] doubleValue];
+  double boxWidth = botRightX - topLeftX;
+  double boxHeight = botRightY - topLeftY;
+  
+  MKMapRect mapRect = MKMapRectMake(topLeftX, topLeftY, boxWidth, boxHeight);
+  
+  [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
+    MKMapPoint currentPoint = MKMapPointForCoordinate(location.coordinate);
+    BOOL isInsideBox = MKMapRectContainsPoint(mapRect, currentPoint);
+    resultBlock(isInsideBox);
+  } errorBlock:^(NSError *error) {
+    resultBlock(NO);
+  }];
 }
 
 @end
