@@ -46,7 +46,7 @@
 }
 
 - (WastePoint *)wastePointFromDictionary:(NSDictionary *)inDict {
-  WastePoint *wastePoint = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
+//  WastePoint *wastePoint = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
   // id, lat, long, description
 //  "composition_glass" = "12463.23883";
 //  "composition_large" = "31609.1141";
@@ -64,7 +64,7 @@
 //  volume = "115633.87059";
 
 //  NSString *compGlass = inDict
-  
+  return nil;
 }
 
 @end
