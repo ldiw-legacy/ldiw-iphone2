@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AllowedValue" representedClassName="AllowedValue" syncable="YES">
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="wpField" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WPField" inverseName="allowedValue" inverseEntity="WPField" syncable="YES"/>
+    </entity>
     <entity name="Server" representedClassName="Server" syncable="YES">
         <attribute name="baseUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="baseUrlSuffix" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,6 +35,7 @@
         <attribute name="min" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="suffix" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="allowedValue" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AllowedValue" inverseName="wpField" inverseEntity="AllowedValue" syncable="YES"/>
         <relationship name="typicalValue" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TypicalValue" inverseName="wpField" inverseEntity="TypicalValue" syncable="YES"/>
         <relationship name="wastePoint" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="wpfields" inverseEntity="WastePoint" syncable="YES"/>
     </entity>
@@ -37,6 +43,7 @@
         <element name="Server" positionX="160" positionY="192" width="128" height="90"/>
         <element name="TypicalValue" positionX="160" positionY="192" width="128" height="90"/>
         <element name="WastePoint" positionX="160" positionY="192" width="128" height="195"/>
-        <element name="WPField" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="WPField" positionX="160" positionY="192" width="128" height="195"/>
+        <element name="AllowedValue" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>
