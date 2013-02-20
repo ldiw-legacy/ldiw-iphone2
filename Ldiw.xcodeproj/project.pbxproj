@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13B6C7E316D3D35300B72B4A /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D416D3D35300B72B4A /* _Server.m */; };
+		13B6C7E416D3D35300B72B4A /* _TypicalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D616D3D35300B72B4A /* _TypicalValues.m */; };
+		13B6C7E516D3D35300B72B4A /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7D816D3D35300B72B4A /* _WastePoint.m */; };
+		13B6C7E616D3D35300B72B4A /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DA16D3D35300B72B4A /* _WPField.m */; };
 		13A42DD816D4A16000B92C17 /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD116D4A16000B92C17 /* _Server.m */; };
 		13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD316D4A16000B92C17 /* _TypicalValue.m */; };
 		13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD516D4A16000B92C17 /* _WastePoint.m */; };
@@ -142,6 +146,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+
 		13A42DD016D4A16000B92C17 /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
 		13A42DD116D4A16000B92C17 /* _Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Server.m; sourceTree = "<group>"; };
 		13A42DD216D4A16000B92C17 /* _TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValue.h; sourceTree = "<group>"; };
