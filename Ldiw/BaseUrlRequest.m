@@ -17,7 +17,7 @@
 @implementation BaseUrlRequest
 
 + (void) loadServerInfoForCurrentLocationWithSuccess:(void (^)())success failure:(void (^)())failure {
-  
+  MSLog(@"Start BaseURLRequest");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     MSLog(@"Got location");
     NSString *latitude = [NSString stringWithFormat:@"%g", location.coordinate.latitude];

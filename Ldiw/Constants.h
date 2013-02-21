@@ -21,3 +21,4 @@
 
 #define kLanguageCodeKey @"language_code"
 
+#define kNotifycationUserDidExitRegion @"kNotifycatoinUserDidExitRegion"

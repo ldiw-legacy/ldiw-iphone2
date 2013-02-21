@@ -52,8 +52,12 @@
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   
   self.headerView.nearbyButton.selected = YES;
+<<<<<<< HEAD
   self.tableView.backgroundColor=kDarkBackgroundColor;
   MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
+=======
+
+>>>>>>> 36c19086db04426b11fa20b37d4b8ca30b464b0f
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
@@ -153,7 +157,8 @@
     if (result) {
       MSLog(@"Need to load base server information");
       [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-        [self loadWastePointList];
+//        [self loadWastePointList];
+        
       } failure:^(void) {
         MSLog(@"Server info loading fail");
       }];

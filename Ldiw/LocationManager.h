@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+typedef void (^LocationBlock)(CLLocation *currentLocation);
+
 @interface LocationManager : NSObject <CLLocationManagerDelegate> {
   void (^_locationBlock)(CLLocation *currentLocation);
   void (^_errorBlock)(NSError *error);
@@ -25,7 +27,7 @@
 - (void)locationWithBlock:(void (^)(CLLocation *currentLocation)) locationBlock errorBlock:(void (^)(NSError *error))errorBlock;
 - (void)reverseGeoCodeLocation:(CLLocation *)locationToCode withBlock:(void (^)(NSArray *placemarks)) geocodeBlock errorBlock:(void (^)(NSError *error))errorBlock;
 - (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result)) booleanResultBlock;
-
+- (BOOL)location:(CLLocation *)location IsInsideBox:(NSString *)box;
 
 +(NSString*) getPhoneLanguage;
 @end
