@@ -52,15 +52,17 @@
 }
 - (IBAction)signin:(UIButton *)sender {
   [self resignFirstResponder];
-  NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
+//  NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
+//
+//  [LoginRequest logInWithParameters:parameters success:^(NSArray *success) {
+//     NSLog(@"ResultArray %@",success);
+//    
+//     [self gotoActivityView];
+//  } failure:^(NSError *e) {
+//    NSLog(@"Login Error  %@",e);
+//  }];
+  [self gotoActivityView];
 
-  [LoginRequest logInWithParameters:parameters success:^(NSArray *success) {
-     NSLog(@"ResultArray %@",success);
-    
-     [self gotoActivityView];
-  } failure:^(NSError *e) {
-    NSLog(@"Login Error  %@",e);
-  }];
 
   
 }
