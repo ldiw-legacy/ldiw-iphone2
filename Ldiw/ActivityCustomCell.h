@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ActivityCustomCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UILabel *cellTitleLabel;
+@property (strong, nonatomic) UILabel *cellNameTitleLabel;
+@property (strong, nonatomic) UILabel *cellSubtitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cellTitleLabel;
 
 @end
