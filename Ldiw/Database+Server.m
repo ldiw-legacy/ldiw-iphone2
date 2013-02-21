@@ -66,7 +66,7 @@
   }
 }
 
-- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues{
+- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues andAllowedValues:(NSArray *)allowedValues {
   WPField *wpField = [self findWPFieldWithFieldName:(NSString *)fieldName orLabel:(NSString *)label];
   
   if (!wpField) {
@@ -79,8 +79,59 @@
     [wpField setSuffix:suffix];
     [wpField setType:type];
     
-    for (NSString *string in typicalValues) {
-      MSLog(@"%@", string);
+    if (typicalValues) {
+      for (NSArray *array in typicalValues) {
+        NSString *key;
+        NSString *value;
+        // Check key
+        if([[array objectAtIndex:0] isKindOfClass:[NSNumber class]])
+        {
+          key = [[array objectAtIndex:0] stringValue];
+        }
+        else if ([[array objectAtIndex:0] isKindOfClass:[NSString class]])
+        {
+          key = [array objectAtIndex:0];
+        }
+        
+        // Check value
+        if([[array objectAtIndex:1] isKindOfClass:[NSNumber class]])
+        {
+          value = [[array objectAtIndex:1] stringValue];
+        }
+        else if ([[array objectAtIndex:1] isKindOfClass:[NSString class]])
+        {
+          value = [array objectAtIndex:1];
+        }
+        [self createTypicalValueWithKey:key andValue:value forWPField:wpField];
+      }
+    }
+    
+    if (allowedValues) {
+      for (NSArray *array in allowedValues) {
+        NSString *key;
+        NSString *value;
+        // Check key
+        if([[array objectAtIndex:0] isKindOfClass:[NSNumber class]])
+        {
+          key = [[array objectAtIndex:0] stringValue];
+        }
+        else if ([[array objectAtIndex:0] isKindOfClass:[NSString class]])
+        {
+          key = [array objectAtIndex:0];
+        }
+        
+        // Check value
+        if([[array objectAtIndex:1] isKindOfClass:[NSNumber class]])
+        {
+          value = [[array objectAtIndex:1] stringValue];
+        }
+        else if ([[array objectAtIndex:1] isKindOfClass:[NSString class]])
+        {
+          value = [array objectAtIndex:1];
+        }
+        
+        [self createAllowedValueWithKey:key andValue:value forWPField:wpField];
+      }
     }
     [self saveContext];
   }
@@ -88,7 +139,7 @@
   return wpField;
 }
 
-- (WPField *)findWPFieldWithFieldName:(NSString *)fieldName orLabel:(NSString *)label
+- (WPField *)findWPFieldWithFieldName:(NSString *)fieldName orLabel:(NSString *)label 
 {
   if (!fieldName) {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label == %@", label];
@@ -101,15 +152,22 @@
   }
 }
 
-//- (TypicalValu *)createTypicalValue
-//{
-//  TypicalValues  = [self findCoreDataObjectNamed:@"WPField" withPredicate:predicate];
-//  return wpField;
-//}
+- (TypicalValue *)createTypicalValueWithKey:(NSString *)key andValue:(NSString *)value forWPField:(WPField *)wpField
+{
+  TypicalValue *tValue = [TypicalValue insertInManagedObjectContext:self.managedObjectContext];
+  [tValue setKey:key];
+  [tValue setValue:value];
+  [tValue setWpField:wpField];
+  return tValue;
+}
 
-- (NSArray *)lisTypicalValues {
-  NSArray *returnArray = [self listCoreObjectsNamed:@"TypicalValue"];
-  return returnArray;
+- (AllowedValue *)createAllowedValueWithKey:(NSString *)key andValue:(NSString *)value forWPField:(WPField *)wpField
+{
+  AllowedValue *aValue = [AllowedValue insertInManagedObjectContext:self.managedObjectContext];
+  [aValue setKey:key];
+  [aValue setValue:value];
+  [aValue setWpField:wpField];
+  return aValue;
 }
 
 - (NSArray *)listAllWPFields {

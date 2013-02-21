@@ -12,6 +12,14 @@
 		13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD516D4A16000B92C17 /* _WastePoint.m */; };
 		13A42DDB16D4A16000B92C17 /* _WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD716D4A16000B92C17 /* _WPField.m */; };
 		13A42DDE16D4A19100B92C17 /* TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DDD16D4A19100B92C17 /* TypicalValue.m */; };
+		13A42DE316D4DF4F00B92C17 /* _AllowedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DE016D4DF4F00B92C17 /* _AllowedValue.m */; };
+		13A42DE416D4DF4F00B92C17 /* AllowedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DE216D4DF4F00B92C17 /* AllowedValue.m */; };
+		13A42DE616D4EDC800B92C17 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DE516D4EDC800B92C17 /* FacebookSDK.framework */; };
+		13A42DE916D4EEE300B92C17 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 13A42DE716D4EEE300B92C17 /* FacebookSDKResources.bundle */; };
+		13A42DEA16D4EEE300B92C17 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 13A42DE816D4EEE300B92C17 /* FBUserSettingsViewResources.bundle */; };
+		13A42DEC16D4EF1A00B92C17 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEB16D4EF1A00B92C17 /* AdSupport.framework */; };
+		13A42DEE16D4EF2000B92C17 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DED16D4EF2000B92C17 /* Social.framework */; };
+		13A42DF016D4EF2B00B92C17 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEF16D4EF2B00B92C17 /* Accounts.framework */; };
 		13B6C7E716D3D35300B72B4A /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DC16D3D35300B72B4A /* Server.m */; };
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
 		13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E216D3D35300B72B4A /* WPField.m */; };
@@ -153,6 +161,16 @@
 		13A42DD716D4A16000B92C17 /* _WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WPField.m; sourceTree = "<group>"; };
 		13A42DDC16D4A19100B92C17 /* TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValue.h; sourceTree = "<group>"; };
 		13A42DDD16D4A19100B92C17 /* TypicalValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValue.m; sourceTree = "<group>"; };
+		13A42DDF16D4DF4F00B92C17 /* _AllowedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AllowedValue.h; sourceTree = "<group>"; };
+		13A42DE016D4DF4F00B92C17 /* _AllowedValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AllowedValue.m; sourceTree = "<group>"; };
+		13A42DE116D4DF4F00B92C17 /* AllowedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllowedValue.h; sourceTree = "<group>"; };
+		13A42DE216D4DF4F00B92C17 /* AllowedValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllowedValue.m; sourceTree = "<group>"; };
+		13A42DE516D4EDC800B92C17 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		13A42DE716D4EEE300B92C17 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		13A42DE816D4EEE300B92C17 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
+		13A42DEB16D4EF1A00B92C17 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		13A42DED16D4EF2000B92C17 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		13A42DEF16D4EF2B00B92C17 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		13B6C7DB16D3D35300B72B4A /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		13B6C7DC16D3D35300B72B4A /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
@@ -323,6 +341,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13A42DF016D4EF2B00B92C17 /* Accounts.framework in Frameworks */,
+				13A42DEE16D4EF2000B92C17 /* Social.framework in Frameworks */,
+				13A42DEC16D4EF1A00B92C17 /* AdSupport.framework in Frameworks */,
 				538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */,
 				C583438216D3ED90005F3330 /* QuartzCore.framework in Frameworks */,
 				534CCF6A16D279980004532F /* CoreLocation.framework in Frameworks */,
@@ -332,6 +353,7 @@
 				534CCF1116D210590004532F /* Foundation.framework in Frameworks */,
 				534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */,
 				534CCF1516D210590004532F /* CoreData.framework in Frameworks */,
+				13A42DE616D4EDC800B92C17 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +363,8 @@
 		13B6C7D216D3D35300B72B4A /* databaseObjects */ = {
 			isa = PBXGroup;
 			children = (
+				13A42DDF16D4DF4F00B92C17 /* _AllowedValue.h */,
+				13A42DE016D4DF4F00B92C17 /* _AllowedValue.m */,
 				13A42DD016D4A16000B92C17 /* _Server.h */,
 				13A42DD116D4A16000B92C17 /* _Server.m */,
 				13A42DD216D4A16000B92C17 /* _TypicalValue.h */,
@@ -349,6 +373,8 @@
 				13A42DD516D4A16000B92C17 /* _WastePoint.m */,
 				13A42DD616D4A16000B92C17 /* _WPField.h */,
 				13A42DD716D4A16000B92C17 /* _WPField.m */,
+				13A42DE116D4DF4F00B92C17 /* AllowedValue.h */,
+				13A42DE216D4DF4F00B92C17 /* AllowedValue.m */,
 				13B6C7DB16D3D35300B72B4A /* Server.h */,
 				13B6C7DC16D3D35300B72B4A /* Server.m */,
 				13B6C7DF16D3D35300B72B4A /* WastePoint.h */,
@@ -383,6 +409,12 @@
 		534CCF0D16D210590004532F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				13A42DEF16D4EF2B00B92C17 /* Accounts.framework */,
+				13A42DED16D4EF2000B92C17 /* Social.framework */,
+				13A42DEB16D4EF1A00B92C17 /* AdSupport.framework */,
+				13A42DE716D4EEE300B92C17 /* FacebookSDKResources.bundle */,
+				13A42DE816D4EEE300B92C17 /* FBUserSettingsViewResources.bundle */,
+				13A42DE516D4EDC800B92C17 /* FacebookSDK.framework */,
 				538DC21516D4B04A002D7925 /* MapKit.framework */,
 				C583438116D3ED8F005F3330 /* QuartzCore.framework */,
 				534CCF6916D279980004532F /* CoreLocation.framework */,
@@ -850,6 +882,8 @@
 				C583438016D3C5A0005F3330 /* LoginViewController.xib in Resources */,
 				C583438516D4018C005F3330 /* Caecilia-Heavy.otf in Resources */,
 				5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */,
+				13A42DE916D4EEE300B92C17 /* FacebookSDKResources.bundle in Resources */,
+				13A42DEA16D4EEE300B92C17 /* FBUserSettingsViewResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,6 +946,8 @@
 				538DC21416D3AF08002D7925 /* Database+WP.m in Sources */,
 				C583437F16D3C5A0005F3330 /* LoginViewController.m in Sources */,
 				C583438816D4CF98005F3330 /* LoginRequest.m in Sources */,
+				13A42DE316D4DF4F00B92C17 /* _AllowedValue.m in Sources */,
+				13A42DE416D4DF4F00B92C17 /* AllowedValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,10 +1024,18 @@
 		534CCF2E16D210590004532F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ldiw/Ldiw-Prefix.pch";
 				INFOPLIST_FILE = "Ldiw/Ldiw-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1000,10 +1044,18 @@
 		534CCF2F16D210590004532F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ldiw/Ldiw-Prefix.pch";
 				INFOPLIST_FILE = "Ldiw/Ldiw-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

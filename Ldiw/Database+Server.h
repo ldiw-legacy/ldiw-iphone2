@@ -8,6 +8,8 @@
 
 #import "Database.h"
 #import "WPField.h"
+#import "TypicalValue.h"
+#import "AllowedValue.h"
 
 @interface Database (Server)
 
@@ -16,6 +18,6 @@
 - (NSString *)serverSuffix;
 
 - (NSArray *)listAllWPFields;
-- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues;
+- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues andAllowedValues:(NSArray *)allowedValues;
 - (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;;
 @end
