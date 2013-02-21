@@ -12,6 +12,7 @@
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #define kTitlePositionAdjustment 8.0
 
@@ -50,14 +51,12 @@
   
   self.headerView.nearbyButton.selected = YES;
 
-  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
   [self loadServerInformation];
 }
-
 
 - (void)nearbyPressed:(UIButton *)sender
 {
@@ -137,7 +136,7 @@
 
 - (void)loadWastePointList {
   [WastepointRequest getWPList:^(NSArray* responseArray) {
-    MSLog(@"Response array %@", responseArray);
+    MSLog(@"Response array count: %i", responseArray.count);
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
   }];

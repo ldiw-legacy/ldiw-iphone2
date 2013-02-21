@@ -449,6 +449,7 @@
 		534CCF1716D210590004532F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */,
 				534CCF1816D210590004532F /* Ldiw-Info.plist */,
 				534CCF1916D210590004532F /* InfoPlist.strings */,
 				534CCF1C16D210590004532F /* main.m */,
@@ -513,10 +514,10 @@
 			children = (
 				534CCF5916D22F770004532F /* MainViewController.h */,
 				534CCF5A16D22F770004532F /* MainViewController.m */,
+				534CCF5B16D22F770004532F /* MainViewController.xib */,
 				C581F30816D27B04003A2FA2 /* ActivityViewController.h */,
 				C581F30916D27B04003A2FA2 /* ActivityViewController.m */,
 				C581F30A16D27B04003A2FA2 /* ActivityViewController.xib */,
-				534CCF5B16D22F770004532F /* MainViewController.xib */,
 				C583437C16D3C5A0005F3330 /* LoginViewController.h */,
 				C583437D16D3C5A0005F3330 /* LoginViewController.m */,
 				C583437E16D3C5A0005F3330 /* LoginViewController.xib */,
@@ -548,7 +549,6 @@
 				534CCF6716D25A2B0004532F /* LocationManager.m */,
 				C581F30F16D308D3003A2FA2 /* DesignHelper.h */,
 				C581F31016D308D3003A2FA2 /* DesignHelper.m */,
-				5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */,
 			);
 			name = Util;
 			sourceTree = "<group>";
