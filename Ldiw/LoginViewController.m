@@ -10,6 +10,8 @@
 #import "MainViewController.h"
 #import "ActivityViewController.h"
 #import "DesignHelper.h"
+#import "AppDelegate.h"
+
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 #define kExternalWebLink @"https://www.letsdoitworld.org/user/register"
 
@@ -69,6 +71,8 @@
 }
 
 - (IBAction)loginFB:(id)sender {
+  AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+  [appDelegate openSession];
 }
 
 -(void)gotoActivityView
@@ -102,4 +106,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Facebook
+- (void)loginFailed {
+  
+}
 @end

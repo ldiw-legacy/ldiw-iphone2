@@ -8,5 +8,7 @@
 
 @interface LoginViewController : UIViewController
 
+- (void)loginFailed;
+- (void)gotoActivityView;
 
 @end

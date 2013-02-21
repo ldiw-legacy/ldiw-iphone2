@@ -13,6 +13,7 @@
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #define kTitlePositionAdjustment 8.0
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
@@ -55,13 +56,14 @@
   self.headerView.nearbyButton.selected = YES;
   self.tableView.backgroundColor=kDarkBackgroundColor;
   MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
+  self.tableView.backgroundColor = kDarkBackgroundColor;
+  
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
   [self loadServerInformation];
 }
-
 
 - (void)nearbyPressed:(UIButton *)sender
 {
@@ -143,7 +145,7 @@
 
 - (void)loadWastePointList {
   [WastepointRequest getWPList:^(NSArray* responseArray) {
-    MSLog(@"Response array %@", responseArray);
+    MSLog(@"Response array count: %i", responseArray.count);
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
   }];
