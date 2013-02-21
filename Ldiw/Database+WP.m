@@ -50,7 +50,7 @@
       [oneElementDict setObject:object forKey:key];
     }
     WastePoint *point = [self wastePointFromDictionary:oneElementDict];
-    
+    [resultArray addObject:point];
 
   }
   
