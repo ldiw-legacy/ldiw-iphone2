@@ -76,7 +76,7 @@
     if (_locationBlock) {
       MSLog(@"Got goot location, call newLocation block");
       _locationBlock(newLocation);
-      _locationBlock = nil;
+//      _locationBlock = nil;
     } else {
       // Recieved significant location change. Fire notifycation
       [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
