@@ -14,7 +14,7 @@
 
 @interface Database (Server)
 
-- (void)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
+- (Server *)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
 - (NSString *)serverBaseUrl;
 - (NSString *)serverSuffix;
 - (NSString *)bBox;

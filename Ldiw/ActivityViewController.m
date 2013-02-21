@@ -9,6 +9,7 @@
 #import "ActivityViewController.h"
 #import "HeaderView.h"
 #import "Database+Server.h"
+#import "Database+WPField.h"
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
@@ -52,12 +53,8 @@
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   
   self.headerView.nearbyButton.selected = YES;
-<<<<<<< HEAD
   self.tableView.backgroundColor=kDarkBackgroundColor;
   MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
-=======
-
->>>>>>> 36c19086db04426b11fa20b37d4b8ca30b464b0f
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];

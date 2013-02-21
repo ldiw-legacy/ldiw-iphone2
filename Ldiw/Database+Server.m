@@ -12,7 +12,7 @@
 
 @implementation Database (Server)
 
-- (void)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox {
+- (Server *)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox {
   MSLog(@"Save server with baseUrl %@ and bbox %@", baseUrl, safeBBox);
   [self deleteAllWPFields];
   
@@ -28,50 +28,54 @@
     baseUrl = [urlPartsArray objectAtIndex:0];
   }
   
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"baseUrl == %@", baseUrl];
-  Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:predicate];
+  Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
 
-  if (server) {
-    [self.managedObjectContext deleteObject:server];
-    [self deleteAllWPFields];
+  if (!server) {
+    server = [Server insertInManagedObjectContext:self.managedObjectContext];
   }
   
-  server = [Server insertInManagedObjectContext:self.managedObjectContext];
   [server setBaseUrlSuffix:suffix];
   [server setBaseUrl:baseUrl];
   [server setSafeBBox:safeBBox];
   [self saveContext];
+  return server;
 }
 
 - (NSString *)serverBaseUrl {
-  Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
+  Server *server = [self currentServer];
   return server.baseUrl;
 }
 
 - (NSString *)serverSuffix {
-  Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
+  Server *server = [self currentServer];
   return server.baseUrlSuffix;
 }
 
 - (NSString *)bBox {
-  Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
+  Server *server = [self currentServer];
   return server.safeBBox;
 }
 
 - (Server *)currentServer {
   Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
+  if (!server) {
+    server = [self addServerWithBaseUrl:nil andSafeBBox:nil];
+  }
   return server;
 }
 
 - (void)setCurrentLocation:(CLLocation *)currentLocation {
   Server *server = [self currentServer];
-  [server setCurrentLocation:currentLocation];
+  [server setLocationLatValue:currentLocation.coordinate.latitude];
+  [server setLocationLonValue:currentLocation.coordinate.longitude];
 }
 
 - (CLLocation *)currentLocation {
   Server *server = [self currentServer];
-  CLLocation *currentLocation = (CLLocation *)server.currentLocation;
-  return currentLocation;
+  double lon = server.locationLonValue;
+  double lat = server.locationLatValue;
+  CLLocation *returnLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+  return  returnLocation;
 }
 
 - (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL))resultBlock {
