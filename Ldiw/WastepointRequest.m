@@ -24,7 +24,7 @@
   //  URL: GET/POST <api_base_url>/waste_points.{json,csv,kml}
   // ONLY CSV is supported
   
-  
+  MSLog(@"Start ListWP request");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     MSLog(@"Got location");
     NSString *latitude = [NSString stringWithFormat:@"%g", location.coordinate.latitude];

@@ -64,7 +64,12 @@
   return server;
 }
 
+- (void)setCurrentLocation:(CLLocation *)currentLocation {
+
+}
+
 - (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL))resultBlock {
+  MSLog(@"NeedToLoadServerInformationWithBlock");
   [[LocationManager sharedManager] currentLocationIsInsideBox:[self bBox] withResultBlock:^(BOOL locationIsInsideBox) {
     NSString *baseUrl = [self serverBaseUrl];
     BOOL serverInfoIsAvailable = (baseUrl.length == 0);

@@ -9,7 +9,9 @@
 #import "AppDelegate.h"
 #import "Database.h"
 #import "LoginViewController.h"
-#import <CoreLocation/CoreLocation.h>
+#import "Database+Server.h"
+#import "LocationManager.h"
+#import "BaseUrlRequest.h"
 
 @implementation AppDelegate
 
@@ -58,9 +60,20 @@
 }
 
 - (void)locationChanged:(NSNotification *)notification {
-  
+  MSLog(@"Got location changed notification");
   CLLocation *location = (CLLocation *)notification.object;
-  
+  NSString *serverBox = [[Database sharedInstance] bBox];
+  if (serverBox) {
+    MSLog(@"Server box is present, check if user is inside box");
+    BOOL userIsInsideBox = [[LocationManager sharedManager] location:location IsInsideBox:serverBox];
+    if (!userIsInsideBox) {
+      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+        MSLog(@"New base url loaded");
+      } failure:^(void) {
+        MSLog(@"Server info loading fail");
+      }];
+    }
+  }
 }
 
 @end

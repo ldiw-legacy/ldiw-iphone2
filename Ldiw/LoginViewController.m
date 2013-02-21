@@ -62,9 +62,6 @@
 //    NSLog(@"Login Error  %@",e);
 //  }];
   [self gotoActivityView];
-
-
-  
 }
 
 - (IBAction)registerAccount:(UIButton *)sender {
