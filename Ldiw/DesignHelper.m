@@ -10,6 +10,7 @@
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
 #define kHeaderButtonTitleColorSelected [UIColor whiteColor]
 #define kHeaderButtonTitleShadowColor [UIColor darkGrayColor]
+#define kTextSubtitleColor [UIColor colorWithRed:0.58 green:0.588 blue:0.545 alpha:1] /*#94968b*/
 @implementation DesignHelper
 
 +(void)setUpHeaderViewButton:(UIButton *)button
@@ -27,6 +28,30 @@
 {
   [button setTitleColor:kHeaderButtonTitleColorSelected forState:UIControlStateHighlighted];
   button.titleLabel.font = [UIFont fontWithName:@"Caecilia-Heavy" size:18];
+  
+}
+
++(void)setActivityViewSubtitle:(UILabel *)label
+{
+  label.font=[UIFont fontWithName:@"HelveticaNeue" size:13];
+  label.textColor=kTextSubtitleColor;
+  label.backgroundColor=[UIColor clearColor];
+  [label sizeToFit];
+}
++(void)setActivityViewNametitle:(UILabel *)label
+{
+  label.font=[UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+  label.textColor=[UIColor whiteColor];
+  label.backgroundColor=[UIColor clearColor];
+  [label sizeToFit];
+  
+}
++(void)setActivityViewActivitytitle:(UILabel *)label
+{
+  
+}
++(void)setActivityViewLocationtitle:(UILabel *)label
+{
   
 }
 

@@ -14,6 +14,8 @@
 #import "BaseUrlRequest.h"
 
 #define kTitlePositionAdjustment 8.0
+#define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
+
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
@@ -35,7 +37,8 @@
 {
   [super viewDidLoad];
   [self setUpTabbar];
- 
+
+
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
@@ -49,7 +52,7 @@
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   
   self.headerView.nearbyButton.selected = YES;
-
+  self.tableView.backgroundColor=kDarkBackgroundColor;
   MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
@@ -127,7 +130,9 @@
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
-  cell.cellTitleLabel.text=@"just testing";
+  cell.cellNameTitleLabel.text=@"John Smith";
+  cell.cellSubtitleLabel.text=@"2 days ago, 3km from here";
+  cell.cellTitleLabel.text=@"added wastepoint";
   return cell;
 }
 
