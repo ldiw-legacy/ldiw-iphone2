@@ -1032,6 +1032,10 @@
 				GCC_PREFIX_HEADER = "Ldiw/Ldiw-Prefix.pch";
 				INFOPLIST_FILE = "Ldiw/Ldiw-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1048,6 +1052,10 @@
 				GCC_PREFIX_HEADER = "Ldiw/Ldiw-Prefix.pch";
 				INFOPLIST_FILE = "Ldiw/Ldiw-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
