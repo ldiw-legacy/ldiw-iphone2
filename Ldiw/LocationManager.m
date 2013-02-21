@@ -160,7 +160,7 @@
   //    box = "26.2167,57.8833,27.2167,58.8833";
   MSLog(@"CurrentLocationIsInsideBox");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-
+    [[Database sharedInstance] setCurrentLocation:location];
     BOOL isInsideBox = [self location:location IsInsideBox:box];
     resultBlock(isInsideBox);
   } errorBlock:^(NSError *error) {

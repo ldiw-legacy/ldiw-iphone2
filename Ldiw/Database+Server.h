@@ -10,6 +10,7 @@
 #import "WPField.h"
 #import "TypicalValue.h"
 #import "AllowedValue.h"
+#import "LocationManager.h"
 
 @interface Database (Server)
 
@@ -18,6 +19,9 @@
 - (NSString *)serverSuffix;
 - (NSString *)bBox;
 - (Server *)currentServer;
+
+- (void)setCurrentLocation:(CLLocation *)currentLocation;
+- (CLLocation *)currentLocation;
 
 - (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;;
 @end

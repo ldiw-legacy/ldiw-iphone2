@@ -9,7 +9,6 @@
 #import "Database+Server.h"
 #import "Database+WPField.h"
 #import "Server.h"
-#import "LocationManager.h"
 
 @implementation Database (Server)
 
@@ -65,7 +64,14 @@
 }
 
 - (void)setCurrentLocation:(CLLocation *)currentLocation {
+  Server *server = [self currentServer];
+  [server setCurrentLocation:currentLocation];
+}
 
+- (CLLocation *)currentLocation {
+  Server *server = [self currentServer];
+  CLLocation *currentLocation = (CLLocation *)server.currentLocation;
+  return currentLocation;
 }
 
 - (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL))resultBlock {

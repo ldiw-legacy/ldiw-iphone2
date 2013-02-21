@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface LoginViewController : UIViewController
 
 
