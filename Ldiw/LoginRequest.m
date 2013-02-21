@@ -9,6 +9,8 @@
 #import "LoginRequest.h"
 #import "LoginViewController.h"
 #import "LoginClient.h"
+#import "Database+Server.h"
+#import "Server.h"
 
 @implementation LoginRequest
 
@@ -19,7 +21,17 @@
   
   
   [[LoginClient sharedLoginClient] postPath:kLoginPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    success(responseObject);
+    if ([responseObject isKindOfClass:[NSDictionary class]]) {
+      Server *userinfo = [[Database sharedInstance] currentServer];
+      userinfo.sessid = [responseObject objectForKey:@"sessid"];
+      userinfo.session_name = [responseObject objectForKey:@"session_name"];
+      
+      if (success) {
+        success(responseObject);
+      }
+      
+    }
+    
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     MSLog(@"Error %@", error);
     failure(error);
