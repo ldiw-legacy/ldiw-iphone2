@@ -8,6 +8,7 @@
     <entity name="Server" representedClassName="Server" syncable="YES">
         <attribute name="baseUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="baseUrlSuffix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="currentLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="safeBBox" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="fields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WPField" inverseName="server" inverseEntity="WPField" syncable="YES"/>
     </entity>
@@ -39,7 +40,7 @@
     </entity>
     <elements>
         <element name="AllowedValue" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Server" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Server" positionX="160" positionY="192" width="128" height="120"/>
         <element name="TypicalValue" positionX="160" positionY="192" width="128" height="90"/>
         <element name="WastePoint" positionX="160" positionY="192" width="128" height="120"/>
         <element name="WPField" positionX="160" positionY="192" width="128" height="225"/>
