@@ -16,8 +16,8 @@
 - (void)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
 - (NSString *)serverBaseUrl;
 - (NSString *)serverSuffix;
+- (NSString *)bBox;
+- (Server *)currentServer;
 
-- (NSArray *)listAllWPFields;
-- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues andAllowedValues:(NSArray *)allowedValues;
 - (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;;
 @end

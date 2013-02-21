@@ -24,6 +24,7 @@
     
     [locManager setDelegate:self];
     [locManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    [locManager startMonitoringSignificantLocationChanges];
   }
   return self;
 }
@@ -71,9 +72,14 @@
 {
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
     [locManager stopUpdatingLocation];
+    
     if (_locationBlock) {
       MSLog(@"Got goot location, call newLocation block");
       _locationBlock(newLocation);
+      _locationBlock = nil;
+    } else {
+      // Recieved significant location change. Fire notifycation
+      [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
     }
   } else {
     MSLog(@"Bad location info %@", newLocation);

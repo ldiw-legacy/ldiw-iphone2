@@ -46,9 +46,10 @@
 		534CCF6D16D34B110004532F /* Database+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6C16D34B110004532F /* Database+Server.m */; };
 		534CCF7616D34D450004532F /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7516D34D450004532F /* ServerRequest.m */; };
 		534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7816D3725C0004532F /* WastepointRequest.m */; };
-		534CCF7C16D39F6E0004532F /* parseCSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7B16D39F6E0004532F /* parseCSV.m */; };
+		534CCF7C16D39F6E0004532F /* CSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7B16D39F6E0004532F /* CSVParser.m */; };
 		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
 		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
+		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
 		C581F2BC16D278E6003A2FA2 /* fb_connect_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */; };
@@ -218,11 +219,13 @@
 		534CCF7516D34D450004532F /* ServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerRequest.m; sourceTree = "<group>"; };
 		534CCF7716D3725C0004532F /* WastepointRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastepointRequest.h; sourceTree = "<group>"; };
 		534CCF7816D3725C0004532F /* WastepointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastepointRequest.m; sourceTree = "<group>"; };
-		534CCF7A16D39F6E0004532F /* parseCSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = parseCSV.h; path = Ldiw/apis/CCsvParser/parseCSV.h; sourceTree = "<group>"; };
-		534CCF7B16D39F6E0004532F /* parseCSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = parseCSV.m; path = Ldiw/apis/CCsvParser/parseCSV.m; sourceTree = "<group>"; };
+		534CCF7A16D39F6E0004532F /* CSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSVParser.h; path = Ldiw/apis/CCsvParser/CSVParser.h; sourceTree = "<group>"; };
+		534CCF7B16D39F6E0004532F /* CSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSVParser.m; path = Ldiw/apis/CCsvParser/CSVParser.m; sourceTree = "<group>"; };
 		538DC21216D3AF08002D7925 /* Database+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WP.h"; sourceTree = "<group>"; };
 		538DC21316D3AF08002D7925 /* Database+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WP.m"; sourceTree = "<group>"; };
 		538DC21516D4B04A002D7925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		538DC21716D5063D002D7925 /* Database+WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WPField.h"; sourceTree = "<group>"; };
+		538DC21816D5063E002D7925 /* Database+WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WPField.m"; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e_friendsgraphic@2x.png"; sourceTree = "<group>"; };
 		C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_connect_normal@2x.png"; sourceTree = "<group>"; };
@@ -446,6 +449,8 @@
 				534CCF6C16D34B110004532F /* Database+Server.m */,
 				538DC21216D3AF08002D7925 /* Database+WP.h */,
 				538DC21316D3AF08002D7925 /* Database+WP.m */,
+				538DC21716D5063D002D7925 /* Database+WPField.h */,
+				538DC21816D5063E002D7925 /* Database+WPField.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -534,8 +539,8 @@
 		534CCF7D16D39F7D0004532F /* CSVParser */ = {
 			isa = PBXGroup;
 			children = (
-				534CCF7A16D39F6E0004532F /* parseCSV.h */,
-				534CCF7B16D39F6E0004532F /* parseCSV.m */,
+				534CCF7A16D39F6E0004532F /* CSVParser.h */,
+				534CCF7B16D39F6E0004532F /* CSVParser.m */,
 			);
 			name = CSVParser;
 			sourceTree = "<group>";
@@ -912,7 +917,7 @@
 				13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */,
 				13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */,
 				534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */,
-				534CCF7C16D39F6E0004532F /* parseCSV.m in Sources */,
+				534CCF7C16D39F6E0004532F /* CSVParser.m in Sources */,
 				C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */,
 				13A42DD816D4A16000B92C17 /* _Server.m in Sources */,
 				13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */,
@@ -924,6 +929,7 @@
 				C583438816D4CF98005F3330 /* LoginRequest.m in Sources */,
 				13A42DE316D4DF4F00B92C17 /* _AllowedValue.m in Sources */,
 				13A42DE416D4DF4F00B92C17 /* AllowedValue.m in Sources */,
+				538DC21916D5063F002D7925 /* Database+WPField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

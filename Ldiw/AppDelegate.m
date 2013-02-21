@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "Database.h"
 #import "LoginViewController.h"
-
+#import <CoreLocation/CoreLocation.h>
 
 @implementation AppDelegate
 
@@ -20,8 +20,9 @@
 
   LoginViewController *lvc=[[LoginViewController alloc]initWithNibName:nil bundle:nil];
 
-
   [self.window setRootViewController:lvc];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
@@ -54,6 +55,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
   // Saves changes in the application's managed object context before the application terminates.
+}
+
+- (void)locationChanged:(NSNotification *)notification {
+  
+  CLLocation *location = (CLLocation *)notification.object;
+  
 }
 
 @end

@@ -50,7 +50,6 @@
   
   self.headerView.nearbyButton.selected = YES;
 
-  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
@@ -149,6 +148,7 @@
       MSLog(@"Need to load base server information");
       [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
         [self loadWastePointList];
+        
       } failure:^(void) {
         MSLog(@"Server info loading fail");
       }];

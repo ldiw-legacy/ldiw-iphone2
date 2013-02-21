@@ -8,6 +8,8 @@
 
 #import "ServerRequest.h"
 #import "Database+Server.h"
+#import "Database+WPField.h"
+#import "Server.h"
 
 #define kGetWPFieldsPath @"waste-point-extra-fields.json"
 
@@ -29,7 +31,7 @@
     NSError *jsonError;
     
     NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&jsonError];
-//    MSLog(@"Got datavse fields %@", responseArray);
+
     for (NSDictionary *wpDict in responseArray ) {
       NSString *fieldName = [wpDict objectForKey:kFieldNameKey];
       NSString *editInstructions = [wpDict objectForKey:kEditInstructionsKey];
@@ -42,7 +44,10 @@
       NSArray *typicalValues = [wpDict objectForKey:kTypicalValuesKey];
       NSArray *allowedValues = [wpDict objectForKey:kAllowedValuesKey];
       
-      [[Database sharedInstance] createWPFieldWithFieldName:fieldName andEditInstructions:editInstructions andLabel:label andMaxValue:max andMinValue:mix andSuffix:suffix andType:type andTypicalValues:typicalValues andAllowedValues:allowedValues];
+      WPField *fieldToAdd = [[Database sharedInstance] createWPFieldWithFieldName:fieldName andEditInstructions:editInstructions andLabel:label andMaxValue:max andMinValue:mix andSuffix:suffix andType:type andTypicalValues:typicalValues andAllowedValues:allowedValues];
+      Server *server = [[Database sharedInstance] currentServer];
+      [server addFieldsObject:fieldToAdd];
+      
     }
     
     success(responseArray);

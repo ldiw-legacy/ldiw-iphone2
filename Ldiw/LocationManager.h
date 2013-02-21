@@ -26,6 +26,5 @@
 - (void)reverseGeoCodeLocation:(CLLocation *)locationToCode withBlock:(void (^)(NSArray *placemarks)) geocodeBlock errorBlock:(void (^)(NSError *error))errorBlock;
 - (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result)) booleanResultBlock;
 
-
 +(NSString*) getPhoneLanguage;
 @end
