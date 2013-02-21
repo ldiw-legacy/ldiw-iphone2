@@ -8,6 +8,7 @@
 
 #import "LocationManager.h"
 #import <MapKit/MapKit.h>
+#import "Database+Server.h"
 
 @implementation LocationManager
 @synthesize locManager, geocoder, locationManagerStart;
@@ -40,7 +41,11 @@
 }
 
 - (void)locationWithBlock:(void (^)(CLLocation *currentLocation)) locationBlock errorBlock:(void (^)(NSError *error))errorBlock {
+  MSLog(@"Get location with block");
+  
   _locationBlock = [locationBlock copy];
+  MSLog(@"Set locationBlock to %@", _locationBlock);
+  
   _errorBlock = [errorBlock copy];
   [locManager startUpdatingLocation];
 }
@@ -70,11 +75,15 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
-    [locManager stopUpdatingLocation];
     if (_locationBlock) {
-      MSLog(@"Got goot location, call newLocation block");
+      [locManager stopUpdatingLocation];
       _locationBlock(newLocation);
+//      _locationBlock = nil;
+    } else {
+      MSLog(@"Fire notification");
+      [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
     }
+    
   } else {
     MSLog(@"Bad location info %@", newLocation);
   }
@@ -126,14 +135,14 @@
   return YES;
 }
 
-- (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result))resultBlock {
-  //    box = "26.2167,57.8833,27.2167,58.8833";
+- (BOOL)location:(CLLocation *)location IsInsideBox:(NSString *)box {
+  
   NSArray *boxObjects = [box componentsSeparatedByString:@","];
   if ([boxObjects count] != 4) {
     MSLog(@"Wrong number of box objects. Have %d, need 4. String: %@", [boxObjects count], box);
-    resultBlock(NO);
+    return NO;
   }
-
+  
   double topLeftX = [[boxObjects objectAtIndex:0] doubleValue];
   double topLeftY = [[boxObjects objectAtIndex:1] doubleValue];
   double botRightX = [[boxObjects objectAtIndex:2] doubleValue];
@@ -142,10 +151,17 @@
   double boxHeight = botRightY - topLeftY;
   
   MKMapRect mapRect = MKMapRectMake(topLeftX, topLeftY, boxWidth, boxHeight);
-  
+  MKMapPoint currentPoint = MKMapPointForCoordinate(location.coordinate);
+  BOOL isInsideBox = MKMapRectContainsPoint(mapRect, currentPoint);
+  return isInsideBox;
+}
+
+- (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result))resultBlock {
+  //    box = "26.2167,57.8833,27.2167,58.8833";
+  MSLog(@"CurrentLocationIsInsideBox");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-    MKMapPoint currentPoint = MKMapPointForCoordinate(location.coordinate);
-    BOOL isInsideBox = MKMapRectContainsPoint(mapRect, currentPoint);
+    [[Database sharedInstance] setCurrentLocation:location];
+    BOOL isInsideBox = [self location:location IsInsideBox:box];
     resultBlock(isInsideBox);
   } errorBlock:^(NSError *error) {
     resultBlock(NO);

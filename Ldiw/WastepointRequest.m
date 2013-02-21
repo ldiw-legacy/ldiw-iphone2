@@ -24,15 +24,16 @@
   //  URL: GET/POST <api_base_url>/waste_points.{json,csv,kml}
   // ONLY CSV is supported
   
-  
+  MSLog(@"Start ListWP request");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     MSLog(@"Got location");
     NSString *latitude = [NSString stringWithFormat:@"%g", location.coordinate.latitude];
     NSString *longtitude = [NSString stringWithFormat:@"%g", location.coordinate.longitude];
     NSString *locationString = [NSString stringWithFormat:@"%@,%@", latitude, longtitude];
+    NSString *serverBBox = [[Database sharedInstance] bBox];
     
 // http://api.letsdoitworld.org/?q=api/waste_points.csv&max_results=10&nearest_points_to=26.7167,58.3833
-    NSString *path = [NSString stringWithFormat:@"%@&%@%d&%@%@", kGetWPListPath, kMaxResultsKey, 1000, kNearestPointToKey, locationString];
+    NSString *path = [NSString stringWithFormat:@"%@&%@=%d&%@=%@&%@=%@", kGetWPListPath, kMaxResultsKey, 1000, kNearestPointToKey, locationString, kBBoxKey, serverBBox];
     
     NSString *baseUrlString = [[Database sharedInstance] serverBaseUrl];
     NSString *baseUrlSuffix = [[Database sharedInstance] serverSuffix];

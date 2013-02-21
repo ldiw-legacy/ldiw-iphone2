@@ -10,7 +10,7 @@
 
 @interface LoginRequest : NetworkRequest
 
-+ (void)logInWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)logInWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 
 

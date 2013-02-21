@@ -22,6 +22,13 @@
     NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
     _sharedClient = [[NetworkRequest alloc] initWithBaseURL:serverBaseUrl];
   });
+
+  NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
+  if (![_sharedClient.baseURL isEqual:serverBaseUrl]) {
+    MSLog(@"Change base url for shared client");
+    _sharedClient = [[NetworkRequest alloc] initWithBaseURL:serverBaseUrl];
+  }
+  
   return _sharedClient;
 }
 
