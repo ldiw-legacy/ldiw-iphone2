@@ -78,7 +78,7 @@
     if (_locationBlock) {
       [locManager stopUpdatingLocation];
       _locationBlock(newLocation);
-      _locationBlock = nil;
+//      _locationBlock = nil;
     } else {
       MSLog(@"Fire notification");
       [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
