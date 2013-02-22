@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface Database : NSObject
 
 @property (nonatomic, strong) NSURL *storeUrl;

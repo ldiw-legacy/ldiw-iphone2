@@ -7,8 +7,6 @@
 //  Copyright (c) 2012 Ha Minh Vuong. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface CSVParser : NSObject
 
 + (NSArray *)parseCSVIntoArrayOfDictionariesFromFile:(NSString *)path

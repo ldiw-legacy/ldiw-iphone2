@@ -7,7 +7,6 @@
 //
 
 #import "LocationManager.h"
-#import <MapKit/MapKit.h>
 #import "Database+Server.h"
 
 @implementation LocationManager
@@ -42,10 +41,7 @@
 
 - (void)locationWithBlock:(void (^)(CLLocation *currentLocation)) locationBlock errorBlock:(void (^)(NSError *error))errorBlock {
   MSLog(@"Get location with block");
-  
-  _locationBlock = [locationBlock copy];
-  MSLog(@"Set locationBlock to %@", _locationBlock);
-  
+  _locationBlock = [locationBlock copy];  
   _errorBlock = [errorBlock copy];
   [locManager startUpdatingLocation];
 }
@@ -78,9 +74,8 @@
     if (_locationBlock) {
       [locManager stopUpdatingLocation];
       _locationBlock(newLocation);
-//      _locationBlock = nil;
+      _locationBlock = nil;
     } else {
-      MSLog(@"Fire notification");
       [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
     }
     
@@ -147,20 +142,18 @@
   double topLeftY = [[boxObjects objectAtIndex:1] doubleValue];
   double botRightX = [[boxObjects objectAtIndex:2] doubleValue];
   double botRightY = [[boxObjects objectAtIndex:3] doubleValue];
-  double boxWidth = botRightX - topLeftX;
-  double boxHeight = botRightY - topLeftY;
-  
-  MKMapRect mapRect = MKMapRectMake(topLeftX, topLeftY, boxWidth, boxHeight);
-  MKMapPoint currentPoint = MKMapPointForCoordinate(location.coordinate);
-  BOOL isInsideBox = MKMapRectContainsPoint(mapRect, currentPoint);
+
+  BOOL betweenXCoordinates = (topLeftX < location.coordinate.latitude < botRightX || topLeftX > location.coordinate.latitude > botRightX);
+  BOOL betweenYCoordinates = (topLeftY < location.coordinate.longitude < botRightY || topLeftY > location.coordinate.longitude > botRightY);
+
+  BOOL isInsideBox = (betweenXCoordinates && betweenYCoordinates);
   return isInsideBox;
 }
 
 - (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result))resultBlock {
   //    box = "26.2167,57.8833,27.2167,58.8833";
-  MSLog(@"CurrentLocationIsInsideBox");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-
+    [[Database sharedInstance] setCurrentLocation:location];
     BOOL isInsideBox = [self location:location IsInsideBox:box];
     resultBlock(isInsideBox);
   } errorBlock:^(NSError *error) {

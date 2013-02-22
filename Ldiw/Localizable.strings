@@ -1,13 +1,15 @@
 
+button.ok = "OK";
 
 // Tab names on tabbar
-
 tabBar.activityTabName = "Activity";
 tabBar.newPointTabText = "NewPoint";
 tabBar.myAccountTabText = "My Account";
 
 
-
+// Facebook login error
+facebook.error.title = "Oops!";
+facebook.error.login = "Facebook login failed. Please try again later";
 
 // Top bar buttons in Activities view
 

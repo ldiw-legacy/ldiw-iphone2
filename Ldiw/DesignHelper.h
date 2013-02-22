@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface DesignHelper : NSObject
 
 +(void)setUpHeaderViewButton:(UIButton *)button;
@@ -17,4 +15,5 @@
 +(void)setActivityViewActiontitle:(UILabel *)label;
 +(void)setActivityViewLocationtitle:(UILabel *)label;
 
++(UITabBarController*) createActivityView;
 @end

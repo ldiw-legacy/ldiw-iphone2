@@ -10,6 +10,8 @@
 #import "MainViewController.h"
 #import "ActivityViewController.h"
 #import "DesignHelper.h"
+#import "AppDelegate.h"
+
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 #define kExternalWebLink @"https://www.letsdoitworld.org/user/register"
 
@@ -52,16 +54,16 @@
 }
 - (IBAction)signin:(UIButton *)sender {
   [self resignFirstResponder];
-//  NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
-//
-//  [LoginRequest logInWithParameters:parameters success:^(NSArray *success) {
-//     NSLog(@"ResultArray %@",success);
-//    
-//     [self gotoActivityView];
-//  } failure:^(NSError *e) {
-//    NSLog(@"Login Error  %@",e);
-//  }];
-  [self gotoActivityView];
+  NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
+
+  [LoginRequest logInWithParameters:parameters success:^(NSArray *success) {
+     NSLog(@"ResultArray %@",success);
+    
+     [self gotoActivityView];
+  } failure:^(NSError *e) {
+    NSLog(@"Login Error  %@",e);
+  }];
+//  [self gotoActivityView];
 }
 
 - (IBAction)registerAccount:(UIButton *)sender {
@@ -69,18 +71,13 @@
 }
 
 - (IBAction)loginFB:(id)sender {
+  AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+  [appDelegate openSession];
 }
 
 -(void)gotoActivityView
 {
-  MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
-  MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
-  ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
-  UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
-
-  UITabBarController *tabBar = [[UITabBarController alloc] init];
-  [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
-  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,mainViewController,mainVC, nil]];
+  UITabBarController *tabBar = [DesignHelper createActivityView];
   tabBar.modalTransitionStyle =UIModalTransitionStyleCrossDissolve;
   [self presentViewController:tabBar animated:YES completion:nil];
 }
@@ -102,4 +99,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Facebook
+- (void)loginFailed {
+  
+}
 @end

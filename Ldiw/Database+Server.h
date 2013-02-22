@@ -10,14 +10,21 @@
 #import "WPField.h"
 #import "TypicalValue.h"
 #import "AllowedValue.h"
+#import "LocationManager.h"
 
 @interface Database (Server)
 
-- (void)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
+- (Server *)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
 - (NSString *)serverBaseUrl;
 - (NSString *)serverSuffix;
 - (NSString *)bBox;
 - (Server *)currentServer;
 
-- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;;
+- (void)setCurrentLocation:(CLLocation *)currentLocation;
+- (CLLocation *)currentLocation;
+
+- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;
+
++ (BOOL)isUserLoggedIn;
+
 @end

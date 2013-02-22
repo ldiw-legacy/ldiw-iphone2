@@ -25,48 +25,42 @@
   // ONLY CSV is supported
   
   MSLog(@"Start ListWP request");
-  [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-    MSLog(@"Got location");
-    NSString *latitude = [NSString stringWithFormat:@"%g", location.coordinate.latitude];
-    NSString *longtitude = [NSString stringWithFormat:@"%g", location.coordinate.longitude];
-    NSString *locationString = [NSString stringWithFormat:@"%@,%@", latitude, longtitude];
-    NSString *serverBBox = [[Database sharedInstance] bBox];
+  MSLog(@"Got location");
+  CLLocation *location = [[Database sharedInstance] currentLocation];
+  NSString *latitude = [NSString stringWithFormat:@"%g", location.coordinate.latitude];
+  NSString *longtitude = [NSString stringWithFormat:@"%g", location.coordinate.longitude];
+  NSString *locationString = [NSString stringWithFormat:@"%@,%@", latitude, longtitude];
+  NSString *serverBBox = [[Database sharedInstance] bBox];
+  
+  // http://api.letsdoitworld.org/?q=api/waste_points.csv&max_results=10&nearest_points_to=26.7167,58.3833
+  NSString *path = [NSString stringWithFormat:@"%@&%@=%d&%@=%@&%@=%@", kGetWPListPath, kMaxResultsKey, 1000, kNearestPointToKey, locationString, kBBoxKey, serverBBox];
+  
+  NSString *baseUrlString = [[Database sharedInstance] serverBaseUrl];
+  NSString *baseUrlSuffix = [[Database sharedInstance] serverSuffix];
+  
+  NSString *url = [NSString stringWithFormat:@"%@%@/%@", baseUrlString, baseUrlSuffix, path];
+  MSLog(@"Get WP list from: %@", url);
+  
+  NSString *language = [LocationManager getPhoneLanguage];
+  NSDictionary *parameters;
+  if (language) {
+    parameters = [NSDictionary dictionaryWithObject:language forKey:kLanguageCodeKey];
+  }
+  MSLog(@"GET WP list with parameters:%@", parameters);
+  
+  NSURLRequest *request = [[[AFHTTPClient alloc] init] requestWithMethod:@"GET" path:url parameters:parameters];
+  
+  AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+  [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSData *responseData = (NSData *)responseObject;
+    NSArray *resultArray = [[Database sharedInstance] WPListFromData:responseData];
+    success(resultArray);
     
-// http://api.letsdoitworld.org/?q=api/waste_points.csv&max_results=10&nearest_points_to=26.7167,58.3833
-    NSString *path = [NSString stringWithFormat:@"%@&%@=%d&%@=%@&%@=%@", kGetWPListPath, kMaxResultsKey, 1000, kNearestPointToKey, locationString, kBBoxKey, serverBBox];
-    
-    NSString *baseUrlString = [[Database sharedInstance] serverBaseUrl];
-    NSString *baseUrlSuffix = [[Database sharedInstance] serverSuffix];
-
-    NSString *url = [NSString stringWithFormat:@"%@%@/%@", baseUrlString, baseUrlSuffix, path];
-    MSLog(@"Get WP list from: %@", url);
-    
-    NSString *language = [LocationManager getPhoneLanguage];
-    NSDictionary *parameters;
-    if (language) {
-      parameters = [NSDictionary dictionaryWithObject:language forKey:kLanguageCodeKey];
-    }
-    MSLog(@"GET WP list with parameters:%@", parameters);
-    
-    NSURLRequest *request = [[[AFHTTPClient alloc] init] requestWithMethod:@"GET" path:url parameters:parameters];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-      NSData *responseData = (NSData *)responseObject;
-      NSArray *resultArray = [[Database sharedInstance] WPListFromData:responseData];
-      success(resultArray);
-      
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      NSLog(@"Things go boom. %@", [error localizedDescription]);
-      failure(error);
-    }];
-    [operation start];
-
-    
-  } errorBlock:^(NSError *error) {
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Things go boom. %@", [error localizedDescription]);
     failure(error);
   }];
-  
+  [operation start];
 }
 
 @end
