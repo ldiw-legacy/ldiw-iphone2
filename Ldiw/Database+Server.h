@@ -23,5 +23,8 @@
 - (void)setCurrentLocation:(CLLocation *)currentLocation;
 - (CLLocation *)currentLocation;
 
-- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;;
+- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;
+
++ (BOOL)isUserLoggedIn;
+
 @end

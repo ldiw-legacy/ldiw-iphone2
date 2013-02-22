@@ -15,4 +15,5 @@
 +(void)setActivityViewActivitytitle:(UILabel *)label;
 +(void)setActivityViewLocationtitle:(UILabel *)label;
 
++(UITabBarController*) createActivityView;
 @end
