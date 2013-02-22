@@ -11,7 +11,7 @@
 @interface LoginRequest : NetworkRequest
 
 + (void)logInWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
-
++ (void)loginWithFBToken:(NSString *)token andUID:(NSString *)uid;
 
 
 @end

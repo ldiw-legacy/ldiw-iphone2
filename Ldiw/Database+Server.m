@@ -63,6 +63,11 @@
   return server;
 }
 
+- (User *)currentUser {
+  User *user = [self findCoreDataObjectNamed:@"User" withPredicate:nil];
+  return user;
+}
+
 - (void)setCurrentLocation:(CLLocation *)currentLocation {
   Server *server = [self currentServer];
   [server setCurrentLocation:currentLocation];

@@ -21,11 +21,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  // Override point for customization after application launch  
-
+  // Override point for customization after application launch
+  
   self.mainViewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
   self.window.rootViewController = self.mainViewController;
-
+  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
   
   self.window.backgroundColor = [UIColor whiteColor];
@@ -64,7 +64,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-  [FBSession.activeSession handleDidBecomeActive];  
+  [FBSession.activeSession handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -87,8 +87,15 @@
 {
   switch (state) {
     case FBSessionStateOpen: {
-      [self.mainViewController gotoActivityView];
-      MSLog(@"FB SESSION OPEN!");
+      [[FBRequest requestForMe] startWithCompletionHandler:
+       ^(FBRequestConnection *connection,
+         NSDictionary<FBGraphUser> *user,
+         NSError *error) {
+         if (!error) {
+           MSLog(@"UID: %@", user.id);
+           [self.mainViewController gotoActivityView];
+         }
+       }];
     }
       break;
     case FBSessionStateClosed: {

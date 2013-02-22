@@ -11,6 +11,7 @@
 #import "TypicalValue.h"
 #import "AllowedValue.h"
 #import "LocationManager.h"
+#import "User.h"
 
 @interface Database (Server)
 
@@ -19,6 +20,7 @@
 - (NSString *)serverSuffix;
 - (NSString *)bBox;
 - (Server *)currentServer;
+- (User *)currentUser;
 
 - (void)setCurrentLocation:(CLLocation *)currentLocation;
 - (CLLocation *)currentLocation;
