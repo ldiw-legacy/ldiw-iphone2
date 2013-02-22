@@ -70,12 +70,14 @@
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+  MSLog(@"Locationmanager didUpdateToLocation");
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
     if (_locationBlock) {
       [locManager stopUpdatingLocation];
       _locationBlock(newLocation);
       _locationBlock = nil;
     } else {
+      MSLog(@"Post significant change notification");
       [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
     }
     
