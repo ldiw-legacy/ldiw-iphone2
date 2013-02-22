@@ -13,6 +13,7 @@
 #import "Database+Server.h"
 #import "LocationManager.h"
 #import "BaseUrlRequest.h"
+#import "DesignHelper.h"
 
 @implementation AppDelegate
 
@@ -23,8 +24,17 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   // Override point for customization after application launch  
 
-  self.mainViewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-  self.window.rootViewController = self.mainViewController;
+  
+  if ([Database isUserLoggedIn] == YES) {
+    UITabBarController *tabBar = [DesignHelper createActivityView];
+    [self.window setRootViewController:tabBar];
+  } else {
+    LoginViewController *lvc=[[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    [self.window setRootViewController:lvc];
+  }
+  
+  
+
 
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
   
