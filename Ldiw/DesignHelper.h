@@ -14,7 +14,7 @@
 +(void)setLoginButtonTitle:(UIButton *)button;
 +(void)setActivityViewSubtitle:(UILabel *)label;
 +(void)setActivityViewNametitle:(UILabel *)label;
-+(void)setActivityViewActivitytitle:(UILabel *)label;
++(void)setActivityViewActiontitle:(UILabel *)label;
 +(void)setActivityViewLocationtitle:(UILabel *)label;
 
 @end

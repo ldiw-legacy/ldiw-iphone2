@@ -52,12 +52,8 @@
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   
   self.headerView.nearbyButton.selected = YES;
-<<<<<<< HEAD
   self.tableView.backgroundColor=kDarkBackgroundColor;
-  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
-=======
-
->>>>>>> 36c19086db04426b11fa20b37d4b8ca30b464b0f
+ // MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
@@ -135,13 +131,22 @@
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
   cell.cellNameTitleLabel.text=@"John Smith";
+  [cell.cellNameTitleLabel sizeToFit];
   cell.cellSubtitleLabel.text=@"2 days ago, 3km from here";
+  [cell.cellSubtitleLabel sizeToFit];
   cell.cellTitleLabel.text=@"added wastepoint";
+  [cell.cellTitleLabel sizeToFit];
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 150;
+  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+  if (!cell) {
+    cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+  }
+
+  return cell.height +20;
+
 }
 
 - (void)loadWastePointList {
