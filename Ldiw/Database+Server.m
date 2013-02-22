@@ -95,7 +95,7 @@
 
 
 + (BOOL)isUserLoggedIn {
-  if ([[[self sharedInstance] currentServer].sessid isKindOfClass:[NSNull class]])
+  if ([[[self sharedInstance] currentUser].sessid isKindOfClass:[NSNull class]])
     return NO;
   else
     return YES;

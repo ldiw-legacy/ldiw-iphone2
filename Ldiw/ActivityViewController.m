@@ -54,14 +54,8 @@
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   
   self.headerView.nearbyButton.selected = YES;
-  self.tableView.backgroundColor=kDarkBackgroundColor;
-<<<<<<< HEAD
- // MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
-=======
-  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
   self.tableView.backgroundColor = kDarkBackgroundColor;
   
->>>>>>> be6195635a7ca15d65ac46e55b8679b642b1224a
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
