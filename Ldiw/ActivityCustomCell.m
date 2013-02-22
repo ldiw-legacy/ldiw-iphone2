@@ -58,28 +58,29 @@
   
   CGRect subtitlelabelrect=CGRectOffset(firstrect, 0, pointMaker.size.height +6);
   cellSubtitleLabel=[[UILabel alloc] initWithFrame:subtitlelabelrect];
+  cellSubtitleLabel.text=@"Subtitle";
   [DesignHelper setActivityViewSubtitle:cellSubtitleLabel];
 
   CGRect namelabelrect=CGRectOffset(secondrect, secondrect.size.width + 4, 0);
   cellNameTitleLabel=[[UILabel alloc] initWithFrame:namelabelrect];
-  cellNameTitleLabel.text=@"";
   [DesignHelper setActivityViewNametitle:cellNameTitleLabel];
 
-  CGRect titlelabelrect=CGRectOffset(namelabelrect, secondrect.size.width + 4, 0);
-  self.cellTitleLabel.frame=titlelabelrect;
-  [DesignHelper setActivityViewNametitle:cellNameTitleLabel];
+  CGRect titlelabelrect=CGRectOffset(namelabelrect, 0 ,14);
+  cellTitleLabel= [[UILabel alloc] initWithFrame:titlelabelrect];
+  [DesignHelper setActivityViewActiontitle:cellTitleLabel];
   
   
   [bgView addSubview:firstImageView];
   [bgView addSubview:secondImageView];
   [bgView addSubview:cellSubtitleLabel];
   [bgView addSubview:cellNameTitleLabel];
+  [bgView addSubview:cellTitleLabel];
+  NSLog(@"korgus %@",NSStringFromCGRect(cellSubtitleLabel.frame));
+  _height = 5 + firstImageView.bounds.size.height + 6 + self.cellSubtitleLabel.bounds.size.height + 5;
+  bgView.frame = CGRectMake(bgView.frame.origin.x, bgView.frame.origin.y, bgView.frame.size.width, _height);
   
-
-  //self.cellTitleLabel=[[UILabel alloc] initWithFrame:rect];
-  //[self addSubview:cellTitleLabel];
-}
-
+                  
+  }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

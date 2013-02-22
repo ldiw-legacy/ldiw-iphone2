@@ -7,6 +7,9 @@
 //
 
 #import "DesignHelper.h"
+#import "MainViewController.h"
+#import "ActivityViewController.h"
+
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
 #define kHeaderButtonTitleColorSelected [UIColor whiteColor]
 #define kHeaderButtonTitleShadowColor [UIColor darkGrayColor]
@@ -46,13 +49,31 @@
   [label sizeToFit];
   
 }
-+(void)setActivityViewActivitytitle:(UILabel *)label
+
++(void)setActivityViewActiontitle:(UILabel *)label
 {
-  
+  label.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
+  label.textColor=[UIColor whiteColor];
+  label.backgroundColor=[UIColor clearColor];
+  [label sizeToFit];
 }
+
 +(void)setActivityViewLocationtitle:(UILabel *)label
 {
   
+}
+
+
++(UITabBarController*) createActivityView {
+  MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
+  MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
+  ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
+  UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
+  
+  UITabBarController *tabBar = [[UITabBarController alloc] init];
+  [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
+  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,mainViewController,mainVC, nil]];
+  return tabBar;
 }
 
 @end

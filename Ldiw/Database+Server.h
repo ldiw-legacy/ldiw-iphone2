@@ -15,7 +15,7 @@
 
 @interface Database (Server)
 
-- (void)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
+- (Server *)addServerWithBaseUrl:(NSString *)baseUrl andSafeBBox:(NSString *)safeBBox;
 - (NSString *)serverBaseUrl;
 - (NSString *)serverSuffix;
 - (NSString *)bBox;
@@ -25,5 +25,8 @@
 - (void)setCurrentLocation:(CLLocation *)currentLocation;
 - (CLLocation *)currentLocation;
 
-- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;;
+- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;
+
++ (BOOL)isUserLoggedIn;
+
 @end
