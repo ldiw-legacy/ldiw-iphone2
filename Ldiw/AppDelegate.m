@@ -14,6 +14,7 @@
 #import "LocationManager.h"
 #import "BaseUrlRequest.h"
 #import "DesignHelper.h"
+#import "LoginRequest.h"
 
 @implementation AppDelegate
 
@@ -27,10 +28,11 @@
     UITabBarController *tabBar = [DesignHelper createActivityView];
     [self.window setRootViewController:tabBar];
   } else {
-    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    [self.window setRootViewController:lvc];
+//    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    self.mainViewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    [self.window setRootViewController:mainViewController];
   }
-
+  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
   
   self.window.backgroundColor = [UIColor whiteColor];
@@ -93,12 +95,23 @@
   switch (state) {
     case FBSessionStateOpen: {
       [[FBRequest requestForMe] startWithCompletionHandler:
-       ^(FBRequestConnection *connection,
-         NSDictionary<FBGraphUser> *user,
-         NSError *error) {
+       ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
          if (!error) {
-           MSLog(@"UID: %@", user.id);
-           [self.mainViewController gotoActivityView];
+//           MSLog(@"%@", user.id);
+//           MSLog(@"%@", [[FBSession activeSession] accessToken]);
+           
+           User *currentUser = [[Database sharedInstance] currentUser];
+           [currentUser setUid:user.id];
+           [currentUser setToken:[[FBSession activeSession] accessToken]];
+           [[Database sharedInstance] saveContext];
+           
+           NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[[Database sharedInstance] currentUser].uid, kFBUIDKey, [[Database sharedInstance] currentUser].token, kAccessTokenKey, nil];
+           [LoginRequest logInWithParameters:parameters andFacebook:YES success:^(NSArray *success) {
+             MSLog(@"ResultArray count: %@",success);
+             [self.mainViewController gotoActivityView];         
+           } failure:^(NSError *error) {
+             MSLog(@"LoginRequest error: %@", error);
+           }];
          }
        }];
     }

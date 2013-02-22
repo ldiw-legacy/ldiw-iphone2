@@ -66,6 +66,9 @@
 
 - (User *)currentUser {
   User *user = [self findCoreDataObjectNamed:@"User" withPredicate:nil];
+  if (!user) {
+    user = [User insertInManagedObjectContext:self.managedObjectContext];
+  }
   return user;
 }
 
@@ -93,12 +96,12 @@
   }];
 }
 
-
 + (BOOL)isUserLoggedIn {
-  if ([[[self sharedInstance] currentUser].sessid isKindOfClass:[NSNull class]])
-    return NO;
-  else
+  if ([[self  sharedInstance] currentUser].sessid) {
     return YES;
+  } else {
+    return NO;
+  }
 }
 
 @end

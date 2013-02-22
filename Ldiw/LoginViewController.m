@@ -56,9 +56,8 @@
   [self resignFirstResponder];
   NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
 
-  [LoginRequest logInWithParameters:parameters success:^(NSArray *success) {
-     NSLog(@"ResultArray %@",success);
-    
+  [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSArray *success) {
+     NSLog(@"ResultArray count: %i",success.count);
      [self gotoActivityView];
   } failure:^(NSError *e) {
     NSLog(@"Login Error  %@",e);

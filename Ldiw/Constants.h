@@ -22,3 +22,6 @@
 #define kLanguageCodeKey @"language_code"
 
 #define kNotifycationUserDidExitRegion @"kNotifycatoinUserDidExitRegion"
+
+#define kAccessTokenKey @"access_token"
+#define kFBUIDKey @"fb_uid"

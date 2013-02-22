@@ -10,8 +10,9 @@
 
 @interface LoginRequest : NetworkRequest
 
-+ (void)logInWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
-+ (void)loginWithFBToken:(NSString *)token andUID:(NSString *)uid;
+
+
++ (void)logInWithParameters:(NSDictionary *)parameters andFacebook:(BOOL)faceBookLogin success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 
 @end

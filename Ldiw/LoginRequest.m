@@ -16,20 +16,25 @@
 @implementation LoginRequest
 
 #define kLoginPath @"user/login.json"
+#define kFBLoginPath @"http://test.letsdoitworld.org/?q=api/user/fbconnect.json"
 
-
-+ (void)logInWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
++ (void)logInWithParameters:(NSDictionary *)parameters andFacebook:(BOOL)faceBookLogin success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
 {
-  [[LoginClient sharedLoginClient] postPath:kLoginPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  NSString *loginPath;
+  if (faceBookLogin) {
+    loginPath = kFBLoginPath;
+  } else {
+    loginPath = kLoginPath;
+  }
+  
+  [[LoginClient sharedLoginClient] postPath:loginPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
       User *userinfo = [[Database sharedInstance] currentUser];
       userinfo.sessid = [responseObject objectForKey:@"sessid"];
       userinfo.session_name = [responseObject objectForKey:@"session_name"];
-      
-      if (success) {
-        success(responseObject);
-      }
-      
+    }
+    if (success) {
+      success(responseObject);
     }
     
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -37,18 +42,5 @@
     failure(error);
   }];
 }
-
-+ (void)loginWithFBToken:(NSString *)token andUID:(NSString *)uid{
-  NSURL *url = [NSURL URLWithString:@"http://test.letsdoitworld.org/"];
-  AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:token, @"access_token", uid, @"fb_uid", nil];
-  [httpClient postPath:@"api/user/fbconnect.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-    NSLog(@"Request Successful, response '%@'", responseStr);
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-  }];
-}
-
 
 @end
