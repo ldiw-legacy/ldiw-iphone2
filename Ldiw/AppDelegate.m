@@ -153,6 +153,8 @@
     MSLog(@"Server box is present, check if user is inside box");
     BOOL userIsInsideBox = [[LocationManager sharedManager] location:location IsInsideBox:serverBox];
     if (!userIsInsideBox) {
+      MSLog(@"User moved out of the box");
+      [[[NetworkRequest sharedHTTPClient] operationQueue] cancelAllOperations];
       [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
         MSLog(@"New base url loaded");
       } failure:^(void) {
