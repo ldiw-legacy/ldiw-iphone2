@@ -12,13 +12,19 @@
 
 #if DEBUG
 #define MSLog(s, ...) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+  #define kFirstServerUrl @"http://test.letsdoitworld.org/"
 #else
-#define MSLog(s, ...) //
+  #define kFirstServerUrl @"http://api.letsdoitworld.org/"
+  #define MSLog(s, ...) //
 #endif
 
-#define kFirstServerUrl @"http://intranet.letsdoitworld.org/"
 #define kServerRequestPath  @"?q=get-api-base-url.json"
 
 #define kLanguageCodeKey @"language_code"
 
 #define kNotifycationUserDidExitRegion @"kNotifycatoinUserDidExitRegion"
+
+#define kAccessTokenKey @"access_token"
+#define kFBUIDKey @"fb_uid"
+
+#define kUserAlreadyLoggedInErrorCode 406

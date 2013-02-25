@@ -64,6 +64,14 @@
   return server;
 }
 
+- (User *)currentUser {
+  User *user = [self findCoreDataObjectNamed:@"User" withPredicate:nil];
+  if (!user) {
+    user = [User insertInManagedObjectContext:self.managedObjectContext];
+  }
+  return user;
+}
+
 - (void)setCurrentLocation:(CLLocation *)currentLocation {
   Server *server = [self currentServer];
   [server setLocationLatValue:currentLocation.coordinate.latitude];
@@ -88,12 +96,12 @@
   }];
 }
 
-
 + (BOOL)isUserLoggedIn {
-  if ([[[self sharedInstance] currentServer].sessid isKindOfClass:[NSNull class]])
-    return NO;
-  else
+  if ([[self  sharedInstance] currentUser].sessid) {
     return YES;
+  } else {
+    return NO;
+  }
 }
 
 @end

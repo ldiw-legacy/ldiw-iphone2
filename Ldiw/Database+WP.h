@@ -7,9 +7,11 @@
 //
 
 #import "Database.h"
+#import "WastePoint.h"
 
 @interface Database (WP)
 
 - (NSArray *)WPListFromData:(NSData *)csvData;
+- (WastePoint *)wastepointWithId:(NSString *)remoteId;
 
 @end

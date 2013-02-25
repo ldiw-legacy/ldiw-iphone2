@@ -14,6 +14,8 @@
 #import "LocationManager.h"
 #import "BaseUrlRequest.h"
 #import "DesignHelper.h"
+#import "LoginRequest.h"
+#import "MBProgressHUD.h"
 
 @implementation AppDelegate
 
@@ -22,28 +24,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  // Override point for customization after application launch  
-
   
   if ([Database isUserLoggedIn] == YES) {
     UITabBarController *tabBar = [DesignHelper createActivityView];
     [self.window setRootViewController:tabBar];
   } else {
-    LoginViewController *lvc=[[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    [self.window setRootViewController:lvc];
+    //    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    self.mainViewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    [self.window setRootViewController:mainViewController];
   }
   
-  
-
-
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
   
   if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-    // Yes, so just open the session (this won't display any UX).
-    [self openSession];
+    if (!FBSession.activeSession.isOpen) {
+      [self openSession];
+    }
   } else {
     // No, display the login page.
     [self showLoginView];
@@ -74,7 +73,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-  [FBSession.activeSession handleDidBecomeActive];  
+  [FBSession.activeSession handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -97,8 +96,31 @@
 {
   switch (state) {
     case FBSessionStateOpen: {
-      [self.mainViewController gotoActivityView];
-      MSLog(@"FB SESSION OPEN!");
+      [MBProgressHUD showHUDAddedTo:self.mainViewController.view animated:YES];
+      [[FBRequest requestForMe] startWithCompletionHandler:
+       ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+         if (!error) {
+           User *currentUser = [[Database sharedInstance] currentUser];
+           [currentUser setUid:user.id];
+           [currentUser setToken:[[FBSession activeSession] accessToken]];
+           [[Database sharedInstance] saveContext];
+           
+           NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[[Database sharedInstance] currentUser].uid, kFBUIDKey, [[Database sharedInstance] currentUser].token, kAccessTokenKey, nil];
+           [LoginRequest logInWithParameters:parameters andFacebook:YES success:^(NSDictionary *success) {
+             [self.mainViewController gotoActivityView];
+             [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
+           } failure:^(NSError *error) {
+             MSLog(@"LoginRequest error: %@", error);
+             if (error.code == kUserAlreadyLoggedInErrorCode) {
+               [self.mainViewController gotoActivityView];
+             }
+             [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
+           }];
+         } else {
+           MSLog(@"%@", error);
+           [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
+         }
+       }];
     }
       break;
     case FBSessionStateClosed: {
@@ -151,6 +173,8 @@
     MSLog(@"Server box is present, check if user is inside box");
     BOOL userIsInsideBox = [[LocationManager sharedManager] location:location IsInsideBox:serverBox];
     if (!userIsInsideBox) {
+      MSLog(@"User moved out of the box");
+      [[[NetworkRequest sharedHTTPClient] operationQueue] cancelAllOperations];
       [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
         MSLog(@"New base url loaded");
       } failure:^(void) {

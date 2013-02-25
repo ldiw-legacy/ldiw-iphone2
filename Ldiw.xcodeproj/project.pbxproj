@@ -20,6 +20,10 @@
 		13A42DEC16D4EF1A00B92C17 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEB16D4EF1A00B92C17 /* AdSupport.framework */; };
 		13A42DEE16D4EF2000B92C17 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DED16D4EF2000B92C17 /* Social.framework */; };
 		13A42DF016D4EF2B00B92C17 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEF16D4EF2B00B92C17 /* Accounts.framework */; };
+		13A60AF416D767B30070AF84 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A60AF116D767B30070AF84 /* _User.m */; };
+		13A60AF516D767B30070AF84 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A60AF316D767B30070AF84 /* User.m */; };
+		13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */; };
+		13AB45B116D681AB00264E77 /* Database+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AB45B016D681AA00264E77 /* Database+User.m */; };
 		13B6C7E716D3D35300B72B4A /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DC16D3D35300B72B4A /* Server.m */; };
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
 		13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E216D3D35300B72B4A /* WPField.m */; };
@@ -56,6 +60,8 @@
 		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
 		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
+		53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DD16DBB2C100AC8E35 /* _CustomValue.m */; };
+		53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DF16DBB2C100AC8E35 /* CustomValue.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
@@ -179,6 +185,14 @@
 		13A42DEB16D4EF1A00B92C17 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		13A42DED16D4EF2000B92C17 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		13A42DEF16D4EF2B00B92C17 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		13A60AF016D767B30070AF84 /* _User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _User.h; sourceTree = "<group>"; };
+		13A60AF116D767B30070AF84 /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _User.m; sourceTree = "<group>"; };
+		13A60AF216D767B30070AF84 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		13A60AF316D767B30070AF84 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		13AB45AF16D681AA00264E77 /* Database+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+User.h"; sourceTree = "<group>"; };
+		13AB45B016D681AA00264E77 /* Database+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+User.m"; sourceTree = "<group>"; };
 		13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		13B6C7DB16D3D35300B72B4A /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		13B6C7DC16D3D35300B72B4A /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
@@ -245,6 +259,10 @@
 		538DC21516D4B04A002D7925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		538DC21716D5063D002D7925 /* Database+WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WPField.h"; sourceTree = "<group>"; };
 		538DC21816D5063E002D7925 /* Database+WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WPField.m"; sourceTree = "<group>"; };
+		53E729DC16DBB2C100AC8E35 /* _CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CustomValue.h; sourceTree = "<group>"; };
+		53E729DD16DBB2C100AC8E35 /* _CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CustomValue.m; sourceTree = "<group>"; };
+		53E729DE16DBB2C100AC8E35 /* CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomValue.h; sourceTree = "<group>"; };
+		53E729DF16DBB2C100AC8E35 /* CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomValue.m; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
@@ -382,6 +400,12 @@
 		13B6C7D216D3D35300B72B4A /* databaseObjects */ = {
 			isa = PBXGroup;
 			children = (
+				53E729DC16DBB2C100AC8E35 /* _CustomValue.h */,
+				53E729DD16DBB2C100AC8E35 /* _CustomValue.m */,
+				53E729DE16DBB2C100AC8E35 /* CustomValue.h */,
+				53E729DF16DBB2C100AC8E35 /* CustomValue.m */,
+				13A60AF016D767B30070AF84 /* _User.h */,
+				13A60AF116D767B30070AF84 /* _User.m */,
 				13A42DDF16D4DF4F00B92C17 /* _AllowedValue.h */,
 				13A42DE016D4DF4F00B92C17 /* _AllowedValue.m */,
 				13A42DD016D4A16000B92C17 /* _Server.h */,
@@ -392,6 +416,8 @@
 				13A42DD516D4A16000B92C17 /* _WastePoint.m */,
 				13A42DD616D4A16000B92C17 /* _WPField.h */,
 				13A42DD716D4A16000B92C17 /* _WPField.m */,
+				13A60AF216D767B30070AF84 /* User.h */,
+				13A60AF316D767B30070AF84 /* User.m */,
 				13A42DE116D4DF4F00B92C17 /* AllowedValue.h */,
 				13A42DE216D4DF4F00B92C17 /* AllowedValue.m */,
 				13B6C7DB16D3D35300B72B4A /* Server.h */,
@@ -482,6 +508,8 @@
 			children = (
 				13B6C7D216D3D35300B72B4A /* databaseObjects */,
 				534CCF2816D210590004532F /* Ldiw.xcdatamodeld */,
+				13AB45AF16D681AA00264E77 /* Database+User.h */,
+				13AB45B016D681AA00264E77 /* Database+User.m */,
 				534CCF3116D213280004532F /* Database.h */,
 				534CCF3216D213280004532F /* Database.m */,
 				534CCF6B16D34B110004532F /* Database+Server.h */,
@@ -575,6 +603,8 @@
 				534CCF6716D25A2B0004532F /* LocationManager.m */,
 				C581F30F16D308D3003A2FA2 /* DesignHelper.h */,
 				C581F31016D308D3003A2FA2 /* DesignHelper.m */,
+				13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */,
+				13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -993,7 +1023,16 @@
 				13A42DE416D4DF4F00B92C17 /* AllowedValue.m in Sources */,
 				538DC21916D5063F002D7925 /* Database+WPField.m in Sources */,
 				5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */,
+<<<<<<< HEAD
 				C583439516DBBB80005F3330 /* DetailViewController.m in Sources */,
+=======
+				13AB45B116D681AB00264E77 /* Database+User.m in Sources */,
+				13A60AF416D767B30070AF84 /* _User.m in Sources */,
+				13A60AF516D767B30070AF84 /* User.m in Sources */,
+				53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */,
+				53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */,
+				13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */,
+>>>>>>> c80b0a629cfaee07bae3a61bf39dd8104b778141
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

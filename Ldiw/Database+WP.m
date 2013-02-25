@@ -7,71 +7,74 @@
 //
 
 #import "Database+WP.h"
-#import "Database+WPField.h"
 #import "CSVParser.h"
-#import "WastePoint.h"
-#import "WPField.h"
+#import "CustomValue.h"
 
 #define kKeyId @"id"
 #define kKeyLat @"lat"
-#define kKeyLong @"lon"
+#define kKeyLon @"lon"
 #define kKeyPhotos @"photos"
-#define kKeyNodes @"nr_of_nodes"
-#define kKeyVolume @"volume"
 
 @implementation Database (WP)
+
+- (WastePoint *)wastepointWithId:(NSString *)remoteId {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id = %@", remoteId];
+  WastePoint *result = [self findCoreDataObjectNamed:@"WastePoint" withPredicate:predicate];
+  return result;
+}
 
 - (NSArray *)WPListFromData:(NSData *)csvData {
   
   NSString *csvString = [[NSString alloc] initWithData:csvData encoding:NSUTF8StringEncoding];
-  NSArray *parsedArray = [CSVParser parseCSVIntoArrayOfDictionariesFromString:csvString withSeparatedCharacterString:@"," quoteCharacterString:nil];
+  CSVParser *parser = [[CSVParser alloc] initWithString:csvString];
+  NSArray *parsedArray = [parser arrayOfParsedRows];
   
-  MSLog(@"Parsed array count: %i", parsedArray.count);
+  MSLog(@"Parsed %i objects", parsedArray.count);
   NSMutableArray *resultArray = [NSMutableArray array];
   
-  // Find all API-defined fields and separate them from server specific fields.
-  NSMutableArray *fieldArray = [NSMutableArray arrayWithArray:[parsedArray objectAtIndex:0]];
-  NSMutableSet *serverFieldsSet = [NSMutableSet set];
-  
-  for (NSString *key in fieldArray) {
-    WPField *field = [self findWPFieldWithFieldName:key orLabel:nil];
-    if (field) {
-      [serverFieldsSet addObject:key];
-    }
-  }
-  
-  for (int i = 1; i < [parsedArray count] - 1; i++) {
-    NSMutableDictionary *oneElementDict = [NSMutableDictionary dictionary];
-    NSArray *elementArray = [parsedArray objectAtIndex:i];
-    for (int j = 0; j < [fieldArray count]; j++) {
-      NSString *object = [elementArray objectAtIndex:j];
-      NSString *key = [fieldArray objectAtIndex:j];
-      
-      [oneElementDict setObject:object forKey:key];
-    }
-    WastePoint *point = [self wastePointFromDictionary:oneElementDict];
+  for (NSDictionary *elementDict in parsedArray) {
+    WastePoint *point = [self wastePointFromDictionary:elementDict];
     [resultArray addObject:point];
-
   }
-  
   
   return resultArray;
 }
 
-
 - (WastePoint *)wastePointFromDictionary:(NSDictionary *)inDict {
-  NSString *wpId = [inDict objectForKey:kKeyId];
-  NSString *wpLon = [inDict objectForKey:kKeyLong];
-  NSString *wpLat = [inDict objectForKey:kKeyLat];
-  NSString *photos = [inDict objectForKey:kKeyPhotos];
+  NSMutableDictionary *wpDict = [NSMutableDictionary dictionaryWithDictionary:inDict];
   
-  WastePoint *point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
-  [point setIdValue:wpId.intValue];
-  [point setLongitudeValue:wpLon.floatValue];
-  [point setLatitudeValue:wpLat.floatValue];
-  [point setPhotos:photos];
+  NSString *wpId = [wpDict objectForKey:kKeyId];
+  [wpDict removeObjectForKey:kKeyId];
+  NSString *wpLat = [wpDict objectForKey:kKeyLat];
+  [wpDict removeObjectForKey:kKeyLat];
+  NSString *wpLon = [wpDict objectForKey:kKeyLon];
+  [wpDict removeObjectForKey:kKeyLon];
+  NSString *wpPhotos = [wpDict objectForKey:kKeyPhotos];
+  [wpDict removeObjectForKey:kKeyPhotos];
 
+  WastePoint *point = [self wastepointWithId:wpId];
+  if (!point) {
+    point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
+    [point setIdValue:wpId.intValue];
+    [point setLatitudeValue:[wpLat floatValue]];
+    [point setLongitudeValue:[wpLon floatValue]];
+    [point setPhotos:wpPhotos];
+  }
+  
+  for (NSString *key in [wpDict allKeys]) {
+    NSString *value = [wpDict objectForKey:key];
+    CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
+    [point addCustomValueObject:valueToAdd];
+  }
+  MSLog(@"Create point %@", point);
   return point;
+}
+
+- (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value {
+  CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
+  [aValue setFieldName:key];
+  [aValue setValue:value];
+  return aValue;
 }
 
 @end

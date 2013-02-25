@@ -24,6 +24,7 @@
     
     [locManager setDelegate:self];
     [locManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    [locManager startMonitoringSignificantLocationChanges];
   }
   return self;
 }
@@ -70,6 +71,7 @@
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+  MSLog(@"LocationManager didUpdateToLocation %@", newLocation);
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
     if (_locationBlock) {
       [locManager stopUpdatingLocation];
@@ -143,8 +145,9 @@
   double botRightX = [[boxObjects objectAtIndex:2] doubleValue];
   double botRightY = [[boxObjects objectAtIndex:3] doubleValue];
 
-  BOOL betweenXCoordinates = (topLeftX < location.coordinate.latitude < botRightX || topLeftX > location.coordinate.latitude > botRightX);
-  BOOL betweenYCoordinates = (topLeftY < location.coordinate.longitude < botRightY || topLeftY > location.coordinate.longitude > botRightY);
+  BOOL betweenXCoordinates = ( ((topLeftX < location.coordinate.latitude) && (location.coordinate.latitude < botRightX)) || ((topLeftX > location.coordinate.latitude) && (location.coordinate.latitude > botRightX)) );
+  
+  BOOL betweenYCoordinates = ( ((topLeftY < location.coordinate.longitude) && (location.coordinate.longitude < botRightY)) || ((topLeftY > location.coordinate.longitude) && (location.coordinate.longitude > botRightY)) );
 
   BOOL isInsideBox = (betweenXCoordinates && betweenYCoordinates);
   return isInsideBox;
