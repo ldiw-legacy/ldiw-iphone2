@@ -5,7 +5,7 @@
 //  Created by sander on 2/18/13.
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
-
+#import "DetailViewController.h"
 #import "ActivityViewController.h"
 #import "HeaderView.h"
 #import "Database+Server.h"
@@ -14,6 +14,7 @@
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "DesignHelper.h"
 
 #define kTitlePositionAdjustment 8.0
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
@@ -47,21 +48,18 @@
   //Segmented control in headerview
  
   UIImage *image2 = [UIImage imageNamed:@"feed_subtab_bg"];
-  self.headerView =[[HeaderView alloc] initWithFrame:CGRectMake(0, 0, image2.size.width, image2.size.height)];
+  self.headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, image2.size.width, image2.size.height)];
   [self.view addSubview:self.headerView];
   [self.headerView.nearbyButton addTarget:self action:@selector(nearbyPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.friendsButton addTarget:self action:@selector(friendsPressed:) forControlEvents:UIControlEventTouchUpInside];
   [self.headerView.showMapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
   
   self.headerView.nearbyButton.selected = YES;
-  self.tableView.backgroundColor=kDarkBackgroundColor;
-<<<<<<< HEAD
- // MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
-=======
-  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
   self.tableView.backgroundColor = kDarkBackgroundColor;
+
+  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
+
   
->>>>>>> be6195635a7ca15d65ac46e55b8679b642b1224a
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
@@ -118,7 +116,56 @@
   item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
   item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
   item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
+  self.tabBarController.delegate=self;
 }
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+  if (viewController==[tabBarController.viewControllers objectAtIndex:1]) {
+    {
+      UIActionSheet  *sheet = [[UIActionSheet alloc]
+                               initWithTitle:NSLocalizedString(@"pleaseAddPhotoTitle", nil)
+                               delegate:self
+                               cancelButtonTitle:NSLocalizedString(@"cancel",nil)                                   destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
+                               otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
+      [sheet showFromTabBar:self.tabBarController.tabBar];
+    }
+
+    return NO;
+    
+    
+  }
+
+  return YES;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+
+{
+  NSLog(@"Buttonindex %i",buttonIndex);
+  if (buttonIndex==3) {
+    self.tabBarController.selectedIndex=0;
+  } else if (buttonIndex==1)
+  {
+    UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+      [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+    } else {[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary]; }
+
+    picker.delegate=self;
+    [self presentViewController:picker animated:YES completion:nil];
+  } else if (buttonIndex==2)
+
+  { UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+    [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [picker setDelegate:self];
+    [self presentViewController:picker animated:YES completion:nil];
+  } else {
+    [self presentViewController:nil animated:YES completion:nil];
+  }
+}
+
+
 - (void)didReceiveMemoryWarning
   
 {
@@ -137,23 +184,46 @@
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
-  cell.cellNameTitleLabel.text=@"John Smith";
+    cell.wastePointImageView.image = nil;
+    cell.userImageView.image = [UIImage imageNamed:@"pointmarker_feed"];
+  
+  if (indexPath.row == 0) {
+    cell.cellNameTitleLabel.text = @"Mike Rubbish";
+    cell.wastePointImageView.image = [UIImage imageNamed:@"garbage005.jpg"];
+    cell.wastePointImageView.image = [DesignHelper wastePointImage:[UIImage imageNamed:@"garbage005.jpg"]];
+    NSLog(@"Wastepoint Image on %@",cell.wastePointImageView.image);
+    cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface2.jpg"]];
+  } else if (indexPath.row == 1) {
+    cell.cellNameTitleLabel.text = @"Missis Smith";
+       cell.wastePointImageView.image = [DesignHelper wastePointImage:[UIImage imageNamed:@"garbage01.jpg"]];
+      cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
+  } else {
+    cell.cellNameTitleLabel.text = @"John Smith";
+   // ToDo cell height
+  }
+
+  [cell.wastePointImageView  sizeToFit];
+//  NSLog(@"wastepointView %@",NSStringFromCGRect(cell.wastePointImageView.frame));
   [cell.cellNameTitleLabel sizeToFit];
-  cell.cellSubtitleLabel.text=@"2 days ago, 3km from here";
+  cell.cellSubtitleLabel.text = @"2 days ago, 3km from here";
   [cell.cellSubtitleLabel sizeToFit];
-  cell.cellTitleLabel.text=@"added wastepoint";
+  cell.cellTitleLabel.text = @"added wastepoint";
   [cell.cellTitleLabel sizeToFit];
+
+  //ToDo cell height
+
+ // CGFloat height = 5 + cell.userImageView.bounds.size.height + 6 + cell.cellSubtitleLabel.bounds.size.height + 5 + cell.wastePointImageView.bounds.size.height;
+ // NSLog(@"cellheight %f", height);
+
+  //cell.height=height;
+ 
   return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
-  if (!cell) {
-    cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-  }
-
-  return cell.height +20;
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  //To Do cell height
+    return 186;
 }
 
 - (void)loadWastePointList {

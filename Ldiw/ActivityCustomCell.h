@@ -13,8 +13,8 @@
 @property (strong, nonatomic) UILabel *cellSubtitleLabel;
 @property (strong, nonatomic) UILabel *cellTitleLabel;
 @property (strong, nonatomic) UILabel *cellLocationLabel;
-@property (strong, nonatomic) UIImage *userImage;
-@property (strong, nonatomic) UIImage *wastePointImage;
-@property (readonly,nonatomic) double height;
+@property (strong, nonatomic) UIImageView *userImageView;
+@property (strong, nonatomic) UIImageView *wastePointImageView;
+@property (nonatomic) double height;
 
 @end

@@ -150,6 +150,12 @@
 		C583438216D3ED90005F3330 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C583438116D3ED8F005F3330 /* QuartzCore.framework */; };
 		C583438516D4018C005F3330 /* Caecilia-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C583438416D4018C005F3330 /* Caecilia-Heavy.otf */; };
 		C583438816D4CF98005F3330 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C583438716D4CF97005F3330 /* LoginRequest.m */; };
+		C583438B16D76ED3005F3330 /* someface.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438A16D76ED3005F3330 /* someface.jpg */; };
+		C583438F16D77583005F3330 /* garbage005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438C16D77583005F3330 /* garbage005.jpg */; };
+		C583439016D77583005F3330 /* garbage01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438D16D77583005F3330 /* garbage01.jpg */; };
+		C583439116D77583005F3330 /* someface2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438E16D77583005F3330 /* someface2.jpg */; };
+		C583439516DBBB80005F3330 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C583439316DBBB7C005F3330 /* DetailViewController.m */; };
+		C583439616DBBB80005F3330 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C583439416DBBB7E005F3330 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -340,6 +346,13 @@
 		C583438416D4018C005F3330 /* Caecilia-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Caecilia-Heavy.otf"; sourceTree = "<group>"; };
 		C583438616D4CF96005F3330 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
 		C583438716D4CF97005F3330 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
+		C583438A16D76ED3005F3330 /* someface.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = someface.jpg; sourceTree = "<group>"; };
+		C583438C16D77583005F3330 /* garbage005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = garbage005.jpg; sourceTree = "<group>"; };
+		C583438D16D77583005F3330 /* garbage01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = garbage01.jpg; sourceTree = "<group>"; };
+		C583438E16D77583005F3330 /* someface2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = someface2.jpg; sourceTree = "<group>"; };
+		C583439216DBBB7B005F3330 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		C583439316DBBB7C005F3330 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		C583439416DBBB7E005F3330 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,6 +538,9 @@
 				534CCF5B16D22F770004532F /* MainViewController.xib */,
 				C581F30816D27B04003A2FA2 /* ActivityViewController.h */,
 				C581F30916D27B04003A2FA2 /* ActivityViewController.m */,
+				C583439216DBBB7B005F3330 /* DetailViewController.h */,
+				C583439316DBBB7C005F3330 /* DetailViewController.m */,
+				C583439416DBBB7E005F3330 /* DetailViewController.xib */,
 				C581F30A16D27B04003A2FA2 /* ActivityViewController.xib */,
 				C583437C16D3C5A0005F3330 /* LoginViewController.h */,
 				C583437D16D3C5A0005F3330 /* LoginViewController.m */,
@@ -575,6 +591,7 @@
 		C581F26516D278E6003A2FA2 /* iOS ASSETS */ = {
 			isa = PBXGroup;
 			children = (
+				C583438916D76E4F005F3330 /* TestImages */,
 				C583438316D4016B005F3330 /* Font */,
 				C583437316D3B312005F3330 /* splash */,
 				C581F26616D278E6003A2FA2 /* 020 Empty Friends */,
@@ -752,6 +769,17 @@
 			name = Font;
 			sourceTree = "<group>";
 		};
+		C583438916D76E4F005F3330 /* TestImages */ = {
+			isa = PBXGroup;
+			children = (
+				C583438C16D77583005F3330 /* garbage005.jpg */,
+				C583438D16D77583005F3330 /* garbage01.jpg */,
+				C583438E16D77583005F3330 /* someface2.jpg */,
+				C583438A16D76ED3005F3330 /* someface.jpg */,
+			);
+			name = TestImages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -894,6 +922,11 @@
 				5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */,
 				13A42DE916D4EEE300B92C17 /* FacebookSDKResources.bundle in Resources */,
 				13A42DEA16D4EEE300B92C17 /* FBUserSettingsViewResources.bundle in Resources */,
+				C583438B16D76ED3005F3330 /* someface.jpg in Resources */,
+				C583438F16D77583005F3330 /* garbage005.jpg in Resources */,
+				C583439016D77583005F3330 /* garbage01.jpg in Resources */,
+				C583439116D77583005F3330 /* someface2.jpg in Resources */,
+				C583439616DBBB80005F3330 /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,6 +993,7 @@
 				13A42DE416D4DF4F00B92C17 /* AllowedValue.m in Sources */,
 				538DC21916D5063F002D7925 /* Database+WPField.m in Sources */,
 				5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */,
+				C583439516DBBB80005F3330 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

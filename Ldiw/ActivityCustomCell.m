@@ -14,73 +14,81 @@
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 @interface ActivityCustomCell ()
 
-
 @end
 
 @implementation ActivityCustomCell
-@synthesize cellNameTitleLabel, cellSubtitleLabel, cellTitleLabel;
+@synthesize cellNameTitleLabel, cellSubtitleLabel, cellTitleLabel, height, wastePointImageView,userImageView;
 
 
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
   self=[super initWithCoder:aDecoder];
   if (self) {
-    [self makeDesign];
+    [self layoutSetup];
   }
   return self;
 }
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-  self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
+  self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
-    [self makeDesign];
+    [self layoutSetup];
   }
   
 
   return self;
 }
 
-- (void)makeDesign
+- (void)layoutSetup
 {
-  UIView *bgView=[[UIView alloc] initWithFrame:CGRectMake(10, 10, 300, 130)];
-  bgView.backgroundColor=[UIColor blackColor];
+  UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 300, 130)];
+  bgView.backgroundColor = [UIColor blackColor];
   [bgView.layer setCornerRadius:kbgCornerRadius];
   [bgView setClipsToBounds:YES];
   [self addSubview:bgView];
-  UIImage *pointMaker=[UIImage imageNamed:@"pointmarker_feed"];
-  UIImage *userIcon= [UIImage imageNamed:@"pointmarker_feed"];
-  CGRect firstrect=CGRectMake(5, 5, pointMaker.size.width, pointMaker.size.height);
-  CGRect secondrect=CGRectOffset(firstrect, pointMaker.size.width+ 2, 0);
-  UIImageView *firstImageView=[[UIImageView alloc] initWithFrame:firstrect];
-  UIImageView *secondImageView=[[UIImageView alloc] initWithFrame:secondrect];
-  firstImageView.image=userIcon;
-  secondImageView.image=pointMaker;
+  UIImage *dummy = [UIImage imageNamed:@"pointmarker_feed"];
+  CGRect firstrect = CGRectMake(5, 5, dummy.size.width, dummy.size.height);
+  CGRect secondrect = CGRectOffset(firstrect, dummy.size.width+ 2, 0);
+  self.userImageView = [[UIImageView alloc] initWithFrame:firstrect];
+  UIImageView *secondImageView = [[UIImageView alloc] initWithFrame:secondrect];
+  self.userImageView.image = dummy;
   
-  CGRect subtitlelabelrect=CGRectOffset(firstrect, 0, pointMaker.size.height +6);
+  secondImageView.image=[UIImage imageNamed:@"pointmarker_feed"];
+  
+  CGRect subtitlelabelrect = CGRectOffset(firstrect, 0, dummy.size.height +6);
   cellSubtitleLabel=[[UILabel alloc] initWithFrame:subtitlelabelrect];
-  cellSubtitleLabel.text=@"Subtitle";
+  cellSubtitleLabel.text = @"Subtitle";
   [DesignHelper setActivityViewSubtitle:cellSubtitleLabel];
 
-  CGRect namelabelrect=CGRectOffset(secondrect, secondrect.size.width + 4, 0);
-  cellNameTitleLabel=[[UILabel alloc] initWithFrame:namelabelrect];
+  CGRect namelabelrect = CGRectOffset(secondrect, secondrect.size.width + 4, 0);
+  cellNameTitleLabel = [[UILabel alloc] initWithFrame:namelabelrect];
   [DesignHelper setActivityViewNametitle:cellNameTitleLabel];
 
   CGRect titlelabelrect=CGRectOffset(namelabelrect, 0 ,14);
-  cellTitleLabel= [[UILabel alloc] initWithFrame:titlelabelrect];
+  cellTitleLabel = [[UILabel alloc] initWithFrame:titlelabelrect];
   [DesignHelper setActivityViewActiontitle:cellTitleLabel];
+
   
-  
-  [bgView addSubview:firstImageView];
+  CGRect wastepointImageRect = CGRectOffset(subtitlelabelrect, -5, cellSubtitleLabel.bounds.size.height + 5);
+  CGRect realwastepointImageRect = CGRectMake(wastepointImageRect.origin.x, wastepointImageRect.origin.y, 300, 100);
+  self.wastePointImageView = [[UIImageView alloc] initWithFrame:realwastepointImageRect];
+
+
+
+  [bgView addSubview:userImageView];
   [bgView addSubview:secondImageView];
   [bgView addSubview:cellSubtitleLabel];
   [bgView addSubview:cellNameTitleLabel];
   [bgView addSubview:cellTitleLabel];
-  NSLog(@"korgus %@",NSStringFromCGRect(cellSubtitleLabel.frame));
-  _height = 5 + firstImageView.bounds.size.height + 6 + self.cellSubtitleLabel.bounds.size.height + 5;
-  bgView.frame = CGRectMake(bgView.frame.origin.x, bgView.frame.origin.y, bgView.frame.size.width, _height);
+  [bgView addSubview:wastePointImageView];
+  
+  self.height = 5 + userImageView.bounds.size.height + 6 + self.cellSubtitleLabel.bounds.size.height + 5 + wastePointImageView.bounds.size.height;
+  
+  bgView.frame = CGRectMake(bgView.frame.origin.x, bgView.frame.origin.y, bgView.frame.size.width, self.height);
   
                   
   }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
