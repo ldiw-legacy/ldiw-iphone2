@@ -1023,16 +1023,13 @@
 				13A42DE416D4DF4F00B92C17 /* AllowedValue.m in Sources */,
 				538DC21916D5063F002D7925 /* Database+WPField.m in Sources */,
 				5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */,
-<<<<<<< HEAD
 				C583439516DBBB80005F3330 /* DetailViewController.m in Sources */,
-=======
 				13AB45B116D681AB00264E77 /* Database+User.m in Sources */,
 				13A60AF416D767B30070AF84 /* _User.m in Sources */,
 				13A60AF516D767B30070AF84 /* User.m in Sources */,
 				53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */,
 				53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */,
 				13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */,
->>>>>>> c80b0a629cfaee07bae3a61bf39dd8104b778141
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  [self.navigationItem setHidesBackButton:YES];
+  self.tabBarController.tabBar.hidden = YES;
     // Do any additional setup after loading the view from its nib.
 }
 

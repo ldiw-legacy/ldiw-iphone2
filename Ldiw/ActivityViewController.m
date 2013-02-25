@@ -161,10 +161,31 @@
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    [self presentViewController:nil animated:YES completion:nil];
+    DetailViewController *detail=[[DetailViewController alloc] init];
+    [self.navigationController pushViewController:detail animated:YES];
+    [self dismissViewControllerAnimated:YES completion:Nil];
   }
 }
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  UIImage *cameraImage=[info objectForKey:UIImagePickerControllerOriginalImage];
+  [self dismissViewControllerAnimated:YES completion:Nil];
+  CFUUIDRef newUniqueID=CFUUIDCreate(kCFAllocatorDefault);
+  CFStringRef newUniqueIDString=CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
+  NSString *key=(__bridge NSString *)newUniqueIDString;
 
+  //ToDo: resize image
+
+  //ToDo: set image imageview on detailview:
+
+  //ToDo: save image to database with unique key
+
+  CFRelease(newUniqueID);
+  CFRelease(newUniqueIDString);
+  NSLog(@"AAA");
+  [self dismissViewControllerAnimated:YES completion:nil];
+  
+}
 
 - (void)didReceiveMemoryWarning
   
