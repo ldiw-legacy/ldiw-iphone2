@@ -15,6 +15,7 @@
 #import "BaseUrlRequest.h"
 #import "DesignHelper.h"
 #import "LoginRequest.h"
+#import "MBProgressHUD.h"
 
 @implementation AppDelegate
 
@@ -28,7 +29,7 @@
     UITabBarController *tabBar = [DesignHelper createActivityView];
     [self.window setRootViewController:tabBar];
   } else {
-//    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    //    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
     self.mainViewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
     [self.window setRootViewController:mainViewController];
   }
@@ -39,8 +40,9 @@
   [self.window makeKeyAndVisible];
   
   if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-    // Yes, so just open the session (this won't display any UX).
-    [self openSession];
+    if (!FBSession.activeSession.isOpen) {
+      [self openSession];
+    }
   } else {
     // No, display the login page.
     [self showLoginView];
@@ -94,24 +96,29 @@
 {
   switch (state) {
     case FBSessionStateOpen: {
+      [MBProgressHUD showHUDAddedTo:self.mainViewController.view animated:YES];
       [[FBRequest requestForMe] startWithCompletionHandler:
        ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
          if (!error) {
-//           MSLog(@"%@", user.id);
-//           MSLog(@"%@", [[FBSession activeSession] accessToken]);
-           
            User *currentUser = [[Database sharedInstance] currentUser];
            [currentUser setUid:user.id];
            [currentUser setToken:[[FBSession activeSession] accessToken]];
            [[Database sharedInstance] saveContext];
            
            NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[[Database sharedInstance] currentUser].uid, kFBUIDKey, [[Database sharedInstance] currentUser].token, kAccessTokenKey, nil];
-           [LoginRequest logInWithParameters:parameters andFacebook:YES success:^(NSArray *success) {
-             MSLog(@"ResultArray count: %@",success);
-             [self.mainViewController gotoActivityView];         
+           [LoginRequest logInWithParameters:parameters andFacebook:YES success:^(NSDictionary *success) {
+             [self.mainViewController gotoActivityView];
+             [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
            } failure:^(NSError *error) {
              MSLog(@"LoginRequest error: %@", error);
+             if (error.code == kUserAlreadyLoggedInErrorCode) {
+               [self.mainViewController gotoActivityView];
+             }
+             [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
            }];
+         } else {
+           MSLog(@"%@", error);
+           [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
          }
        }];
     }

@@ -26,3 +26,5 @@
 
 #define kAccessTokenKey @"access_token"
 #define kFBUIDKey @"fb_uid"
+
+#define kUserAlreadyLoggedInErrorCode 406
