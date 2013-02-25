@@ -1,34 +1,34 @@
 //
 //  CSVParser.h
-//  CSVParser
-//
-//  Created by Ha Minh Vuong on 8/31/12.
-// Modified to accept input from NSString by Lauri Eskor 20.02.2013
-//  Copyright (c) 2012 Ha Minh Vuong. All rights reserved.
-//
+//  CSVImporter
 
 @interface CSVParser : NSObject
+{
+	NSString *csvString;
+	NSString *separator;
+	NSScanner *scanner;
+	BOOL hasHeader;
+	NSMutableArray *fieldNames;
+	NSCharacterSet *endTextCharacterSet;
+}
 
-+ (NSArray *)parseCSVIntoArrayOfDictionariesFromFile:(NSString *)path
-                        withSeparatedCharacterString:(NSString *)character
-                                quoteCharacterString:(NSString *)quote;
+- (id)initWithString:(NSString *)string;
+- (id)initWithString:(NSString *)aCSVString separator:(NSString *)aSeparatorString hasHeader:(BOOL)header fieldNames:(NSArray *)names;
 
-+ (NSArray *)parseCSVIntoArrayOfArraysFromFile:(NSString *)path
-                  withSeparatedCharacterString:(NSString *)character
-                          quoteCharacterString:(NSString *)quote;
+- (NSArray *)arrayOfParsedRows;
+- (void)parseRows;
 
-+ (void)parseCSVIntoArrayOfDictionariesFromFile:(NSString *)path
-                   withSeparatedCharacterString:(NSString *)character
-                           quoteCharacterString:(NSString *)quote
-                                      withBlock:(void (^)(NSArray *array))block;
-
-+ (void)parseCSVIntoArrayOfArraysFromFile:(NSString *)path
-             withSeparatedCharacterString:(NSString *)character
-                     quoteCharacterString:(NSString *)quote
-                                withBlock:(void (^)(NSArray *array))block;
-
-+ (NSArray *)parseCSVIntoArrayOfDictionariesFromString:(NSString *)csvString
-                        withSeparatedCharacterString:(NSString *)character
-                                quoteCharacterString:(NSString *)quote;
+- (NSArray *)parseFile;
+- (NSMutableArray *)parseHeader;
+- (NSDictionary *)parseRecord;
+- (NSString *)parseName;
+- (NSString *)parseField;
+- (NSString *)parseEscaped;
+- (NSString *)parseNonEscaped;
+- (NSString *)parseDoubleQuote;
+- (NSString *)parseSeparator;
+- (NSString *)parseLineSeparator;
+- (NSString *)parseTwoDoubleQuotes;
+- (NSString *)parseTextData;
 
 @end

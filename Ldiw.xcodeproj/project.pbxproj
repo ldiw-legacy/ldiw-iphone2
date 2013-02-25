@@ -59,6 +59,8 @@
 		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
 		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
+		53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DD16DBB2C100AC8E35 /* _CustomValue.m */; };
+		53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DF16DBB2C100AC8E35 /* CustomValue.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
@@ -248,6 +250,10 @@
 		538DC21516D4B04A002D7925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		538DC21716D5063D002D7925 /* Database+WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WPField.h"; sourceTree = "<group>"; };
 		538DC21816D5063E002D7925 /* Database+WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WPField.m"; sourceTree = "<group>"; };
+		53E729DC16DBB2C100AC8E35 /* _CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CustomValue.h; sourceTree = "<group>"; };
+		53E729DD16DBB2C100AC8E35 /* _CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CustomValue.m; sourceTree = "<group>"; };
+		53E729DE16DBB2C100AC8E35 /* CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomValue.h; sourceTree = "<group>"; };
+		53E729DF16DBB2C100AC8E35 /* CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomValue.m; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
@@ -378,6 +384,10 @@
 		13B6C7D216D3D35300B72B4A /* databaseObjects */ = {
 			isa = PBXGroup;
 			children = (
+				53E729DC16DBB2C100AC8E35 /* _CustomValue.h */,
+				53E729DD16DBB2C100AC8E35 /* _CustomValue.m */,
+				53E729DE16DBB2C100AC8E35 /* CustomValue.h */,
+				53E729DF16DBB2C100AC8E35 /* CustomValue.m */,
 				13A60AF016D767B30070AF84 /* _User.h */,
 				13A60AF116D767B30070AF84 /* _User.m */,
 				13A42DDF16D4DF4F00B92C17 /* _AllowedValue.h */,
@@ -978,6 +988,8 @@
 				13AB45B116D681AB00264E77 /* Database+User.m in Sources */,
 				13A60AF416D767B30070AF84 /* _User.m in Sources */,
 				13A60AF516D767B30070AF84 /* User.m in Sources */,
+				53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */,
+				53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

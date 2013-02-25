@@ -163,8 +163,8 @@
     if (result) {
       MSLog(@"Need to load base server information");
       [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-//        [self loadWastePointList];
-        
+        [self loadWastePointList];
+    
       } failure:^(void) {
         MSLog(@"Server info loading fail");
       }];
