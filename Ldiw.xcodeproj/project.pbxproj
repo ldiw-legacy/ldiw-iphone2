@@ -22,6 +22,7 @@
 		13A42DF016D4EF2B00B92C17 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEF16D4EF2B00B92C17 /* Accounts.framework */; };
 		13A60AF416D767B30070AF84 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A60AF116D767B30070AF84 /* _User.m */; };
 		13A60AF516D767B30070AF84 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A60AF316D767B30070AF84 /* User.m */; };
+		13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */; };
 		13AB45B116D681AB00264E77 /* Database+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AB45B016D681AA00264E77 /* Database+User.m */; };
 		13B6C7E716D3D35300B72B4A /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DC16D3D35300B72B4A /* Server.m */; };
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
@@ -180,6 +181,8 @@
 		13A60AF116D767B30070AF84 /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _User.m; sourceTree = "<group>"; };
 		13A60AF216D767B30070AF84 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		13A60AF316D767B30070AF84 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		13AB45AF16D681AA00264E77 /* Database+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+User.h"; sourceTree = "<group>"; };
 		13AB45B016D681AA00264E77 /* Database+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+User.m"; sourceTree = "<group>"; };
 		13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -574,6 +577,8 @@
 				534CCF6716D25A2B0004532F /* LocationManager.m */,
 				C581F30F16D308D3003A2FA2 /* DesignHelper.h */,
 				C581F31016D308D3003A2FA2 /* DesignHelper.m */,
+				13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */,
+				13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -978,6 +983,7 @@
 				13AB45B116D681AB00264E77 /* Database+User.m in Sources */,
 				13A60AF416D767B30070AF84 /* _User.m in Sources */,
 				13A60AF516D767B30070AF84 /* User.m in Sources */,
+				13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,13 +12,14 @@
 #import "Database+Server.h"
 #import "Server.h"
 #import "User.h"
+#import "AFHTTPRequestOperation.h"
 
 @implementation LoginRequest
 
 #define kLoginPath @"user/login.json"
 #define kFBLoginPath @"http://test.letsdoitworld.org/?q=api/user/fbconnect.json"
 
-+ (void)logInWithParameters:(NSDictionary *)parameters andFacebook:(BOOL)faceBookLogin success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
++ (void)logInWithParameters:(NSDictionary *)parameters andFacebook:(BOOL)faceBookLogin success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
 {
   NSString *loginPath;
   if (faceBookLogin) {
@@ -39,7 +40,10 @@
     
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     MSLog(@"Error %@", error);
-    failure(error);
+    MSLog(@"%d", [operation.response statusCode]);
+    NSError *myError = [[NSError alloc] initWithDomain:error
+                        .domain code:[operation.response statusCode] userInfo:error.userInfo];
+    failure(myError);
   }];
 }
 

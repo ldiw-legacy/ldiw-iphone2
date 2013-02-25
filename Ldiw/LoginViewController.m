@@ -20,12 +20,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *loginUserLabel;
 @property (weak, nonatomic) IBOutlet UITextField *loginPasswordLabel;
 @property (weak, nonatomic) IBOutlet UIButton *signinButton;
-
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
-
-
-
 
 @end
 
@@ -50,19 +46,22 @@
   [DesignHelper setLoginButtonTitle:self.registerButton];
   [self.registerButton setTitle:NSLocalizedString(@"login.register", nil)     forState:UIControlStateNormal];
   [self.facebookLoginButton setTitle:NSLocalizedString(@"login.facebook", nil) forState:UIControlStateNormal];
-    // Do any additional setup after loading the view from its nib.
 }
+
 - (IBAction)signin:(UIButton *)sender {
   [self resignFirstResponder];
-  NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
+  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
 
-  [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSArray *success) {
-     NSLog(@"ResultArray count: %i",success.count);
+  [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
+//    MSLog(@"ResultArray count: %i",success.count);
+    MSLog(@"SUCCESS:: %@", success);
      [self gotoActivityView];
   } failure:^(NSError *e) {
-    NSLog(@"Login Error  %@",e);
+    if (e.code == kUserAlreadyLoggedInErrorCode) {
+      [self gotoActivityView];
+    }
+    MSLog(@"Login Error  %@",e);
   }];
-//  [self gotoActivityView];
 }
 
 - (IBAction)registerAccount:(UIButton *)sender {
@@ -77,12 +76,12 @@
 -(void)gotoActivityView
 {
   UITabBarController *tabBar = [DesignHelper createActivityView];
-  tabBar.modalTransitionStyle =UIModalTransitionStyleCrossDissolve;
+  tabBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
   [self presentViewController:tabBar animated:YES completion:nil];
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
-  if (textField==loginUserLabel) {
+  if (textField == loginUserLabel) {
     [loginPasswordLabel becomeFirstResponder];
     return NO;
   } else {
@@ -102,4 +101,5 @@
 - (void)loginFailed {
   
 }
+
 @end
