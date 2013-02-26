@@ -96,8 +96,8 @@
   }];
 }
 
-+ (BOOL)isUserLoggedIn {
-  if ([[self  sharedInstance] currentUser].sessid) {
+- (BOOL)userIsLoggedIn {
+  if ([[Database  sharedInstance] currentUser].sessid) {
     return YES;
   } else {
     return NO;

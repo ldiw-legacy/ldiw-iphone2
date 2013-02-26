@@ -5,6 +5,7 @@
 //  Created by sander on 2/18/13.
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
+#import <FacebookSDK/FacebookSDK.h>
 #import "DetailViewController.h"
 #import "ActivityViewController.h"
 #import "HeaderView.h"
@@ -13,12 +14,12 @@
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
-#import <FacebookSDK/FacebookSDK.h>
+#import "LoginViewController.h"
 #import "DesignHelper.h"
+#import "FBHelper.h"
+#import "MBProgressHUD.h"
 
-#define kTitlePositionAdjustment 8.0
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
-
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
@@ -39,9 +40,11 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self setUpTabbar];
-
-
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
+  
+  [self.tabBarController setDelegate:self];
+  
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
@@ -57,14 +60,27 @@
   self.headerView.nearbyButton.selected = YES;
   self.tableView.backgroundColor = kDarkBackgroundColor;
 
-  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
-
-  
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
+  [self showLoginViewIfNeeded];
   [self loadServerInformation];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+  self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)showLoginViewIfNeeded {
+  BOOL userLoggedIn = [[Database sharedInstance] userIsLoggedIn];
+  BOOL FBSessionOpen = [FBHelper FBSessionOpen];
+  BOOL openLoginView = !(userLoggedIn || FBSessionOpen);
+  if (openLoginView) {
+    MSLog(@"User logged in %d, FBsessionOpen %d, open login view", userLoggedIn, FBSessionOpen);
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self presentViewController:loginVC animated:YES completion:nil];
+  }
 }
 
 - (void)nearbyPressed:(UIButton *)sender
@@ -88,36 +104,6 @@
   self.headerView.showMapButton.selected=YES;
 }
 
-- (void) setUpTabbar {
-
-  UITabBar *tabbar = self.tabBarController.tabBar;
-  tabbar.clipsToBounds = NO;
-
-  UIImage *selectedImage0 = [UIImage imageNamed:@"tab_feed_pressed"];
-  UIImage *unselctedImage0 = [UIImage imageNamed:@"tab_feed_normal"];
-
-  UIImage *selectedImage1 = [UIImage imageNamed:@"tab_addpoint_pressed"];
-  UIImage *unselctedImage1 = [UIImage imageNamed:@"tab_addpoint_normal"];
-
-  UIImage *selectedImage2 = [UIImage imageNamed:@"tab_account_pressed"];
-  UIImage *unselctedImage2 = [UIImage imageNamed:@"tab_account_normal"];
-
-  UITabBarItem *item0 = [tabbar.items objectAtIndex:0];
-  UITabBarItem *item1 = [tabbar.items objectAtIndex:1];
-  UITabBarItem *item2 = [tabbar.items objectAtIndex:2];
-  [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselctedImage0];
-  [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselctedImage1];
-  [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselctedImage2];
-
-
-  item0.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item1.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item2.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
-  item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
-  item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
-  self.tabBarController.delegate=self;
-}
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
   if (viewController==[tabBarController.viewControllers objectAtIndex:1]) {
@@ -129,12 +115,8 @@
                                otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
       [sheet showFromTabBar:self.tabBarController.tabBar];
     }
-
     return NO;
-    
-    
   }
-
   return YES;
 }
 
@@ -142,9 +124,9 @@
 
 {
   NSLog(@"Buttonindex %i",buttonIndex);
-  if (buttonIndex==3) {
+  if (buttonIndex == 3) {
     self.tabBarController.selectedIndex=0;
-  } else if (buttonIndex==1)
+  } else if (buttonIndex == 1)
   {
     UIImagePickerController *picker=[[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -152,35 +134,36 @@
       [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
     } else {[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary]; }
 
-    picker.delegate=self;
+    picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
-  } else if (buttonIndex==2)
+  } else if (buttonIndex == 2)
 
-  { UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+  { UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    DetailViewController *detail=[[DetailViewController alloc] init];
+    DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
-    [self dismissViewControllerAnimated:YES completion:Nil];
+    detail.takePictureButton.alpha = 1.0;
   }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  UIImage *cameraImage=[info objectForKey:UIImagePickerControllerOriginalImage];
-  [self dismissViewControllerAnimated:YES completion:Nil];
-  CFUUIDRef newUniqueID=CFUUIDCreate(kCFAllocatorDefault);
-  CFStringRef newUniqueIDString=CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
+  DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+  [self.navigationController pushViewController:detail animated:YES];
+  UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+  CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
+  CFStringRef newUniqueIDString = CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
   //Unique Key
 
-  NSString *key=(__bridge NSString *)newUniqueIDString;
+  NSString *key = (__bridge NSString *)newUniqueIDString;
 
   //ToDo: resize image
   
-  UIImage *resizedImage=[DesignHelper resizeImage:cameraImage];
-  NSData *dataForJpg=UIImageJPEGRepresentation(resizedImage, 0.7);
+  UIImage *resizedImage = [DesignHelper resizeImage:cameraImage];
+  NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7);
   
   //ToDo: set image imageview on detailview:
 
@@ -191,6 +174,9 @@
   CFRelease(newUniqueID);
   CFRelease(newUniqueIDString);
   [self dismissViewControllerAnimated:YES completion:nil];
+  detail.imageView.image = cameraImage;
+  detail.takePictureButton.alpha = 0;
+
   
 }
 
@@ -208,6 +194,7 @@
 {
   return 18;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
   ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -258,7 +245,7 @@
 
 - (void)loadWastePointList {
   CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
-  MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
+  MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
   MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, span);
   
   [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {
@@ -269,17 +256,28 @@
 }
 
 - (void)loadServerInformation {
-  [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
-    if (result) {
-      MSLog(@"Need to load base server information");
-      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-        [self loadWastePointList];
-    
-      } failure:^(void) {
-        MSLog(@"Server info loading fail");
-      }];
-    }
-  }];
+  if ([[Database sharedInstance] userIsLoggedIn]) {
+    [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
+      if (result) {
+        MSLog(@"Need to load base server information");
+        [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+          [self loadWastePointList];
+          
+        } failure:^(void) {
+          MSLog(@"Server info loading fail");
+        }];
+      }
+    }];
+  }
+}
+
+- (void)showHud {
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)removeHud {
+  [self dismissModalViewControllerAnimated:YES];
+  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 @end

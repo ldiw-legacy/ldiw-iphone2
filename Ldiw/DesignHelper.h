@@ -14,10 +14,12 @@
 +(void)setActivityViewNametitle:(UILabel *)label;
 +(void)setActivityViewActiontitle:(UILabel *)label;
 +(void)setActivityViewLocationtitle:(UILabel *)label;
++(void)setBarButtonTitleAttributes:(UIButton *)button;
++(void)setNavigationTitleStyle:(UILabel *)label;
 
 +(UIImage *)userIconImage:(UIImage *)image;
 +(UIImage *)wastePointImage:(UIImage *)image;
 +(UIImage *)resizeImage:(UIImage *)image;
 
-+(UITabBarController*) createActivityView;
++(UITabBarController*) createTabBarController;
 @end

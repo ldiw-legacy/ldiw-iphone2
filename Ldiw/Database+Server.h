@@ -27,6 +27,6 @@
 
 - (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL result)) resultBlock;
 
-+ (BOOL)isUserLoggedIn;
+- (BOOL)userIsLoggedIn;
 
 @end

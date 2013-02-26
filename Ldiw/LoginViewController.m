@@ -7,10 +7,9 @@
 //
 #import "LoginRequest.h"
 #import "LoginViewController.h"
-#import "MainViewController.h"
 #import "ActivityViewController.h"
 #import "DesignHelper.h"
-#import "AppDelegate.h"
+#import "FBHelper.h"
 
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 #define kExternalWebLink @"https://www.letsdoitworld.org/user/register"
@@ -55,13 +54,17 @@
   [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
 //    MSLog(@"ResultArray count: %i",success.count);
     MSLog(@"SUCCESS:: %@", success);
-     [self gotoActivityView];
+     [self closeLoginView];
   } failure:^(NSError *e) {
     if (e.code == kUserAlreadyLoggedInErrorCode) {
-      [self gotoActivityView];
+      [self closeLoginView];
     }
     MSLog(@"Login Error  %@",e);
   }];
+}
+
+- (void)closeLoginView {
+  [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)registerAccount:(UIButton *)sender {
@@ -69,15 +72,7 @@
 }
 
 - (IBAction)loginFB:(id)sender {
-  AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-  [appDelegate openSession];
-}
-
--(void)gotoActivityView
-{
-  UITabBarController *tabBar = [DesignHelper createActivityView];
-  tabBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-  [self presentViewController:tabBar animated:YES completion:nil];
+  [FBHelper openSession];
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{

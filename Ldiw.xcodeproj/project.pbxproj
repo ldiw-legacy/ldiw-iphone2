@@ -50,8 +50,6 @@
 		534CCF5316D22D9C0004532F /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF4A16D22D9C0004532F /* UIImageView+AFNetworking.m */; };
 		534CCF5516D22DC60004532F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF5416D22DC60004532F /* SystemConfiguration.framework */; };
 		534CCF5716D22DE40004532F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF5616D22DE40004532F /* MobileCoreServices.framework */; };
-		534CCF5C16D22F770004532F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF5A16D22F770004532F /* MainViewController.m */; };
-		534CCF5D16D22F770004532F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534CCF5B16D22F770004532F /* MainViewController.xib */; };
 		534CCF6116D256620004532F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6016D256620004532F /* NetworkRequest.m */; };
 		534CCF6416D2598B0004532F /* BaseUrlRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6316D2598B0004532F /* BaseUrlRequest.m */; };
 		534CCF6816D25A2B0004532F /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF6716D25A2B0004532F /* LocationManager.m */; };
@@ -65,6 +63,9 @@
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
 		53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DD16DBB2C100AC8E35 /* _CustomValue.m */; };
 		53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DF16DBB2C100AC8E35 /* CustomValue.m */; };
+		53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E316DCB6F000AC8E35 /* AccountViewController.m */; };
+		53E729E616DCB6F200AC8E35 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53E729E416DCB6F100AC8E35 /* AccountViewController.xib */; };
+		53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E816DCEA2C00AC8E35 /* FBHelper.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
@@ -244,9 +245,6 @@
 		534CCF4A16D22D9C0004532F /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		534CCF5416D22DC60004532F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		534CCF5616D22DE40004532F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		534CCF5916D22F770004532F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		534CCF5A16D22F770004532F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		534CCF5B16D22F770004532F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		534CCF5F16D256620004532F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkRequest.h; sourceTree = "<group>"; };
 		534CCF6016D256620004532F /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkRequest.m; sourceTree = "<group>"; };
 		534CCF6216D2598B0004532F /* BaseUrlRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUrlRequest.h; sourceTree = "<group>"; };
@@ -271,6 +269,11 @@
 		53E729DD16DBB2C100AC8E35 /* _CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CustomValue.m; sourceTree = "<group>"; };
 		53E729DE16DBB2C100AC8E35 /* CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomValue.h; sourceTree = "<group>"; };
 		53E729DF16DBB2C100AC8E35 /* CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomValue.m; sourceTree = "<group>"; };
+		53E729E216DCB6F000AC8E35 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		53E729E316DCB6F000AC8E35 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		53E729E416DCB6F100AC8E35 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		53E729E716DCEA2C00AC8E35 /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
+		53E729E816DCEA2C00AC8E35 /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
@@ -569,9 +572,6 @@
 		534CCF5816D22F4C0004532F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				534CCF5916D22F770004532F /* MainViewController.h */,
-				534CCF5A16D22F770004532F /* MainViewController.m */,
-				534CCF5B16D22F770004532F /* MainViewController.xib */,
 				C581F30816D27B04003A2FA2 /* ActivityViewController.h */,
 				C581F30916D27B04003A2FA2 /* ActivityViewController.m */,
 				C581F30A16D27B04003A2FA2 /* ActivityViewController.xib */,
@@ -584,6 +584,9 @@
 				13A8B8ED16DBBCCC00D7E076 /* AddNewWPViewController.h */,
 				13A8B8EE16DBBCCC00D7E076 /* AddNewWPViewController.m */,
 				13A8B8EF16DBBCCC00D7E076 /* AddNewWPViewController.xib */,
+				53E729E216DCB6F000AC8E35 /* AccountViewController.h */,
+				53E729E316DCB6F000AC8E35 /* AccountViewController.m */,
+				53E729E416DCB6F100AC8E35 /* AccountViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -616,6 +619,8 @@
 				C581F31016D308D3003A2FA2 /* DesignHelper.m */,
 				13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */,
 				13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */,
+				53E729E716DCEA2C00AC8E35 /* FBHelper.h */,
+				53E729E816DCEA2C00AC8E35 /* FBHelper.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -876,7 +881,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				534CCF1B16D210590004532F /* InfoPlist.strings in Resources */,
-				534CCF5D16D22F770004532F /* MainViewController.xib in Resources */,
 				C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */,
 				C581F2BC16D278E6003A2FA2 /* fb_connect_normal@2x.png in Resources */,
 				C581F2BD16D278E6003A2FA2 /* fb_connect_pressed@2x.png in Resources */,
@@ -971,6 +975,7 @@
 				C583439116D77583005F3330 /* someface2.jpg in Resources */,
 				C583439616DBBB80005F3330 /* DetailViewController.xib in Resources */,
 				13A8B8F116DBBCCD00D7E076 /* AddNewWPViewController.xib in Resources */,
+				53E729E616DCB6F200AC8E35 /* AccountViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,7 +1015,6 @@
 				534CCF5116D22D9C0004532F /* AFURLConnectionOperation.m in Sources */,
 				534CCF5216D22D9C0004532F /* AFXMLRequestOperation.m in Sources */,
 				534CCF5316D22D9C0004532F /* UIImageView+AFNetworking.m in Sources */,
-				534CCF5C16D22F770004532F /* MainViewController.m in Sources */,
 				534CCF6116D256620004532F /* NetworkRequest.m in Sources */,
 				534CCF6416D2598B0004532F /* BaseUrlRequest.m in Sources */,
 				534CCF6816D25A2B0004532F /* LocationManager.m in Sources */,
@@ -1046,6 +1050,8 @@
 				13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */,
 				13A8B8EC16DBA9C800D7E076 /* WastePointViews.m in Sources */,
 				13A8B8F016DBBCCD00D7E076 /* AddNewWPViewController.m in Sources */,
+				53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */,
+				53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
