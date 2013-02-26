@@ -10,7 +10,10 @@
 #import "MainViewController.h"
 #import "DetailViewController.h"
 #import "ActivityViewController.h"
+#import "AddNewWPViewController.h"
+
 #define kbgCornerRadius 8.0
+
 
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
 #define kHeaderButtonTitleColorSelected [UIColor whiteColor]
@@ -147,14 +150,15 @@
 
 
 +(UITabBarController*) createActivityView {
-  DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
-  MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
+  MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
+  AddNewWPViewController *newWP = [[AddNewWPViewController alloc] initWithNibName:@"AddNewWPViewController" bundle:nil];
   ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
   UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
   
   UITabBarController *tabBar = [[UITabBarController alloc] init];
   [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
-  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,detailViewController,mainVC, nil]];
+
+  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC, mainViewController, newWP, nil]];
   return tabBar;
 }
 
