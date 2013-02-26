@@ -30,7 +30,7 @@
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     [self createMapViewWithCoordinate:location];
   } errorBlock:^(NSError *error) {
-
+    
   }];
 }
 

@@ -25,14 +25,8 @@
 {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
-  if ([Database isUserLoggedIn] == YES) {
-    UITabBarController *tabBar = [DesignHelper createActivityView];
-    [self.window setRootViewController:tabBar];
-  } else {
-    //    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    self.mainViewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    [self.window setRootViewController:mainViewController];
-  }
+  UITabBarController *tabBar = [DesignHelper createTabBarController];
+  [self.window setRootViewController:tabBar];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
   

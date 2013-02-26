@@ -7,9 +7,10 @@
 //
 
 #import "DesignHelper.h"
-#import "MainViewController.h"
 #import "DetailViewController.h"
 #import "ActivityViewController.h"
+#import "AccountViewController.h"
+
 #define kbgCornerRadius 8.0
 
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
@@ -146,15 +147,15 @@
 }
 
 
-+(UITabBarController*) createActivityView {
++(UITabBarController*) createTabBarController {
   DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
-  MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
-  ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
+  AccountViewController *accountVC = [[AccountViewController alloc] initWithNibName:nil bundle:nil];
+  ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:nil bundle:nil];
   UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
   
   UITabBarController *tabBar = [[UITabBarController alloc] init];
   [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
-  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,detailViewController,mainVC, nil]];
+  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, accountVC, nil]];
   return tabBar;
 }
 

@@ -7,7 +7,6 @@
 //
 #import "LoginRequest.h"
 #import "LoginViewController.h"
-#import "MainViewController.h"
 #import "ActivityViewController.h"
 #import "DesignHelper.h"
 #import "AppDelegate.h"
@@ -55,13 +54,17 @@
   [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
 //    MSLog(@"ResultArray count: %i",success.count);
     MSLog(@"SUCCESS:: %@", success);
-     [self gotoActivityView];
+     [self closeLoginView];
   } failure:^(NSError *e) {
     if (e.code == kUserAlreadyLoggedInErrorCode) {
-      [self gotoActivityView];
+      [self closeLoginView];
     }
     MSLog(@"Login Error  %@",e);
   }];
+}
+
+- (void)closeLoginView {
+  [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)registerAccount:(UIButton *)sender {
@@ -75,9 +78,7 @@
 
 -(void)gotoActivityView
 {
-  UITabBarController *tabBar = [DesignHelper createActivityView];
-  tabBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-  [self presentViewController:tabBar animated:YES completion:nil];
+
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{

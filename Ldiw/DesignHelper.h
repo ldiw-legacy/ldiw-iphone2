@@ -19,5 +19,5 @@
 +(UIImage *)wastePointImage:(UIImage *)image;
 +(UIImage *)resizeImage:(UIImage *)image;
 
-+(UITabBarController*) createActivityView;
++(UITabBarController*) createTabBarController;
 @end

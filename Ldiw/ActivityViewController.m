@@ -5,6 +5,7 @@
 //  Created by sander on 2/18/13.
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
+#import <FacebookSDK/FacebookSDK.h>
 #import "DetailViewController.h"
 #import "ActivityViewController.h"
 #import "HeaderView.h"
@@ -13,7 +14,7 @@
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
-#import <FacebookSDK/FacebookSDK.h>
+#import "LoginViewController.h"
 #import "DesignHelper.h"
 
 #define kTitlePositionAdjustment 8.0
@@ -41,7 +42,6 @@
   [super viewDidLoad];
   [self setUpTabbar];
 
-
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
@@ -57,14 +57,19 @@
   self.headerView.nearbyButton.selected = YES;
   self.tableView.backgroundColor = kDarkBackgroundColor;
 
-  MSLog(@"%@", [[Database sharedInstance] listAllWPFields]);
-
-  
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
+  [self showLoginViewIfNeeded];
   [self loadServerInformation];
+}
+
+- (void)showLoginViewIfNeeded {
+  if (![[Database sharedInstance] userIsLoggedIn]) {
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self presentViewController:loginVC animated:YES completion:nil];
+  }
 }
 
 - (void)nearbyPressed:(UIButton *)sender
@@ -142,9 +147,9 @@
 
 {
   NSLog(@"Buttonindex %i",buttonIndex);
-  if (buttonIndex==3) {
+  if (buttonIndex == 3) {
     self.tabBarController.selectedIndex=0;
-  } else if (buttonIndex==1)
+  } else if (buttonIndex == 1)
   {
     UIImagePickerController *picker=[[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -152,35 +157,34 @@
       [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
     } else {[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary]; }
 
-    picker.delegate=self;
+    picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
-  } else if (buttonIndex==2)
+  } else if (buttonIndex == 2)
 
-  { UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+  { UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    DetailViewController *detail=[[DetailViewController alloc] init];
+    DetailViewController *detail = [[DetailViewController alloc] init];
     [self.navigationController pushViewController:detail animated:YES];
-    [self dismissViewControllerAnimated:YES completion:Nil];
   }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  UIImage *cameraImage=[info objectForKey:UIImagePickerControllerOriginalImage];
+  UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   [self dismissViewControllerAnimated:YES completion:Nil];
-  CFUUIDRef newUniqueID=CFUUIDCreate(kCFAllocatorDefault);
-  CFStringRef newUniqueIDString=CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
+  CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
+  CFStringRef newUniqueIDString = CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
   //Unique Key
 
-  NSString *key=(__bridge NSString *)newUniqueIDString;
+  NSString *key = (__bridge NSString *)newUniqueIDString;
 
   //ToDo: resize image
   
-  UIImage *resizedImage=[DesignHelper resizeImage:cameraImage];
-  NSData *dataForJpg=UIImageJPEGRepresentation(resizedImage, 0.7);
+  UIImage *resizedImage = [DesignHelper resizeImage:cameraImage];
+  NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7);
   
   //ToDo: set image imageview on detailview:
 
@@ -269,17 +273,19 @@
 }
 
 - (void)loadServerInformation {
-  [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
-    if (result) {
-      MSLog(@"Need to load base server information");
-      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-        [self loadWastePointList];
-    
-      } failure:^(void) {
-        MSLog(@"Server info loading fail");
-      }];
-    }
-  }];
+  if ([[Database sharedInstance] userIsLoggedIn]) {
+    [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
+      if (result) {
+        MSLog(@"Need to load base server information");
+        [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+          [self loadWastePointList];
+          
+        } failure:^(void) {
+          MSLog(@"Server info loading fail");
+        }];
+      }
+    }];
+  }
 }
 
 @end
