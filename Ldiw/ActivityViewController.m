@@ -166,6 +166,7 @@
     [self dismissViewControllerAnimated:YES completion:Nil];
   }
 }
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   UIImage *cameraImage=[info objectForKey:UIImagePickerControllerOriginalImage];
