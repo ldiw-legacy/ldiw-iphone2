@@ -8,11 +8,8 @@
 
 #import "DetailViewController.h"
 
-@interface DetailViewController ()
-
-@end
-
 @implementation DetailViewController
+@synthesize scrollView, imageView, mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
