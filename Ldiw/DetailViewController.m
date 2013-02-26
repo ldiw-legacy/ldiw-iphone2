@@ -26,7 +26,7 @@
     [super viewDidLoad];
   self.tabBarController.tabBar.hidden = YES;
     // Do any additional setup after loading the view from its nib.
-  
+
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     [self createMapViewWithCoordinate:location];
   } errorBlock:^(NSError *error) {
