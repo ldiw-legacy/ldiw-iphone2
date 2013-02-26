@@ -256,7 +256,11 @@
 }
 
 - (void)loadWastePointList {
-  [WastepointRequest getWPList:^(NSArray* responseArray) {
+  CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
+  MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
+  MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, span);
+  
+  [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");

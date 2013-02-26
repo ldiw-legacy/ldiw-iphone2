@@ -6,9 +6,12 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface DetailViewController : UIViewController <UINavigationBarDelegate, UIImagePickerControllerDelegate>
-@property (weak,nonatomic) id delegate;
+@property (weak, nonatomic) id delegate;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
