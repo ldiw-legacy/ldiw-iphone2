@@ -6,13 +6,10 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "LoginViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)openSession;
 @end

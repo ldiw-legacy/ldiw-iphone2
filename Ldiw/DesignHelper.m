@@ -9,11 +9,13 @@
 #import "DesignHelper.h"
 #import "DetailViewController.h"
 #import "ActivityViewController.h"
+#import "AddNewWPViewController.h"
 #import "AccountViewController.h"
 
 #define kbgCornerRadius 8.0
 #define kTabBarTitlePositionAdjustment 8.0
 #define kBoldThemeFont @"HelveticaNeue-Bold"
+
 
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
 #define kHeaderButtonTitleColorSelected [UIColor whiteColor]
@@ -168,14 +170,16 @@
 }
 
 +(UITabBarController*) createTabBarController {
+  AddNewWPViewController *newWP = [[AddNewWPViewController alloc] initWithNibName:@"AddNewWPViewController" bundle:nil];
   DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
-  AccountViewController *accountVC = [[AccountViewController alloc] initWithNibName:nil bundle:nil];
+//  AccountViewController *accountVC = [[AccountViewController alloc] initWithNibName:nil bundle:nil];
   ActivityViewController *activityVC = [[ActivityViewController alloc] initWithNibName:nil bundle:nil];
   UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:activityVC];
   
   UITabBarController *tabBarController = [[UITabBarController alloc] init];
   [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
-  [tabBarController setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, accountVC, nil]];
+
+  [tabBarController setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, newWP, nil]];
 
   UITabBar *tabbar = tabBarController.tabBar;
   tabbar.clipsToBounds = NO;

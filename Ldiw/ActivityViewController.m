@@ -16,9 +16,10 @@
 #import "BaseUrlRequest.h"
 #import "LoginViewController.h"
 #import "DesignHelper.h"
+#import "FBHelper.h"
+#import "MBProgressHUD.h"
 
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
-
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
@@ -39,6 +40,9 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
+  
   [self.tabBarController setDelegate:self];
   
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
@@ -69,7 +73,11 @@
 }
 
 - (void)showLoginViewIfNeeded {
-  if (![[Database sharedInstance] userIsLoggedIn]) {
+  BOOL userLoggedIn = [[Database sharedInstance] userIsLoggedIn];
+  BOOL FBSessionOpen = [FBHelper FBSessionOpen];
+  BOOL openLoginView = !(userLoggedIn || FBSessionOpen);
+  if (openLoginView) {
+    MSLog(@"User logged in %d, FBsessionOpen %d, open login view", userLoggedIn, FBSessionOpen);
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     [self presentViewController:loginVC animated:YES completion:nil];
   }
@@ -258,6 +266,15 @@
       }
     }];
   }
+}
+
+- (void)showHud {
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)removeHud {
+  [self dismissModalViewControllerAnimated:YES];
+  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 @end
