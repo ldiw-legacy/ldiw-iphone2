@@ -28,3 +28,6 @@
 #define kFBUIDKey @"fb_uid"
 
 #define kUserAlreadyLoggedInErrorCode 406
+
+#define kNotificationShowHud @"showHud"
+#define kNotificationRemoveHud @"removeHud"

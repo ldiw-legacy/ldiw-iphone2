@@ -9,13 +9,10 @@
 #import "AppDelegate.h"
 #import "Database.h"
 #import "ActivityViewController.h"
-#import "LoginViewController.h"
 #import "Database+Server.h"
 #import "LocationManager.h"
 #import "BaseUrlRequest.h"
 #import "DesignHelper.h"
-#import "LoginRequest.h"
-#import "MBProgressHUD.h"
 
 @implementation AppDelegate
 
@@ -31,16 +28,7 @@
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
-  
-  if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-    if (!FBSession.activeSession.isOpen) {
-      [self openSession];
-    }
-  } else {
-    // No, display the login page.
-    [self showLoginView];
-  }
-  
+
   return YES;
 }
 
@@ -74,88 +62,8 @@
   // Saves changes in the application's managed object context before the application terminates.
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
   return [FBSession.activeSession handleOpenURL:url];
-}
-
-#pragma mark Facebook SDK
-- (void)sessionStateChanged:(FBSession *)session
-                      state:(FBSessionState) state
-                      error:(NSError *)error
-{
-  switch (state) {
-    case FBSessionStateOpen: {
-      [MBProgressHUD showHUDAddedTo:self.window.rootViewController.view animated:YES];
-      [[FBRequest requestForMe] startWithCompletionHandler:
-       ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
-         if (!error) {
-           User *currentUser = [[Database sharedInstance] currentUser];
-           [currentUser setUid:user.id];
-           [currentUser setToken:[[FBSession activeSession] accessToken]];
-           [[Database sharedInstance] saveContext];
-           
-           NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[[Database sharedInstance] currentUser].uid, kFBUIDKey, [[Database sharedInstance] currentUser].token, kAccessTokenKey, nil];
-           [LoginRequest logInWithParameters:parameters andFacebook:YES success:^(NSDictionary *success) {
-             [self.window.rootViewController dismissModalViewControllerAnimated:YES];
-             [MBProgressHUD hideAllHUDsForView:self.window.rootViewController.view animated:YES];
-           } failure:^(NSError *error) {
-             MSLog(@"LoginRequest error: %@", error);
-             if (error.code == kUserAlreadyLoggedInErrorCode) {
-               [self.window.rootViewController dismissModalViewControllerAnimated:YES];
-             }
-             [MBProgressHUD hideAllHUDsForView:self.window.rootViewController.view animated:YES];
-           }];
-         } else {
-           MSLog(@"%@", error);
-           [MBProgressHUD hideAllHUDsForView:self.window.rootViewController.view animated:YES];
-         }
-       }];
-    }
-      break;
-    case FBSessionStateClosed: {
-      MSLog(@"FB SESSION CLOSED!");
-    }
-      break;
-    case FBSessionStateClosedLoginFailed:
-      // Once the user has logged in, we want them to
-      // be looking at the root view.
-      
-      [FBSession.activeSession closeAndClearTokenInformation];
-      
-      break;
-    default:
-      break;
-  }
-  
-  if (error) {
-    UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"facebook.error.title",nil)
-                              message:NSLocalizedString(@"facebook.error.login", nil)
-                              delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"button.ok", nil)
-                              otherButtonTitles:nil];
-    [alertView show];
-  }
-}
-
-- (void)openSession
-{
-  [FBSession openActiveSessionWithReadPermissions:nil
-                                     allowLoginUI:YES
-                                completionHandler:
-   ^(FBSession *session,
-     FBSessionState state, NSError *error) {
-     [self sessionStateChanged:session state:state error:error];
-   }];
-}
-
-- (void)showLoginView
-{
-  // Show login view
 }
 
 - (void)locationChanged:(NSNotification *)notification {

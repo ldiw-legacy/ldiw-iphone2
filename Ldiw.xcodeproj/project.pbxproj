@@ -62,6 +62,7 @@
 		53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DF16DBB2C100AC8E35 /* CustomValue.m */; };
 		53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E316DCB6F000AC8E35 /* AccountViewController.m */; };
 		53E729E616DCB6F200AC8E35 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53E729E416DCB6F100AC8E35 /* AccountViewController.xib */; };
+		53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E816DCEA2C00AC8E35 /* FBHelper.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
@@ -263,6 +264,8 @@
 		53E729E216DCB6F000AC8E35 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		53E729E316DCB6F000AC8E35 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		53E729E416DCB6F100AC8E35 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		53E729E716DCEA2C00AC8E35 /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
+		53E729E816DCEA2C00AC8E35 /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
@@ -605,6 +608,8 @@
 				C581F31016D308D3003A2FA2 /* DesignHelper.m */,
 				13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */,
 				13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */,
+				53E729E716DCEA2C00AC8E35 /* FBHelper.h */,
+				53E729E816DCEA2C00AC8E35 /* FBHelper.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1030,6 +1035,7 @@
 				53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */,
 				13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */,
 				53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */,
+				53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

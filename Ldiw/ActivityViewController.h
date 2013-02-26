@@ -6,10 +6,7 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 
 @end
