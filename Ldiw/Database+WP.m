@@ -66,7 +66,6 @@
     CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
     [point addCustomValueObject:valueToAdd];
   }
-  MSLog(@"Create point %@", point);
   return point;
 }
 

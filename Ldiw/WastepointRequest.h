@@ -7,9 +7,11 @@
 //
 
 #import "NetworkRequest.h"
+#import <MapKit/MapKit.h>
 
 @interface WastepointRequest : NetworkRequest
 
-+ (void)getWPList:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)getWPListWithBbox:(NSString *)box andCoordinates:(NSString *)coordinates withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
++ (void)getWPListForArea:(MKCoordinateRegion)region withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 @end
