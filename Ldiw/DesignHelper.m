@@ -94,6 +94,36 @@
   
 }
 
++(UIImage *)resizeImage:(UIImage *)image
+{
+
+  CGFloat originalWidth = image.size.width;
+  CGFloat originalHeight = image.size.height;
+  CGFloat ratio=originalWidth/originalHeight;
+  CGFloat maxRatio=320.0/480.0;
+
+  if (ratio != maxRatio) {
+    if (ratio < maxRatio){
+      ratio = 480 / originalHeight;
+      originalWidth = ratio * originalWidth;
+    }
+    else {
+      ratio=320.0/originalWidth;
+      originalHeight=ratio * originalHeight;
+      originalWidth=320.0;
+
+    }
+
+  }
+  CGRect newRect =CGRectMake(0, 0, originalWidth, originalHeight);
+  UIGraphicsBeginImageContext(newRect.size);
+  [image drawInRect:newRect];
+  UIImage *newImage=UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return newImage;
+  
+}
+
 +(UIImage *)userIconImage:(UIImage *)image
 {
   CGSize originalsize = [image size];
