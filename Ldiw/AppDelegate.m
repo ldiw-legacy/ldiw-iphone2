@@ -19,13 +19,12 @@
 
 @implementation AppDelegate
 
-@synthesize mainViewController;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
   UITabBarController *tabBar = [DesignHelper createTabBarController];
+  
   [self.window setRootViewController:tabBar];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
@@ -90,7 +89,7 @@
 {
   switch (state) {
     case FBSessionStateOpen: {
-      [MBProgressHUD showHUDAddedTo:self.mainViewController.view animated:YES];
+      [MBProgressHUD showHUDAddedTo:self.window.rootViewController.view animated:YES];
       [[FBRequest requestForMe] startWithCompletionHandler:
        ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
          if (!error) {
@@ -101,18 +100,18 @@
            
            NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[[Database sharedInstance] currentUser].uid, kFBUIDKey, [[Database sharedInstance] currentUser].token, kAccessTokenKey, nil];
            [LoginRequest logInWithParameters:parameters andFacebook:YES success:^(NSDictionary *success) {
-             [self.mainViewController gotoActivityView];
-             [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
+             [self.window.rootViewController dismissModalViewControllerAnimated:YES];
+             [MBProgressHUD hideAllHUDsForView:self.window.rootViewController.view animated:YES];
            } failure:^(NSError *error) {
              MSLog(@"LoginRequest error: %@", error);
              if (error.code == kUserAlreadyLoggedInErrorCode) {
-               [self.mainViewController gotoActivityView];
+               [self.window.rootViewController dismissModalViewControllerAnimated:YES];
              }
-             [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
+             [MBProgressHUD hideAllHUDsForView:self.window.rootViewController.view animated:YES];
            }];
          } else {
            MSLog(@"%@", error);
-           [MBProgressHUD hideAllHUDsForView:self.mainViewController.view animated:YES];
+           [MBProgressHUD hideAllHUDsForView:self.window.rootViewController.view animated:YES];
          }
        }];
     }

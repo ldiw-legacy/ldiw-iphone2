@@ -17,7 +17,6 @@
 #import "LoginViewController.h"
 #import "DesignHelper.h"
 
-#define kTitlePositionAdjustment 8.0
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 
 
@@ -40,8 +39,8 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self setUpTabbar];
-
+  [self.tabBarController setDelegate:self];
+  
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
@@ -93,36 +92,6 @@
   self.headerView.showMapButton.selected=YES;
 }
 
-- (void) setUpTabbar {
-
-  UITabBar *tabbar = self.tabBarController.tabBar;
-  tabbar.clipsToBounds = NO;
-
-  UIImage *selectedImage0 = [UIImage imageNamed:@"tab_feed_pressed"];
-  UIImage *unselctedImage0 = [UIImage imageNamed:@"tab_feed_normal"];
-
-  UIImage *selectedImage1 = [UIImage imageNamed:@"tab_addpoint_pressed"];
-  UIImage *unselctedImage1 = [UIImage imageNamed:@"tab_addpoint_normal"];
-
-  UIImage *selectedImage2 = [UIImage imageNamed:@"tab_account_pressed"];
-  UIImage *unselctedImage2 = [UIImage imageNamed:@"tab_account_normal"];
-
-  UITabBarItem *item0 = [tabbar.items objectAtIndex:0];
-  UITabBarItem *item1 = [tabbar.items objectAtIndex:1];
-  UITabBarItem *item2 = [tabbar.items objectAtIndex:2];
-  [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselctedImage0];
-  [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselctedImage1];
-  [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselctedImage2];
-
-
-  item0.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item1.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item2.titlePositionAdjustment = UIOffsetMake(0, -kTitlePositionAdjustment);
-  item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
-  item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
-  item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
-  self.tabBarController.delegate=self;
-}
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
   if (viewController==[tabBarController.viewControllers objectAtIndex:1]) {
@@ -134,12 +103,8 @@
                                otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
       [sheet showFromTabBar:self.tabBarController.tabBar];
     }
-
     return NO;
-    
-    
   }
-
   return YES;
 }
 
@@ -212,6 +177,7 @@
 {
   return 18;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
   ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -262,7 +228,7 @@
 
 - (void)loadWastePointList {
   CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
-  MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
+  MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
   MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, span);
   
   [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {

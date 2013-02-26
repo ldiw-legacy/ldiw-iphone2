@@ -76,11 +76,6 @@
   [appDelegate openSession];
 }
 
--(void)gotoActivityView
-{
-
-}
-
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
   if (textField == loginUserLabel) {
     [loginPasswordLabel becomeFirstResponder];

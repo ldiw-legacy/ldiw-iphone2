@@ -12,6 +12,7 @@
 #import "AccountViewController.h"
 
 #define kbgCornerRadius 8.0
+#define kTabBarTitlePositionAdjustment 8.0
 
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
 #define kHeaderButtonTitleColorSelected [UIColor whiteColor]
@@ -146,17 +147,44 @@
   
 }
 
-
 +(UITabBarController*) createTabBarController {
   DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
   AccountViewController *accountVC = [[AccountViewController alloc] initWithNibName:nil bundle:nil];
-  ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:nil bundle:nil];
-  UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
+  ActivityViewController *activityVC = [[ActivityViewController alloc] initWithNibName:nil bundle:nil];
+  UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:activityVC];
   
-  UITabBarController *tabBar = [[UITabBarController alloc] init];
+  UITabBarController *tabBarController = [[UITabBarController alloc] init];
   [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
-  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, accountVC, nil]];
-  return tabBar;
+  [tabBarController setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, accountVC, nil]];
+
+  UITabBar *tabbar = tabBarController.tabBar;
+  tabbar.clipsToBounds = NO;
+  
+  UIImage *selectedImage0 = [UIImage imageNamed:@"tab_feed_pressed"];
+  UIImage *unselctedImage0 = [UIImage imageNamed:@"tab_feed_normal"];
+  
+  UIImage *selectedImage1 = [UIImage imageNamed:@"tab_addpoint_pressed"];
+  UIImage *unselctedImage1 = [UIImage imageNamed:@"tab_addpoint_normal"];
+  
+  UIImage *selectedImage2 = [UIImage imageNamed:@"tab_account_pressed"];
+  UIImage *unselctedImage2 = [UIImage imageNamed:@"tab_account_normal"];
+  
+  UITabBarItem *item0 = [tabbar.items objectAtIndex:0];
+  UITabBarItem *item1 = [tabbar.items objectAtIndex:1];
+  UITabBarItem *item2 = [tabbar.items objectAtIndex:2];
+  [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselctedImage0];
+  [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselctedImage1];
+  [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselctedImage2];
+  
+  
+  item0.titlePositionAdjustment = UIOffsetMake(0, -kTabBarTitlePositionAdjustment);
+  item1.titlePositionAdjustment = UIOffsetMake(0, -kTabBarTitlePositionAdjustment);
+  item2.titlePositionAdjustment = UIOffsetMake(0, -kTabBarTitlePositionAdjustment);
+  item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
+  item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
+  item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
+
+  return tabBarController;
 }
 
 @end
