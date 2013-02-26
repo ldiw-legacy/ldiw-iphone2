@@ -133,6 +133,7 @@
   } else {
     DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
+    detail.takePictureButton.alpha = 1.0;
   }
 }
 
@@ -162,6 +163,7 @@
   CFRelease(newUniqueIDString);
   [self dismissViewControllerAnimated:YES completion:nil];
   detail.imageView.image = cameraImage;
+  detail.takePictureButton.alpha = 0;
 
   
 }

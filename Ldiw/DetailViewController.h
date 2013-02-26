@@ -8,7 +8,7 @@
 
 #import <MapKit/MapKit.h>
 
-@interface DetailViewController : UIViewController <UINavigationBarDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate>
+@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate>
 @property (weak, nonatomic) id delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

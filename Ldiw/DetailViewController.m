@@ -26,6 +26,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [self.navigationItem setHidesBackButton:YES];
+  
 }
 
 - (void)viewDidLoad
@@ -69,5 +70,14 @@
   [super viewDidUnload];
 }
 - (IBAction)takePicture:(id)sender {
+
+  UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+  if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+  {
+    [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+  } else {[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary]; }
+
+  picker.delegate = self;
+  [self presentViewController:picker animated:YES completion:nil];
 }
 @end
