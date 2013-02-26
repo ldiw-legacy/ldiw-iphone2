@@ -21,3 +21,11 @@ activities.showMapButton = "Show Map";
 
 login.register = "Register new account";
 login.facebook = "Facebook login";
+
+//Camera Action
+
+pleaseAddPhotoTitle ="Please add photo for your point";
+cancel = "Cancel";
+skipPhoto ="Skip Photo";
+takePhoto ="Take Photo";
+chooseFromLibrary ="Choose From Library";

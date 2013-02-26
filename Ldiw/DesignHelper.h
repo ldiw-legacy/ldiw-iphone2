@@ -15,5 +15,8 @@
 +(void)setActivityViewActiontitle:(UILabel *)label;
 +(void)setActivityViewLocationtitle:(UILabel *)label;
 
++(UIImage *)userIconImage:(UIImage *)image;
++(UIImage *)wastePointImage:(UIImage *)image;
+
 +(UITabBarController*) createActivityView;
 @end

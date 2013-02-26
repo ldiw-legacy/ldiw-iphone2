@@ -8,7 +8,9 @@
 
 #import "DesignHelper.h"
 #import "MainViewController.h"
+#import "DetailViewController.h"
 #import "ActivityViewController.h"
+#define kbgCornerRadius 8.0
 
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
 #define kHeaderButtonTitleColorSelected [UIColor whiteColor]
@@ -64,15 +66,65 @@
 }
 
 
++(UIImage *)wastePointImage:(UIImage *)image
+{
+  CGSize originalsize = [image size];
+  CGRect newimagerect = CGRectMake(0, 0, 300, 100);
+  CGRect strokerect = CGRectMake(1, 1, 298, 98);
+  float ratio = MAX (newimagerect.size.height/originalsize.height, newimagerect.size.width/originalsize.width);
+  
+  UIGraphicsBeginImageContextWithOptions(newimagerect.size, NO , 0.0);
+  UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newimagerect cornerRadius:kbgCornerRadius];
+  UIBezierPath *strokepath=[UIBezierPath bezierPathWithRoundedRect:strokerect cornerRadius:kbgCornerRadius];
+  [path addClip];
+
+  CGRect projectRect;
+  projectRect.size.width=ratio * originalsize.width;
+  projectRect.size.height=ratio * originalsize.height;
+  projectRect.origin.x = (newimagerect.size.width - projectRect.size.width) / 2.0;
+  projectRect.origin.y = (newimagerect.size.height -projectRect.size.width) / 2.0;
+  [image drawInRect:projectRect];
+  strokepath.lineWidth = 2;
+  [[UIColor whiteColor] setStroke];
+  [strokepath stroke];
+  
+  UIImage *wastePointImage=UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return wastePointImage;
+  
+}
+
++(UIImage *)userIconImage:(UIImage *)image
+{
+  CGSize originalsize = [image size];
+  CGRect newimagerect = CGRectMake(0, 0, 33, 33);
+  float ratio = MAX (newimagerect.size.height/originalsize.height, newimagerect.size.width/originalsize.width);
+  UIGraphicsBeginImageContextWithOptions(newimagerect.size, NO , 0.0);
+  UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:newimagerect];
+  [path addClip];
+  CGRect projectRect;
+  projectRect.size.width=ratio * originalsize.width;
+  projectRect.size.height=ratio * originalsize.height;
+  projectRect.origin.x = (newimagerect.size.width - projectRect.size.width) / 2.0;
+  projectRect.origin.y = (newimagerect.size.height -projectRect.size.width) / 2.0;
+  [image drawInRect:projectRect];
+  UIImage *userIconImage=UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return userIconImage;
+ 
+  
+}
+
+
 +(UITabBarController*) createActivityView {
-  MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
+  DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
   MainViewController *mainVC = [[MainViewController alloc]initWithNibName:nil bundle:nil];
   ActivityViewController *activityVC= [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
   UINavigationController *navVC=[[UINavigationController alloc] initWithRootViewController:activityVC];
   
   UITabBarController *tabBar = [[UITabBarController alloc] init];
   [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
-  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,mainViewController,mainVC, nil]];
+  [tabBar setViewControllers:[NSArray arrayWithObjects:navVC,detailViewController,mainVC, nil]];
   return tabBar;
 }
 
