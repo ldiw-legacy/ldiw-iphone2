@@ -138,8 +138,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+  DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+  [self.navigationController pushViewController:detail animated:YES];
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  [self dismissViewControllerAnimated:YES completion:Nil];
   CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
   CFStringRef newUniqueIDString = CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
   //Unique Key
@@ -160,6 +161,8 @@
   CFRelease(newUniqueID);
   CFRelease(newUniqueIDString);
   [self dismissViewControllerAnimated:YES completion:nil];
+  detail.imageView.image = cameraImage;
+
   
 }
 
