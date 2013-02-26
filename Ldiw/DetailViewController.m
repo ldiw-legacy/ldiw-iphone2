@@ -65,6 +65,14 @@
   UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
   self.navigationItem.rightBarButtonItem = addBarButton;
 
+  UILabel *title=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+  title.text=@"Add New";
+  [DesignHelper setNavigationTitleStyle:title];
+  [title sizeToFit];
+  self.navigationItem.titleView = title;
+
+  
+
 
 
     // Do any additional setup after loading the view from its nib.

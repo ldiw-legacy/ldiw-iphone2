@@ -68,14 +68,24 @@
   
 }
 
++ (void)setNavigationTitleStyle:(UILabel *)label
+{
+  label.font=[UIFont fontWithName:@"Caecilia-Heavy" size:18];
+  label.textColor = [UIColor whiteColor];
+  label.shadowColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+  label.shadowOffset = CGSizeMake (0,1);
+  label.backgroundColor = [UIColor clearColor];
+  label.textAlignment = UITextAlignmentCenter;
+}
+
 
 + (void) setBarButtonTitleAttributes:(UIButton *)button
 
 {
-  button.titleLabel.textColor=[UIColor whiteColor]; 
-  button.titleLabel.font=[UIFont fontWithName:kBoldThemeFont size:12];
-  button.titleLabel.shadowColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
-  button.titleLabel.shadowOffset=CGSizeMake (0,1);
+  button.titleLabel.textColor = [UIColor whiteColor]; 
+  button.titleLabel.font = [UIFont fontWithName:kBoldThemeFont size:12];
+  button.titleLabel.shadowColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+  button.titleLabel.shadowOffset = CGSizeMake (0,1);
 }
 
 +(UIImage *)wastePointImage:(UIImage *)image
