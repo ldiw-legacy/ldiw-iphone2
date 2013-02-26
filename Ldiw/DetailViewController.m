@@ -8,6 +8,8 @@
 
 #import "DetailViewController.h"
 #import "LocationManager.h"
+#define kViewBackroundColor [UIColor colorWithRed:0.894 green:0.894 blue:0.894 alpha:1] /*#e4e4e4*/
+#define kButtonBackgroundColor [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1] /*#d2d2d2*/
 
 @implementation DetailViewController
 @synthesize scrollView, imageView, mapView;
@@ -21,10 +23,17 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [self.navigationItem setHidesBackButton:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
   self.tabBarController.tabBar.hidden = YES;
+  self.view.backgroundColor=kViewBackroundColor;
+  self.imageView.backgroundColor=kButtonBackgroundColor;
     // Do any additional setup after loading the view from its nib.
 
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
@@ -54,5 +63,11 @@
   MSLog(@"new mapView to new region");
   MKCoordinateRegion region = aMapView.region;
   MSLog(@"Mapview region delta: %g %g", region.span.latitudeDelta, region.span.longitudeDelta);
+}
+- (void)viewDidUnload {
+  [self setTakePictureButton:nil];
+  [super viewDidUnload];
+}
+- (IBAction)takePicture:(id)sender {
 }
 @end

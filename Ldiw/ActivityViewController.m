@@ -131,7 +131,7 @@
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    DetailViewController *detail = [[DetailViewController alloc] init];
+    DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
   }
 }
