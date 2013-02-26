@@ -14,6 +14,7 @@
 +(void)setActivityViewNametitle:(UILabel *)label;
 +(void)setActivityViewActiontitle:(UILabel *)label;
 +(void)setActivityViewLocationtitle:(UILabel *)label;
++(void)setBarButtonTitleAttributes:(UIButton *)button;
 
 +(UIImage *)userIconImage:(UIImage *)image;
 +(UIImage *)wastePointImage:(UIImage *)image;

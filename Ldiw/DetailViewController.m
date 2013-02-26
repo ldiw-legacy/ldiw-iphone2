@@ -32,10 +32,41 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  
+  [super viewDidLoad];
   self.tabBarController.tabBar.hidden = YES;
   self.view.backgroundColor=kViewBackroundColor;
   self.imageView.backgroundColor=kButtonBackgroundColor;
+  UIImage *image = [UIImage imageNamed:@"cancel_normal.png"];
+  UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  cancelButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+  [cancelButton setBackgroundImage:image forState:UIControlStateNormal];
+  [cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel_pressed.png"] forState:UIControlStateHighlighted];
+  [cancelButton addTarget:self action:@selector(cancelPressed:) forControlEvents:UIControlEventTouchUpInside];
+  [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+  [DesignHelper setBarButtonTitleAttributes:cancelButton];
+
+
+
+
+  UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+  self.navigationItem.leftBarButtonItem = cancelBarButton;
+
+  
+  UIImage *addimage = [UIImage imageNamed:@"blue_normal.png"];
+  UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  addButton.bounds = CGRectMake( 0, 0, addimage.size.width, addimage.size.height );
+  [addButton setBackgroundImage:addimage forState:UIControlStateNormal];
+  [addButton setBackgroundImage:[UIImage imageNamed:@"blue_pressed.png"] forState:UIControlStateHighlighted];
+  [addButton addTarget:self action:@selector(addPressed:) forControlEvents:UIControlEventTouchUpInside];
+  [addButton setTitle:@"Add" forState:UIControlStateNormal];
+  [DesignHelper setBarButtonTitleAttributes:addButton];
+
+  UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+  self.navigationItem.rightBarButtonItem = addBarButton;
+
+
+
     // Do any additional setup after loading the view from its nib.
 
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
@@ -70,6 +101,16 @@
   [self setTakePictureButton:nil];
   [super viewDidUnload];
 }
+- (IBAction)cancelPressed:(id)sender
+{
+  
+}
+
+- (IBAction)addPressed:(id)sender
+{
+
+}
+
 - (IBAction)takePicture:(id)sender {
 
   UIImagePickerController *picker=[[UIImagePickerController alloc] init];
