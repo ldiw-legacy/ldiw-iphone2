@@ -43,7 +43,7 @@
   [cancelButton setBackgroundImage:image forState:UIControlStateNormal];
   [cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel_pressed.png"] forState:UIControlStateHighlighted];
   [cancelButton addTarget:self action:@selector(cancelPressed:) forControlEvents:UIControlEventTouchUpInside];
-  [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+  [cancelButton setTitle:NSLocalizedString(@"cancel",nil) forState:UIControlStateNormal];
   [DesignHelper setBarButtonTitleAttributes:cancelButton];
 
 
@@ -59,14 +59,14 @@
   [addButton setBackgroundImage:addimage forState:UIControlStateNormal];
   [addButton setBackgroundImage:[UIImage imageNamed:@"blue_pressed.png"] forState:UIControlStateHighlighted];
   [addButton addTarget:self action:@selector(addPressed:) forControlEvents:UIControlEventTouchUpInside];
-  [addButton setTitle:@"Add" forState:UIControlStateNormal];
+  [addButton setTitle:NSLocalizedString(@"add", nil)  forState:UIControlStateNormal];
   [DesignHelper setBarButtonTitleAttributes:addButton];
 
   UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
   self.navigationItem.rightBarButtonItem = addBarButton;
 
   UILabel *title=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-  title.text=@"Add New";
+  title.text=NSLocalizedString(@"addNewTitle", nil);
   [DesignHelper setNavigationTitleStyle:title];
   [title sizeToFit];
   self.navigationItem.titleView = title;
