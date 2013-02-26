@@ -24,8 +24,13 @@ login.facebook = "Facebook login";
 
 //Camera Action
 
-pleaseAddPhotoTitle ="Please add photo for your point";
+pleaseAddPhotoTitle = "Please add photo for your point";
 cancel = "Cancel";
-skipPhoto ="Skip Photo";
-takePhoto ="Take Photo";
-chooseFromLibrary ="Choose From Library";
+skipPhoto = "Skip Photo";
+takePhoto = "Take Photo";
+chooseFromLibrary = "Choose From Library";
+
+//DetailView
+addNewTitle = "Add New";
+add = "Add";
+
