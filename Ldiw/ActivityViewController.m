@@ -173,20 +173,28 @@
   [self dismissViewControllerAnimated:YES completion:Nil];
   CFUUIDRef newUniqueID=CFUUIDCreate(kCFAllocatorDefault);
   CFStringRef newUniqueIDString=CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
+  //Unique Key
+
   NSString *key=(__bridge NSString *)newUniqueIDString;
 
   //ToDo: resize image
-
+  
+  UIImage *resizedImage=[DesignHelper resizeImage:cameraImage];
+  NSData *dataForJpg=UIImageJPEGRepresentation(resizedImage, 0.7);
+  
   //ToDo: set image imageview on detailview:
+
+  //ToDo: save to documents
 
   //ToDo: save image to database with unique key
 
   CFRelease(newUniqueID);
   CFRelease(newUniqueIDString);
-  NSLog(@"AAA");
   [self dismissViewControllerAnimated:YES completion:nil];
   
 }
+
+
 
 - (void)didReceiveMemoryWarning
   
