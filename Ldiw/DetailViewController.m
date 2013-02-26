@@ -103,9 +103,11 @@
 }
 - (IBAction)cancelPressed:(id)sender
 {
-  
+  //Do some cleaning here
+  [self.navigationController popViewControllerAnimated:YES];
+  self.tabBarController.tabBar.hidden = NO;
+  self.tabBarController.selectedIndex = 0;
 }
-
 - (IBAction)addPressed:(id)sender
 {
 

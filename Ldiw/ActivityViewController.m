@@ -63,6 +63,10 @@
   [self showLoginViewIfNeeded];
   [self loadServerInformation];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+  self.tabBarController.tabBar.hidden = NO;
+}
 
 - (void)showLoginViewIfNeeded {
   if (![[Database sharedInstance] userIsLoggedIn]) {
