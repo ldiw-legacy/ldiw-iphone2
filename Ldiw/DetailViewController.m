@@ -114,12 +114,10 @@
 
   NSString *key = (__bridge NSString *)newUniqueIDString;
 
-  //ToDo: resize image
 
   UIImage *resizedImage = [DesignHelper resizeImage:cameraImage];
   NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7);
 
-  //ToDo: set image imageview on detailview:
 
   //ToDo: save to documents
 

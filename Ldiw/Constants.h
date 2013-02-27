@@ -29,5 +29,25 @@
 
 #define kUserAlreadyLoggedInErrorCode 406
 
+// Dictionary keys
+#define kFieldNameKey @"field_name"
+#define kLabelKey @"label"
+#define kMaxKey @"max"
+#define kMinKey @"min"
+#define kSuffixKey @"suffix"
+#define kTypeKey @"type"
+#define kEditInstructionsKey @"edit_instructions"
+#define kTypicalValuesKey @"typical_values"
+#define kAllowedValuesKey @"allowed_values"
+
+// FONTS
+#define kFontNameBold @"HelveticaNeue-Bold"
+#define kFontName @"HelveticaNeue"
+#define kWPLabelTextSize 13
+#define kWPDescripttionTextSize 11
+
+// COLORS
+#define kWPFieldBgColor [UIColor colorWithRed:0.886 green:0.886 blue:0.886 alpha:1]
+
 #define kNotificationShowHud @"showHud"
 #define kNotificationRemoveHud @"removeHud"

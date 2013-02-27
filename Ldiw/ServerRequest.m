@@ -13,16 +13,6 @@
 
 #define kGetWPFieldsPath @"waste-point-extra-fields.json"
 
-#define kFieldNameKey @"field_name"
-#define kLabelKey @"label"
-#define kMaxKey @"max"
-#define kMinKey @"min"
-#define kSuffixKey @"suffix"
-#define kTypeKey @"type"
-#define kEditInstructionsKey @"edit_instructions"
-#define kTypicalValuesKey @"typical_values"
-#define kAllowedValuesKey @"allowed_values"
-
 @implementation ServerRequest
 
 + (void)getWPFieldsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
