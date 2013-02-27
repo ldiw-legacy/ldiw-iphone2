@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		139F1AA816DE3F82008E07E1 /* TypicalValueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 139F1AA716DE3F82008E07E1 /* TypicalValueView.m */; };
 		13A42DD816D4A16000B92C17 /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD116D4A16000B92C17 /* _Server.m */; };
 		13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD316D4A16000B92C17 /* _TypicalValue.m */; };
 		13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD516D4A16000B92C17 /* _WastePoint.m */; };
@@ -169,6 +170,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		139F1AA616DE3F82008E07E1 /* TypicalValueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValueView.h; sourceTree = "<group>"; };
+		139F1AA716DE3F82008E07E1 /* TypicalValueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValueView.m; sourceTree = "<group>"; };
 		13A42DD016D4A16000B92C17 /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
 		13A42DD116D4A16000B92C17 /* _Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Server.m; sourceTree = "<group>"; };
 		13A42DD216D4A16000B92C17 /* _TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValue.h; sourceTree = "<group>"; };
@@ -788,6 +791,8 @@
 		C581F31216D30F07003A2FA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				139F1AA616DE3F82008E07E1 /* TypicalValueView.h */,
+				139F1AA716DE3F82008E07E1 /* TypicalValueView.m */,
 				13A8B8EA16DBA9C800D7E076 /* WastePointViews.h */,
 				13A8B8EB16DBA9C800D7E076 /* WastePointViews.m */,
 				C581F31316D30F3C003A2FA2 /* HeaderView.h */,
@@ -1052,6 +1057,7 @@
 				13A8B8F016DBBCCD00D7E076 /* AddNewWPViewController.m in Sources */,
 				53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */,
 				53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */,
+				139F1AA816DE3F82008E07E1 /* TypicalValueView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

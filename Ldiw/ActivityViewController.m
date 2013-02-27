@@ -256,7 +256,7 @@
 }
 
 - (void)loadServerInformation {
-  if ([[Database sharedInstance] userIsLoggedIn]) {
+//  if ([[Database sharedInstance] userIsLoggedIn]) {
     [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
       if (result) {
         MSLog(@"Need to load base server information");
@@ -268,7 +268,7 @@
         }];
       }
     }];
-  }
+//  }
 }
 
 - (void)showHud {
