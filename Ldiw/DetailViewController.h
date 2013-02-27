@@ -7,6 +7,8 @@
 //
 
 #import "MapView.h"
+#import <MapKit/MapKit.h>
+#import "WastePoint.h"
 
 @interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate>
 
@@ -15,8 +17,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet MapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
+@property (nonatomic, strong) WastePoint *wastePoint;
 
 
 - (IBAction)takePicture:(id)sender;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil usingImage:(UIImage*)image;
 
 @end

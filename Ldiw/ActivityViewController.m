@@ -19,6 +19,10 @@
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
 
+#import "WastePoint.h"
+#import "Image.h"
+
+
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 
 @interface ActivityViewController ()
@@ -144,7 +148,7 @@
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:nil];
     [self.navigationController pushViewController:detail animated:YES];
     detail.takePictureButton.alpha = 1.0;
   }
@@ -152,26 +156,14 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
-  [self.navigationController pushViewController:detail animated:YES];
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
-  CFStringRef newUniqueIDString = CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
-  //Unique Key
-
-  NSString *key = (__bridge NSString *)newUniqueIDString;
-
-  UIImage *resizedImage = [DesignHelper resizeImage:cameraImage];
-  NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7);
   
-
-  //ToDo: save to documents
-
-  //ToDo: save image to database with unique key
-
-  CFRelease(newUniqueID);
-  CFRelease(newUniqueIDString);
+  DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:cameraImage];
+  [self.navigationController pushViewController:detail animated:YES];
+  
+  
   [self dismissViewControllerAnimated:YES completion:nil];
+  
   detail.imageView.image = cameraImage;
   detail.takePictureButton.alpha = 0;
 }
