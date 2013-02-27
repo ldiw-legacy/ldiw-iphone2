@@ -8,6 +8,7 @@
 
 #import "AddNewWPViewController.h"
 #import "WastePointViews.h"
+#import "Database+Server.h"
 
 @interface AddNewWPViewController ()
 
@@ -30,15 +31,23 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view from its nib.
+  
   WastePointViews *wpViews = [[WastePointViews alloc] initWithWastePoint:nil];
+  [wpViews setUserInteractionEnabled:NO];
   [self.scrollView setContentSize:CGSizeMake(320, wpViews.bounds.size.height)];
-  [self.scrollView addSubview:[[WastePointViews alloc] initWithWastePoint:nil]];
+  [self.scrollView setCanCancelContentTouches:NO];
+  [self.scrollView addSubview:wpViews];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)checkPressed:(UIButton *)selector {
+  MSLog(@"checkPressed!");
+  [selector setSelected:YES];
 }
 
 @end

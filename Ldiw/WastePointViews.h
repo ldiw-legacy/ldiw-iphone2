@@ -11,6 +11,9 @@
 
 @interface WastePointViews : UIView
 
+@property (nonatomic, strong) NSMutableArray *checkArray;
+
 - (id)initWithWastePoint:(WastePoint *)wp;
+- (NSArray *)wpCheckFields;
 
 @end
