@@ -9,17 +9,20 @@
 #import "DetailViewController.h"
 #import "LocationManager.h"
 #import "DesignHelper.h"
+#import "PictureHelper.h"
+#import "Image.h"
+
 #define kViewBackroundColor [UIColor colorWithRed:0.894 green:0.894 blue:0.894 alpha:1] /*#e4e4e4*/
 #define kButtonBackgroundColor [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1] /*#d2d2d2*/
 
 @implementation DetailViewController
 @synthesize scrollView, imageView, mapView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil usingImage:(UIImage*)image
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+      self.wastePoint = [WastePoint newWastePointUsingImage:image];
     }
     return self;
 }

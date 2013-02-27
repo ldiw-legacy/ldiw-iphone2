@@ -70,6 +70,9 @@
 		53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729EE16DD021A00AC8E35 /* MapAnnotation.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
+		5AD08AEB16DD0CCC00566B04 /* PictureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD08AEA16DD0CCC00566B04 /* PictureHelper.m */; };
+		5AD08AEF16DD1DD300566B04 /* _Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD08AEE16DD1DD300566B04 /* _Image.m */; };
+		5AD08AF216DD1DE300566B04 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD08AF116DD1DE300566B04 /* Image.m */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
 		C581F2BC16D278E6003A2FA2 /* fb_connect_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */; };
 		C581F2BD16D278E6003A2FA2 /* fb_connect_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26916D278E6003A2FA2 /* fb_connect_pressed@2x.png */; };
@@ -283,6 +286,12 @@
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
+		5AD08AE916DD0CCC00566B04 /* PictureHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureHelper.h; sourceTree = "<group>"; };
+		5AD08AEA16DD0CCC00566B04 /* PictureHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureHelper.m; sourceTree = "<group>"; };
+		5AD08AED16DD1DD300566B04 /* _Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Image.h; sourceTree = "<group>"; };
+		5AD08AEE16DD1DD300566B04 /* _Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Image.m; sourceTree = "<group>"; };
+		5AD08AF016DD1DE300566B04 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		5AD08AF116DD1DE300566B04 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e_friendsgraphic@2x.png"; sourceTree = "<group>"; };
 		C581F26816D278E6003A2FA2 /* fb_connect_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_connect_normal@2x.png"; sourceTree = "<group>"; };
 		C581F26916D278E6003A2FA2 /* fb_connect_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_connect_pressed@2x.png"; sourceTree = "<group>"; };
@@ -435,6 +444,10 @@
 				13A42DD716D4A16000B92C17 /* _WPField.m */,
 				13A60AF216D767B30070AF84 /* User.h */,
 				13A60AF316D767B30070AF84 /* User.m */,
+				5AD08AED16DD1DD300566B04 /* _Image.h */,
+				5AD08AEE16DD1DD300566B04 /* _Image.m */,
+				5AD08AF016DD1DE300566B04 /* Image.h */,
+				5AD08AF116DD1DE300566B04 /* Image.m */,
 				13A42DE116D4DF4F00B92C17 /* AllowedValue.h */,
 				13A42DE216D4DF4F00B92C17 /* AllowedValue.m */,
 				13B6C7DB16D3D35300B72B4A /* Server.h */,
@@ -627,6 +640,8 @@
 				13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */,
 				53E729E716DCEA2C00AC8E35 /* FBHelper.h */,
 				53E729E816DCEA2C00AC8E35 /* FBHelper.m */,
+				5AD08AE916DD0CCC00566B04 /* PictureHelper.h */,
+				5AD08AEA16DD0CCC00566B04 /* PictureHelper.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1062,6 +1077,9 @@
 				13A8B8F016DBBCCD00D7E076 /* AddNewWPViewController.m in Sources */,
 				53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */,
 				53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */,
+				5AD08AEB16DD0CCC00566B04 /* PictureHelper.m in Sources */,
+				5AD08AEF16DD1DD300566B04 /* _Image.m in Sources */,
+				5AD08AF216DD1DE300566B04 /* Image.m in Sources */,
 				53E729EC16DCFD5800AC8E35 /* MapView.m in Sources */,
 				53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */,
 			);
