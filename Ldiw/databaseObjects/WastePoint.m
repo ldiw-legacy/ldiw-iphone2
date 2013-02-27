@@ -8,15 +8,11 @@
 
 + (WastePoint *) newWastePointUsingImage:(UIImage *)image {
   WastePoint *wp = [WastePoint insertInManagedObjectContext:[[Database sharedInstance] managedObjectContext]];
-  [self setImage:image forWastePoint:wp];
+  if (image) [PictureHelper saveImage:image forWastePoint:wp];
   return wp;
 }
 
-+ (void)setImage:(UIImage*)image forWastePoint:(WastePoint*)wp {
-  if (image) {
-    [PictureHelper saveImage:image forWastePoint:wp];
-  }
-}
+
 
 
 - (NSString *)description {

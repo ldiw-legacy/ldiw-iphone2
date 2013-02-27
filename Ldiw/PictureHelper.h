@@ -13,7 +13,5 @@
 @interface PictureHelper : NSObject
 
 + (void)saveImage:(UIImage*)image forWastePoint:(WastePoint*)wp;
-
 + (UIImage *)loadImageForWP:(WastePoint*)wp;
-
 @end

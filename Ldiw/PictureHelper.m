@@ -19,7 +19,7 @@
   
   NSString *key = (__bridge NSString *)newUniqueIDString;
   
-  NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+  NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
   
   NSString *imageFilePath = [NSString stringWithFormat:@"%@/%@", docDir, key];
   
@@ -32,7 +32,12 @@
   
   [dataForJpg writeToFile:imageFilePath atomically:YES];
   
-  wp.image = [Image newImageWithLocalUrl:imageFilePath];
+  if (wp.image) {
+    wp.image.localURL = imageFilePath;
+  } else {
+    wp.image = [Image newImageWithLocalUrl:imageFilePath];
+  }
+  
   
   
   CFRelease(newUniqueID);
@@ -44,6 +49,7 @@
   NSData *imgData = [NSData dataWithContentsOfFile:wp.image.localURL];
   return [UIImage imageWithData:imgData];
 }
+
 
 
 @end
