@@ -100,16 +100,11 @@
   self.tabBarController.tabBar.hidden = NO;
   self.tabBarController.selectedIndex = 0;
 }
+
 - (IBAction)addPressed:(id)sender
 {
-
-  //Used for 
-  /*
- 
-  
- 
-   */
 }
+
 - (IBAction)addValue:(UIButton *)sender
 {
   UITextField *textfield = [[UITextField alloc] init];
@@ -200,7 +195,6 @@
   self.insertTextLabel.textAlignment = UITextAlignmentCenter;
   self.insertTextLabel.backgroundColor = [UIColor clearColor];
 
-
   //Button
   UIImage *confirmImage = [UIImage imageNamed:@"confirm_input_normal.png"];
   UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -216,10 +210,10 @@
 
 - (void)showCustomNumPad:(UITextField *)textfield
 {
-  UIView *mytoolbar=[self keyboardAccessoryView];
+  UIView *mytoolbar = [self keyboardAccessoryView];
   textfield.inputAccessoryView = mytoolbar;
   [textfield becomeFirstResponder];
-  textfield.keyboardType=UIKeyboardTypeDecimalPad;
+  textfield.keyboardType = UIKeyboardTypeDecimalPad;
   self.insertTextLabel.text = @"Enter value";
   self.textInputField = [[UITextField alloc]init];
   textInputField.font = [UIFont fontWithName:@"Caecilia-Heavy" size:38];
@@ -234,7 +228,7 @@
 
 - (void)showCustomTextPad:(UITextView *)textView
 {
-  UIView *mytoolbar=[self keyboardAccessoryView];
+  UIView *mytoolbar = [self keyboardAccessoryView];
   textView.inputAccessoryView = mytoolbar;
   [textView becomeFirstResponder];
   self.myTextInputView = [[UITextView alloc]init];
@@ -249,24 +243,21 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-  NSLog(@"textInputView %@",myTextInputView.text);
+  MSLog(@"textInputView %@",myTextInputView.text);
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-  NSLog(@"textInputField %@",textInputField.text);
+  MSLog(@"textInputField %@",textInputField.text);
 }
 
-
 -(IBAction)confirmPressed:(id)sender {
-
   self.navigationController.navigationBarHidden = NO;
   self.navigationController.navigationBar.alpha = 1;
   [self.insertTextLabel removeFromSuperview];
   [self.dimView removeFromSuperview];
   [textInputField resignFirstResponder];
   [myTextInputView resignFirstResponder];
-
 }
 
 
