@@ -100,16 +100,11 @@
   self.tabBarController.tabBar.hidden = NO;
   self.tabBarController.selectedIndex = 0;
 }
+
 - (IBAction)addPressed:(id)sender
 {
-
-  //Used for 
-  /*
- 
-  
- 
-   */
 }
+
 - (IBAction)addValue:(UIButton *)sender
 {
 
@@ -203,7 +198,6 @@
   self.insertTextLabel.textAlignment = UITextAlignmentCenter;
   self.insertTextLabel.backgroundColor = [UIColor clearColor];
 
-
   //Button
   UIImage *confirmImage = [UIImage imageNamed:@"confirm_input_normal.png"];
   UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -256,24 +250,21 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-  NSLog(@"textInputView %@",myTextInputView.text);
+  MSLog(@"textInputView %@",myTextInputView.text);
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-  NSLog(@"textInputField %@",textInputField.text);
+  MSLog(@"textInputField %@",textInputField.text);
 }
 
-
 -(IBAction)confirmPressed:(id)sender {
-
   self.navigationController.navigationBarHidden = NO;
   self.navigationController.navigationBar.alpha = 1;
   [self.insertTextLabel removeFromSuperview];
   [self.dimView removeFromSuperview];
   [textInputField resignFirstResponder];
   [myTextInputView resignFirstResponder];
-  
 }
 
 -(void)viewDidDisappear:(BOOL)animated
