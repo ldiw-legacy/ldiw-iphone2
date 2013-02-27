@@ -11,6 +11,6 @@
 @interface LoginRequest : NetworkRequest
 
 + (void)logInWithParameters:(NSDictionary *)parameters andFacebook:(BOOL)faceBookLogin success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
-
++ (void)loginUserToDatabaseWithDictionary:(NSDictionary *)inputDictionary;
 
 @end

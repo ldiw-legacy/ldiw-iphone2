@@ -11,6 +11,7 @@
 #import "HeaderView.h"
 #import "Database+Server.h"
 #import "Database+WPField.h"
+#import "Database+WP.h"
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
@@ -18,6 +19,7 @@
 #import "DesignHelper.h"
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
+#import "WastePoint.h"
 
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 
@@ -64,7 +66,7 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
-  [self showLoginViewIfNeeded];
+//  [self showLoginViewIfNeeded];
   [self loadServerInformation];
 }
 
@@ -252,19 +254,26 @@
 }
 
 - (void)loadServerInformation {
-  if ([[Database sharedInstance] userIsLoggedIn]) {
+//  if ([[Database sharedInstance] userIsLoggedIn]) {
     [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
       if (result) {
         MSLog(@"Need to load base server information");
         [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
           [self loadWastePointList];
-          
+//          WastePoint *point = [[Database sharedInstance] wastepointWithId:[NSString stringWithFormat:@"%d", 1]];
+//          [point setLatitudeValue:26.0];
+//          [point setLongitudeValue:59.0];
+//          [WastepointRequest uploadWP:point withSuccess:^(NSArray* result) {
+//          
+//          } failure:^(NSError *error) {
+//          
+//          }];
         } failure:^(void) {
           MSLog(@"Server info loading fail");
         }];
       }
     }];
-  }
+//  }
 }
 
 - (void)showHud {
@@ -274,6 +283,7 @@
 - (void)removeHud {
   [self dismissModalViewControllerAnimated:YES];
   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+  [self loadServerInformation];
 }
 
 @end

@@ -30,21 +30,32 @@
   
   [[LoginClient sharedLoginClient] postPath:loginPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
-      User *userinfo = [[Database sharedInstance] currentUser];
-      userinfo.sessid = [responseObject objectForKey:@"sessid"];
-      userinfo.session_name = [responseObject objectForKey:@"session_name"];
     }
     if (success) {
+      [self loginUserToDatabaseWithDictionary:responseObject];
       success(responseObject);
     }
     
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
     MSLog(@"Error %@", error);
     MSLog(@"%d", [operation.response statusCode]);
     NSError *myError = [[NSError alloc] initWithDomain:error
                         .domain code:[operation.response statusCode] userInfo:error.userInfo];
+//    if (myError.code == kUserAlreadyLoggedInErrorCode) {
+//      [self loginUserToDatabaseWithDictionary:nil];
+//    }
+
     failure(myError);
   }];
+}
+
++ (void)loginUserToDatabaseWithDictionary:(NSDictionary *)inputDictionary {
+  if (inputDictionary) {
+    User *userinfo = [[Database sharedInstance] currentUser];
+    userinfo.sessid = [inputDictionary objectForKey:@"sessid"];
+    userinfo.session_name = [inputDictionary objectForKey:@"session_name"];
+  }
 }
 
 @end

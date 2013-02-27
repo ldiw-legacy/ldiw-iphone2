@@ -13,6 +13,7 @@
 #import "LocationManager.h"
 
 #define kGetWPListPath @"waste_points.csv"
+#define kCreateNewWPPath @"wp.json"
 
 #define kResultsToReturn 1000
 #define kMaxResultsKey @"max_results" //default 10
@@ -69,6 +70,21 @@
     failure(error);
   }];
   [operation start];
+}
+
++ (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+  NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+  NSString *lat = [NSString stringWithFormat:@"%g", point.latitudeValue];
+  NSString *lon = [NSString stringWithFormat:@"%g", point.longitudeValue];
+  
+  [parameters setObject:lat forKey:@"lat"];
+  [parameters setObject:lon forKey:@"lon"];
+  [[self sharedHTTPClient] postPath:kCreateNewWPPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    MSLog(@"New WP created!");
+    MSLog(@"Response %@", responseObject);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    MSLog(@"Error: %@", error);
+  }];
 }
 
 @end
