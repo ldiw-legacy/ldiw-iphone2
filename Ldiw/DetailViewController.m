@@ -102,18 +102,32 @@
 }
 - (IBAction)addPressed:(id)sender
 {
+
+  //Used for 
   /*
-  UITextField *textfield=[[UITextField alloc] init];
-  textfield.delegate=self;
+ 
+  
+ 
+   */
+}
+- (IBAction)addValue:(UIButton *)sender
+{
+  UITextField *textfield = [[UITextField alloc] init];
+  textfield.delegate = self;
   [self.view addSubview:textfield];
-  //[self showCustomKeyboard:textfield];
   [self showCustomNumPad:textfield];
-  */
-  UITextView *textview=[[UITextView alloc]init];
-  textview.delegate=self;
+  
+}
+
+- (IBAction)addComment:(UIButton *)sender
+{
+  UITextView *textview = [[UITextView alloc]init];
+  textview.delegate = self;
   [self.view addSubview:textview];
   [self showCustomTextPad:textview];
+  
 }
+
 
 - (IBAction)takePicture:(id)sender {
 
