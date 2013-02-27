@@ -6,12 +6,13 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import "NetworkRequest.h"
 #import <MapKit/MapKit.h>
+#import "NetworkRequest.h"
+#import "WastePoint.h"
 
 @interface WastepointRequest : NetworkRequest
 
-+ (void)getWPListWithBbox:(NSString *)box andCoordinates:(NSString *)coordinates withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
-
 + (void)getWPListForArea:(MKCoordinateRegion)region withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
+
 @end

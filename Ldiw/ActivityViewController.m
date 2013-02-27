@@ -11,6 +11,7 @@
 #import "HeaderView.h"
 #import "Database+Server.h"
 #import "Database+WPField.h"
+#import "Database+WP.h"
 #import "WastepointRequest.h"
 #import "ActivityCustomCell.h"
 #import "BaseUrlRequest.h"
@@ -18,6 +19,11 @@
 #import "DesignHelper.h"
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
+#import "WastePoint.h"
+
+#import "WastePoint.h"
+#import "Image.h"
+
 
 #define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 
@@ -64,9 +70,10 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
-  [self showLoginViewIfNeeded];
+//  [self showLoginViewIfNeeded];
   [self loadServerInformation];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
   self.tabBarController.tabBar.hidden = NO;
@@ -129,21 +136,21 @@
   } else if (buttonIndex == 1)
   {
     UIImagePickerController *picker=[[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-    } else {[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary]; }
-
+    } else {
+      [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
     picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
-  } else if (buttonIndex == 2)
-
-  { UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+  } else if (buttonIndex == 2) {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:nil];
     [self.navigationController pushViewController:detail animated:YES];
     detail.takePictureButton.alpha = 1.0;
   }
@@ -151,33 +158,16 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
-  [self.navigationController pushViewController:detail animated:YES];
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
-  CFStringRef newUniqueIDString = CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
-  //Unique Key
-
-  NSString *key = (__bridge NSString *)newUniqueIDString;
-
-  //ToDo: resize image
   
-  UIImage *resizedImage = [DesignHelper resizeImage:cameraImage];
-  NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7);
+  DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:cameraImage];
+  [self.navigationController pushViewController:detail animated:YES];
   
-  //ToDo: set image imageview on detailview:
-
-  //ToDo: save to documents
-
-  //ToDo: save image to database with unique key
-
-  CFRelease(newUniqueID);
-  CFRelease(newUniqueIDString);
+  
   [self dismissViewControllerAnimated:YES completion:nil];
+  
   detail.imageView.image = cameraImage;
   detail.takePictureButton.alpha = 0;
-
-  
 }
 
 
@@ -262,7 +252,14 @@
         MSLog(@"Need to load base server information");
         [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
           [self loadWastePointList];
-          
+//          WastePoint *point = [[Database sharedInstance] wastepointWithId:[NSString stringWithFormat:@"%d", 1]];
+//          [point setLatitudeValue:26.0];
+//          [point setLongitudeValue:59.0];
+//          [WastepointRequest uploadWP:point withSuccess:^(NSArray* result) {
+//          
+//          } failure:^(NSError *error) {
+//          
+//          }];
         } failure:^(void) {
           MSLog(@"Server info loading fail");
         }];
@@ -278,6 +275,7 @@
 - (void)removeHud {
   [self dismissModalViewControllerAnimated:YES];
   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+  [self loadServerInformation];
 }
 
 @end

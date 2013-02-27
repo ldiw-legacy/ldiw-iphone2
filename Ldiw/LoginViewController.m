@@ -56,10 +56,7 @@
     MSLog(@"SUCCESS:: %@", success);
      [self closeLoginView];
   } failure:^(NSError *e) {
-    if (e.code == kUserAlreadyLoggedInErrorCode) {
-      [self closeLoginView];
-    }
-    MSLog(@"Login Error  %@",e);
+     MSLog(@"Login Error  %@",e);
   }];
 }
 

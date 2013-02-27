@@ -9,17 +9,20 @@
 #import "DetailViewController.h"
 #import "LocationManager.h"
 #import "DesignHelper.h"
+#import "PictureHelper.h"
+#import "Image.h"
+
 #define kViewBackroundColor [UIColor colorWithRed:0.894 green:0.894 blue:0.894 alpha:1] /*#e4e4e4*/
 #define kButtonBackgroundColor [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1] /*#d2d2d2*/
 
 @implementation DetailViewController
 @synthesize scrollView, imageView, mapView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil usingImage:(UIImage*)image
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+      self.wastePoint = [WastePoint newWastePointUsingImage:image];
     }
     return self;
 }
@@ -35,8 +38,8 @@
   
   [super viewDidLoad];
   self.tabBarController.tabBar.hidden = YES;
-  self.view.backgroundColor=kViewBackroundColor;
-  self.imageView.backgroundColor=kButtonBackgroundColor;
+  self.view.backgroundColor = kViewBackroundColor;
+  self.imageView.backgroundColor = kButtonBackgroundColor;
   UIImage *image = [UIImage imageNamed:@"cancel_normal.png"];
   UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
   cancelButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
@@ -46,12 +49,8 @@
   [cancelButton setTitle:NSLocalizedString(@"cancel",nil) forState:UIControlStateNormal];
   [DesignHelper setBarButtonTitleAttributes:cancelButton];
 
-
-
-
   UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
   self.navigationItem.leftBarButtonItem = cancelBarButton;
-
   
   UIImage *addimage = [UIImage imageNamed:@"blue_normal.png"];
   UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -65,33 +64,14 @@
   UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
   self.navigationItem.rightBarButtonItem = addBarButton;
 
-  UILabel *title=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-  title.text=NSLocalizedString(@"addNewTitle", nil);
+  UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+  title.text = NSLocalizedString(@"addNewTitle", nil);
   [DesignHelper setNavigationTitleStyle:title];
   [title sizeToFit];
   self.navigationItem.titleView = title;
 
-  
-
-
-
-    // Do any additional setup after loading the view from its nib.
-
-  [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-    [self createMapViewWithCoordinate:location];
-  } errorBlock:^(NSError *error) {
-    
-  }];
 }
 
-- (void)createMapViewWithCoordinate:(CLLocation *)location {
-  MSLog(@"Zoom map to region");
-  // TODO: Why is mapview frame height zero??
-//  [mapView setFrame:CGRectMake(166, 15, 140, 140)];
-  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.002, 0.004);
-  MKCoordinateRegion mapRegion = MKCoordinateRegionMake(location.coordinate, mapSpan);
-  [mapView setRegion:mapRegion animated:NO];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -99,16 +79,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - MKMapViewDelegate
-- (void)mapView:(MKMapView *)aMapView regionDidChangeAnimated:(BOOL)animated {
-  MSLog(@"new mapView to new region");
-  MKCoordinateRegion region = aMapView.region;
-  MSLog(@"Mapview region delta: %g %g", region.span.latitudeDelta, region.span.longitudeDelta);
-}
 - (void)viewDidUnload {
   [self setTakePictureButton:nil];
   [super viewDidUnload];
 }
+
 - (IBAction)cancelPressed:(id)sender
 {
   //Do some cleaning here
@@ -123,7 +98,7 @@
 
 - (IBAction)takePicture:(id)sender {
 
-  UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
   if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
   {
     [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
@@ -142,12 +117,10 @@
 
   NSString *key = (__bridge NSString *)newUniqueIDString;
 
-  //ToDo: resize image
 
   UIImage *resizedImage = [DesignHelper resizeImage:cameraImage];
   NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7);
 
-  //ToDo: set image imageview on detailview:
 
   //ToDo: save to documents
 

@@ -118,9 +118,7 @@
   
 }
 
-+(UIImage *)resizeImage:(UIImage *)image
-{
-
++(UIImage *)resizeImage:(UIImage *)image {
   CGFloat originalWidth = image.size.width;
   CGFloat originalHeight = image.size.height;
   CGFloat ratio=originalWidth/originalHeight;
@@ -135,21 +133,17 @@
       ratio=320.0/originalWidth;
       originalHeight=ratio * originalHeight;
       originalWidth=320.0;
-
     }
-
   }
-  CGRect newRect =CGRectMake(0, 0, originalWidth, originalHeight);
+  CGRect newRect = CGRectMake(0, 0, originalWidth, originalHeight);
   UIGraphicsBeginImageContext(newRect.size);
   [image drawInRect:newRect];
-  UIImage *newImage=UIGraphicsGetImageFromCurrentImageContext();
+  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   return newImage;
-  
 }
 
-+(UIImage *)userIconImage:(UIImage *)image
-{
++(UIImage *)userIconImage:(UIImage *)image {
   CGSize originalsize = [image size];
   CGRect newimagerect = CGRectMake(0, 0, 33, 33);
   float ratio = MAX (newimagerect.size.height/originalsize.height, newimagerect.size.width/originalsize.width);
@@ -157,16 +151,14 @@
   UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:newimagerect];
   [path addClip];
   CGRect projectRect;
-  projectRect.size.width=ratio * originalsize.width;
-  projectRect.size.height=ratio * originalsize.height;
+  projectRect.size.width = ratio * originalsize.width;
+  projectRect.size.height = ratio * originalsize.height;
   projectRect.origin.x = (newimagerect.size.width - projectRect.size.width) / 2.0;
-  projectRect.origin.y = (newimagerect.size.height -projectRect.size.width) / 2.0;
+  projectRect.origin.y = (newimagerect.size.height - projectRect.size.width) / 2.0;
   [image drawInRect:projectRect];
-  UIImage *userIconImage=UIGraphicsGetImageFromCurrentImageContext();
+  UIImage *userIconImage = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   return userIconImage;
- 
-  
 }
 
 +(UITabBarController*) createTabBarController {
