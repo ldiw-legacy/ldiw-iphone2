@@ -67,6 +67,7 @@
   [self showLoginViewIfNeeded];
   [self loadServerInformation];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
   self.tabBarController.tabBar.hidden = NO;
@@ -129,21 +130,21 @@
   } else if (buttonIndex == 1)
   {
     UIImagePickerController *picker=[[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-    } else {[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary]; }
-
+    } else {
+      [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
     picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
-  } else if (buttonIndex == 2)
-
-  { UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+  } else if (buttonIndex == 2) {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
     detail.takePictureButton.alpha = 1.0;
   }
@@ -176,8 +177,6 @@
   [self dismissViewControllerAnimated:YES completion:nil];
   detail.imageView.image = cameraImage;
   detail.takePictureButton.alpha = 0;
-
-  
 }
 
 

@@ -51,7 +51,7 @@
   [wpDict removeObjectForKey:kKeyLon];
   NSString *wpPhotos = [wpDict objectForKey:kKeyPhotos];
   [wpDict removeObjectForKey:kKeyPhotos];
-
+  
   WastePoint *point = [self wastepointWithId:wpId];
   if (!point) {
     point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
@@ -59,12 +59,12 @@
     [point setLatitudeValue:[wpLat floatValue]];
     [point setLongitudeValue:[wpLon floatValue]];
     [point setPhotos:wpPhotos];
-  }
-  
-  for (NSString *key in [wpDict allKeys]) {
-    NSString *value = [wpDict objectForKey:key];
-    CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
-    [point addCustomValueObject:valueToAdd];
+    
+    for (NSString *key in [wpDict allKeys]) {
+      NSString *value = [wpDict objectForKey:key];
+      CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
+      [point addCustomValueObject:valueToAdd];
+    }
   }
   return point;
 }

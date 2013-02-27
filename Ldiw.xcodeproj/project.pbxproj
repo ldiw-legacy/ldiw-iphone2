@@ -63,6 +63,8 @@
 		53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E316DCB6F000AC8E35 /* AccountViewController.m */; };
 		53E729E616DCB6F200AC8E35 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53E729E416DCB6F100AC8E35 /* AccountViewController.xib */; };
 		53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E816DCEA2C00AC8E35 /* FBHelper.m */; };
+		53E729EC16DCFD5800AC8E35 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729EB16DCFD5800AC8E35 /* MapView.m */; };
+		53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729EE16DD021A00AC8E35 /* MapAnnotation.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
 		C581F2BB16D278E6003A2FA2 /* e_friendsgraphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C581F26716D278E6003A2FA2 /* e_friendsgraphic@2x.png */; };
@@ -266,6 +268,10 @@
 		53E729E416DCB6F100AC8E35 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
 		53E729E716DCEA2C00AC8E35 /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
 		53E729E816DCEA2C00AC8E35 /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
+		53E729EA16DCFD5800AC8E35 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		53E729EB16DCFD5800AC8E35 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
+		53E729ED16DD021A00AC8E35 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
+		53E729EE16DD021A00AC8E35 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
@@ -782,6 +788,10 @@
 				C581F31616D36952003A2FA2 /* ActivityCustomCell.h */,
 				C581F31716D36952003A2FA2 /* ActivityCustomCell.m */,
 				C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */,
+				53E729EA16DCFD5800AC8E35 /* MapView.h */,
+				53E729EB16DCFD5800AC8E35 /* MapView.m */,
+				53E729ED16DD021A00AC8E35 /* MapAnnotation.h */,
+				53E729EE16DD021A00AC8E35 /* MapAnnotation.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1036,6 +1046,8 @@
 				13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */,
 				53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */,
 				53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */,
+				53E729EC16DCFD5800AC8E35 /* MapView.m in Sources */,
+				53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
