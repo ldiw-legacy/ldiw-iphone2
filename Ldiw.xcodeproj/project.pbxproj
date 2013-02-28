@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		139E721916DF6CD9008EDEE3 /* MySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E721716DF6CD9008EDEE3 /* MySettingsViewController.m */; };
 		139E721A16DF6CD9008EDEE3 /* MySettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 139E721816DF6CD9008EDEE3 /* MySettingsViewController.xib */; };
+		139E722416DF8E01008EDEE3 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E721D16DF8E01008EDEE3 /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		139E722516DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E721F16DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		139E722616DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E722116DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		139E722716DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E722316DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		139F1AA816DE3F82008E07E1 /* TypicalValueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 139F1AA716DE3F82008E07E1 /* TypicalValueView.m */; };
 		13A42DD816D4A16000B92C17 /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD116D4A16000B92C17 /* _Server.m */; };
 		13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD316D4A16000B92C17 /* _TypicalValue.m */; };
@@ -180,6 +184,14 @@
 		139E721616DF6CD9008EDEE3 /* MySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingsViewController.h; sourceTree = "<group>"; };
 		139E721716DF6CD9008EDEE3 /* MySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingsViewController.m; sourceTree = "<group>"; };
 		139E721816DF6CD9008EDEE3 /* MySettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySettingsViewController.xib; sourceTree = "<group>"; };
+		139E721C16DF8E01008EDEE3 /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
+		139E721D16DF8E01008EDEE3 /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
+		139E721E16DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
+		139E721F16DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
+		139E722016DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
+		139E722116DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
+		139E722216DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
+		139E722316DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
 		139F1AA616DE3F82008E07E1 /* TypicalValueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValueView.h; sourceTree = "<group>"; };
 		139F1AA716DE3F82008E07E1 /* TypicalValueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValueView.m; sourceTree = "<group>"; };
 		13A42DD016D4A16000B92C17 /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
@@ -206,8 +218,8 @@
 		13A60AF116D767B30070AF84 /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _User.m; sourceTree = "<group>"; };
 		13A60AF216D767B30070AF84 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		13A60AF316D767B30070AF84 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Ldiw/MBProgressHUD.h; sourceTree = "<group>"; };
+		13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Ldiw/MBProgressHUD.m; sourceTree = "<group>"; };
 		13A8B8EA16DBA9C800D7E076 /* WastePointViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePointViews.h; sourceTree = "<group>"; };
 		13A8B8EB16DBA9C800D7E076 /* WastePointViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePointViews.m; sourceTree = "<group>"; };
 		13A8B8ED16DBBCCC00D7E076 /* AddNewWPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewWPViewController.h; sourceTree = "<group>"; };
@@ -431,6 +443,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		139E721B16DF8E01008EDEE3 /* DCRoundSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				139E721C16DF8E01008EDEE3 /* DCRoundSwitch.h */,
+				139E721D16DF8E01008EDEE3 /* DCRoundSwitch.m */,
+				139E721E16DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.h */,
+				139E721F16DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m */,
+				139E722016DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.h */,
+				139E722116DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m */,
+				139E722216DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.h */,
+				139E722316DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m */,
+			);
+			path = DCRoundSwitch;
+			sourceTree = "<group>";
+		};
+		139E722816DF8E0E008EDEE3 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */,
+				13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		13B6C7D216D3D35300B72B4A /* databaseObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +599,8 @@
 		534CCF3616D22D870004532F /* Apis */ = {
 			isa = PBXGroup;
 			children = (
+				139E722816DF8E0E008EDEE3 /* MBProgressHUD */,
+				139E721B16DF8E01008EDEE3 /* DCRoundSwitch */,
 				534CCF7D16D39F7D0004532F /* CSVParser */,
 				534CCF3716D22D9C0004532F /* AFNetworking */,
 			);
@@ -647,8 +685,6 @@
 				534CCF6716D25A2B0004532F /* LocationManager.m */,
 				C581F30F16D308D3003A2FA2 /* DesignHelper.h */,
 				C581F31016D308D3003A2FA2 /* DesignHelper.m */,
-				13A8B8E716DB3A5700D7E076 /* MBProgressHUD.h */,
-				13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */,
 				53E729E716DCEA2C00AC8E35 /* FBHelper.h */,
 				53E729E816DCEA2C00AC8E35 /* FBHelper.m */,
 				5AD08AE916DD0CCC00566B04 /* PictureHelper.h */,
@@ -1098,6 +1134,10 @@
 				53E729EC16DCFD5800AC8E35 /* MapView.m in Sources */,
 				53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */,
 				139E721916DF6CD9008EDEE3 /* MySettingsViewController.m in Sources */,
+				139E722416DF8E01008EDEE3 /* DCRoundSwitch.m in Sources */,
+				139E722516DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m in Sources */,
+				139E722616DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m in Sources */,
+				139E722716DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

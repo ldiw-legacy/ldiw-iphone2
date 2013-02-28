@@ -15,6 +15,8 @@
 
 @implementation MySettingsViewController
 
+@synthesize uploadSettingBaseView, uploadSettingSwitch, uploadSettingDescritption, uploadSettingTitle;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,7 +43,15 @@
   [DesignHelper setBarButtonTitleAttributes:backButton];
   UIBarButtonItem *backBarBtn = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   [self.navigationItem setLeftBarButtonItem:backBarBtn];
+  
+  DCRoundSwitch *onlineOfflineSwitch = [[DCRoundSwitch alloc] initWithFrame:CGRectMake(200, 55, 110, 30)];
+  [onlineOfflineSwitch setOnText:@"WIFI"];
+  [onlineOfflineSwitch setOffText:@"3G/WIFI"];
+  [onlineOfflineSwitch addTarget:self action:@selector(wifiOr3g:) forControlEvents:UIControlEventValueChanged];
+  [self setUploadSettingSwitch:onlineOfflineSwitch];
+  [self.view addSubview:onlineOfflineSwitch];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -52,5 +62,9 @@
 - (IBAction)customBackPressed:(UIBarButtonItem *)sender {
 	// Some anything you need to do before leaving
 	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)wifiOr3g:(id)sender {
+  MSLog(@"Value changed");
 }
 @end
