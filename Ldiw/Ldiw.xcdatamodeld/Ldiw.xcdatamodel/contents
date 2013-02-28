@@ -41,7 +41,7 @@
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="photos" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="customValue" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CustomValue" inverseName="point" inverseEntity="CustomValue" syncable="YES"/>
-        <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="wastepoint" inverseEntity="Image" syncable="YES"/>
+        <relationship name="image" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="wastepoint" inverseEntity="Image" syncable="YES"/>
     </entity>
     <entity name="WPField" representedClassName="WPField" syncable="YES">
         <attribute name="edit_instructions" optional="YES" attributeType="String" syncable="YES"/>

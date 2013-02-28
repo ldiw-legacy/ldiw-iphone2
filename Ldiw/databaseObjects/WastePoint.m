@@ -12,9 +12,6 @@
   return wp;
 }
 
-
-
-
 - (NSString *)description {
   NSString *returnString = [NSString stringWithFormat:@"id = %d\nlat = %f\nlon = %f\nphotos = %@", self.idValue, self.latitudeValue, self.longitudeValue, self.photos];
   NSMutableString *customValuesString = [NSMutableString string];

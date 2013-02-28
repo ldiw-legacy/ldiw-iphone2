@@ -69,6 +69,11 @@
   return point;
 }
 
+- (NSArray *)listWastePointsWithNoId {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == 0"];
+  return [self listCoreObjectsNamed:@"WastePoint" withPredicate:predicate];
+}
+
 - (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value {
   CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
   [aValue setFieldName:key];
