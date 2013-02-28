@@ -23,7 +23,7 @@
 @implementation DetailViewController 
 
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView,myTextInputView;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil usingImage:(UIImage*)image
 {
@@ -105,6 +105,8 @@
 
 - (IBAction)addValue:(UIButton *)sender
 {
+
+  //Remove later
   UITextField *textfield = [[UITextField alloc] init];
   textfield.delegate = self;
   [self.view addSubview:textfield];
@@ -114,6 +116,7 @@
 
 - (IBAction)addComment:(UIButton *)sender
 {
+  //Remove later
   UITextView *textview = [[UITextView alloc]init];
   textview.delegate = self;
   [self.view addSubview:textview];
@@ -229,10 +232,14 @@
   UIView *mytoolbar = [self keyboardAccessoryView];
   textView.inputAccessoryView = mytoolbar;
   [textView becomeFirstResponder];
-  self.myTextInputView = [[UITextView alloc]init];
+  if (!myTextInputView) {
+    self.myTextInputView = [[UITextView alloc]init];
+  }
   self.myTextInputView.delegate = self;
-  self.myTextInputView.keyboardType=UIKeyboardTypeDefault;
-  self.myTextInputView.frame = CGRectMake(15, 20, 175, 50);
+  self.myTextInputView.scrollEnabled = YES;
+  self.myTextInputView.keyboardType = UIKeyboardTypeDefault;
+  self.myTextInputView.frame = CGRectMake(15, 20, 185, 50);
+  
   self.myTextInputView.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
   [mytoolbar addSubview:myTextInputView];
   [self.myTextInputView becomeFirstResponder];
@@ -258,5 +265,14 @@
   [myTextInputView resignFirstResponder];
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:(BOOL)animated];
+  
+  textInputField = nil;
+  myTextInputView = nil;
+  dimView = nil;
+  insertTextLabel = nil;
+}
 
 @end
