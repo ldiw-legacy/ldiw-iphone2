@@ -63,7 +63,7 @@
     for (NSString *key in [wpDict allKeys]) {
       NSString *value = [wpDict objectForKey:key];
       CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
-      [point addCustomValueObject:valueToAdd];
+      [point addCustomValuesObject:valueToAdd];
     }
   }
   return point;

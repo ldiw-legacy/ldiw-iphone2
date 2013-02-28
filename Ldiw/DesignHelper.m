@@ -9,7 +9,6 @@
 #import "DesignHelper.h"
 #import "DetailViewController.h"
 #import "ActivityViewController.h"
-#import "AddNewWPViewController.h"
 #import "AccountViewController.h"
 
 #define kbgCornerRadius 8.0

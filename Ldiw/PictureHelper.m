@@ -28,14 +28,14 @@
   [dataForJpg writeToFile:imageFilePath atomically:YES];
   
   Image *dbImage = [Image newImageWithLocalUrl:imageFilePath];
-  [wp addImageObject:dbImage];
+  [wp addImagesObject:dbImage];
   
   CFRelease(newUniqueID);
   CFRelease(newUniqueIDString);
 }
 
 + (UIImage *)loadImageForWP:(WastePoint*)wp {
-  Image *anImage = [wp.image anyObject];
+  Image *anImage = [wp.images anyObject];
   NSData *imgData = [NSData dataWithContentsOfFile:anImage.localURL];
   return [UIImage imageWithData:imgData];
 }

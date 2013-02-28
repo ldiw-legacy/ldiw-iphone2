@@ -90,6 +90,7 @@
                               otherButtonTitles:nil];
     [alertView show];
   }
+  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRemoveHud object:nil];
 }
 
 @end

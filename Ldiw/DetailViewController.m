@@ -11,6 +11,7 @@
 #import "DesignHelper.h"
 #import "PictureHelper.h"
 #import "Image.h"
+#import "WastePointViews.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -23,28 +24,25 @@
 @implementation DetailViewController 
 
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil usingImage:(UIImage*)image
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-      self.wastePoint = [WastePoint newWastePointUsingImage:image];
-    }
-    return self;
+- (id)initWithImage:(UIImage *)image {
+  self = [super initWithNibName:nil bundle:nil];
+  if (self) {
+    self.wastePoint = [WastePoint newWastePointUsingImage:image];
+  }
+  return self;
 }
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [self.navigationItem setHidesBackButton:YES];
-  
 }
 
 - (void)viewDidLoad
 {
-  
   [super viewDidLoad];
-  self.tabBarController.tabBar.hidden = YES;
   self.view.backgroundColor = kViewBackroundColor;
   self.imageView.backgroundColor = kButtonBackgroundColor;
   UIImage *image = [UIImage imageNamed:@"cancel_normal.png"];
@@ -76,9 +74,21 @@
   [DesignHelper setNavigationTitleStyle:title];
   [title sizeToFit];
   self.navigationItem.titleView = title;
-
+  
+  [self addWastePointViews];
 }
 
+- (void)addWastePointViews {
+  WastePointViews *wpViews = [[WastePointViews alloc] initWithWastePoint:wastePoint];
+  CGRect wpViewsRect = CGRectMake(0, imageView.frame.origin.y + imageView.frame.size.height, wpViews.frame.size.width, wpViews.frame.size.height);
+  [wpViews setFrame:wpViewsRect];
+  [scrollView addSubview:wpViews];
+  
+  CGSize oldSize = scrollView.contentSize;
+  CGSize newSize = CGSizeMake(oldSize.width, oldSize.height + wpViews.frame.size.height + wpViews.frame.origin.y);
+  [self.scrollView setContentSize:newSize];
+  [self.scrollView addSubview:wpViews];
+}
 
 - (void)didReceiveMemoryWarning
 {

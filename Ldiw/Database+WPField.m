@@ -156,4 +156,13 @@
   return [self listFieldsWithComposition:NO];
 }
 
+- (NSArray *)typicalValuesForField:(WPField *)field {
+  NSArray *sortedArray = [[field.typicalValue allObjects] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+    NSString *first = [(TypicalValue*)a value];
+    NSString *second = [(TypicalValue*)b value];
+    return [first compare:second options:NSNumericSearch];
+  }];
+  return sortedArray;
+}
+
 @end

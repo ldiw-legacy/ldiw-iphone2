@@ -170,28 +170,25 @@
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
   } else {
-    DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:nil];
-    [self.navigationController pushViewController:detail animated:YES];
-    detail.takePictureButton.alpha = 1.0;
-    detail.controller = self;
+    [self openDetailViewWithImage:nil];
   }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+  [self dismissModalViewControllerAnimated:YES];
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  
-  DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:cameraImage];
-  [self.navigationController pushViewController:detail animated:YES];
-  
-  
-  [self dismissViewControllerAnimated:YES completion:nil];
-   detail.controller = self;
-  detail.imageView.image = cameraImage;
-  detail.takePictureButton.alpha = 0;
+  [self openDetailViewWithImage:cameraImage];
 }
 
+- (void)openDetailViewWithImage:(UIImage *)image {
+  DetailViewController *detail = [[DetailViewController alloc] initWithImage:image];
+  detail.takePictureButton.alpha = 1.0;
+  detail.controller = self;
 
+  UINavigationController *detailNavController = [[UINavigationController alloc] initWithRootViewController:detail];
+  [self presentViewController:detailNavController animated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning
   
@@ -296,7 +293,6 @@
 - (void)removeHud {
   [self dismissModalViewControllerAnimated:YES];
   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-  [self loadServerInformation];
 }
 
 @end

@@ -13,7 +13,6 @@
 		139E722516DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E721F16DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		139E722616DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E722116DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		139E722716DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 139E722316DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		139F1AA816DE3F82008E07E1 /* TypicalValueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 139F1AA716DE3F82008E07E1 /* TypicalValueView.m */; };
 		13A42DD816D4A16000B92C17 /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD116D4A16000B92C17 /* _Server.m */; };
 		13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD316D4A16000B92C17 /* _TypicalValue.m */; };
 		13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD516D4A16000B92C17 /* _WastePoint.m */; };
@@ -31,8 +30,6 @@
 		13A60AF516D767B30070AF84 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A60AF316D767B30070AF84 /* User.m */; };
 		13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */; };
 		13A8B8EC16DBA9C800D7E076 /* WastePointViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8B8EB16DBA9C800D7E076 /* WastePointViews.m */; };
-		13A8B8F016DBBCCD00D7E076 /* AddNewWPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8B8EE16DBBCCC00D7E076 /* AddNewWPViewController.m */; };
-		13A8B8F116DBBCCD00D7E076 /* AddNewWPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13A8B8EF16DBBCCC00D7E076 /* AddNewWPViewController.xib */; };
 		13AB45B116D681AB00264E77 /* Database+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AB45B016D681AA00264E77 /* Database+User.m */; };
 		13B6C7E716D3D35300B72B4A /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DC16D3D35300B72B4A /* Server.m */; };
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
@@ -196,8 +193,6 @@
 		139E722116DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
 		139E722216DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
 		139E722316DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
-		139F1AA616DE3F82008E07E1 /* TypicalValueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValueView.h; sourceTree = "<group>"; };
-		139F1AA716DE3F82008E07E1 /* TypicalValueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValueView.m; sourceTree = "<group>"; };
 		13A42DD016D4A16000B92C17 /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
 		13A42DD116D4A16000B92C17 /* _Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Server.m; sourceTree = "<group>"; };
 		13A42DD216D4A16000B92C17 /* _TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValue.h; sourceTree = "<group>"; };
@@ -226,9 +221,6 @@
 		13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Ldiw/MBProgressHUD.m; sourceTree = "<group>"; };
 		13A8B8EA16DBA9C800D7E076 /* WastePointViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePointViews.h; sourceTree = "<group>"; };
 		13A8B8EB16DBA9C800D7E076 /* WastePointViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePointViews.m; sourceTree = "<group>"; };
-		13A8B8ED16DBBCCC00D7E076 /* AddNewWPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewWPViewController.h; sourceTree = "<group>"; };
-		13A8B8EE16DBBCCC00D7E076 /* AddNewWPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewWPViewController.m; sourceTree = "<group>"; };
-		13A8B8EF16DBBCCC00D7E076 /* AddNewWPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewWPViewController.xib; sourceTree = "<group>"; };
 		13AB45AF16D681AA00264E77 /* Database+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+User.h"; sourceTree = "<group>"; };
 		13AB45B016D681AA00264E77 /* Database+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+User.m"; sourceTree = "<group>"; };
 		13B1DF6016D27AE900A5BF60 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -658,9 +650,6 @@
 				C583437C16D3C5A0005F3330 /* LoginViewController.h */,
 				C583437D16D3C5A0005F3330 /* LoginViewController.m */,
 				C583437E16D3C5A0005F3330 /* LoginViewController.xib */,
-				13A8B8ED16DBBCCC00D7E076 /* AddNewWPViewController.h */,
-				13A8B8EE16DBBCCC00D7E076 /* AddNewWPViewController.m */,
-				13A8B8EF16DBBCCC00D7E076 /* AddNewWPViewController.xib */,
 				53E729E216DCB6F000AC8E35 /* AccountViewController.h */,
 				53E729E316DCB6F000AC8E35 /* AccountViewController.m */,
 				53E729E416DCB6F100AC8E35 /* AccountViewController.xib */,
@@ -1074,7 +1063,6 @@
 				C583439016D77583005F3330 /* garbage01.jpg in Resources */,
 				C583439116D77583005F3330 /* someface2.jpg in Resources */,
 				C583439616DBBB80005F3330 /* DetailViewController.xib in Resources */,
-				13A8B8F116DBBCCD00D7E076 /* AddNewWPViewController.xib in Resources */,
 				53E729E616DCB6F200AC8E35 /* AccountViewController.xib in Resources */,
 				139E721A16DF6CD9008EDEE3 /* MySettingsViewController.xib in Resources */,
 			);
@@ -1150,7 +1138,6 @@
 				53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */,
 				13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */,
 				13A8B8EC16DBA9C800D7E076 /* WastePointViews.m in Sources */,
-				13A8B8F016DBBCCD00D7E076 /* AddNewWPViewController.m in Sources */,
 				53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */,
 				53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */,
 				5AD08AEB16DD0CCC00566B04 /* PictureHelper.m in Sources */,

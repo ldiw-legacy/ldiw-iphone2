@@ -6,11 +6,6 @@
 
 - (BOOL)isCompositionField:(BOOL)composition {
   NSString *fieldName = self.field_name;
-
-  if (!fieldName) {
-    fieldName = self.label;
-  }
-  
   BOOL fieldIsComposition = NO;
   
   NSRange compositionRange = [fieldName rangeOfString:kCompositionString];

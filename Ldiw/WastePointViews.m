@@ -31,12 +31,23 @@
   
   for (WPField *wpField in nonCompFields) {
     FieldView *field = [[FieldView alloc] initWithWPField:wpField];
+    [field setDelegate:self];
     [self addSubviewToBottom:field];
   }
 }
 
-- (void)check:(UIButton *)sender {
-  MSLog(@"CHECKED button %@", sender);
+#pragma mark - FieldDelegate
+- (void)checkedValue:(NSString *)value forField:(NSString *)fieldName {
+  MSLog(@"Checked value %@ for field %@", value, fieldName);
+
+  // allow only one selection in custom values
+  [wastePoint setCustomValues:nil];
+  [wastePoint setValue:value forCustomField:fieldName];
+  
+}
+
+- (void)addDataPressedForField:(NSString *)fieldName {
+  MSLog(@"Add data pressed for field %@", fieldName);
 }
 
 @end

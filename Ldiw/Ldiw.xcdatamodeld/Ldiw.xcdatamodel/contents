@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="11G63b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AllowedValue" representedClassName="AllowedValue" syncable="YES">
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,12 +8,12 @@
     <entity name="CustomValue" representedClassName="CustomValue" syncable="YES">
         <attribute name="fieldName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="point" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="customValue" inverseEntity="WastePoint" syncable="YES"/>
+        <relationship name="point" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="customValues" inverseEntity="WastePoint" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
         <attribute name="localURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="wastepoint" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="image" inverseEntity="WastePoint" syncable="YES"/>
+        <relationship name="wastepoint" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="images" inverseEntity="WastePoint" syncable="YES"/>
     </entity>
     <entity name="Server" representedClassName="Server" syncable="YES">
         <attribute name="baseUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -40,8 +40,8 @@
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="photos" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="customValue" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CustomValue" inverseName="point" inverseEntity="CustomValue" syncable="YES"/>
-        <relationship name="image" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="wastepoint" inverseEntity="Image" syncable="YES"/>
+        <relationship name="customValues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CustomValue" inverseName="point" inverseEntity="CustomValue" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="wastepoint" inverseEntity="Image" syncable="YES"/>
     </entity>
     <entity name="WPField" representedClassName="WPField" syncable="YES">
         <attribute name="edit_instructions" optional="YES" attributeType="String" syncable="YES"/>
@@ -62,7 +62,7 @@
         <element name="Server" positionX="-441" positionY="159" width="128" height="165"/>
         <element name="TypicalValue" positionX="322" positionY="126" width="128" height="90"/>
         <element name="User" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="WastePoint" positionX="90" positionY="413" width="128" height="133"/>
+        <element name="WastePoint" positionX="90" positionY="413" width="128" height="135"/>
         <element name="WPField" positionX="-243" positionY="99" width="128" height="193"/>
     </elements>
 </model>

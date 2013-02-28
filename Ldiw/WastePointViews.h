@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "WastePoint.h"
+#import "FieldView.h"
 
-@interface WastePointViews : UIView
+@interface WastePointViews : UIView <FieldDelegate>
 @property (nonatomic, strong) WastePoint *wastePoint;
 
 - (id)initWithWastePoint:(WastePoint *)wp;

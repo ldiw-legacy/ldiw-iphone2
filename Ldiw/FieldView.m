@@ -10,6 +10,7 @@
 #import "FieldView.h"
 #import "TypicalValue.h"
 #import "UIView+addSubView.h"
+#import "Database+WPField.h"
 
 #define kTValueHeight 35.0f
 #define kWPFieldHeight 58.0f
@@ -21,7 +22,7 @@
 #define kContentWidth 300.0f
 
 @implementation FieldView
-@synthesize wastePointField;
+@synthesize wastePointField, delegate;
 
 - (id)initWithWPField:(WPField *)field {  
 
@@ -76,16 +77,12 @@
 
 - (void)addTypicalValueFields {
   
-  NSArray *sortedArray = [[wastePointField.typicalValue allObjects] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-    NSString *first = [(TypicalValue*)a value];
-    NSString *second = [(TypicalValue*)b value];
-    return [first compare:second options:NSNumericSearch];
-  }];
   
   UIView *typicalValueView = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kContentPaddingFromSide, kContentWidth, 0)];
-  
-  for (TypicalValue *tValue in sortedArray) {
-    
+  NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];
+
+  for (int i = 0; i < [tvArray count]; i++) {
+    TypicalValue *tValue = [tvArray objectAtIndex:i];
     UILabel *tValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, 0, kLabelTextLength, kTValueHeight)];
     [tValueLabel setText:tValue.key];
     [tValueLabel setFont:[UIFont fontWithName:kFontName size:kWPLabelTextSize]];
@@ -95,6 +92,7 @@
     [checkButton setFrame:CGRectMake(0, 0, 20, 20)];
     [checkButton setBackgroundImage:[UIImage imageNamed:@"tick_active"] forState:UIControlStateSelected];
     [checkButton setBackgroundImage:[UIImage imageNamed:@"tick_inactive"] forState:UIControlStateNormal];
+    [checkButton setTag:i];
     [checkButton addTarget:self action:@selector(checkPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [typicalValueView addSubviewToBottom:tValueLabel];
@@ -105,11 +103,14 @@
 }
 
 - (void)addDataPressed {
-  MSLog(@"AddDataPressed");
+  [delegate addDataPressedForField:self.wastePointField.field_name];
 }
 
-- (void)checkPressed:(id)sender {
-  MSLog(@"Check pressed");
+- (void)checkPressed:(UIButton *)sender {
+  NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];
+  TypicalValue *tValue = [tvArray objectAtIndex:sender.tag];
+  NSString *value = tValue.value;
+  [delegate checkedValue:value forField:self.wastePointField.field_name];
 }
 
 @end

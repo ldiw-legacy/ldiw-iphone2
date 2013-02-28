@@ -24,6 +24,6 @@
 
 - (IBAction)takePicture:(id)sender;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil usingImage:(UIImage*)image;
+- (id)initWithImage:(UIImage *)image;
 
 @end
