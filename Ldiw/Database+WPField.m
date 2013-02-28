@@ -36,24 +36,24 @@
       for (NSArray *array in typicalValues) {
         NSString *key;
         NSString *value;
-        // Check key
+        // Check value
         if([[array objectAtIndex:0] isKindOfClass:[NSNumber class]])
         {
-          key = [[array objectAtIndex:0] stringValue];
+          value = [[array objectAtIndex:0] stringValue];
         }
         else if ([[array objectAtIndex:0] isKindOfClass:[NSString class]])
         {
-          key = [array objectAtIndex:0];
+          value = [array objectAtIndex:0];
         }
         
-        // Check value
+        // Check key
         if([[array objectAtIndex:1] isKindOfClass:[NSNumber class]])
         {
-          value = [[array objectAtIndex:1] stringValue];
+          key = [[array objectAtIndex:1] stringValue];
         }
         else if ([[array objectAtIndex:1] isKindOfClass:[NSString class]])
         {
-          value = [array objectAtIndex:1];
+          key = [array objectAtIndex:1];
         }
         
         [self createTypicalValueWithKey:key andValue:value forWPField:wpField];
@@ -130,5 +130,30 @@
   return returnArray;
 }
 
+- (NSArray *)listFieldsWithComposition:(BOOL)composition {
+  NSArray *allFields = [self listAllWPFields];
+  NSMutableArray *resultArray = [NSMutableArray array];
+  for (WPField *field in allFields) {
+    if ([field isCompositionField:composition]) {
+      [resultArray addObject:field];
+    }
+  }
+  
+  NSArray *sortedArray = [resultArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+    NSString *first = [(WPField *)a label];
+    NSString *second = [(WPField *)b label];
+    return [first compare:second];
+  }];
+  
+  return sortedArray;
+}
+
+- (NSArray *)listAllCompositionFields {
+  return [self listFieldsWithComposition:YES];
+}
+
+- (NSArray *)listAllNonCompositionFields {
+  return [self listFieldsWithComposition:NO];
+}
 
 @end

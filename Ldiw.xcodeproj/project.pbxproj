@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		139F1AA816DE3F82008E07E1 /* TypicalValueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 139F1AA716DE3F82008E07E1 /* TypicalValueView.m */; };
 		13A42DD816D4A16000B92C17 /* _Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD116D4A16000B92C17 /* _Server.m */; };
 		13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD316D4A16000B92C17 /* _TypicalValue.m */; };
 		13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A42DD516D4A16000B92C17 /* _WastePoint.m */; };
@@ -59,6 +58,8 @@
 		534CCF7616D34D450004532F /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7516D34D450004532F /* ServerRequest.m */; };
 		534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7816D3725C0004532F /* WastepointRequest.m */; };
 		534CCF7C16D39F6E0004532F /* CSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7B16D39F6E0004532F /* CSVParser.m */; };
+		535C37D216DE4BA600131F50 /* FieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37D116DE4BA600131F50 /* FieldView.m */; };
+		535C37D516DF830200131F50 /* UIView+addSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37D416DF830200131F50 /* UIView+addSubView.m */; };
 		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
 		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
@@ -175,8 +176,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		139F1AA616DE3F82008E07E1 /* TypicalValueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypicalValueView.h; sourceTree = "<group>"; };
-		139F1AA716DE3F82008E07E1 /* TypicalValueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypicalValueView.m; sourceTree = "<group>"; };
 		13A42DD016D4A16000B92C17 /* _Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Server.h; sourceTree = "<group>"; };
 		13A42DD116D4A16000B92C17 /* _Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Server.m; sourceTree = "<group>"; };
 		13A42DD216D4A16000B92C17 /* _TypicalValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TypicalValue.h; sourceTree = "<group>"; };
@@ -268,6 +267,10 @@
 		534CCF7816D3725C0004532F /* WastepointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastepointRequest.m; sourceTree = "<group>"; };
 		534CCF7A16D39F6E0004532F /* CSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSVParser.h; path = Ldiw/apis/CCsvParser/CSVParser.h; sourceTree = "<group>"; };
 		534CCF7B16D39F6E0004532F /* CSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSVParser.m; path = Ldiw/apis/CCsvParser/CSVParser.m; sourceTree = "<group>"; };
+		535C37D016DE4BA600131F50 /* FieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldView.h; sourceTree = "<group>"; };
+		535C37D116DE4BA600131F50 /* FieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldView.m; sourceTree = "<group>"; };
+		535C37D316DF830200131F50 /* UIView+addSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+addSubView.h"; sourceTree = "<group>"; };
+		535C37D416DF830200131F50 /* UIView+addSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addSubView.m"; sourceTree = "<group>"; };
 		538DC21216D3AF08002D7925 /* Database+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WP.h"; sourceTree = "<group>"; };
 		538DC21316D3AF08002D7925 /* Database+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WP.m"; sourceTree = "<group>"; };
 		538DC21516D4B04A002D7925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -429,38 +432,38 @@
 		13B6C7D216D3D35300B72B4A /* databaseObjects */ = {
 			isa = PBXGroup;
 			children = (
-				53E729DC16DBB2C100AC8E35 /* _CustomValue.h */,
-				53E729DD16DBB2C100AC8E35 /* _CustomValue.m */,
-				53E729DE16DBB2C100AC8E35 /* CustomValue.h */,
-				53E729DF16DBB2C100AC8E35 /* CustomValue.m */,
-				13A60AF016D767B30070AF84 /* _User.h */,
-				13A60AF116D767B30070AF84 /* _User.m */,
 				13A42DDF16D4DF4F00B92C17 /* _AllowedValue.h */,
 				13A42DE016D4DF4F00B92C17 /* _AllowedValue.m */,
+				53E729DC16DBB2C100AC8E35 /* _CustomValue.h */,
+				53E729DD16DBB2C100AC8E35 /* _CustomValue.m */,
+				5AD08AED16DD1DD300566B04 /* _Image.h */,
+				5AD08AEE16DD1DD300566B04 /* _Image.m */,
 				13A42DD016D4A16000B92C17 /* _Server.h */,
 				13A42DD116D4A16000B92C17 /* _Server.m */,
 				13A42DD216D4A16000B92C17 /* _TypicalValue.h */,
 				13A42DD316D4A16000B92C17 /* _TypicalValue.m */,
+				13A60AF016D767B30070AF84 /* _User.h */,
+				13A60AF116D767B30070AF84 /* _User.m */,
 				13A42DD416D4A16000B92C17 /* _WastePoint.h */,
 				13A42DD516D4A16000B92C17 /* _WastePoint.m */,
 				13A42DD616D4A16000B92C17 /* _WPField.h */,
 				13A42DD716D4A16000B92C17 /* _WPField.m */,
-				13A60AF216D767B30070AF84 /* User.h */,
-				13A60AF316D767B30070AF84 /* User.m */,
-				5AD08AED16DD1DD300566B04 /* _Image.h */,
-				5AD08AEE16DD1DD300566B04 /* _Image.m */,
-				5AD08AF016DD1DE300566B04 /* Image.h */,
-				5AD08AF116DD1DE300566B04 /* Image.m */,
 				13A42DE116D4DF4F00B92C17 /* AllowedValue.h */,
 				13A42DE216D4DF4F00B92C17 /* AllowedValue.m */,
+				53E729DE16DBB2C100AC8E35 /* CustomValue.h */,
+				53E729DF16DBB2C100AC8E35 /* CustomValue.m */,
+				5AD08AF016DD1DE300566B04 /* Image.h */,
+				5AD08AF116DD1DE300566B04 /* Image.m */,
 				13B6C7DB16D3D35300B72B4A /* Server.h */,
 				13B6C7DC16D3D35300B72B4A /* Server.m */,
+				13A42DDC16D4A19100B92C17 /* TypicalValue.h */,
+				13A42DDD16D4A19100B92C17 /* TypicalValue.m */,
+				13A60AF216D767B30070AF84 /* User.h */,
+				13A60AF316D767B30070AF84 /* User.m */,
 				13B6C7DF16D3D35300B72B4A /* WastePoint.h */,
 				13B6C7E016D3D35300B72B4A /* WastePoint.m */,
 				13B6C7E116D3D35300B72B4A /* WPField.h */,
 				13B6C7E216D3D35300B72B4A /* WPField.m */,
-				13A42DDC16D4A19100B92C17 /* TypicalValue.h */,
-				13A42DDD16D4A19100B92C17 /* TypicalValue.m */,
 			);
 			path = databaseObjects;
 			sourceTree = "<group>";
@@ -645,6 +648,8 @@
 				53E729E816DCEA2C00AC8E35 /* FBHelper.m */,
 				5AD08AE916DD0CCC00566B04 /* PictureHelper.h */,
 				5AD08AEA16DD0CCC00566B04 /* PictureHelper.m */,
+				535C37D316DF830200131F50 /* UIView+addSubView.h */,
+				535C37D416DF830200131F50 /* UIView+addSubView.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -656,6 +661,17 @@
 				534CCF7B16D39F6E0004532F /* CSVParser.m */,
 			);
 			name = CSVParser;
+			sourceTree = "<group>";
+		};
+		535C37D616DFBAEB00131F50 /* WPListViews */ = {
+			isa = PBXGroup;
+			children = (
+				13A8B8EA16DBA9C800D7E076 /* WastePointViews.h */,
+				13A8B8EB16DBA9C800D7E076 /* WastePointViews.m */,
+				535C37D016DE4BA600131F50 /* FieldView.h */,
+				535C37D116DE4BA600131F50 /* FieldView.m */,
+			);
+			name = WPListViews;
 			sourceTree = "<group>";
 		};
 		C581F26516D278E6003A2FA2 /* iOS ASSETS */ = {
@@ -812,10 +828,7 @@
 		C581F31216D30F07003A2FA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				139F1AA616DE3F82008E07E1 /* TypicalValueView.h */,
-				139F1AA716DE3F82008E07E1 /* TypicalValueView.m */,
-				13A8B8EA16DBA9C800D7E076 /* WastePointViews.h */,
-				13A8B8EB16DBA9C800D7E076 /* WastePointViews.m */,
+				535C37D616DFBAEB00131F50 /* WPListViews */,
 				C581F31316D30F3C003A2FA2 /* HeaderView.h */,
 				C581F31416D30F3C003A2FA2 /* HeaderView.m */,
 				C581F31616D36952003A2FA2 /* ActivityCustomCell.h */,
@@ -1082,12 +1095,13 @@
 				13A8B8F016DBBCCD00D7E076 /* AddNewWPViewController.m in Sources */,
 				53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */,
 				53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */,
-				139F1AA816DE3F82008E07E1 /* TypicalValueView.m in Sources */,
 				5AD08AEB16DD0CCC00566B04 /* PictureHelper.m in Sources */,
 				5AD08AEF16DD1DD300566B04 /* _Image.m in Sources */,
 				5AD08AF216DD1DE300566B04 /* Image.m in Sources */,
 				53E729EC16DCFD5800AC8E35 /* MapView.m in Sources */,
 				53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */,
+				535C37D216DE4BA600131F50 /* FieldView.m in Sources */,
+				535C37D516DF830200131F50 /* UIView+addSubView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,7 +33,6 @@
   // Do any additional setup after loading the view from its nib.
   
   WastePointViews *wpViews = [[WastePointViews alloc] initWithWastePoint:nil];
-  [wpViews setUserInteractionEnabled:NO];
   [self.scrollView setContentSize:CGSizeMake(320, wpViews.bounds.size.height)];
   [self.scrollView setCanCancelContentTouches:NO];
   [self.scrollView addSubview:wpViews];

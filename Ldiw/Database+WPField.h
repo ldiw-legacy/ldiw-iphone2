@@ -18,4 +18,6 @@
 - (AllowedValue *)createAllowedValueWithKey:(NSString *)key andValue:(NSString *)value forWPField:(WPField *)wpField;
 - (TypicalValue *)createTypicalValueWithKey:(NSString *)key andValue:(NSString *)value forWPField:(WPField *)wpField;
 
+- (NSArray *)listAllNonCompositionFields;
+- (NSArray *)listAllCompositionFields;
 @end

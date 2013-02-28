@@ -48,6 +48,7 @@
 
 // COLORS
 #define kWPFieldBgColor [UIColor colorWithRed:0.886 green:0.886 blue:0.886 alpha:1]
+#define kWPFieldFGColor [UIColor colorWithRed:0.8 green:0.8 blue:0.8  alpha:1]
 
 #define kNotificationShowHud @"showHud"
 #define kNotificationRemoveHud @"removeHud"

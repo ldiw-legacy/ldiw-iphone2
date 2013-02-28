@@ -10,10 +10,8 @@
 #import "WastePoint.h"
 
 @interface WastePointViews : UIView
-
-@property (nonatomic, strong) NSMutableArray *checkArray;
+@property (nonatomic, strong) WastePoint *wastePoint;
 
 - (id)initWithWastePoint:(WastePoint *)wp;
-- (NSArray *)wpCheckFields;
 
 @end
