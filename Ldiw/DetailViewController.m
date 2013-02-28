@@ -103,6 +103,9 @@
 
 - (IBAction)addPressed:(id)sender
 {
+  self.controller.wastePointAddedSuccessfully = YES;
+  [self.navigationController popViewControllerAnimated:NO];
+  
 }
 
 - (IBAction)addValue:(UIButton *)sender
