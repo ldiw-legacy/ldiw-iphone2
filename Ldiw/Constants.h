@@ -55,3 +55,7 @@
 
 #define kNotificationShowHud @"showHud"
 #define kNotificationRemoveHud @"removeHud"
+
+// Upload settings
+#define kUploadWifiOnly 1
+#define kUploadWifiAnd3G 2

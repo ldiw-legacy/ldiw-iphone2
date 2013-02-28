@@ -7,6 +7,7 @@
 //
 
 #import "MySettingsViewController.h"
+#import "Database+Server.h"
 #import "DesignHelper.h"
 
 @interface MySettingsViewController ()
@@ -53,8 +54,10 @@
   
   [uploadSettingTitle setText:NSLocalizedString(@"setting.upload.title", nil)];
   [uploadSettingDescritption setText:NSLocalizedString(@"setting.upload.description", nil)];
+  if ([[[Database sharedInstance] currentUser].uploadWifiOnly isEqualToNumber:[NSNumber numberWithInt:kUploadWifiOnly]]) {
+    [uploadSettingSwitch setOn:YES];
+  }
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -67,7 +70,14 @@
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)wifiOr3g:(id)sender {
-  MSLog(@"Value changed");
+- (IBAction)wifiOr3g:(DCRoundSwitch *)sender {
+  if (sender.isOn) {
+    [[[Database sharedInstance] currentUser] setUploadWifiOnly:[NSNumber numberWithInt:kUploadWifiOnly]];
+    MSLog(@"Upload setting set: WIFI only");
+  } else {
+    [[[Database sharedInstance] currentUser] setUploadWifiOnly:[NSNumber numberWithInt:kUploadWifiAnd3G]];
+    MSLog(@"Upload setting set: WIFI and 3G");
+  }
+  [[Database sharedInstance] saveContext];
 }
 @end
