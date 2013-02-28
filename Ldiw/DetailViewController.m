@@ -12,8 +12,6 @@
 #import "PictureHelper.h"
 #import "Image.h"
 
-#define kViewBackroundColor [UIColor colorWithRed:0.894 green:0.894 blue:0.894 alpha:1] /*#e4e4e4*/
-#define kButtonBackgroundColor [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1] /*#d2d2d2*/
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
 @property (strong, nonatomic) UITextView *myTextInputView;

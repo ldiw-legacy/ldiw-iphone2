@@ -11,7 +11,6 @@
 #import "DesignHelper.h"
 
 #define kbgCornerRadius 8
-#define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 @interface ActivityCustomCell ()
 
 @end

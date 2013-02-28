@@ -20,11 +20,9 @@
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
 #import "WastePoint.h"
+#import "WastePoint.h"
 #import "Image.h"
 #import "SuccessView.h"
-
-
-#define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
@@ -70,7 +68,7 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
-//  [self showLoginViewIfNeeded];
+  [self showLoginViewIfNeeded];
   [self loadServerInformation];
 }
 
