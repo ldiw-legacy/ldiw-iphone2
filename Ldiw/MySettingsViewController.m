@@ -50,6 +50,9 @@
   [onlineOfflineSwitch addTarget:self action:@selector(wifiOr3g:) forControlEvents:UIControlEventValueChanged];
   [self setUploadSettingSwitch:onlineOfflineSwitch];
   [self.view addSubview:onlineOfflineSwitch];
+  
+  [uploadSettingTitle setText:NSLocalizedString(@"setting.upload.title", nil)];
+  [uploadSettingDescritption setText:NSLocalizedString(@"setting.upload.description", nil)];
 }
 
 
