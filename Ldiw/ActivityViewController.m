@@ -81,6 +81,7 @@
   }
  
 }
+
 -(void)showSuccessBanner
 {
   self.wastePointAddedSuccessfully = NO;
@@ -93,9 +94,8 @@
     successView.controller = self;
   }
   [self.view addSubview:self.successView];
+  MSLog(@"Added wastepoint to DB: %@", [[Database sharedInstance] listWastePointsWithNoId]);
 }
-
-
 
 - (void)showLoginViewIfNeeded {
   BOOL userLoggedIn = [[Database sharedInstance] userIsLoggedIn];

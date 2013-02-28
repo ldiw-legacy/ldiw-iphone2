@@ -13,5 +13,5 @@
 
 - (NSArray *)WPListFromData:(NSData *)csvData;
 - (WastePoint *)wastepointWithId:(NSString *)remoteId;
-
+- (NSArray *)listWastePointsWithNoId;
 @end
