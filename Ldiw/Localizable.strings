@@ -33,5 +33,11 @@ chooseFromLibrary = "Choose From Library";
 //DetailView
 addNewTitle = "Add New";
 add = "Add";
+<<<<<<< HEAD
+success = "Success!";
+success.newwastepoint = "New waste point added.";
+continue = "Continue";
+=======
 back = "  Back";
 
+>>>>>>> 728699a849a28f2ea6f20e14d27010cf88c4438b

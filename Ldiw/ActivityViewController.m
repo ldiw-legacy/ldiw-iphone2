@@ -22,13 +22,15 @@
 #import "WastePoint.h"
 #import "WastePoint.h"
 #import "Image.h"
+#import "SuccessView.h"
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
+@property (strong, nonatomic) SuccessView *successView;
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView
+@synthesize tableView, headerView, successView
 ;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,8 +74,28 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+  self.navigationController.navigationBarHidden=NO;
   self.tabBarController.tabBar.hidden = NO;
+  if (self.wastePointAddedSuccessfully) {
+    [self showSuccessBanner];
+  }
+ 
 }
+-(void)showSuccessBanner
+{
+  self.wastePointAddedSuccessfully = NO;
+  self.navigationController.navigationBarHidden = YES;
+  self.tabBarController.tabBar.hidden = YES;
+  [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
+  if (!successView) {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    successView = [[SuccessView alloc] initWithFrame:screenRect];
+    successView.controller = self;
+  }
+  [self.view addSubview:self.successView];
+}
+
+
 
 - (void)showLoginViewIfNeeded {
   BOOL userLoggedIn = [[Database sharedInstance] userIsLoggedIn];
@@ -149,6 +171,7 @@
     DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:nil];
     [self.navigationController pushViewController:detail animated:YES];
     detail.takePictureButton.alpha = 1.0;
+    detail.controller = self;
   }
 }
 
@@ -161,7 +184,7 @@
   
   
   [self dismissViewControllerAnimated:YES completion:nil];
-  
+   detail.controller = self;
   detail.imageView.image = cameraImage;
   detail.takePictureButton.alpha = 0;
 }
