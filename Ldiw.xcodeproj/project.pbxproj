@@ -75,6 +75,7 @@
 		53E729E916DCEA2C00AC8E35 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E816DCEA2C00AC8E35 /* FBHelper.m */; };
 		53E729EC16DCFD5800AC8E35 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729EB16DCFD5800AC8E35 /* MapView.m */; };
 		53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729EE16DD021A00AC8E35 /* MapAnnotation.m */; };
+		5A1FAA6916DFAAF800751FFF /* WastePointUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1FAA6816DFAAF800751FFF /* WastePointUploader.m */; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
 		5AD08AEB16DD0CCC00566B04 /* PictureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD08AEA16DD0CCC00566B04 /* PictureHelper.m */; };
@@ -304,6 +305,8 @@
 		53E729EB16DCFD5800AC8E35 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		53E729ED16DD021A00AC8E35 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		53E729EE16DD021A00AC8E35 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
+		5A1FAA6716DFAAF800751FFF /* WastePointUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePointUploader.h; sourceTree = "<group>"; };
+		5A1FAA6816DFAAF800751FFF /* WastePointUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePointUploader.m; sourceTree = "<group>"; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
@@ -677,6 +680,8 @@
 				534CCF7516D34D450004532F /* ServerRequest.m */,
 				534CCF7716D3725C0004532F /* WastepointRequest.h */,
 				534CCF7816D3725C0004532F /* WastepointRequest.m */,
+				5A1FAA6716DFAAF800751FFF /* WastePointUploader.h */,
+				5A1FAA6816DFAAF800751FFF /* WastePointUploader.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1144,6 +1149,7 @@
 				139E722516DF8E01008EDEE3 /* DCRoundSwitchKnobLayer.m in Sources */,
 				139E722616DF8E01008EDEE3 /* DCRoundSwitchOutlineLayer.m in Sources */,
 				139E722716DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m in Sources */,
+				5A1FAA6916DFAAF800751FFF /* WastePointUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

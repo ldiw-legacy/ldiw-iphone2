@@ -24,6 +24,8 @@
 #import "Image.h"
 #import "SuccessView.h"
 
+#import "WastePointUploader.h"
+
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
 @property (strong, nonatomic) SuccessView *successView;
@@ -274,10 +276,10 @@
 //          WastePoint *point = [[Database sharedInstance] wastepointWithId:[NSString stringWithFormat:@"%d", 1]];
 //          [point setLatitudeValue:26.0];
 //          [point setLongitudeValue:59.0];
-//          [WastepointRequest uploadWP:point withSuccess:^(NSArray* result) {
-//          
+//          [WastePointUploader uploadWP:point withSuccess:^(NSArray* result) {
+//            
 //          } failure:^(NSError *error) {
-//          
+//            
 //          }];
         } failure:^(void) {
           MSLog(@"Server info loading fail");
