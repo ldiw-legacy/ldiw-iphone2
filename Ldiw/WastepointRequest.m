@@ -72,19 +72,6 @@
   [operation start];
 }
 
-+ (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-  NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-  NSString *lat = [NSString stringWithFormat:@"%g", point.latitudeValue];
-  NSString *lon = [NSString stringWithFormat:@"%g", point.longitudeValue];
-  
-  [parameters setObject:lat forKey:@"lat"];
-  [parameters setObject:lon forKey:@"lon"];
-  [[self sharedHTTPClient] postPath:kCreateNewWPPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    MSLog(@"New WP created!");
-    MSLog(@"Response %@", responseObject);
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    MSLog(@"Error: %@", error);
-  }];
-}
+
 
 @end

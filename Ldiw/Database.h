@@ -17,6 +17,7 @@
 + (Database *)sharedInstance;
 - (void)saveContext;
 - (NSArray *)listCoreObjectsNamed:(NSString *)modelName;
+- (NSArray *)listCoreObjectsNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate;
 
 - (id)findCoreDataObjectNamed:(NSString *)coreName withPredicate:(NSPredicate *)predicate;
 

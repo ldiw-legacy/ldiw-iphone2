@@ -8,9 +8,9 @@
 
 #import "LoginClient.h"
 #import "AFJSONRequestOperation.h"
+#import "Database+Server.h"
 
-
-#define kLoginServerUrl  @"https://www.letsdoitworld.org/api/"
+#define kLoginServerUrl  @"http://test.letsdoitworld.org/"
 
 
 @implementation LoginClient

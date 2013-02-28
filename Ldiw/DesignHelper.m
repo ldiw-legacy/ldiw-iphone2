@@ -20,7 +20,6 @@
 #define kHeaderButtonTitleColorNormal [UIColor darkGrayColor]
 #define kHeaderButtonTitleColorSelected [UIColor whiteColor]
 #define kHeaderButtonTitleShadowColor [UIColor darkGrayColor]
-#define kTextSubtitleColor [UIColor colorWithRed:0.58 green:0.588 blue:0.545 alpha:1] /*#94968b*/
 @implementation DesignHelper
 
 +(void)setUpHeaderViewButton:(UIButton *)button
@@ -45,23 +44,24 @@
 {
   label.font=[UIFont fontWithName:@"HelveticaNeue" size:13];
   label.textColor=kTextSubtitleColor;
-  label.backgroundColor=[UIColor clearColor];
+  label.backgroundColor = [UIColor clearColor];
   [label sizeToFit];
 }
+
 +(void)setActivityViewNametitle:(UILabel *)label
 {
   label.font=[UIFont fontWithName:kBoldThemeFont size:14];
-  label.textColor=[UIColor whiteColor];
-  label.backgroundColor=[UIColor clearColor];
+  label.textColor = [UIColor whiteColor];
+  label.backgroundColor = [UIColor clearColor];
   [label sizeToFit];
   
 }
 
 +(void)setActivityViewActiontitle:(UILabel *)label
 {
-  label.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
-  label.textColor=[UIColor whiteColor];
-  label.backgroundColor=[UIColor clearColor];
+  label.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+  label.textColor = [UIColor whiteColor];
+  label.backgroundColor = [UIColor clearColor];
   [label sizeToFit];
 }
 
@@ -84,7 +84,7 @@
 + (void) setBarButtonTitleAttributes:(UIButton *)button
 
 {
-  button.titleLabel.textColor = [UIColor whiteColor]; 
+  button.titleLabel.textColor = [UIColor whiteColor];
   button.titleLabel.font = [UIFont fontWithName:kBoldThemeFont size:12];
   button.titleLabel.shadowColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
   button.titleLabel.shadowOffset = CGSizeMake (0,1);
@@ -101,7 +101,7 @@
   UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newimagerect cornerRadius:kbgCornerRadius];
   UIBezierPath *strokepath=[UIBezierPath bezierPathWithRoundedRect:strokerect cornerRadius:kbgCornerRadius];
   [path addClip];
-
+  
   CGRect projectRect;
   projectRect.size.width=ratio * originalsize.width;
   projectRect.size.height=ratio * originalsize.height;
@@ -123,7 +123,7 @@
   CGFloat originalHeight = image.size.height;
   CGFloat ratio=originalWidth/originalHeight;
   CGFloat maxRatio=320.0/480.0;
-
+  
   if (ratio != maxRatio) {
     if (ratio < maxRatio){
       ratio = 480 / originalHeight;
@@ -162,17 +162,17 @@
 }
 
 +(UITabBarController*) createTabBarController {
-  AddNewWPViewController *newWP = [[AddNewWPViewController alloc] initWithNibName:@"AddNewWPViewController" bundle:nil];
   DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
-//  AccountViewController *accountVC = [[AccountViewController alloc] initWithNibName:nil bundle:nil];
+  AccountViewController *accountVC = [[AccountViewController alloc] initWithNibName:nil bundle:nil];
   ActivityViewController *activityVC = [[ActivityViewController alloc] initWithNibName:nil bundle:nil];
   UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:activityVC];
+  UINavigationController *accountNavVC = [[UINavigationController alloc] initWithRootViewController:accountVC];
   
   UITabBarController *tabBarController = [[UITabBarController alloc] init];
   [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
-
-  [tabBarController setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, newWP, nil]];
-
+  
+  [tabBarController setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, accountNavVC, nil]];
+  
   UITabBar *tabbar = tabBarController.tabBar;
   tabbar.clipsToBounds = NO;
   
@@ -199,7 +199,7 @@
   item0.title = NSLocalizedString(@"tabBar.activityTabName", nil);
   item1.title = NSLocalizedString(@"tabBar.newPointTabText", nil);
   item2.title = NSLocalizedString(@"tabBar.myAccountTabText", nil);
-
+  
   return tabBarController;
 }
 

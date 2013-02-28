@@ -33,4 +33,11 @@ chooseFromLibrary = "Choose From Library";
 //DetailView
 addNewTitle = "Add New";
 add = "Add";
+success = "Success!";
+success.newwastepoint = "New waste point added.";
+continue = "Continue";
+back = "  Back";
 
+// SettingsView
+setting.upload.title = "Upload setting";
+setting.upload.description = "Upload data only when phone is connected via WIFI or 3G/WIFI";

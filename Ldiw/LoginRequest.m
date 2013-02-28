@@ -16,7 +16,7 @@
 
 @implementation LoginRequest
 
-#define kLoginPath @"user/login.json"
+#define kLoginPath @"?q=api/user/login.json"
 #define kFBLoginPath @"http://test.letsdoitworld.org/?q=api/user/fbconnect.json"
 
 + (void)logInWithParameters:(NSDictionary *)parameters andFacebook:(BOOL)faceBookLogin success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
@@ -29,7 +29,10 @@
   }
   
   [[LoginClient sharedLoginClient] postPath:loginPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    if ([responseObject isKindOfClass:[NSDictionary class]]) {
+    if ([responseObject isKindOfClass:[NSData class]]) {
+      NSError *error;
+      responseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
+
     }
     if (success) {
       [self loginUserToDatabaseWithDictionary:responseObject];

@@ -20,19 +20,19 @@
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
 #import "WastePoint.h"
-
 #import "WastePoint.h"
 #import "Image.h"
+#import "SuccessView.h"
 
-
-#define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
+#import "WastePointUploader.h"
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
+@property (strong, nonatomic) SuccessView *successView;
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView
+@synthesize tableView, headerView, successView
 ;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,13 +70,33 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
 
-//  [self showLoginViewIfNeeded];
+  [self showLoginViewIfNeeded];
   [self loadServerInformation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+  self.navigationController.navigationBarHidden=NO;
   self.tabBarController.tabBar.hidden = NO;
+  if (self.wastePointAddedSuccessfully) {
+    [self showSuccessBanner];
+  }
+ 
+}
+
+-(void)showSuccessBanner
+{
+  self.wastePointAddedSuccessfully = NO;
+  self.navigationController.navigationBarHidden = YES;
+  self.tabBarController.tabBar.hidden = YES;
+  [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
+  if (!successView) {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    successView = [[SuccessView alloc] initWithFrame:screenRect];
+    successView.controller = self;
+  }
+  [self.view addSubview:self.successView];
+  MSLog(@"Added wastepoint to DB: %@", [[Database sharedInstance] listWastePointsWithNoId]);
 }
 
 - (void)showLoginViewIfNeeded {
@@ -153,6 +173,7 @@
     DetailViewController *detail =[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil usingImage:nil];
     [self.navigationController pushViewController:detail animated:YES];
     detail.takePictureButton.alpha = 1.0;
+    detail.controller = self;
   }
 }
 
@@ -165,7 +186,7 @@
   
   
   [self dismissViewControllerAnimated:YES completion:nil];
-  
+   detail.controller = self;
   detail.imageView.image = cameraImage;
   detail.takePictureButton.alpha = 0;
 }
@@ -255,10 +276,10 @@
 //          WastePoint *point = [[Database sharedInstance] wastepointWithId:[NSString stringWithFormat:@"%d", 1]];
 //          [point setLatitudeValue:26.0];
 //          [point setLongitudeValue:59.0];
-//          [WastepointRequest uploadWP:point withSuccess:^(NSArray* result) {
-//          
+//          [WastePointUploader uploadWP:point withSuccess:^(NSArray* result) {
+//            
 //          } failure:^(NSError *error) {
-//          
+//            
 //          }];
         } failure:^(void) {
           MSLog(@"Server info loading fail");

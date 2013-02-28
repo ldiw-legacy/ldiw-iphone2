@@ -7,6 +7,8 @@
 //
 
 @interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) BOOL  wastePointAddedSuccessfully;
 
 @end

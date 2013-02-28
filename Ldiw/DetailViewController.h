@@ -9,8 +9,9 @@
 #import "MapView.h"
 #import <MapKit/MapKit.h>
 #import "WastePoint.h"
+#import "ActivityViewController.h"
 
-@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate>
+@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate,UITextViewDelegate>
 
 @property (weak, nonatomic) id delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet MapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
 @property (nonatomic, strong) WastePoint *wastePoint;
+@property (weak, nonatomic) ActivityViewController *controller;
 
 
 - (IBAction)takePicture:(id)sender;

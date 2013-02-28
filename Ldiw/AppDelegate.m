@@ -19,7 +19,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  
+  if ([[[Database sharedInstance] currentUser] uploadWifiOnly] == nil) {
+    [[[Database sharedInstance] currentUser] setUploadWifiOnly:[NSNumber numberWithInt:kUploadWifiOnly]];
+  }
   UITabBarController *tabBar = [DesignHelper createTabBarController];
   
   [self.window setRootViewController:tabBar];

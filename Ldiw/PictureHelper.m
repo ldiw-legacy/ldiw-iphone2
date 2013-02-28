@@ -18,38 +18,26 @@
   //Unique Key
   
   NSString *key = (__bridge NSString *)newUniqueIDString;
-  
   NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-  
   NSString *imageFilePath = [NSString stringWithFormat:@"%@/%@", docDir, key];
   
   MSLog(@"SAVED IMAGE TO: %@", imageFilePath);
-  
-  
-  
   UIImage *resizedImage = [DesignHelper resizeImage:image];
   NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7f);
   
   [dataForJpg writeToFile:imageFilePath atomically:YES];
   
-  if (wp.image) {
-    wp.image.localURL = imageFilePath;
-  } else {
-    wp.image = [Image newImageWithLocalUrl:imageFilePath];
-  }
-  
-  
+  Image *dbImage = [Image newImageWithLocalUrl:imageFilePath];
+  [wp addImageObject:dbImage];
   
   CFRelease(newUniqueID);
   CFRelease(newUniqueIDString);
 }
 
-
 + (UIImage *)loadImageForWP:(WastePoint*)wp {
-  NSData *imgData = [NSData dataWithContentsOfFile:wp.image.localURL];
+  Image *anImage = [wp.image anyObject];
+  NSData *imgData = [NSData dataWithContentsOfFile:anImage.localURL];
   return [UIImage imageWithData:imgData];
 }
-
-
 
 @end
