@@ -20,12 +20,8 @@
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
 #import "WastePoint.h"
-
 #import "WastePoint.h"
 #import "Image.h"
-
-
-#define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;

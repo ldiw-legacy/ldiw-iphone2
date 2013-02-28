@@ -33,4 +33,5 @@ chooseFromLibrary = "Choose From Library";
 //DetailView
 addNewTitle = "Add New";
 add = "Add";
+back = "  Back";
 

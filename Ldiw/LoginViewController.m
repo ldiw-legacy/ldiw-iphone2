@@ -11,7 +11,6 @@
 #import "DesignHelper.h"
 #import "FBHelper.h"
 
-#define kDarkBackgroundColor [UIColor colorWithRed:0.153 green:0.141 blue:0.125 alpha:1] /*#272420*/
 #define kExternalWebLink @"https://www.letsdoitworld.org/user/register"
 
 @interface LoginViewController ()
@@ -40,7 +39,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.view.backgroundColor=kDarkBackgroundColor;
+  self.view.backgroundColor = kDarkBackgroundColor;
   [DesignHelper setLoginButtonTitle:self.facebookLoginButton];
   [DesignHelper setLoginButtonTitle:self.registerButton];
   [self.registerButton setTitle:NSLocalizedString(@"login.register", nil)     forState:UIControlStateNormal];
