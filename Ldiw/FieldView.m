@@ -22,7 +22,7 @@
 #define kContentWidth 300.0f
 
 @implementation FieldView
-@synthesize wastePointField, delegate;
+@synthesize wastePointField, delegate, tickButtonArray;
 
 - (id)initWithWPField:(WPField *)field {  
 
@@ -80,6 +80,7 @@
   
   UIView *typicalValueView = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kContentPaddingFromSide, kContentWidth, 0)];
   NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];
+  [self setTickButtonArray:[NSMutableArray array]];
 
   for (int i = 0; i < [tvArray count]; i++) {
     TypicalValue *tValue = [tvArray objectAtIndex:i];
@@ -94,7 +95,7 @@
     [checkButton setBackgroundImage:[UIImage imageNamed:@"tick_inactive"] forState:UIControlStateNormal];
     [checkButton setTag:i];
     [checkButton addTarget:self action:@selector(checkPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [tickButtonArray addObject:checkButton];
     [typicalValueView addSubviewToBottom:tValueLabel];
     [typicalValueView addSubviewToRightBottomCorner:checkButton withRightPadding:kCheckmarkPadding andBottomPadding:kTopPadding];
 
@@ -107,6 +108,11 @@
 }
 
 - (void)checkPressed:(UIButton *)sender {
+  for (UIButton *button in tickButtonArray) {
+    [button setSelected:NO];
+  }
+  [sender setSelected:YES];
+  
   NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];
   TypicalValue *tValue = [tvArray objectAtIndex:sender.tag];
   NSString *value = tValue.value;

@@ -18,6 +18,7 @@
 @interface FieldView : UIView
 @property (nonatomic, assign) id<FieldDelegate> delegate;
 @property (nonatomic, strong) WPField *wastePointField;
+@property (nonatomic, strong) NSMutableArray *tickButtonArray;
 
 - (id)initWithWPField:(WPField *)field;
 
