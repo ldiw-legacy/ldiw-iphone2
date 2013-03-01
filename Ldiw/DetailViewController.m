@@ -131,23 +131,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
-  CFStringRef newUniqueIDString = CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
-  //Unique Key
-
-  NSString *key = (__bridge NSString *)newUniqueIDString;
-
-
-  UIImage *resizedImage = [DesignHelper resizeImage:cameraImage];
-  NSData *dataForJpg = UIImageJPEGRepresentation(resizedImage, 0.7);
-
-
-  //ToDo: save to documents
-
-  //ToDo: save image to database with unique key
-
-  CFRelease(newUniqueID);
-  CFRelease(newUniqueIDString);
+  
+  
   [self dismissViewControllerAnimated:YES completion:nil];
   self.imageView.image = cameraImage;
   self.takePictureButton.alpha = 0;
