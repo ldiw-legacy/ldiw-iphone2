@@ -22,7 +22,7 @@
 #define kContentWidth 300.0f
 
 @implementation FieldView
-@synthesize wastePointField, delegate, tickButtonArray;
+@synthesize wastePointField, delegate, tickButtonArray, valueLabel;
 
 - (id)initWithWPField:(WPField *)field {  
 
@@ -31,7 +31,6 @@
   if (self) {
     [self setWastePointField:field];
     [self setBackgroundColor:kWPFieldBgColor];
-    
     UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kWPFieldHeight - kTopPadding)];
     [bg setBackgroundColor:kWPFieldFGColor];
     bg.layer.cornerRadius = 5;
@@ -48,6 +47,7 @@
     [descriptionLabel setText:field.edit_instructions];
     [descriptionLabel setFont:[UIFont fontWithName:kFontName size:kWPDescripttionTextSize]];
     [descriptionLabel setBackgroundColor:[UIColor clearColor]];
+    [self setValueLabel:descriptionLabel];
     [bg addSubview:descriptionLabel];
     
     UIButton *addDataBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
@@ -59,25 +59,11 @@
     if ([field.typicalValue count] > 0) {
       [self addTypicalValueFields];
     }
-        //
-    //        [checkButton setExclusiveTouch:YES];
-    //
-    //        [typicalValueView addSubview:tValueLabel];
-    //        [typicalValueView addSubview:checkButton];
-    //        [typicalValueView setUserInteractionEnabled:YES];
-    //        [fieldView addSubview:typicalValueView];
-    //        subStartHeight += kTValueHeight;
-    //        tValueCounter++;
-    //      }
-
-    
-    }
+  }
   return self;
 }
 
 - (void)addTypicalValueFields {
-  
-  
   UIView *typicalValueView = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kContentPaddingFromSide, kContentWidth, 0)];
   NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];
   [self setTickButtonArray:[NSMutableArray array]];
@@ -117,6 +103,11 @@
   TypicalValue *tValue = [tvArray objectAtIndex:sender.tag];
   NSString *value = tValue.value;
   [delegate checkedValue:value forField:self.wastePointField.field_name];
+}
+
+- (void)setValue:(NSString *)value {
+  [valueLabel setText:value];
+  [valueLabel setTextColor:[UIColor greenColor]];
 }
 
 @end

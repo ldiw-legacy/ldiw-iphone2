@@ -14,11 +14,12 @@
 #import "FieldView.h"
 
 @implementation WastePointViews
-@synthesize wastePoint, fieldDelegate;
+@synthesize wastePoint, fieldDelegate, fieldsDictionary;
 
 - (id)initWithWastePoint:(WastePoint *)wp andDelegate:(id)delegate {
   self = [super initWithFrame:CGRectMake(0, 0, 320, 0)];
   if (self) {
+    [self setFieldsDictionary:[NSMutableDictionary dictionary]];
     [self setWastePoint:wp];
     [self setFieldDelegate:delegate];
     [self configureView];
@@ -33,8 +34,14 @@
   for (WPField *wpField in nonCompFields) {
     FieldView *field = [[FieldView alloc] initWithWPField:wpField];
     [field setDelegate:fieldDelegate];
+    [fieldsDictionary setObject:field forKey:wpField.field_name];
     [self addSubviewToBottom:field];
   }
+}
+
+- (void)setValue:(NSString *)value forField:(NSString *)fieldname {
+  FieldView *fieldView = (FieldView *)[fieldsDictionary objectForKey:fieldname];
+  [fieldView setValue:value];
 }
 
 @end

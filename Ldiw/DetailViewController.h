@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "WastePoint.h"
 #import "ActivityViewController.h"
+#import "WastePointViews.h"
 #import "FieldView.h"
 
 @interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate, UITextViewDelegate, FieldDelegate>
@@ -21,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
 @property (nonatomic, strong) WastePoint *wastePoint;
 @property (weak, nonatomic) ActivityViewController *controller;
-
+@property (nonatomic, strong) WastePointViews *wastePointViews;
 
 - (IBAction)takePicture:(id)sender;
 

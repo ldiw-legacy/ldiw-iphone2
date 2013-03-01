@@ -26,7 +26,7 @@
 @implementation DetailViewController 
 
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews;
 
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
@@ -89,6 +89,7 @@
   CGSize newSize = CGSizeMake(oldSize.width, oldSize.height + wpViews.frame.size.height + wpViews.frame.origin.y);
   [self.scrollView setContentSize:newSize];
   [self.scrollView addSubview:wpViews];
+  [self setWastePointViews:wpViews];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,12 +133,9 @@
 {
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   
-  
   [self dismissViewControllerAnimated:YES completion:nil];
   self.imageView.image = cameraImage;
   self.takePictureButton.alpha = 0;
-  
-  
 }
 
 
@@ -188,11 +186,13 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
   [wastePoint setValue:textView.text forCustomField:selectedFieldName];
+  [wastePointViews setValue:textView.text forField:selectedFieldName];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
   [wastePoint setValue:textField.text forCustomField:selectedFieldName];
+  [wastePointViews setValue:textField.text forField:selectedFieldName];
 }
 
 -(IBAction)confirmPressed:(id)sender {
