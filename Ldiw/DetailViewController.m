@@ -106,7 +106,7 @@
 - (IBAction)cancelPressed:(id)sender
 {
   //Do some cleaning here
-  [self.navigationController popViewControllerAnimated:YES];
+ [self dismissModalViewControllerAnimated:YES];
   self.tabBarController.tabBar.hidden = NO;
   self.tabBarController.selectedIndex = 0;
 }
