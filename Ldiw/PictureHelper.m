@@ -9,6 +9,7 @@
 #import "PictureHelper.h"
 #import "DesignHelper.h"
 #import "Image.h"
+#import "Database+Image.h"
 
 @implementation PictureHelper
 
@@ -27,7 +28,7 @@
   
   [dataForJpg writeToFile:imageFilePath atomically:YES];
   
-  Image *dbImage = [Image newImageWithLocalUrl:imageFilePath];
+  Image *dbImage = [[Database sharedInstance] newImageWithLocalUrl:imageFilePath];
   [wp addImagesObject:dbImage];
   
   CFRelease(newUniqueID);

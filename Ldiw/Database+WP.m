@@ -9,6 +9,7 @@
 #import "Database+WP.h"
 #import "CSVParser.h"
 #import "CustomValue.h"
+#import "PictureHelper.h"
 
 #define kKeyId @"id"
 #define kKeyLat @"lat"
@@ -16,6 +17,15 @@
 #define kKeyPhotos @"photos"
 
 @implementation Database (WP)
+
+- (WastePoint *)addWastePointUsingImage:(UIImage *)image {
+  WastePoint *wp = [WastePoint insertInManagedObjectContext:[[Database sharedInstance] managedObjectContext]];
+  if (image) {
+    [PictureHelper saveImage:image forWastePoint:wp];
+  }
+  MSLog(@"Added waste point %@", wp);
+  return wp;
+}
 
 - (WastePoint *)wastepointWithId:(NSString *)remoteId {
   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id = %@", remoteId];
@@ -78,6 +88,14 @@
   CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
   [aValue setFieldName:key];
   [aValue setValue:value];
+  return aValue;
+}
+
+- (CustomValue *)customValueWithKey:(NSString *)key andValue:(NSString *)newValue {
+  
+  CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
+  [aValue setValue:newValue];
+  [aValue setFieldName:key];
   return aValue;
 }
 

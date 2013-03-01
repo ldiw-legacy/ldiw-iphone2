@@ -12,6 +12,7 @@
 #import "PictureHelper.h"
 #import "Image.h"
 #import "WastePointViews.h"
+#import "Database+WP.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -29,11 +30,10 @@
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
-    self.wastePoint = [WastePoint newWastePointUsingImage:image];
+    self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:image];
   }
   return self;
 }
-
 
 - (void)viewWillAppear:(BOOL)animated
 {

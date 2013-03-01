@@ -41,9 +41,7 @@
   MSLog(@"Checked value %@ for field %@", value, fieldName);
 
   // allow only one selection in custom values
-  [wastePoint setCustomValues:nil];
-  [wastePoint setValue:value forCustomField:fieldName];
-  
+  [wastePoint setValue:value forCustomField:fieldName];  
 }
 
 - (void)addDataPressedForField:(NSString *)fieldName {

@@ -1,28 +1,22 @@
 #import "WastePoint.h"
 #import "CustomValue.h"
 #import "Database.h"
-#import "PictureHelper.h"
+#import "Database+WP.h"
 
 @implementation WastePoint
 
 // Custom logic goes here.
-
-+ (WastePoint *) newWastePointUsingImage:(UIImage *)image {
-  WastePoint *wp = [WastePoint insertInManagedObjectContext:[[Database sharedInstance] managedObjectContext]];
-  if (image) [PictureHelper saveImage:image forWastePoint:wp];
-  return wp;
-}
-
 - (void)setValue:(NSString *)newValue forCustomField:(NSString *)fieldName {
   for (CustomValue* value in self.customValues) {
     if ([value.fieldName isEqualToString:fieldName]) {
+      MSLog(@"Change value for field '%@' to '%@'", fieldName, newValue);
       [value setValue:newValue];
       return;
     }
   }
-  MSLog(@"Need to add new value");
-  CustomValue *value = [CustomValue customValueWithKey:fieldName andValue:newValue];
+  CustomValue *value = [[Database sharedInstance] customValueWithKey:fieldName andValue:newValue];
   [self addCustomValuesObject:value];
+  MSLog(@"Added new customValue '%@' to point", fieldName);
 }
 
 - (NSString *)description {

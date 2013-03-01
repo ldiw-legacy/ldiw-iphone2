@@ -41,14 +41,12 @@
     return nil;
   }
     
-  // [self registerHTTPOperationClass:[AFHTTPRequestOperation class]];
   [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
   self.parameterEncoding = AFJSONParameterEncoding;
   
-  [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingOperationDidStartNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-    AFHTTPRequestOperation *operation = (AFHTTPRequestOperation *)[note object];
-    MSLog(@"Operation started: %@", operation.request.URL);
-  }];
+//  [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingOperationDidStartNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+//    AFHTTPRequestOperation *operation = (AFHTTPRequestOperation *)[note object];
+//  }];
   
   return self;
 }

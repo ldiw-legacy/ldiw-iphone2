@@ -48,14 +48,12 @@
   NSString *baseUrlSuffix = [[Database sharedInstance] serverSuffix];
   
   NSString *url = [NSString stringWithFormat:@"%@%@/%@", baseUrlString, baseUrlSuffix, path];
-  MSLog(@"Get WP list from: %@", url);
   
   NSString *language = [LocationManager getPhoneLanguage];
   NSDictionary *parameters;
   if (language) {
     parameters = [NSDictionary dictionaryWithObject:language forKey:kLanguageCodeKey];
   }
-  MSLog(@"GET WP list with parameters:%@", parameters);
   
   NSURLRequest *request = [[[AFHTTPClient alloc] init] requestWithMethod:@"GET" path:url parameters:parameters];
   
