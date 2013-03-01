@@ -70,6 +70,11 @@
 - (IBAction)loginFB:(id)sender {
   [FBHelper openSession];
 }
+- (IBAction)backgroundTap:(id)sender {
+   [[self view] endEditing:YES];
+}
+
+
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
   if (textField == loginUserLabel) {
