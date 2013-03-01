@@ -13,19 +13,20 @@
 #import "Image.h"
 #import "WastePointViews.h"
 #import "Database+WP.h"
+#import "Database+WPField.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
 @property (strong, nonatomic) UITextView *myTextInputView;
 @property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UILabel *insertTextLabel;
+@property (strong, nonatomic) NSString *selectedFieldName;
 @end
-
 
 @implementation DetailViewController 
 
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName;
 
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
@@ -79,7 +80,7 @@
 }
 
 - (void)addWastePointViews {
-  WastePointViews *wpViews = [[WastePointViews alloc] initWithWastePoint:wastePoint];
+  WastePointViews *wpViews = [[WastePointViews alloc] initWithWastePoint:wastePoint andDelegate:self];
   CGRect wpViewsRect = CGRectMake(0, imageView.frame.origin.y + imageView.frame.size.height, wpViews.frame.size.width, wpViews.frame.size.height);
   [wpViews setFrame:wpViewsRect];
   [scrollView addSubview:wpViews];
@@ -112,31 +113,8 @@
 - (IBAction)addPressed:(id)sender
 {
   self.controller.wastePointAddedSuccessfully = YES;
-  [self.navigationController popViewControllerAnimated:NO];
-  
+  [self dismissModalViewControllerAnimated:YES];
 }
-
-- (IBAction)addValue:(UIButton *)sender
-{
-
-  //Remove later
-  UITextField *textfield = [[UITextField alloc] init];
-  textfield.delegate = self;
-  [self.view addSubview:textfield];
-  [self showCustomNumPad:textfield];
-  
-}
-
-- (IBAction)addComment:(UIButton *)sender
-{
-  //Remove later
-  UITextView *textview = [[UITextView alloc]init];
-  textview.delegate = self;
-  [self.view addSubview:textview];
-  [self showCustomTextPad:textview];
-  
-}
-
 
 - (IBAction)takePicture:(id)sender {
 
@@ -222,51 +200,14 @@
   
 }
 
-- (void)showCustomNumPad:(UITextField *)textfield
-{
-  UIView *mytoolbar = [self keyboardAccessoryView];
-  textfield.inputAccessoryView = mytoolbar;
-  [textfield becomeFirstResponder];
-  textfield.keyboardType = UIKeyboardTypeDecimalPad;
-  self.insertTextLabel.text = @"Enter value";
-  self.textInputField = [[UITextField alloc]init];
-  textInputField.font = [UIFont fontWithName:@"Caecilia-Heavy" size:38];
-  textInputField.adjustsFontSizeToFitWidth = YES;
-  textInputField.delegate = self;
-  textInputField.frame = CGRectMake(25, 25, 175, 60);
-  textInputField.keyboardType = UIKeyboardTypeDecimalPad;
-  textInputField.keyboardAppearance = UIKeyboardAppearanceDefault;
-  [mytoolbar addSubview:textInputField];
-  [textInputField becomeFirstResponder];
-}
-
-- (void)showCustomTextPad:(UITextView *)textView
-{
-  UIView *mytoolbar = [self keyboardAccessoryView];
-  textView.inputAccessoryView = mytoolbar;
-  [textView becomeFirstResponder];
-  if (!myTextInputView) {
-    self.myTextInputView = [[UITextView alloc]init];
-  }
-  self.myTextInputView.delegate = self;
-  self.myTextInputView.scrollEnabled = YES;
-  self.myTextInputView.keyboardType = UIKeyboardTypeDefault;
-  self.myTextInputView.frame = CGRectMake(15, 20, 185, 50);
-  
-  self.myTextInputView.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-  [mytoolbar addSubview:myTextInputView];
-  [self.myTextInputView becomeFirstResponder];
-  [textView resignFirstResponder];
-}
-
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-  MSLog(@"textInputView %@",myTextInputView.text);
+  [wastePoint setValue:textView.text forCustomField:selectedFieldName];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-  MSLog(@"textInputField %@",textInputField.text);
+  [wastePoint setValue:textField.text forCustomField:selectedFieldName];
 }
 
 -(IBAction)confirmPressed:(id)sender {
@@ -286,6 +227,66 @@
   myTextInputView = nil;
   dimView = nil;
   insertTextLabel = nil;
+}
+
+
+- (void)showCustomNumPad {
+  UITextField *textfield = [[UITextField alloc] init];
+  textfield.delegate = self;
+  [self.view addSubview:textfield];
+
+  UIView *mytoolbar = [self keyboardAccessoryView];
+  textfield.inputAccessoryView = mytoolbar;
+  [textfield becomeFirstResponder];
+  textfield.keyboardType = UIKeyboardTypeDecimalPad;
+  self.insertTextLabel.text = @"Enter value";
+  self.textInputField = [[UITextField alloc]init];
+  textInputField.font = [UIFont fontWithName:@"Caecilia-Heavy" size:38];
+  textInputField.adjustsFontSizeToFitWidth = YES;
+  textInputField.delegate = self;
+  textInputField.frame = CGRectMake(25, 25, 175, 60);
+  textInputField.keyboardType = UIKeyboardTypeDecimalPad;
+  textInputField.keyboardAppearance = UIKeyboardAppearanceDefault;
+  [mytoolbar addSubview:textInputField];
+  [textInputField becomeFirstResponder];
+}
+
+- (void)showCustomTextPad {
+  UITextView *textView = [[UITextView alloc]init];
+  textView.delegate = self;
+  [self.view addSubview:textView];
+
+  UIView *mytoolbar = [self keyboardAccessoryView];
+  textView.inputAccessoryView = mytoolbar;
+  [textView becomeFirstResponder];
+  if (!myTextInputView) {
+    self.myTextInputView = [[UITextView alloc]init];
+  }
+  self.myTextInputView.delegate = self;
+  self.myTextInputView.scrollEnabled = YES;
+  self.myTextInputView.keyboardType = UIKeyboardTypeDefault;
+  self.myTextInputView.frame = CGRectMake(15, 20, 185, 50);
+  
+  self.myTextInputView.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+  [mytoolbar addSubview:myTextInputView];
+  [self.myTextInputView becomeFirstResponder];
+  [textView resignFirstResponder];
+}
+
+#pragma mark - FieldDelegate
+- (void)checkedValue:(NSString *)value forField:(NSString *)fieldName {
+  [wastePoint setValue:value forCustomField:fieldName];
+}
+
+- (void)addDataPressedForField:(NSString *)fieldName {
+  [self setSelectedFieldName:fieldName];
+  WPField *field = [[Database sharedInstance] findWPFieldWithFieldName:fieldName orLabel:nil];
+
+  if ([field.type isEqualToString:@"text"]) {
+    [self showCustomTextPad];
+  } else {
+    [self showCustomNumPad];
+  }
 }
 
 @end

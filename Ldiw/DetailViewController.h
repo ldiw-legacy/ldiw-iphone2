@@ -10,8 +10,9 @@
 #import <MapKit/MapKit.h>
 #import "WastePoint.h"
 #import "ActivityViewController.h"
+#import "FieldView.h"
 
-@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate,UITextViewDelegate>
+@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate, UITextViewDelegate, FieldDelegate>
 
 @property (weak, nonatomic) id delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

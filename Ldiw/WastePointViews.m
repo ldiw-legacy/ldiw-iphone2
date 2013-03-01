@@ -14,12 +14,13 @@
 #import "FieldView.h"
 
 @implementation WastePointViews
-@synthesize wastePoint;
+@synthesize wastePoint, fieldDelegate;
 
-- (id)initWithWastePoint:(WastePoint *)wp {
+- (id)initWithWastePoint:(WastePoint *)wp andDelegate:(id)delegate {
   self = [super initWithFrame:CGRectMake(0, 0, 320, 0)];
   if (self) {
     [self setWastePoint:wp];
+    [self setFieldDelegate:delegate];
     [self configureView];
   }
   return self;
@@ -31,21 +32,9 @@
   
   for (WPField *wpField in nonCompFields) {
     FieldView *field = [[FieldView alloc] initWithWPField:wpField];
-    [field setDelegate:self];
+    [field setDelegate:fieldDelegate];
     [self addSubviewToBottom:field];
   }
-}
-
-#pragma mark - FieldDelegate
-- (void)checkedValue:(NSString *)value forField:(NSString *)fieldName {
-  MSLog(@"Checked value %@ for field %@", value, fieldName);
-
-  // allow only one selection in custom values
-  [wastePoint setValue:value forCustomField:fieldName];  
-}
-
-- (void)addDataPressedForField:(NSString *)fieldName {
-  MSLog(@"Add data pressed for field %@", fieldName);
 }
 
 @end
