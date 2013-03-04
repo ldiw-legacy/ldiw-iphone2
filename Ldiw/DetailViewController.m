@@ -14,6 +14,8 @@
 #import "WastePointViews.h"
 #import "Database+WP.h"
 #import "Database+WPField.h"
+#import "WastePointUploader.h"
+#import "Database+Server.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -113,7 +115,22 @@
 
 - (IBAction)addPressed:(id)sender
 {
-  self.controller.wastePointAddedSuccessfully = YES;
+  CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
+  [wastePoint setLatitudeValue:currentLocation.coordinate.latitude];
+  [wastePoint setLongitudeValue:currentLocation.coordinate.longitude];
+
+  [WastePointUploader uploadWP:wastePoint withSuccess:^(NSDictionary* result) {
+    NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber * myNumber = [f numberFromString:[responseWP objectForKey:@"id"]];
+    [wastePoint setId:myNumber];
+    [[Database sharedInstance] saveContext];
+    self.controller.wastePointAddedSuccessfully = YES;
+    MSLog(@"%@", wastePoint);
+  } failure:^(NSError *error) {
+    MSLog(@"UPLOAD ERROR: %@", error);
+  }];
   [self dismissModalViewControllerAnimated:YES];
 }
 

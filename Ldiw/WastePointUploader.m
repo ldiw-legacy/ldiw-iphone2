@@ -16,7 +16,7 @@
 @implementation WastePointUploader
 
 
-+ (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
++ (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
   NSString *lat = [NSString stringWithFormat:@"%g", point.latitudeValue];
   NSString *lon = [NSString stringWithFormat:@"%g", point.longitudeValue];

@@ -11,7 +11,7 @@
 
 @interface WastePointUploader : LoginClient
 
-+ (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
 
 
 
