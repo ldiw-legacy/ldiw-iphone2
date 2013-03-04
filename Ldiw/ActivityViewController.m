@@ -292,7 +292,7 @@
 
 - (void)removeHud {
   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-  [self dismissModalViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
 @end
