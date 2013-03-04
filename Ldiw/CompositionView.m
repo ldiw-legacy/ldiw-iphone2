@@ -17,6 +17,8 @@
 #define kContentWidth 300.0f
 #define kCompositionElementHeight 100.0f
 #define kCheckButtonSize 20.0f
+#define kLabelHeight 58.0f
+
 
 @implementation CompositionView
 @synthesize tickButtonArray, field, delegate;
@@ -29,9 +31,12 @@
     [bg setBackgroundColor:kWPFieldFGColor];
     bg.layer.cornerRadius = 5;
     bg.layer.masksToBounds = YES;
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kCheckButtonSize)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kLabelHeight)];
     [nameLabel setText:field.label];
-    [bg addSubview:nameLabel];
+    [nameLabel setFont:[UIFont fontWithName:kFontNameBold size:kWPLabelTextSize]];
+    [nameLabel setBackgroundColor:[UIColor clearColor]];
+
+    [bg addSubviewToBottom:nameLabel];
     
     [self addSubviewToBottom:bg];
 
