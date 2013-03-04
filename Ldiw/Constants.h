@@ -53,6 +53,8 @@
 #define kViewBackroundColor [UIColor colorWithRed:0.894 green:0.894 blue:0.894 alpha:1] /*#e4e4e4*/
 #define kButtonBackgroundColor [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1] /*#d2d2d2*/
 #define kTextSubtitleColor [UIColor colorWithRed:0.58 green:0.588 blue:0.545 alpha:1] /*#94968b*/
+#define kFieldDescriptionTextColor [UIColor colorWithRed:0.655 green:0.663 blue:0.675 alpha:1] /*#a7a9ac*/
+
 
 #define kNotificationShowHud @"showHud"
 #define kNotificationRemoveHud @"removeHud"

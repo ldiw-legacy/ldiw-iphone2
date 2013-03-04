@@ -47,6 +47,7 @@
     [descriptionLabel setText:field.edit_instructions];
     [descriptionLabel setFont:[UIFont fontWithName:kFontName size:kWPDescripttionTextSize]];
     [descriptionLabel setBackgroundColor:[UIColor clearColor]];
+    [descriptionLabel setTextColor:kFieldDescriptionTextColor];
     [self setValueLabel:descriptionLabel];
     [bg addSubview:descriptionLabel];
     
@@ -108,7 +109,7 @@
 
 - (void)setValue:(NSString *)value {
   [valueLabel setText:value];
-  [valueLabel setTextColor:[UIColor greenColor]];
+  [valueLabel setTextColor:[UIColor darkGrayColor]];
 }
 
 @end
