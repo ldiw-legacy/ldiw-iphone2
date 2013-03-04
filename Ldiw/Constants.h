@@ -40,6 +40,11 @@
 #define kTypicalValuesKey @"typical_values"
 #define kAllowedValuesKey @"allowed_values"
 
+#define kKeyId @"id"
+#define kKeyLat @"lat"
+#define kKeyLon @"lon"
+#define kKeyPhotos @"photos"
+
 // FONTS
 #define kFontNameBold @"HelveticaNeue-Bold"
 #define kFontName @"HelveticaNeue"

@@ -123,11 +123,11 @@
     NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber * myNumber = [f numberFromString:[responseWP objectForKey:@"id"]];
+    NSNumber * myNumber = [f numberFromString:[responseWP objectForKey:kKeyId]];
     [wastePoint setId:myNumber];
+    [wastePoint setPhotos:[responseWP objectForKey:kKeyPhotos]];
     [[Database sharedInstance] saveContext];
     self.controller.wastePointAddedSuccessfully = YES;
-    MSLog(@"%@", wastePoint);
   } failure:^(NSError *error) {
     MSLog(@"UPLOAD ERROR: %@", error);
   }];

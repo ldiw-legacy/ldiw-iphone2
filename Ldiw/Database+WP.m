@@ -11,11 +11,6 @@
 #import "CustomValue.h"
 #import "PictureHelper.h"
 
-#define kKeyId @"id"
-#define kKeyLat @"lat"
-#define kKeyLon @"lon"
-#define kKeyPhotos @"photos"
-
 @implementation Database (WP)
 
 - (WastePoint *)addWastePointUsingImage:(UIImage *)image {
