@@ -13,4 +13,5 @@
 - (void)addSubviewToBottom:(UIView *)subView;
 - (void)addSubviewToRightBottomCorner:(UIView *)subView withPadding:(int)padding;
 - (void)addSubviewToRightBottomCorner:(UIView *)subView withRightPadding:(int)rightPadding andBottomPadding:(int)bottomPadding;
+- (void)addViewToGrid:(UIView *)viewToAdd;
 @end

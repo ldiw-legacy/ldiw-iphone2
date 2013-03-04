@@ -3,7 +3,7 @@
     <entity name="AllowedValue" representedClassName="AllowedValue" syncable="YES">
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="wpField" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WPField" inverseName="allowedValue" inverseEntity="WPField" syncable="YES"/>
+        <relationship name="wpField" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WPField" inverseName="allowedValues" inverseEntity="WPField" syncable="YES"/>
     </entity>
     <entity name="CustomValue" representedClassName="CustomValue" syncable="YES">
         <attribute name="fieldName" optional="YES" attributeType="String" syncable="YES"/>
@@ -26,7 +26,7 @@
     <entity name="TypicalValue" representedClassName="TypicalValue" syncable="YES">
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="wpField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WPField" inverseName="typicalValue" inverseEntity="WPField" syncable="YES"/>
+        <relationship name="wpField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WPField" inverseName="typicalValues" inverseEntity="WPField" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="sessid" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,9 +51,9 @@
         <attribute name="min" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="suffix" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="allowedValue" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AllowedValue" inverseName="wpField" inverseEntity="AllowedValue" syncable="YES"/>
+        <relationship name="allowedValues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AllowedValue" inverseName="wpField" inverseEntity="AllowedValue" syncable="YES"/>
         <relationship name="server" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Server" inverseName="fields" inverseEntity="Server" syncable="YES"/>
-        <relationship name="typicalValue" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TypicalValue" inverseName="wpField" inverseEntity="TypicalValue" syncable="YES"/>
+        <relationship name="typicalValues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TypicalValue" inverseName="wpField" inverseEntity="TypicalValue" syncable="YES"/>
     </entity>
     <elements>
         <element name="AllowedValue" positionX="-47" positionY="81" width="128" height="90"/>
@@ -63,6 +63,6 @@
         <element name="TypicalValue" positionX="322" positionY="126" width="128" height="90"/>
         <element name="User" positionX="160" positionY="192" width="128" height="120"/>
         <element name="WastePoint" positionX="90" positionY="413" width="128" height="135"/>
-        <element name="WPField" positionX="-243" positionY="99" width="128" height="193"/>
+        <element name="WPField" positionX="-243" positionY="99" width="128" height="195"/>
     </elements>
 </model>

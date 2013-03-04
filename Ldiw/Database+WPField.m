@@ -157,9 +157,18 @@
 }
 
 - (NSArray *)typicalValuesForField:(WPField *)field {
-  NSArray *sortedArray = [[field.typicalValue allObjects] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+  NSArray *sortedArray = [[field.typicalValues allObjects] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
     NSString *first = [(TypicalValue*)a value];
     NSString *second = [(TypicalValue*)b value];
+    return [first compare:second options:NSNumericSearch];
+  }];
+  return sortedArray;
+}
+
+- (NSArray *)allowedValuesForField:(WPField *)field {
+  NSArray *sortedArray = [[field.allowedValues allObjects] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+    NSString *first = [(AllowedValue*)a value];
+    NSString *second = [(AllowedValue*)b value];
     return [first compare:second options:NSNumericSearch];
   }];
   return sortedArray;

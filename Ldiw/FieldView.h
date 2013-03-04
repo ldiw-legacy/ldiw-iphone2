@@ -7,11 +7,7 @@
 //
 
 #import "WPField.h"
-
-@protocol FieldDelegate
-- (void)checkedValue:(NSString *)value forField:(NSString *)fieldName;
-- (void)addDataPressedForField:(NSString *)fieldName;
-@end
+#import "FieldDelegate.h"
 
 @interface FieldView : UIView
 @property (nonatomic, assign) id<FieldDelegate> delegate;

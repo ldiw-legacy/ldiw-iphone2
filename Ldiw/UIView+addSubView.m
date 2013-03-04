@@ -7,6 +7,7 @@
 //
 
 #import "UIView+addSubView.h"
+#define kGridViewTag 1000
 
 @implementation UIView (addSubView)
 
@@ -26,10 +27,36 @@
   [self addSubviewToRightBottomCorner:subView withRightPadding:padding andBottomPadding:padding];
 }
 
+- (void)addViewToGrid:(UIView *)viewToAdd {
+  int nrOfGridElements = [self numberOfGridViewElements];
+  [viewToAdd setTag:kGridViewTag];
+  
+  // If we have even number of views, add subview to bottom
+  // if we have odd number of views, add subview to right bottom corner and no padding
+  if (nrOfGridElements & 1) {
+    // odd number of subviews
+    [self addSubviewToRightBottomCorner:viewToAdd withPadding:0];
+  } else {
+    // even number of subviews
+    [self addSubviewToBottom:viewToAdd];
+  }
+}
+
 - (void)increaseFrameHeightBy:(int)amount {
   CGRect oldFrame = self.frame;
   CGRect newFrame = CGRectMake(oldFrame.origin.x, oldFrame.origin.y, oldFrame.size.width, oldFrame.size.height + amount);
   [self setFrame:newFrame];
+}
+
+- (int)numberOfGridViewElements {
+  NSArray *subViews = self.subviews;
+  int result = 0;
+  for (UIView *view in subViews) {
+    if (view.tag == kGridViewTag) {
+      result++;
+    }
+  }
+  return result;
 }
 
 @end

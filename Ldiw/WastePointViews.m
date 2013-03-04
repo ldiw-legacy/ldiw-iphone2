@@ -12,6 +12,7 @@
 #import "TypicalValue.h"
 #import "WPField.h"
 #import "FieldView.h"
+#import "CompositionView.h"
 
 @implementation WastePointViews
 @synthesize wastePoint, fieldDelegate, fieldsDictionary;
@@ -22,12 +23,13 @@
     [self setFieldsDictionary:[NSMutableDictionary dictionary]];
     [self setWastePoint:wp];
     [self setFieldDelegate:delegate];
-    [self configureView];
+    [self addNonCompFields];
+    [self addCompFields];
   }
   return self;
 }
 
-- (void)configureView {
+- (void)addNonCompFields {
   
   NSArray *nonCompFields = [[Database sharedInstance] listAllNonCompositionFields];
   
@@ -36,6 +38,15 @@
     [field setDelegate:fieldDelegate];
     [fieldsDictionary setObject:field forKey:wpField.field_name];
     [self addSubviewToBottom:field];
+  }
+}
+
+- (void)addCompFields {
+  NSArray *compFields = [[Database sharedInstance] listAllCompositionFields];
+  for (WPField *wpField in compFields) {
+    CompositionView *compView = [[CompositionView alloc] initWithField:wpField];
+    [compView setDelegate:fieldDelegate];
+    [self addSubviewToBottom:compView];
   }
 }
 

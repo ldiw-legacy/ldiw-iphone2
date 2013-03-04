@@ -1,5 +1,5 @@
 #import "WPField.h"
-#define kCompositionString @"composition_"
+#define kCompositionString @"composition"
 @implementation WPField
 
 // Custom logic goes here.

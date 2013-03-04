@@ -65,6 +65,7 @@
 		535C37D216DE4BA600131F50 /* FieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37D116DE4BA600131F50 /* FieldView.m */; };
 		535C37D516DF830200131F50 /* UIView+addSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37D416DF830200131F50 /* UIView+addSubView.m */; };
 		535C37DC16E0845B00131F50 /* Database+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37DB16E0845700131F50 /* Database+Image.m */; };
+		535C37DF16E0D1E000131F50 /* CompositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37DE16E0D1E000131F50 /* CompositionView.m */; };
 		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
 		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
@@ -288,11 +289,14 @@
 		535C37D416DF830200131F50 /* UIView+addSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addSubView.m"; sourceTree = "<group>"; };
 		535C37DA16E0845500131F50 /* Database+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+Image.h"; sourceTree = "<group>"; };
 		535C37DB16E0845700131F50 /* Database+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+Image.m"; sourceTree = "<group>"; };
+		535C37DD16E0D1DF00131F50 /* CompositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositionView.h; sourceTree = "<group>"; };
+		535C37DE16E0D1E000131F50 /* CompositionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositionView.m; sourceTree = "<group>"; };
 		538DC21216D3AF08002D7925 /* Database+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WP.h"; sourceTree = "<group>"; };
 		538DC21316D3AF08002D7925 /* Database+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WP.m"; sourceTree = "<group>"; };
 		538DC21516D4B04A002D7925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		538DC21716D5063D002D7925 /* Database+WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WPField.h"; sourceTree = "<group>"; };
 		538DC21816D5063E002D7925 /* Database+WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WPField.m"; sourceTree = "<group>"; };
+		53A7BE1616E4880B003036DC /* FieldDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldDelegate.h; sourceTree = "<group>"; };
 		53E729DC16DBB2C100AC8E35 /* _CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CustomValue.h; sourceTree = "<group>"; };
 		53E729DD16DBB2C100AC8E35 /* _CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CustomValue.m; sourceTree = "<group>"; };
 		53E729DE16DBB2C100AC8E35 /* CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomValue.h; sourceTree = "<group>"; };
@@ -558,6 +562,7 @@
 		534CCF1616D210590004532F /* Ldiw */ = {
 			isa = PBXGroup;
 			children = (
+				53A7BE1516E487F0003036DC /* Protocols */,
 				C581F26516D278E6003A2FA2 /* iOS ASSETS */,
 				534CCF6516D25A130004532F /* Util */,
 				C581F31216D30F07003A2FA2 /* Views */,
@@ -719,8 +724,18 @@
 				13A8B8EB16DBA9C800D7E076 /* WastePointViews.m */,
 				535C37D016DE4BA600131F50 /* FieldView.h */,
 				535C37D116DE4BA600131F50 /* FieldView.m */,
+				535C37DD16E0D1DF00131F50 /* CompositionView.h */,
+				535C37DE16E0D1E000131F50 /* CompositionView.m */,
 			);
 			name = WPListViews;
+			sourceTree = "<group>";
+		};
+		53A7BE1516E487F0003036DC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				53A7BE1616E4880B003036DC /* FieldDelegate.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		C581F26516D278E6003A2FA2 /* iOS ASSETS */ = {
@@ -1160,6 +1175,7 @@
 				139E722716DF8E01008EDEE3 /* DCRoundSwitchToggleLayer.m in Sources */,
 				5A1FAA6916DFAAF800751FFF /* WastePointUploader.m in Sources */,
 				535C37DC16E0845B00131F50 /* Database+Image.m in Sources */,
+				535C37DF16E0D1E000131F50 /* CompositionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
