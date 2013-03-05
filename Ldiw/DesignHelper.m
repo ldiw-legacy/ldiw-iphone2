@@ -164,7 +164,8 @@
   UINavigationController *accountNavVC = [[UINavigationController alloc] initWithRootViewController:accountVC];
   
   UITabBarController *tabBarController = [[UITabBarController alloc] init];
-  [[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
+  [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"titlebar_bg"] forBarMetrics:UIBarMetricsDefault];
+  //[[UINavigationBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titlebar_bg"]]];
   
   [tabBarController setViewControllers:[NSArray arrayWithObjects:navVC, detailViewController, accountNavVC, nil]];
   
