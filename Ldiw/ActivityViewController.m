@@ -141,7 +141,7 @@
                                cancelButtonTitle:NSLocalizedString(@"cancel",nil)                                   destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
                                otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
       sheet.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-      [sheet showInView:self.view];
+      [sheet showInView:self.tabBarController.tabBar];
     }
     return NO;
   }
