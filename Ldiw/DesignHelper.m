@@ -119,21 +119,17 @@
 
 +(UIImage *)resizeImage:(UIImage *)image {
   CGFloat originalWidth = image.size.width;
-  CGFloat originalHeight = image.size.height;
-  CGFloat ratio=originalWidth/originalHeight;
-  CGFloat maxRatio=320.0/480.0;
   
-  if (ratio != maxRatio) {
-    if (ratio < maxRatio){
-      ratio = 480 / originalHeight;
-      originalWidth = ratio * originalWidth;
-    }
-    else {
-      ratio=320.0/originalWidth;
-      originalHeight=ratio * originalHeight;
-      originalWidth=320.0;
-    }
+  if (originalWidth <= 480) {
+    return image;
   }
+  
+  CGFloat originalHeight = image.size.height;
+  
+  CGFloat timesTooBig = originalWidth/480.0f;
+  originalWidth = originalWidth/timesTooBig;
+  originalHeight = originalHeight/timesTooBig;
+  
   CGRect newRect = CGRectMake(0, 0, originalWidth, originalHeight);
   UIGraphicsBeginImageContext(newRect.size);
   [image drawInRect:newRect];
