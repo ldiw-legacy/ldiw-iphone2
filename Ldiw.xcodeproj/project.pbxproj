@@ -23,9 +23,9 @@
 		13A42DE616D4EDC800B92C17 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DE516D4EDC800B92C17 /* FacebookSDK.framework */; };
 		13A42DE916D4EEE300B92C17 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 13A42DE716D4EEE300B92C17 /* FacebookSDKResources.bundle */; };
 		13A42DEA16D4EEE300B92C17 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 13A42DE816D4EEE300B92C17 /* FBUserSettingsViewResources.bundle */; };
-		13A42DEC16D4EF1A00B92C17 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEB16D4EF1A00B92C17 /* AdSupport.framework */; };
-		13A42DEE16D4EF2000B92C17 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DED16D4EF2000B92C17 /* Social.framework */; };
-		13A42DF016D4EF2B00B92C17 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEF16D4EF2B00B92C17 /* Accounts.framework */; };
+		13A42DEC16D4EF1A00B92C17 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEB16D4EF1A00B92C17 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		13A42DEE16D4EF2000B92C17 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DED16D4EF2000B92C17 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		13A42DF016D4EF2B00B92C17 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A42DEF16D4EF2B00B92C17 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		13A60AF416D767B30070AF84 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A60AF116D767B30070AF84 /* _User.m */; };
 		13A60AF516D767B30070AF84 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A60AF316D767B30070AF84 /* User.m */; };
 		13A8B8E916DB3A5700D7E076 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8B8E816DB3A5700D7E076 /* MBProgressHUD.m */; };
@@ -1218,8 +1218,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1242,7 +1242,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
