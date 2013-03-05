@@ -34,6 +34,7 @@
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
     self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:image];
+    [self.wastePoint setIdValue:0];
   }
   return self;
 }
@@ -126,7 +127,6 @@
     NSNumber * myNumber = [f numberFromString:[responseWP objectForKey:kKeyId]];
     [wastePoint setId:myNumber];
     [wastePoint setPhotos:[responseWP objectForKey:kKeyPhotos]];
-    [[Database sharedInstance] saveContext];
     self.controller.wastePointAddedSuccessfully = YES;
   } failure:^(NSError *error) {
     MSLog(@"UPLOAD ERROR: %@", error);
