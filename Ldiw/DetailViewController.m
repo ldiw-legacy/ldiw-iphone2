@@ -119,19 +119,10 @@
   CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
   [wastePoint setLatitudeValue:currentLocation.coordinate.latitude];
   [wastePoint setLongitudeValue:currentLocation.coordinate.longitude];
-
-  [WastePointUploader uploadWP:wastePoint withSuccess:^(NSDictionary* result) {
-    NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
-    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-    [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber * myNumber = [f numberFromString:[responseWP objectForKey:kKeyId]];
-    [wastePoint setId:myNumber];
-    [wastePoint setPhotos:[responseWP objectForKey:kKeyPhotos]];
-    self.controller.wastePointAddedSuccessfully = YES;
-  } failure:^(NSError *error) {
-    MSLog(@"UPLOAD ERROR: %@", error);
+  [WastePointUploader uploadAllLocalWPs];
+  self.controller.wastePointAddedSuccessfully = YES;  
+  [self dismissViewControllerAnimated:YES completion:^(void){
   }];
-  [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)takePicture:(id)sender {

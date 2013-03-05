@@ -270,14 +270,6 @@
         MSLog(@"Need to load base server information");
         [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
           [self loadWastePointList];
-//          WastePoint *point = [[Database sharedInstance] wastepointWithId:[NSString stringWithFormat:@"%d", 1]];
-//          [point setLatitudeValue:26.0];
-//          [point setLongitudeValue:59.0];
-//          [WastePointUploader uploadWP:point withSuccess:^(NSArray* result) {
-//            
-//          } failure:^(NSError *error) {
-//            
-//          }];
         } failure:^(void) {
           MSLog(@"Server info loading fail");
         }];

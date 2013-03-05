@@ -9,6 +9,7 @@
 #import "WastePointUploader.h"
 #import "AFHTTPRequestOperation.h"
 #import "Database+Server.h"
+#import "Database+WP.h"
 #import "User.h"
 
 #define kCreateNewWPPath @"?q=api/wp.json"
@@ -51,16 +52,32 @@
     failure(error);
   }];
   
-  
   [[LoginClient sharedLoginClient] enqueueHTTPRequestOperation:operation];
-  
-  
-//  [[LoginClient sharedLoginClient] postPath:kCreateNewWPPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//    MSLog(@"New WP created!");
-//    MSLog(@"Response %@", responseObject);
-//  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//    MSLog(@"Error: %@", error);
-//  }];
+}
+
++ (void)uploadAllLocalWPs {
+  MSLog(@"LOCAL WPs COUNT: %i", [[Database sharedInstance] listWastePointsWithNoId].count);
+  NSMutableArray *localWPs = [NSMutableArray arrayWithArray:[[Database sharedInstance] listWastePointsWithNoId]];
+  [self uploadAllLocalWPsWithArray:localWPs];
+}
+
++ (void)uploadAllLocalWPsWithArray:(NSMutableArray *)WPs {
+    WastePoint *wp = [WPs objectAtIndex:0];
+    [WastePointUploader uploadWP:wp withSuccess:^(NSDictionary* result) {
+      NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
+      NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+      [f setNumberStyle:NSNumberFormatterDecimalStyle];
+      NSNumber *myNumber = [f numberFromString:[responseWP objectForKey:kKeyId]];
+      [wp setId:myNumber];
+      [wp setPhotos:[responseWP objectForKey:kKeyPhotos]];
+      [WPs removeObject:wp];
+      if (WPs.count > 0) {
+        [self uploadAllLocalWPsWithArray:WPs];        
+      }
+      MSLog(@"UPLOAD SUCCESSFUL FOR WP WITH ID: %@", wp.id);
+    } failure:^(NSError *error) {
+      MSLog(@"UPLOAD FAILED FOR: %@", wp);
+    }];
 }
 
 @end

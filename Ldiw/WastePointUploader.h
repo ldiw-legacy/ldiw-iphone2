@@ -13,6 +13,6 @@
 
 + (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
 
-
++ (void)uploadAllLocalWPs;
 
 @end
