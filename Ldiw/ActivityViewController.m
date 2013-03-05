@@ -140,7 +140,8 @@
                                delegate:self
                                cancelButtonTitle:NSLocalizedString(@"cancel",nil)                                   destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
                                otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
-      [sheet showFromTabBar:self.tabBarController.tabBar];
+      sheet.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+      [sheet showInView:self.view];
     }
     return NO;
   }

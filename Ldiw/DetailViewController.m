@@ -42,6 +42,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [self.navigationItem setHidesBackButton:YES];
+  self.tabBarController.tabBar.hidden=YES;
+  [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
+
 }
 
 - (void)viewDidLoad
