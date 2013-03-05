@@ -176,18 +176,20 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  [self dismissModalViewControllerAnimated:YES];
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  [self openDetailViewWithImage:cameraImage];
+  DetailViewController *detail = [[DetailViewController alloc] initWithImage:cameraImage];
+  detail.controller = self;
+  [self.navigationController pushViewController:detail animated:NO]; 
+  [self dismissViewControllerAnimated:YES completion:nil];
+  detail.imageView.image=cameraImage;
+  detail.takePictureButton.alpha = 0;  
 }
 
 - (void)openDetailViewWithImage:(UIImage *)image {
   DetailViewController *detail = [[DetailViewController alloc] initWithImage:image];
   detail.takePictureButton.alpha = 1.0;
   detail.controller = self;
-
-  UINavigationController *detailNavController = [[UINavigationController alloc] initWithRootViewController:detail];
-  [self presentViewController:detailNavController animated:YES completion:nil];
+  [self.navigationController pushViewController:detail animated:NO]; 
 }
 
 - (void)didReceiveMemoryWarning

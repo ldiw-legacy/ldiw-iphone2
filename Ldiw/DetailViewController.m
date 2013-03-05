@@ -109,7 +109,7 @@
 - (IBAction)cancelPressed:(id)sender
 {
   //Do some cleaning here
- [self dismissModalViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:NO];
   self.tabBarController.tabBar.hidden = NO;
   self.tabBarController.selectedIndex = 0;
 }
@@ -120,9 +120,10 @@
   [wastePoint setLatitudeValue:currentLocation.coordinate.latitude];
   [wastePoint setLongitudeValue:currentLocation.coordinate.longitude];
   [WastePointUploader uploadAllLocalWPs];
-  self.controller.wastePointAddedSuccessfully = YES;  
-  [self dismissViewControllerAnimated:YES completion:^(void){
-  }];
+  self.controller.wastePointAddedSuccessfully = YES;
+  
+  [self.navigationController popViewControllerAnimated:NO];
+
 }
 
 - (IBAction)takePicture:(id)sender {
