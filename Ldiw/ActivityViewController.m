@@ -23,6 +23,7 @@
 #import "WastePoint.h"
 #import "Image.h"
 #import "SuccessView.h"
+#import "Constants.h"
 
 #import "WastePointUploader.h"
 
@@ -135,13 +136,19 @@
 {
   if (viewController==[tabBarController.viewControllers objectAtIndex:1]) {
     {
-      UIActionSheet  *sheet = [[UIActionSheet alloc]
-                               initWithTitle:NSLocalizedString(@"pleaseAddPhotoTitle", nil)
-                               delegate:self
-                               cancelButtonTitle:NSLocalizedString(@"cancel",nil)                                   destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
-                               otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
-      sheet.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-      [sheet showInView:self.tabBarController.tabBar];
+      if (([CLLocationManager locationServicesEnabled] &&
+           [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)) {
+        UIActionSheet  *sheet = [[UIActionSheet alloc]
+                                 initWithTitle:NSLocalizedString(@"pleaseAddPhotoTitle", nil)
+                                 delegate:self
+                                 cancelButtonTitle:NSLocalizedString(@"cancel",nil)                                   destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
+                                 otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
+        sheet.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [sheet showInView:self.tabBarController.tabBar];
+      } else {
+        [self showHudWarning];
+      }
+      
     }
     return NO;
   }
@@ -247,6 +254,30 @@
  
   return cell;
 }
+
+
+- (void)showHudWarning
+{
+  MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+
+  [self.view addSubview:hud];
+  hud.delegate = self;
+  hud.customView = [[UIImageView alloc] initWithImage:
+                    [UIImage imageNamed:@"pin_1"]];
+  hud.mode = MBProgressHUDModeCustomView;
+  hud.opacity = 0.8;
+  hud.color=[UIColor colorWithRed:0.75 green:0.75 blue:0.72 alpha:1];
+  hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
+  hud.detailsLabelFont = [UIFont fontWithName:kFontNameBold size:17];
+  [hud showWhileExecuting:@selector(waitForSomeSeconds)
+                 onTarget:self withObject:nil animated:YES];
+  
+}
+
+- (void)waitForSomeSeconds {
+  sleep(3);
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

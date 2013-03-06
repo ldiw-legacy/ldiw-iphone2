@@ -122,8 +122,6 @@
 - (IBAction)addPressed:(id)sender
 {
   
-  if([CLLocationManager locationServicesEnabled] &&
-     [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
     CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
     [wastePoint setLatitudeValue:currentLocation.coordinate.latitude];
     [wastePoint setLongitudeValue:currentLocation.coordinate.longitude];
@@ -131,28 +129,6 @@
     self.controller.wastePointAddedSuccessfully = YES;
 
     [self.navigationController popViewControllerAnimated:NO];
-  } else {
-    [self showHudWarning];
-  }
-  
-}
-- (void)showHudWarning
-{
-  MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
-
-  [self.view addSubview:hud];
-  hud.delegate = self;
-  hud.customView = [[UIImageView alloc] initWithImage:
-                    [UIImage imageNamed:@"pin_1"]];
-  hud.mode = MBProgressHUDModeCustomView;
-  hud.opacity = 0.5;
-  hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
-  [hud showWhileExecuting:@selector(waitForSomeSeconds)
-                 onTarget:self withObject:nil animated:YES];
-}
-
-- (void)waitForSomeSeconds {
-  sleep(3);
 }
 
 
