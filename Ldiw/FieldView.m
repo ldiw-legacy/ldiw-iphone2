@@ -39,7 +39,7 @@
     
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kLabelTextLength, 30)];
     [nameLabel setText:field.label];
-    [nameLabel setFont:[UIFont fontWithName:kFontNameBold size:kWPLabelTextSize]];
+    [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
     [nameLabel setBackgroundColor:[UIColor clearColor]];
     [bg addSubview:nameLabel];
     

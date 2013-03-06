@@ -16,6 +16,7 @@
 #import "Database+WPField.h"
 #import "WastePointUploader.h"
 #import "Database+Server.h"
+#import "Constants.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -35,6 +36,7 @@
   if (self) {
     self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:image];
     [self.wastePoint setIdValue:0];
+    self.view.backgroundColor=kViewBackroundColor;
   }
   return self;
 }
