@@ -5,6 +5,7 @@
 // Custom logic goes here.
 
 - (BOOL)isCompositionField:(BOOL)composition {
+//  return NO;
   NSString *fieldName = self.field_name;
   BOOL fieldIsComposition = NO;
   
