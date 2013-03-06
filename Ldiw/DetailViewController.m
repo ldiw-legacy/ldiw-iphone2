@@ -25,7 +25,7 @@
 @property (strong, nonatomic) NSString *selectedFieldName;
 @end
 
-@implementation DetailViewController 
+@implementation DetailViewController
 
 
 @synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews;
@@ -44,7 +44,7 @@
   [self.navigationItem setHidesBackButton:YES];
   self.tabBarController.tabBar.hidden=YES;
   [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
-
+  
 }
 
 - (void)viewDidLoad
@@ -60,7 +60,7 @@
   [cancelButton addTarget:self action:@selector(cancelPressed:) forControlEvents:UIControlEventTouchUpInside];
   [cancelButton setTitle:NSLocalizedString(@"cancel",nil) forState:UIControlStateNormal];
   [DesignHelper setBarButtonTitleAttributes:cancelButton];
-
+  
   UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
   self.navigationItem.leftBarButtonItem = cancelBarButton;
   
@@ -72,10 +72,10 @@
   [addButton addTarget:self action:@selector(addPressed:) forControlEvents:UIControlEventTouchUpInside];
   [addButton setTitle:NSLocalizedString(@"add", nil)  forState:UIControlStateNormal];
   [DesignHelper setBarButtonTitleAttributes:addButton];
-
+  
   UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
   self.navigationItem.rightBarButtonItem = addBarButton;
-
+  
   UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
   title.text = NSLocalizedString(@"addNewTitle", nil);
   [DesignHelper setNavigationTitleStyle:title];
@@ -100,8 +100,8 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidUnload {
@@ -119,24 +119,28 @@
 
 - (IBAction)addPressed:(id)sender
 {
-  CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
-  [wastePoint setLatitudeValue:currentLocation.coordinate.latitude];
-  [wastePoint setLongitudeValue:currentLocation.coordinate.longitude];
-  [WastePointUploader uploadAllLocalWPs];
-  self.controller.wastePointAddedSuccessfully = YES;
+  [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
+    [wastePoint setLatitudeValue:location.coordinate.latitude];
+    [wastePoint setLongitudeValue:location.coordinate.longitude];
+    [WastePointUploader uploadAllLocalWPs];
+    self.controller.wastePointAddedSuccessfully = YES;
+    
+  } errorBlock:^(NSError *error) {
+    MSLog(@"Could not get location for map");
+    [self.navigationController popViewControllerAnimated:NO];
+  }];
   
-  [self.navigationController popViewControllerAnimated:NO];
-
+  
 }
 
 - (IBAction)takePicture:(id)sender {
-
+  
   UIImagePickerController *picker = [[UIImagePickerController alloc] init];
   if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
   {
     [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
   } else {[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary]; }
-
+  
   picker.delegate = self;
   [self presentViewController:picker animated:YES completion:nil];
 }
@@ -159,7 +163,7 @@
   UIImageView *lefbar = [[UIImageView alloc]initWithFrame:leftRect];
   lefbar.image = [UIImage imageNamed:@"inputfield_element"];
   [tbar addSubview:lefbar];
-
+  
   //Dim
   CGRect screenRect = [[UIScreen mainScreen] bounds];
   self.dimView = [[UIView alloc] initWithFrame:screenRect];
@@ -169,11 +173,11 @@
   [UIView animateWithDuration:0.5
                    animations:^{self.dimView.alpha = 0.75;}
                    completion:^(BOOL finished) {
-
+                     
                    }];
-
+  
   self.navigationController.navigationBarHidden = YES;
-
+  
   self.insertTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 320, 100)];
   [self.view addSubview:self.insertTextLabel];
   self.insertTextLabel.text = @"Enter Comment";
@@ -181,7 +185,7 @@
   self.insertTextLabel.font = [UIFont fontWithName:@"Caecilia-Heavy" size:28];
   self.insertTextLabel.textAlignment = UITextAlignmentCenter;
   self.insertTextLabel.backgroundColor = [UIColor clearColor];
-
+  
   //Button
   UIImage *confirmImage = [UIImage imageNamed:@"confirm_input_normal.png"];
   UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -189,7 +193,7 @@
   [confirmButton setBackgroundImage:confirmImage forState:UIControlStateNormal];
   [confirmButton setBackgroundImage:[UIImage imageNamed:@"confirm_input_pressed.png"] forState:UIControlStateHighlighted];
   [confirmButton addTarget:self action:@selector(confirmPressed:) forControlEvents:UIControlEventTouchUpInside];
-
+  
   [tbar addSubview:confirmButton];
   return tbar;
   
@@ -231,7 +235,7 @@
   UITextField *textfield = [[UITextField alloc] init];
   textfield.delegate = self;
   [self.view addSubview:textfield];
-
+  
   UIView *mytoolbar = [self keyboardAccessoryView];
   textfield.inputAccessoryView = mytoolbar;
   [textfield becomeFirstResponder];
@@ -252,7 +256,7 @@
   UITextView *textView = [[UITextView alloc]init];
   textView.delegate = self;
   [self.view addSubview:textView];
-
+  
   UIView *mytoolbar = [self keyboardAccessoryView];
   textView.inputAccessoryView = mytoolbar;
   [textView becomeFirstResponder];
@@ -278,7 +282,7 @@
 - (void)addDataPressedForField:(NSString *)fieldName {
   [self setSelectedFieldName:fieldName];
   WPField *field = [[Database sharedInstance] findWPFieldWithFieldName:fieldName orLabel:nil];
-
+  
   if ([field.type isEqualToString:@"text"]) {
     [self showCustomTextPad];
   } else {

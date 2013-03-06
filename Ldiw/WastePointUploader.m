@@ -11,6 +11,7 @@
 #import "Database+Server.h"
 #import "Database+WP.h"
 #import "User.h"
+#import "Reachability.h"
 
 #define kCreateNewWPPath @"?q=api/wp.json"
 
@@ -58,7 +59,31 @@
 + (void)uploadAllLocalWPs {
   MSLog(@"LOCAL WPs COUNT: %i", [[Database sharedInstance] listWastePointsWithNoId].count);
   NSMutableArray *localWPs = [NSMutableArray arrayWithArray:[[Database sharedInstance] listWastePointsWithNoId]];
-  [self uploadAllLocalWPsWithArray:localWPs];
+  if (localWPs.count <= 0 ) {
+    return;
+  }
+  
+  Reachability *reachability = [Reachability reachabilityForInternetConnection];
+  [reachability startNotifier];
+  
+  NetworkStatus status = [reachability currentReachabilityStatus];
+  int userUploadSetting = [[Database sharedInstance] currentUser].uploadWifiOnlyValue;
+  
+  if(status == NotReachable)
+  {
+    //No internet
+    MSLog(@"No Internet connection");
+  }
+  else if (status == ReachableViaWiFi && (userUploadSetting == ReachableViaWiFi || userUploadSetting == ReachableViaWWAN))
+  {
+    //WiFi and 3G
+    MSLog(@"-- WIFI is Active!");
+    [WastePointUploader uploadAllLocalWPs];
+  }
+  else
+  {
+    MSLog(@"-- No 3G upload is allowed!");
+  }
 }
 
 + (void)uploadAllLocalWPsWithArray:(NSMutableArray *)WPs {

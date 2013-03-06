@@ -13,6 +13,7 @@
 #import "LocationManager.h"
 #import "BaseUrlRequest.h"
 #import "DesignHelper.h"
+#import "WastePointUploader.h"
 
 @implementation AppDelegate
 
@@ -30,7 +31,7 @@
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
-
+  
   return YES;
 }
 
@@ -50,13 +51,13 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
   // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-  
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   [FBSession.activeSession handleDidBecomeActive];
+  [WastePointUploader uploadAllLocalWPs];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -70,20 +71,5 @@
 
 - (void)locationChanged:(NSNotification *)notification {
   MSLog(@"Got location changed notification");
-//  CLLocation *location = (CLLocation *)notification.object;
-//  NSString *serverBox = [[Database sharedInstance] bBox];
-//  if (serverBox) {
-//    MSLog(@"Server box is present, check if user is inside box");
-//    BOOL userIsInsideBox = [[LocationManager sharedManager] location:location IsInsideBox:serverBox];
-//    if (!userIsInsideBox) {
-//      MSLog(@"User moved out of the box");
-//      [[[NetworkRequest sharedHTTPClient] operationQueue] cancelAllOperations];
-//      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-//        MSLog(@"New base url loaded");
-//      } failure:^(void) {
-//        MSLog(@"Server info loading fail");
-//      }];
-//    }
-//  }
 }
 @end

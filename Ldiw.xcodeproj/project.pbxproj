@@ -34,6 +34,7 @@
 		13B6C7E716D3D35300B72B4A /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7DC16D3D35300B72B4A /* Server.m */; };
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
 		13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E216D3D35300B72B4A /* WPField.m */; };
+		13E84D8816E77450003F7E34 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E84D8716E77450003F7E34 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		534CCF0F16D210590004532F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF0E16D210590004532F /* UIKit.framework */; };
 		534CCF1116D210590004532F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1016D210590004532F /* Foundation.framework */; };
 		534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1216D210590004532F /* CoreGraphics.framework */; };
@@ -232,6 +233,8 @@
 		13B6C7E016D3D35300B72B4A /* WastePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePoint.m; sourceTree = "<group>"; };
 		13B6C7E116D3D35300B72B4A /* WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPField.h; sourceTree = "<group>"; };
 		13B6C7E216D3D35300B72B4A /* WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPField.m; sourceTree = "<group>"; };
+		13E84D8616E77450003F7E34 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		13E84D8716E77450003F7E34 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		534CCF0B16D210590004532F /* Ldiw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ldiw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		534CCF0E16D210590004532F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		534CCF1016D210590004532F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -517,6 +520,16 @@
 			path = databaseObjects;
 			sourceTree = "<group>";
 		};
+		13E84D8516E77450003F7E34 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				13E84D8616E77450003F7E34 /* Reachability.h */,
+				13E84D8716E77450003F7E34 /* Reachability.m */,
+			);
+			name = Reachability;
+			path = Ldiw/apis/Reachability;
+			sourceTree = "<group>";
+		};
 		534CCF0216D210580004532F = {
 			isa = PBXGroup;
 			children = (
@@ -613,6 +626,7 @@
 		534CCF3616D22D870004532F /* Apis */ = {
 			isa = PBXGroup;
 			children = (
+				13E84D8516E77450003F7E34 /* Reachability */,
 				139E722816DF8E0E008EDEE3 /* MBProgressHUD */,
 				139E721B16DF8E01008EDEE3 /* DCRoundSwitch */,
 				534CCF7D16D39F7D0004532F /* CSVParser */,
@@ -1176,6 +1190,7 @@
 				5A1FAA6916DFAAF800751FFF /* WastePointUploader.m in Sources */,
 				535C37DC16E0845B00131F50 /* Database+Image.m in Sources */,
 				535C37DF16E0D1E000131F50 /* CompositionView.m in Sources */,
+				13E84D8816E77450003F7E34 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
