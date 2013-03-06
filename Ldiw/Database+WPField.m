@@ -157,7 +157,9 @@
 }
 
 - (NSArray *)typicalValuesForField:(WPField *)field {
-  NSArray *sortedArray = [[field.typicalValues allObjects] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+  NSMutableArray *valuesArray = [NSMutableArray arrayWithArray:[field.typicalValues allObjects]];
+  [valuesArray addObjectsFromArray:[field.allowedValues allObjects]];
+  NSArray *sortedArray = [valuesArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
     NSString *first = [(TypicalValue*)a value];
     NSString *second = [(TypicalValue*)b value];
     return [first compare:second options:NSNumericSearch];

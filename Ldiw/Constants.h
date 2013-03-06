@@ -46,6 +46,7 @@
 #define kKeyPhotos @"photos"
 
 // FONTS
+#define kCustomFont @"Caecilia-Heavy"
 #define kFontNameBold @"HelveticaNeue-Bold"
 #define kFontName @"HelveticaNeue"
 #define kWPLabelTextSize 13

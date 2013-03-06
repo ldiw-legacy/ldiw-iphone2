@@ -39,7 +39,7 @@
     
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kLabelTextLength, 30)];
     [nameLabel setText:field.label];
-    [nameLabel setFont:[UIFont fontWithName:kFontNameBold size:kWPLabelTextSize]];
+    [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
     [nameLabel setBackgroundColor:[UIColor clearColor]];
     [bg addSubview:nameLabel];
     
@@ -57,7 +57,7 @@
     [addDataBtn addTarget:self action:@selector(addDataPressed) forControlEvents:UIControlEventTouchUpInside];
     [bg addSubviewToRightBottomCorner:addDataBtn withPadding:kContentPaddingFromSide];
     
-    if ([field.typicalValues count] > 0) {
+    if ([field.typicalValues count] > 0 || [field.allowedValues count] > 0) {
       [self addTypicalValueFields];
     }
     

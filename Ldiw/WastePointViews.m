@@ -24,20 +24,23 @@
     [self setWastePoint:wp];
     [self setFieldDelegate:delegate];
     [self addNonCompFields];
-    [self addCompFields];
+//    [self addCompFields];
   }
   return self;
 }
 
 - (void)addNonCompFields {
   
-  NSArray *nonCompFields = [[Database sharedInstance] listAllNonCompositionFields];
+  NSArray *nonCompFields = [[Database sharedInstance] listAllWPFields];
+//  NSArray *nonCompFields = [[Database sharedInstance] listAllNonCompositionFields];
   
   for (WPField *wpField in nonCompFields) {
     FieldView *field = [[FieldView alloc] initWithWPField:wpField];
     [field setDelegate:fieldDelegate];
-    [fieldsDictionary setObject:field forKey:wpField.field_name];
-    [self addSubviewToBottom:field];
+    if (wpField.field_name) {
+      [fieldsDictionary setObject:field forKey:wpField.field_name];
+      [self addSubviewToBottom:field];
+    }
   }
 }
 

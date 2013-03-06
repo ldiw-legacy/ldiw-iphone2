@@ -15,9 +15,11 @@
 #define kContentPaddingFromSide 10.0f
 #define kTopPadding 5.0f
 #define kContentWidth 300.0f
+#define kLabelTextLength 230.0f
 #define kCompositionElementHeight 100.0f
 #define kCheckButtonSize 20.0f
-#define kLabelHeight 58.0f
+#define kLabelHeight 38.0f
+#define kCheckmarkPadding 13.0f
 
 
 @implementation CompositionView
@@ -33,7 +35,7 @@
     bg.layer.masksToBounds = YES;
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kLabelHeight)];
     [nameLabel setText:field.label];
-    [nameLabel setFont:[UIFont fontWithName:kFontNameBold size:kWPLabelTextSize]];
+    [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
     [nameLabel setBackgroundColor:[UIColor clearColor]];
 
     [bg addSubviewToBottom:nameLabel];
@@ -50,32 +52,27 @@
   NSArray *valuesArray = [[Database sharedInstance] allowedValuesForField:self.field];
   [self setTickButtonArray:[NSMutableArray array]];
   
+  UIView *typicalValueView = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kContentPaddingFromSide, kContentWidth, 0)];
+  
   for (int i = 0; i < [valuesArray count]; i++) {
     AllowedValue *value = [valuesArray objectAtIndex:i];
-    NSString *allowedValueValue = value.value;
-
-    UIView *gridElement = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, kCompositionElementHeight)];
-
-    CGRect labelRect = CGRectMake(kContentPaddingFromSide, 0, gridElement.frame.size.width - kCheckButtonSize - 2 * kContentPaddingFromSide, gridElement.frame.size.height);
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:labelRect];
-    [nameLabel setNumberOfLines:0];
-    [nameLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    [nameLabel setText:allowedValueValue];
-    [nameLabel setFont:[UIFont fontWithName:kFontName size:kWPLabelTextSize]];
-    [nameLabel setBackgroundColor:[UIColor clearColor]];
-    [gridElement addSubview:nameLabel];
+    
+    UILabel *tValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, 0, kLabelTextLength, kLabelHeight)];
+    [tValueLabel setText:value.value];
+    [tValueLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
+    [tValueLabel setBackgroundColor:[UIColor clearColor]];
     
     UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect buttonRect = CGRectMake(gridElement.frame.size.width - kCheckButtonSize - kContentPaddingFromSide, gridElement.frame.size.height / 2 - (kCheckButtonSize / 2), kCheckButtonSize, kCheckButtonSize);
-    [checkButton setFrame:buttonRect];
+    [checkButton setFrame:CGRectMake(0, 0, 20, 20)];
     [checkButton setBackgroundImage:[UIImage imageNamed:@"tick_active"] forState:UIControlStateSelected];
     [checkButton setBackgroundImage:[UIImage imageNamed:@"tick_inactive"] forState:UIControlStateNormal];
     [checkButton setTag:i];
     [checkButton addTarget:self action:@selector(checkPressed:) forControlEvents:UIControlEventTouchUpInside];
     [tickButtonArray addObject:checkButton];
-    [gridElement addSubview:checkButton];    
-    [self addViewToGrid:gridElement];
+    [typicalValueView addSubviewToBottom:tValueLabel];
+    [typicalValueView addSubviewToRightBottomCorner:checkButton withRightPadding:kCheckmarkPadding andBottomPadding:kTopPadding];
   }
+  [self addSubviewToBottom:typicalValueView];
 }
 
 - (void)checkPressed:(UIButton *)sender {

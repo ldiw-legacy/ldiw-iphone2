@@ -12,8 +12,9 @@
 #import "ActivityViewController.h"
 #import "WastePointViews.h"
 #import "FieldView.h"
+#import "MBProgressHUD.h"
 
-@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate, UITextViewDelegate, FieldDelegate>
+@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate,UITextFieldDelegate, UITextViewDelegate, FieldDelegate, MBProgressHUDDelegate>
 
 @property (weak, nonatomic) id delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

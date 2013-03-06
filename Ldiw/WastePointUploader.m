@@ -78,7 +78,7 @@
   {
     //WiFi and 3G
     MSLog(@"-- WIFI is Active!");
-    [WastePointUploader uploadAllLocalWPs];
+    [WastePointUploader uploadAllLocalWPsWithArray:localWPs];
   }
   else
   {

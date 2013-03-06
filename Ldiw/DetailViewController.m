@@ -16,6 +16,7 @@
 #import "Database+WPField.h"
 #import "WastePointUploader.h"
 #import "Database+Server.h"
+#import "Constants.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -35,6 +36,7 @@
   if (self) {
     self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:image];
     [self.wastePoint setIdValue:0];
+    self.view.backgroundColor=kViewBackroundColor;
   }
   return self;
 }
@@ -119,18 +121,40 @@
 
 - (IBAction)addPressed:(id)sender
 {
-  [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-    [wastePoint setLatitudeValue:location.coordinate.latitude];
-    [wastePoint setLongitudeValue:location.coordinate.longitude];
-    [WastePointUploader uploadAllLocalWPs];
-    self.controller.wastePointAddedSuccessfully = YES;
-    
-  } errorBlock:^(NSError *error) {
-    MSLog(@"Could not get location for map");
-    [self.navigationController popViewControllerAnimated:NO];
-  }];
+  if([CLLocationManager locationServicesEnabled] &&
+     [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+    [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
+      [wastePoint setLatitudeValue:location.coordinate.latitude];
+      [wastePoint setLongitudeValue:location.coordinate.longitude];
+      [WastePointUploader uploadAllLocalWPs];
+      self.controller.wastePointAddedSuccessfully = YES;
+      [self.navigationController popViewControllerAnimated:NO];      
+    } errorBlock:^(NSError *error) {
+      MSLog(@"Could not get location for map");
+      [self.navigationController popViewControllerAnimated:NO];
+    }];
+  } else {
+    [self showHudWarning];
+  }
   
+}
+- (void)showHudWarning
+{
+  MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
   
+  [self.view addSubview:hud];
+  hud.delegate = self;
+  hud.customView = [[UIImageView alloc] initWithImage:
+                    [UIImage imageNamed:@"pin_1"]];
+  hud.mode = MBProgressHUDModeCustomView;
+  hud.opacity = 0.5;
+  hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
+  [hud showWhileExecuting:@selector(waitForSomeSeconds)
+                 onTarget:self withObject:nil animated:YES];
+}
+
+- (void)waitForSomeSeconds {
+  sleep(3);
 }
 
 - (IBAction)takePicture:(id)sender {
