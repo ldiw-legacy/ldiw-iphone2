@@ -33,7 +33,7 @@
     bg.layer.masksToBounds = YES;
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kLabelHeight)];
     [nameLabel setText:field.label];
-    [nameLabel setFont:[UIFont fontWithName:kFontNameBold size:kWPLabelTextSize]];
+    [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
     [nameLabel setBackgroundColor:[UIColor clearColor]];
 
     [bg addSubviewToBottom:nameLabel];
