@@ -5,8 +5,9 @@
 //  Created by sander on 2/18/13.
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
+#import "MBProgressHUD.h"
 
-@interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) BOOL  wastePointAddedSuccessfully;
