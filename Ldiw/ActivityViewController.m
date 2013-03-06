@@ -37,11 +37,11 @@
 ;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    // Custom initialization
+  }
+  return self;
 }
 
 - (void)viewDidLoad
@@ -54,9 +54,9 @@
   
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
-
+  
   //Segmented control in headerview
- 
+  
   UIImage *image2 = [UIImage imageNamed:@"feed_subtab_bg"];
   self.headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, image2.size.width, image2.size.height)];
   [self.view addSubview:self.headerView];
@@ -66,11 +66,11 @@
   
   self.headerView.nearbyButton.selected = YES;
   self.tableView.backgroundColor = kDarkBackgroundColor;
-
+  
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
-
+  
   [self showLoginViewIfNeeded];
   [self loadServerInformation];
 }
@@ -82,7 +82,7 @@
   if (self.wastePointAddedSuccessfully) {
     [self showSuccessBanner];
   }
- 
+  
 }
 
 -(void)showSuccessBanner
@@ -113,23 +113,23 @@
 
 - (void)nearbyPressed:(UIButton *)sender
 {
-  self.headerView.nearbyButton.selected=YES;
-  self.headerView.friendsButton.selected=NO;
-  self.headerView.showMapButton.selected=NO;
+  self.headerView.nearbyButton.selected = YES;
+  self.headerView.friendsButton.selected = NO;
+  self.headerView.showMapButton.selected = NO;
 }
 
 - (void)friendsPressed:(UIButton *)sender
 {
-  self.headerView.nearbyButton.selected=NO;
-  self.headerView.friendsButton.selected=YES;
-  self.headerView.showMapButton.selected=NO;
+  self.headerView.nearbyButton.selected = NO;
+  self.headerView.friendsButton.selected = YES;
+  self.headerView.showMapButton.selected = NO;
 }
 
 - (void)showMapPressed:(UIButton *)sender
 {
-  self.headerView.nearbyButton.selected=NO;
-  self.headerView.friendsButton.selected=NO;
-  self.headerView.showMapButton.selected=YES;
+  self.headerView.nearbyButton.selected = NO;
+  self.headerView.friendsButton.selected = NO;
+  self.headerView.showMapButton.selected = YES;
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
@@ -143,7 +143,7 @@
                                  delegate:self
                                  cancelButtonTitle:NSLocalizedString(@"cancel",nil)                                   destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
                                  otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
-        sheet.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
         [sheet showInView:self.tabBarController.tabBar];
       } else {
         [self showHudWarning];
@@ -156,14 +156,10 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-
 {
-  NSLog(@"Buttonindex %i",buttonIndex);
-  if (buttonIndex == 3) {
-    self.tabBarController.selectedIndex=0;
-  } else if (buttonIndex == 1)
-  {
-    UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+  self.tabBarController.selectedIndex = 0;  
+  if (buttonIndex == 1) {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
     } else {
@@ -171,13 +167,12 @@
     }
     picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
-    
   } else if (buttonIndex == 2) {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
-  } else {
+  } else if (buttonIndex != 3) {
     [self openDetailViewWithImage:nil];
   }
 }
@@ -187,24 +182,24 @@
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   DetailViewController *detail = [[DetailViewController alloc] initWithImage:cameraImage];
   detail.controller = self;
-  [self.navigationController pushViewController:detail animated:NO]; 
+  [self.navigationController pushViewController:detail animated:NO];
   [self dismissViewControllerAnimated:YES completion:nil];
-  detail.imageView.image=cameraImage;
-  detail.takePictureButton.alpha = 0;  
+  detail.imageView.image = cameraImage;
+  detail.takePictureButton.alpha = 0;
 }
 
 - (void)openDetailViewWithImage:(UIImage *)image {
   DetailViewController *detail = [[DetailViewController alloc] initWithImage:image];
   detail.takePictureButton.alpha = 1.0;
   detail.controller = self;
-  [self.navigationController pushViewController:detail animated:NO]; 
+  [self.navigationController pushViewController:detail animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
-  
+
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 
@@ -214,13 +209,13 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+  
   ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
-    cell.wastePointImageView.image = nil;
-    cell.userImageView.image = [UIImage imageNamed:@"pointmarker_feed"];
+  cell.wastePointImageView.image = nil;
+  cell.userImageView.image = [UIImage imageNamed:@"pointmarker_feed"];
   
   if (indexPath.row == 0) {
     cell.cellNameTitleLabel.text = @"Mike Rubbish";
@@ -230,28 +225,28 @@
     cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface2.jpg"]];
   } else if (indexPath.row == 1) {
     cell.cellNameTitleLabel.text = @"Missis Smith";
-       cell.wastePointImageView.image = [DesignHelper wastePointImage:[UIImage imageNamed:@"garbage01.jpg"]];
-      cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
+    cell.wastePointImageView.image = [DesignHelper wastePointImage:[UIImage imageNamed:@"garbage01.jpg"]];
+    cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
   } else {
     cell.cellNameTitleLabel.text = @"John Smith";
-   // ToDo cell height
+    // ToDo cell height
   }
-
+  
   [cell.wastePointImageView  sizeToFit];
-//  NSLog(@"wastepointView %@",NSStringFromCGRect(cell.wastePointImageView.frame));
+  //  NSLog(@"wastepointView %@",NSStringFromCGRect(cell.wastePointImageView.frame));
   [cell.cellNameTitleLabel sizeToFit];
   cell.cellSubtitleLabel.text = @"2 days ago, 3km from here";
   [cell.cellSubtitleLabel sizeToFit];
   cell.cellTitleLabel.text = @"added wastepoint";
   [cell.cellTitleLabel sizeToFit];
-
+  
   //ToDo cell height
-
- // CGFloat height = 5 + cell.userImageView.bounds.size.height + 6 + cell.cellSubtitleLabel.bounds.size.height + 5 + cell.wastePointImageView.bounds.size.height;
- // NSLog(@"cellheight %f", height);
-
+  
+  // CGFloat height = 5 + cell.userImageView.bounds.size.height + 6 + cell.cellSubtitleLabel.bounds.size.height + 5 + cell.wastePointImageView.bounds.size.height;
+  // NSLog(@"cellheight %f", height);
+  
   //cell.height=height;
- 
+  
   return cell;
 }
 
@@ -259,7 +254,7 @@
 - (void)showHudWarning
 {
   MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
-
+  
   [self.view addSubview:hud];
   hud.delegate = self;
   hud.customView = [[UIImageView alloc] initWithImage:
@@ -282,7 +277,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   //To Do cell height
-    return 186;
+  return 186;
 }
 
 - (void)loadWastePointList {
@@ -298,18 +293,18 @@
 }
 
 - (void)loadServerInformation {
-//  if ([[Database sharedInstance] userIsLoggedIn]) {
-    [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
-      if (result) {
-        MSLog(@"Need to load base server information");
-        [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-          [self loadWastePointList];
-        } failure:^(void) {
-          MSLog(@"Server info loading fail");
-        }];
-      }
-    }];
-//  }
+  //  if ([[Database sharedInstance] userIsLoggedIn]) {
+  [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
+    if (result) {
+      MSLog(@"Need to load base server information");
+      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+        [self loadWastePointList];
+      } failure:^(void) {
+        MSLog(@"Server info loading fail");
+      }];
+    }
+  }];
+  //  }
 }
 
 - (void)showHud {
