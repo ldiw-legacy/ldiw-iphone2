@@ -57,7 +57,7 @@
     [addDataBtn addTarget:self action:@selector(addDataPressed) forControlEvents:UIControlEventTouchUpInside];
     [bg addSubviewToRightBottomCorner:addDataBtn withPadding:kContentPaddingFromSide];
     
-    if ([field.typicalValues count] > 0) {
+    if ([field.typicalValues count] > 0 || [field.allowedValues count] > 0) {
       [self addTypicalValueFields];
     }
     
