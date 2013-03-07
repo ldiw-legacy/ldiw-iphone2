@@ -67,21 +67,21 @@
         // Check key
         if([[array objectAtIndex:0] isKindOfClass:[NSNumber class]])
         {
-          key = [[array objectAtIndex:0] stringValue];
+          value = [[array objectAtIndex:0] stringValue];
         }
         else if ([[array objectAtIndex:0] isKindOfClass:[NSString class]])
         {
-          key = [array objectAtIndex:0];
+          value = [array objectAtIndex:0];
         }
         
         // Check value
         if([[array objectAtIndex:1] isKindOfClass:[NSNumber class]])
         {
-          value = [[array objectAtIndex:1] stringValue];
+          key = [[array objectAtIndex:1] stringValue];
         }
         else if ([[array objectAtIndex:1] isKindOfClass:[NSString class]])
         {
-          value = [array objectAtIndex:1];
+          key = [array objectAtIndex:1];
         }
         
         [self createAllowedValueWithKey:key andValue:value forWPField:wpField];
