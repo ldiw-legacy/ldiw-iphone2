@@ -78,14 +78,18 @@
     [tValueLabel setBackgroundColor:[UIColor clearColor]];
     
     UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [checkButton setFrame:CGRectMake(0, 0, 20, 20)];
-    [checkButton setBackgroundImage:[UIImage imageNamed:@"tick_active"] forState:UIControlStateSelected];
-    [checkButton setBackgroundImage:[UIImage imageNamed:@"tick_inactive"] forState:UIControlStateNormal];
+    [checkButton setFrame:CGRectMake(0, 0, kContentWidth-kContentPaddingFromSide, tValueLabel.frame.size.height)];
+    [checkButton setImage:[UIImage imageNamed:@"tick_active"] forState:UIControlStateSelected];
+    [checkButton setImage:[UIImage imageNamed:@"tick_inactive"] forState:UIControlStateNormal];
+    checkButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    checkButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [checkButton setTag:i];
     [checkButton addTarget:self action:@selector(checkPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+    
     [tickButtonArray addObject:checkButton];
     [typicalValueView addSubviewToBottom:tValueLabel];
-    [typicalValueView addSubviewToRightBottomCorner:checkButton withRightPadding:kCheckmarkPadding andBottomPadding:kTopPadding];
+    [typicalValueView addSubviewToRightBottomCorner:checkButton withRightPadding:kCheckmarkPadding andBottomPadding:0];
 
   }
   [self addSubviewToBottom:typicalValueView];
