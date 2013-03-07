@@ -30,7 +30,6 @@
     [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session,FBSessionState state, NSError *error) {
       [self sessionStateChanged:session state:state error:error];
     }];
-
   } else {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRemoveHud object:nil];
   }
@@ -51,7 +50,7 @@
            
            NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[[Database sharedInstance] currentUser].uid, kFBUIDKey, [[Database sharedInstance] currentUser].token, kAccessTokenKey, nil];
            [LoginRequest logInWithParameters:parameters andFacebook:YES success:^(NSDictionary *success) {
-             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRemoveHud object:nil];
+             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDismissLoginView object:nil];
            } failure:^(NSError *error) {
              MSLog(@"LoginRequest error: %@", error);
              if (error.code == kUserAlreadyLoggedInErrorCode) {

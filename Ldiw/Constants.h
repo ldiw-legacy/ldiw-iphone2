@@ -61,9 +61,9 @@
 #define kTextSubtitleColor [UIColor colorWithRed:0.58 green:0.588 blue:0.545 alpha:1] /*#94968b*/
 #define kFieldDescriptionTextColor [UIColor colorWithRed:0.655 green:0.663 blue:0.675 alpha:1] /*#a7a9ac*/
 
-
 #define kNotificationShowHud @"showHud"
 #define kNotificationRemoveHud @"removeHud"
+#define kNotificationDismissLoginView @"dismissLoginView"
 
 // Upload settings
 #define kUploadWifiOnly 1

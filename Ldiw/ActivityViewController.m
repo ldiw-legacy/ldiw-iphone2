@@ -33,8 +33,8 @@
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView
-;
+@synthesize tableView, headerView, successView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,6 +49,7 @@
   [super viewDidLoad];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeViewController) name:kNotificationDismissLoginView object:nil];
   
   [self.tabBarController setDelegate:self];
   
@@ -71,18 +72,18 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   
-  [self showLoginViewIfNeeded];
+  [self showLoginViewIfNeeded];  
   [self loadServerInformation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  self.navigationController.navigationBarHidden=NO;
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = NO;
   self.tabBarController.tabBar.hidden = NO;
   if (self.wastePointAddedSuccessfully) {
     [self showSuccessBanner];
   }
-  
 }
 
 -(void)showSuccessBanner
@@ -313,6 +314,9 @@
 
 - (void)removeHud {
   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
+- (void)removeViewController {
   [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
