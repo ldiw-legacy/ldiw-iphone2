@@ -28,6 +28,13 @@
     loginPath = kLoginPath;
   }
   
+  NSURL *url = [[[LoginClient sharedLoginClient] baseURL] URLByAppendingPathComponent:loginPath];
+  NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];
+  for (NSHTTPCookie *cookie in cookies)
+  {
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+  }
+  
   [[LoginClient sharedLoginClient] postPath:loginPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     if ([responseObject isKindOfClass:[NSData class]]) {
       NSError *error;
