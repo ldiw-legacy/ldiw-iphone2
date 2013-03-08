@@ -242,6 +242,8 @@
   [self.dimView removeFromSuperview];
   [textInputField resignFirstResponder];
   [myTextInputView resignFirstResponder];
+  textInputField=nil;
+  myTextInputView=nil;
 }
 
 -(void)viewDidDisappear:(BOOL)animated
