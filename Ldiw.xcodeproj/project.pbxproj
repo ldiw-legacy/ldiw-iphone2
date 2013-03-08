@@ -35,6 +35,8 @@
 		13B6C7E916D3D35300B72B4A /* WastePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E016D3D35300B72B4A /* WastePoint.m */; };
 		13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C7E216D3D35300B72B4A /* WPField.m */; };
 		13E84D8816E77450003F7E34 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E84D8716E77450003F7E34 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		13F544F616E9FD6600C6C3C4 /* tick_inactive_wide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F544F516E9FD6600C6C3C4 /* tick_inactive_wide@2x.png */; };
+		13F544F816E9FF1A00C6C3C4 /* tick_active_wide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F544F716E9FF1A00C6C3C4 /* tick_active_wide@2x.png */; };
 		534CCF0F16D210590004532F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF0E16D210590004532F /* UIKit.framework */; };
 		534CCF1116D210590004532F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1016D210590004532F /* Foundation.framework */; };
 		534CCF1316D210590004532F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CCF1216D210590004532F /* CoreGraphics.framework */; };
@@ -235,6 +237,8 @@
 		13B6C7E216D3D35300B72B4A /* WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPField.m; sourceTree = "<group>"; };
 		13E84D8616E77450003F7E34 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		13E84D8716E77450003F7E34 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		13F544F516E9FD6600C6C3C4 /* tick_inactive_wide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tick_inactive_wide@2x.png"; sourceTree = "<group>"; };
+		13F544F716E9FF1A00C6C3C4 /* tick_active_wide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tick_active_wide@2x.png"; sourceTree = "<group>"; };
 		534CCF0B16D210590004532F /* Ldiw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ldiw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		534CCF0E16D210590004532F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		534CCF1016D210590004532F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -822,6 +826,8 @@
 				C581F28A16D278E6003A2FA2 /* signin_btn_pressed@2x.png */,
 				C581F28B16D278E6003A2FA2 /* splashlogo@2x.png */,
 				C581F28C16D278E6003A2FA2 /* tick_active@2x.png */,
+				13F544F716E9FF1A00C6C3C4 /* tick_active_wide@2x.png */,
+				13F544F516E9FD6600C6C3C4 /* tick_inactive_wide@2x.png */,
 				C581F28D16D278E6003A2FA2 /* tick_inactive@2x.png */,
 				C581F28E16D278E6003A2FA2 /* wastetype_glass@2x.png */,
 				C581F28F16D278E6003A2FA2 /* wastetype_other@2x.png */,
@@ -1099,6 +1105,8 @@
 				C583439616DBBB80005F3330 /* DetailViewController.xib in Resources */,
 				53E729E616DCB6F200AC8E35 /* AccountViewController.xib in Resources */,
 				139E721A16DF6CD9008EDEE3 /* MySettingsViewController.xib in Resources */,
+				13F544F616E9FD6600C6C3C4 /* tick_inactive_wide@2x.png in Resources */,
+				13F544F816E9FF1A00C6C3C4 /* tick_active_wide@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

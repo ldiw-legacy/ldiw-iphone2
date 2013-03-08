@@ -20,6 +20,7 @@
 #define kDescriptionTopPadding 32.0f
 #define kCheckmarkPadding 13.0f
 #define kContentWidth 300.0f
+#define kButtonContentWidth 320.0f
 
 @implementation FieldView
 @synthesize wastePointField, delegate, tickButtonArray, valueLabel;
@@ -66,7 +67,7 @@
 }
 
 - (void)addTypicalValueFields {
-  UIView *typicalValueView = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kContentPaddingFromSide, kContentWidth, 0)];
+  UIView *typicalValueView = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kContentPaddingFromSide, kButtonContentWidth, 0)];
   NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];
   [self setTickButtonArray:[NSMutableArray array]];
 
@@ -78,9 +79,9 @@
     [tValueLabel setBackgroundColor:[UIColor clearColor]];
     
     UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [checkButton setFrame:CGRectMake(0, 0, kContentWidth-kContentPaddingFromSide, tValueLabel.frame.size.height)];
-    [checkButton setImage:[UIImage imageNamed:@"tick_active"] forState:UIControlStateSelected];
-    [checkButton setImage:[UIImage imageNamed:@"tick_inactive"] forState:UIControlStateNormal];
+    [checkButton setFrame:CGRectMake(0, 0, kContentWidth, tValueLabel.frame.size.height)];
+    [checkButton setImage:[UIImage imageNamed:@"tick_active_wide"] forState:UIControlStateSelected];
+    [checkButton setImage:[UIImage imageNamed:@"tick_inactive_wide"] forState:UIControlStateNormal];
     checkButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     checkButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [checkButton setTag:i];
