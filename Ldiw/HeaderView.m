@@ -23,32 +23,36 @@
       UIImage *middleSegment = [UIImage imageNamed:@"subtab_middle_normal"];
       UIImage *rightSegment = [UIImage imageNamed:@"subtab_right_normal"];
       UIImage *selectedleftSegment = [UIImage imageNamed:@"subtab_left_pressed"];
-      UIImage *selectedmiddleSegment = [UIImage imageNamed:@"subtab_middle_pressed"];
+   //   UIImage *selectedmiddleSegment = [UIImage imageNamed:@"subtab_middle_pressed"];
       UIImage *selectedrightSegment = [UIImage imageNamed:@"subtab_right_pressed"];
       
       self.nearbyButton = [UIButton buttonWithType:UIButtonTypeCustom];
       self.friendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
       self.showMapButton = [UIButton buttonWithType:UIButtonTypeCustom];
       
-      self.nearbyButton.frame = CGRectMake( kButtonPadding, kButtonPadding, leftSegment.size.width, leftSegment.size.height );
+      self.nearbyButton.frame = CGRectMake( kButtonPadding + middleSegment.size.width/2, kButtonPadding, leftSegment.size.width, leftSegment.size.height );
       [self.nearbyButton setBackgroundImage:leftSegment forState:UIControlStateNormal];
       [self.nearbyButton setBackgroundImage:selectedleftSegment forState:UIControlStateSelected];
       [self.nearbyButton setTitle:NSLocalizedString(@"activities.nearbyButton", nil) forState:UIControlStateNormal];
       [DesignHelper setUpHeaderViewButton:self.nearbyButton];
-      
+
+
+      //Removed Friends button temporary
+      /*
      self.friendsButton.frame = CGRectMake( kButtonPadding + leftSegment.size.width, kButtonPadding, middleSegment.size.width, middleSegment.size.height );
       [self.friendsButton setTitle:NSLocalizedString(@"activities.friendsButton", nil) forState:UIControlStateNormal];
       [self.friendsButton setBackgroundImage:middleSegment forState:UIControlStateNormal];
       [self.friendsButton setBackgroundImage:selectedmiddleSegment forState:UIControlStateSelected];
       [DesignHelper setUpHeaderViewButton:self.friendsButton];
+       */
       
-      self.showMapButton.frame = CGRectMake(kButtonPadding + leftSegment.size.width + middleSegment.size.width, kButtonPadding, rightSegment.size.width, rightSegment.size.height );
+      self.showMapButton.frame = CGRectMake(kButtonPadding + leftSegment.size.width +middleSegment.size.width/2, kButtonPadding, rightSegment.size.width, rightSegment.size.height);
       [self.showMapButton setTitle:NSLocalizedString(@"activities.showMapButton", nil) forState:UIControlStateNormal];
       [DesignHelper setUpHeaderViewButton:self.showMapButton];
       [self.showMapButton setBackgroundImage:rightSegment forState:UIControlStateNormal];
       [self.showMapButton setBackgroundImage:selectedrightSegment forState:UIControlStateSelected];
       [self addSubview:nearbyButton];
-      [self addSubview:friendsButton];
+     // [self addSubview:friendsButton];
       [self addSubview:showMapButton];
     }
     return self;
