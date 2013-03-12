@@ -41,3 +41,4 @@ back = "  Back";
 // SettingsView
 setting.upload.title = "Upload setting";
 setting.upload.description = "Upload data only when phone is connected via WIFI or 3G/WIFI";
+setting.logout = "Logout";

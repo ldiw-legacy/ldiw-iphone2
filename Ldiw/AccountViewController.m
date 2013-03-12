@@ -32,14 +32,35 @@
   UIImage *image = [UIImage imageNamed:@"logo_titlebar"];
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
   UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-  UIImage *settingsLogo = [UIImage imageNamed:@"actions_normal@2x"];
+  UIImage *settingsLogo = [UIImage imageNamed:@"actions_normal"];
   settingsButton.bounds = CGRectMake( 0, 0, 40, 30);
   [settingsButton setBackgroundImage:settingsLogo forState:UIControlStateNormal];
-  [settingsButton setBackgroundImage:[UIImage imageNamed:@"actions_pressed@2x"] forState:UIControlStateHighlighted];
+  [settingsButton setBackgroundImage:[UIImage imageNamed:@"actions_pressed"] forState:UIControlStateHighlighted];
   [settingsButton addTarget:self action:@selector(settingsPressed:) forControlEvents:UIControlEventTouchUpInside];
   UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
   [self.navigationItem setRightBarButtonItem:settingsBarButton];
+
+  UIButton *logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  UIImage *logoutImage = [UIImage imageNamed:@"cancel_normal"];
+  logoutButton.bounds = CGRectMake( 0, 0, logoutImage.size.width, logoutImage.size.height );
+  [logoutButton setBackgroundImage:logoutImage forState:UIControlStateNormal];
+  [logoutButton setBackgroundImage:[UIImage imageNamed:@"cancel_pressed"] forState:UIControlStateHighlighted];
+  [logoutButton addTarget:self action:@selector(logoutPressed:) forControlEvents:UIControlEventTouchUpInside];
+  [logoutButton setTitle:NSLocalizedString(@"setting.logout",nil) forState:UIControlStateNormal];
+  [DesignHelper setBarButtonTitleAttributes:logoutButton];
+  UIBarButtonItem *logoutBarButton = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
+  self.navigationItem.leftBarButtonItem = logoutBarButton;
+
 }
+
+- (void)logoutPressed:(UIButton *)sender
+{
+  NSLog(@"LogOut Pressed");
+  // Implement logOut
+  
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {
