@@ -32,8 +32,6 @@
 - (void)addNonCompFields {
   
   NSArray *nonCompFields = [[Database sharedInstance] listAllWPFields];
-//  NSArray *nonCompFields = [[Database sharedInstance] listAllNonCompositionFields];
-  
   for (WPField *wpField in nonCompFields) {
     FieldView *field = [[FieldView alloc] initWithWPField:wpField];
     [field setDelegate:fieldDelegate];

@@ -19,7 +19,7 @@
   }
 }
 
-- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues andAllowedValues:(NSArray *)allowedValues {
+- (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues andAllowedValues:(NSArray *)allowedValues andIndex:(NSNumber *)index {
   WPField *wpField = [self findWPFieldWithFieldName:(NSString *)fieldName orLabel:(NSString *)label];
   
   if (!wpField) {
@@ -31,7 +31,7 @@
     [wpField setMin:min];
     [wpField setSuffix:suffix];
     [wpField setType:type];
-    
+    [wpField setIndex:index];
     if (typicalValues) {
       for (NSArray *array in typicalValues) {
         NSString *key;
@@ -127,7 +127,13 @@
 
 - (NSArray *)listAllWPFields {
   NSArray *returnArray = [self listCoreObjectsNamed:@"WPField"];
-  return returnArray;
+  NSArray *sortedArray;
+  sortedArray = [returnArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+    NSNumber *first = [(WPField *)a index];
+    NSNumber *second = [(WPField *)b index];
+    return [first compare:second];
+  }];
+  return sortedArray;
 }
 
 - (NSArray *)listFieldsWithComposition:(BOOL)composition {
