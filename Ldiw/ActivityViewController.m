@@ -72,7 +72,7 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   
-  [self showLoginViewIfNeeded];  
+  
   [self loadServerInformation];
 }
 
@@ -84,6 +84,7 @@
   if (self.wastePointAddedSuccessfully) {
     [self showSuccessBanner];
   }
+  [self showLoginViewIfNeeded]; 
 }
 
 -(void)showSuccessBanner

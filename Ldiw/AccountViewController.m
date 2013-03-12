@@ -9,6 +9,7 @@
 #import "AccountViewController.h"
 #import "DesignHelper.h"
 #import "MySettingsViewController.h"
+#import "Database+Server.h"
 
 @interface AccountViewController ()
 
@@ -57,6 +58,10 @@
 {
   NSLog(@"LogOut Pressed");
   // Implement logOut
+  User *userinfo = [[Database sharedInstance] currentUser];
+  userinfo.sessid=nil;
+  userinfo.session_name=nil;
+  self.tabBarController.selectedIndex=0;
   
 }
 
