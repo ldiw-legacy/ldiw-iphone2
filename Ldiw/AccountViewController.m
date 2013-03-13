@@ -10,6 +10,7 @@
 #import "DesignHelper.h"
 #import "MySettingsViewController.h"
 #import "Database+Server.h"
+#import "FBHelper.h"
 
 @interface AccountViewController ()
 
@@ -61,6 +62,9 @@
   User *userinfo = [[Database sharedInstance] currentUser];
   userinfo.sessid=nil;
   userinfo.session_name=nil;
+  userinfo.token=nil;
+  [FBSession.activeSession close];
+  
   self.tabBarController.selectedIndex=0;
   
 }
