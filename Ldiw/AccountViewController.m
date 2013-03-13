@@ -64,7 +64,7 @@
   userinfo.session_name=nil;
   userinfo.token=nil;
   [FBSession.activeSession close];
-  
+  [[Database sharedInstance] saveContext];
   self.tabBarController.selectedIndex=0;
   
 }

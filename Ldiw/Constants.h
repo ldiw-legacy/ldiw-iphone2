@@ -13,8 +13,10 @@
 #if DEBUG
 #define MSLog(s, ...) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
   #define kFirstServerUrl @"http://test.letsdoitworld.org/"
+  #define kExternalWebLink @"http://test.letsdoitworld.org/user/register"
 #else
   #define kFirstServerUrl @"http://api.letsdoitworld.org/"
+  #define kExternalWebLink @"http://api.letsdoitworld.org/user/register"
   #define MSLog(s, ...) //
 #endif
 

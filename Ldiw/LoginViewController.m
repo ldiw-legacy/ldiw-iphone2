@@ -10,8 +10,9 @@
 #import "ActivityViewController.h"
 #import "DesignHelper.h"
 #import "FBHelper.h"
+#import "Constants.h"
 
-#define kExternalWebLink @"https://www.letsdoitworld.org/user/register"
+
 
 @interface LoginViewController ()
 
