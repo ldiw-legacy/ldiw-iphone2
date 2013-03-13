@@ -17,6 +17,7 @@
 #import "WastePointUploader.h"
 #import "Database+Server.h"
 #import "Constants.h"
+#import "CustomValue.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -223,25 +224,23 @@
   
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-  [wastePoint setValue:textView.text forCustomField:selectedFieldName];
-  [wastePointViews setValue:textView.text forField:selectedFieldName];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-  [wastePoint setValue:textField.text forCustomField:selectedFieldName];
-  [wastePointViews setValue:textField.text forField:selectedFieldName];
-}
 
 -(IBAction)confirmPressed:(id)sender {
   self.navigationController.navigationBarHidden = NO;
   self.navigationController.navigationBar.alpha = 1;
   [self.insertTextLabel removeFromSuperview];
   [self.dimView removeFromSuperview];
-  [textInputField resignFirstResponder];
-  [myTextInputView resignFirstResponder];
+  
+  if ([self.myTextInputView isFirstResponder]) {
+    [self.wastePoint setValue:self.myTextInputView.text forCustomField:self.selectedFieldName];
+    [self.wastePointViews setValue:self.myTextInputView.text forField:selectedFieldName];
+    [myTextInputView resignFirstResponder];
+  } else {
+    [self.wastePoint setValue:self.textInputField.text forCustomField:self.selectedFieldName];
+    [self.wastePointViews setValue:self.textInputField.text forField:selectedFieldName];
+    [textInputField resignFirstResponder];
+  }
+  
   textInputField=nil;
   myTextInputView=nil;
 }
@@ -309,10 +308,19 @@
   [self setSelectedFieldName:fieldName];
   WPField *field = [[Database sharedInstance] findWPFieldWithFieldName:fieldName orLabel:nil];
   
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fieldName == %@", fieldName];
+  NSSet *s = [self.wastePoint.customValues filteredSetUsingPredicate:predicate];
+  CustomValue *cv;
+  if (s.count == 1) {
+    cv = [s anyObject];
+  }
+  
   if ([field.type isEqualToString:@"text"]) {
     [self showCustomTextPad];
+    self.myTextInputView.text = cv.value;
   } else {
     [self showCustomNumPad];
+    self.textInputField.text = cv.value;
   }
 }
 
