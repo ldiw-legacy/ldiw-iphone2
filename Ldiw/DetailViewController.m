@@ -224,17 +224,6 @@
   
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-  [wastePoint setValue:textView.text forCustomField:selectedFieldName];
-  [wastePointViews setValue:textView.text forField:selectedFieldName];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-  [wastePoint setValue:textField.text forCustomField:selectedFieldName];
-  [wastePointViews setValue:textField.text forField:selectedFieldName];
-}
 
 -(IBAction)confirmPressed:(id)sender {
   self.navigationController.navigationBarHidden = NO;
