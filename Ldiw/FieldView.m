@@ -103,10 +103,14 @@
   [delegate addDataPressedForField:self.wastePointField.field_name];
 }
 
-- (void)checkPressed:(UIButton *)sender {
+-(void) deselctAllTics {
   for (UIButton *button in tickButtonArray) {
     [button setSelected:NO];
   }
+}
+
+- (void)checkPressed:(UIButton *)sender {
+  [self deselctAllTics];
   [sender setSelected:YES];
   
   NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];

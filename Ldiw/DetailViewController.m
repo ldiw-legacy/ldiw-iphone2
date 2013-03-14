@@ -226,6 +226,7 @@
 
 
 -(IBAction)confirmPressed:(id)sender {
+  [self.wastePointViews deselectAllTicsForField:self.selectedFieldName];
   self.navigationController.navigationBarHidden = NO;
   self.navigationController.navigationBar.alpha = 1;
   [self.insertTextLabel removeFromSuperview];

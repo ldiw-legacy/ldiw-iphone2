@@ -17,5 +17,6 @@
 
 - (id)initWithWastePoint:(WastePoint *)wp andDelegate:(id)delegate;
 - (void)setValue:(NSString *)value forField:(NSString *)fieldname;
+- (void) deselectAllTicsForField:(NSString *)fieldname;
 
 @end
