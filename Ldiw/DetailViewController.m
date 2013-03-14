@@ -25,19 +25,26 @@
 @property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UILabel *insertTextLabel;
 @property (strong, nonatomic) NSString *selectedFieldName;
+@property (strong, nonatomic) UIActivityIndicatorView *pictureLoading;
+
 @end
 
 @implementation DetailViewController
 
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, pictureLoading;
 
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
-    self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:image];
+    self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:nil];
     [self.wastePoint setIdValue:0];
-    self.view.backgroundColor=kViewBackroundColor;
+    self.view.backgroundColor = kViewBackroundColor;
+    if (image) {
+      [self addImageAsynchronously:image];
+      self.pictureLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+      
+    }
   }
   return self;
 }
@@ -48,13 +55,33 @@
   self.tabBarController.tabBar.hidden=YES;
   [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
   
+  if (self.pictureLoading) {
+    [self pictureLoadingAppearance];
+  }
+}
+
+- (void) pictureLoadingAppearance {
+  self.takePictureButton.alpha = 0;
+  self.pictureLoading.frame = self.imageView.frame;
+  [self.imageView addSubview:self.pictureLoading];
+  [self.pictureLoading startAnimating];
+}
+
+- (void) pictureLoaded {
+  if (self.pictureLoading) {
+    [self.pictureLoading stopAnimating];
+    [self.pictureLoading removeFromSuperview];
+    self.pictureLoading = nil;
+  }
 }
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   self.view.backgroundColor = kViewBackroundColor;
+  
   self.imageView.backgroundColor = kButtonBackgroundColor;
+  
   UIImage *image = [UIImage imageNamed:@"cancel_normal.png"];
   UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
   cancelButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
@@ -87,6 +114,24 @@
   
   [self addWastePointViews];
 }
+
+
+
+-(void) addImageAsynchronously:(UIImage*)image {
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    UIImage *smallImage = [PictureHelper saveImage:image forWastePoint:self.wastePoint];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [self setImageinImageView:smallImage];
+      [self pictureLoaded];
+    });
+  });
+}
+
+-(void) setImageinImageView:(UIImage*) image {
+  self.imageView.image = image;
+  self.takePictureButton.alpha = 0;
+}
+
 
 - (void)addWastePointViews {
   WastePointViews *wpViews = [[WastePointViews alloc] initWithWastePoint:wastePoint andDelegate:self];
@@ -175,9 +220,10 @@
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   
   [self dismissViewControllerAnimated:YES completion:nil];
-  self.imageView.image = cameraImage;
-  self.takePictureButton.alpha = 0;
+  [self addImageAsynchronously:cameraImage];
 }
+
+
 
 
 - (UIView *)keyboardAccessoryView {
