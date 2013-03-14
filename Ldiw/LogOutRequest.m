@@ -18,7 +18,6 @@
       NSError *error;
       responseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
     }
-
     success(responseObject);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     MSLog(@"Logout failed");
