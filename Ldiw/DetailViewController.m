@@ -62,6 +62,9 @@
 
 - (void) pictureLoadingAppearance {
   self.takePictureButton.alpha = 0;
+  if (!self.pictureLoading) {
+    self.pictureLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  }
   self.pictureLoading.frame = self.imageView.frame;
   [self.imageView addSubview:self.pictureLoading];
   [self.pictureLoading startAnimating];
@@ -116,8 +119,12 @@
 }
 
 
+- (void) addImageAsynchronouslyShowingSpinner:(UIImage*)image {
+  [self pictureLoadingAppearance];
+  [self addImageAsynchronously:image];
+}
 
--(void) addImageAsynchronously:(UIImage*)image {
+- (void) addImageAsynchronously:(UIImage*)image {
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     UIImage *smallImage = [PictureHelper saveImage:image forWastePoint:self.wastePoint];
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -220,7 +227,7 @@
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   
   [self dismissViewControllerAnimated:YES completion:nil];
-  [self addImageAsynchronously:cameraImage];
+  [self addImageAsynchronouslyShowingSpinner:cameraImage];
 }
 
 
