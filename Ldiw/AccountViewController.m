@@ -11,6 +11,7 @@
 #import "MySettingsViewController.h"
 #import "Database+Server.h"
 #import "FBHelper.h"
+#import "LogOutRequest.h"
 
 @interface AccountViewController ()
 
@@ -57,6 +58,17 @@
 - (void)logoutPressed:(UIButton *)sender
 {
   NSLog(@"LogOut Pressed");
+  
+  [LogOutRequest logOutUserWithSuccess:^(NSDictionary *responseDict) {
+    MSLog(@"Logoutrequst response %@", responseDict);
+    [self logout];
+  } failure:^(NSError *error){
+    MSLog(@"Logoutrequest error %@", error);
+    [self logout];  
+  }];
+}
+
+- (void)logout {
   // Implement logOut
   User *userinfo = [[Database sharedInstance] currentUser];
   userinfo.sessid = nil;
