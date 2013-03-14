@@ -302,6 +302,7 @@
 #pragma mark - FieldDelegate
 - (void)checkedValue:(NSString *)value forField:(NSString *)fieldName {
   [wastePoint setValue:value forCustomField:fieldName];
+  [self.wastePointViews setValue:@"" forField:fieldName];
 }
 
 - (void)addDataPressedForField:(NSString *)fieldName {
