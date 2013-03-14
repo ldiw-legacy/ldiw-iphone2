@@ -13,7 +13,7 @@
 
 @implementation PictureHelper
 
-+ (void)saveImage:(UIImage*)image forWastePoint:(WastePoint*)wp {
++ (UIImage*) saveImage:(UIImage*)image forWastePoint:(WastePoint*)wp {
   CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
   CFStringRef newUniqueIDString = CFUUIDCreateString(kCFAllocatorDefault, newUniqueID);
   //Unique Key
@@ -33,6 +33,7 @@
   
   CFRelease(newUniqueID);
   CFRelease(newUniqueIDString);
+  return resizedImage;
 }
 
 + (UIImage *)loadImageForWP:(WastePoint*)wp {

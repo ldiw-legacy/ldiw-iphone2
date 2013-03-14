@@ -186,8 +186,6 @@
   detail.controller = self;
   [self.navigationController pushViewController:detail animated:NO];
   [self dismissViewControllerAnimated:YES completion:nil];
-  detail.imageView.image = cameraImage;
-  detail.takePictureButton.alpha = 0;
 }
 
 - (void)openDetailViewWithImage:(UIImage *)image {
