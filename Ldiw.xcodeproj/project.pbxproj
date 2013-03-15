@@ -1203,7 +1203,10 @@
 				C5844BD216F25E7800359E0C /* AFURLConnectionOperation.m in Sources */,
 				C5844BD316F25E7800359E0C /* AFXMLRequestOperation.m in Sources */,
 				C5844BD416F25E7800359E0C /* UIImageView+AFNetworking.m in Sources */,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 582e8dc75d82c60d7e52ef427b4217e0f2c048b8
 				535A730D16F1EF55007B2CB7 /* LogOutRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
