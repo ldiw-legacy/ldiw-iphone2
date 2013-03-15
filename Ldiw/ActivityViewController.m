@@ -24,16 +24,16 @@
 #import "Image.h"
 #import "SuccessView.h"
 #import "Constants.h"
-
 #import "WastePointUploader.h"
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
 @property (strong, nonatomic) SuccessView *successView;
+@property (strong,nonatomic) NSArray *wastPointResultsArray;
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView;
+@synthesize tableView, headerView, successView,wastPointResultsArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -207,7 +207,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 18;
+  return self.wastPointResultsArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -215,40 +215,45 @@
   ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-  }
-  cell.wastePointImageView.image = nil;
-  cell.userImageView.image = [UIImage imageNamed:@"pointmarker_feed"];
-  
-  if (indexPath.row == 0) {
-    cell.cellNameTitleLabel.text = @"Mike Rubbish";
-    cell.wastePointImageView.image = [UIImage imageNamed:@"garbage005.jpg"];
-    cell.wastePointImageView.image = [DesignHelper wastePointImage:[UIImage imageNamed:@"garbage005.jpg"]];
-    NSLog(@"Wastepoint Image on %@",cell.wastePointImageView.image);
-    cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface2.jpg"]];
-  } else if (indexPath.row == 1) {
-    cell.cellNameTitleLabel.text = @"Missis Smith";
-    cell.wastePointImageView.image = [DesignHelper wastePointImage:[UIImage imageNamed:@"garbage01.jpg"]];
-    cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
-  } else {
-    cell.cellNameTitleLabel.text = @"John Smith";
-    // ToDo cell height
-  }
-  
-  [cell.wastePointImageView  sizeToFit];
-  //  NSLog(@"wastepointView %@",NSStringFromCGRect(cell.wastePointImageView.frame));
+  } 
+  cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
+
+  NSDictionary *dict = [self.wastPointResultsArray objectAtIndex:indexPath.row];
+ // NSLog(@"dict %@",dict );
+  NSString *wastpointID = [NSString stringWithFormat:@"%@", [dict valueForKey:@"id"]];
+  cell.cellNameTitleLabel.text = wastpointID;
+  NSString *photosString = [NSString stringWithFormat:@"%@", [dict valueForKey:@"photos"]];
+  NSString *trimmedString = nil;
+  MSLog(@"Photos %@",photosString);
+    if (photosString.length>3) {
+      cell.wastePointImageView.image=nil;
+      [cell.spinner startAnimating];
+      NSRange range = NSMakeRange(0, 4);
+      trimmedString = [photosString substringWithRange:range];
+      NSString *imageUrlString = [kFirstServerUrl stringByAppendingString:[kImageURLPath stringByAppendingString:wastpointID]];
+      NSString *imageUrlExtended = [imageUrlString stringByAppendingString:@"/"];
+      NSString *imageUrlFullString = [imageUrlExtended stringByAppendingString:trimmedString];
+     
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURL *imageUrl = [NSURL URLWithString:imageUrlFullString];
+        NSData *data = [NSData dataWithContentsOfURL:imageUrl];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          UIImage *image = [UIImage imageWithData:data];
+          cell.wastePointImageView.image = [DesignHelper wastePointImage:image];
+      [cell.spinner stopAnimating];
+          
+        });
+      });
+ 
   [cell.cellNameTitleLabel sizeToFit];
   cell.cellSubtitleLabel.text = @"2 days ago, 3km from here";
   [cell.cellSubtitleLabel sizeToFit];
-  cell.cellTitleLabel.text = @"added wastepoint";
+  cell.cellTitleLabel.text = @"Location - Estonia";
   [cell.cellTitleLabel sizeToFit];
-  
-  //ToDo cell height
-  
-  // CGFloat height = 5 + cell.userImageView.bounds.size.height + 6 + cell.cellSubtitleLabel.bounds.size.height + 5 + cell.wastePointImageView.bounds.size.height;
-  // NSLog(@"cellheight %f", height);
-  
-  //cell.height=height;
-  
+
+    }
+  cell.wastePointImageView.image=nil;
   return cell;
 }
 
@@ -289,6 +294,9 @@
   
   [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
+    //MSLog(@"Response array first object %@", [responseArray objectAtIndex:1] );
+    self.wastPointResultsArray=[[NSArray alloc] initWithArray:responseArray];
+    [self.tableView reloadData];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
   }];

@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UILabel *cellLocationLabel;
 @property (strong, nonatomic) UIImageView *userImageView;
 @property (strong, nonatomic) UIImageView *wastePointImageView;
+@property (strong, nonatomic)  UIActivityIndicatorView *spinner;
 @property (nonatomic) double height;
 
 @end

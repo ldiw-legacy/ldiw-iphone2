@@ -16,7 +16,7 @@
 @end
 
 @implementation ActivityCustomCell
-@synthesize cellNameTitleLabel, cellSubtitleLabel, cellTitleLabel, height, wastePointImageView,userImageView;
+@synthesize cellNameTitleLabel, cellSubtitleLabel, cellTitleLabel, height, wastePointImageView,userImageView,spinner;
 
 
 
@@ -73,13 +73,18 @@
   self.wastePointImageView = [[UIImageView alloc] initWithFrame:realwastepointImageRect];
 
 
+  self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+  
+  spinner.center = CGPointMake(wastePointImageView.center.x, wastePointImageView.center.y);
 
+  
   [bgView addSubview:userImageView];
   [bgView addSubview:secondImageView];
   [bgView addSubview:cellSubtitleLabel];
   [bgView addSubview:cellNameTitleLabel];
   [bgView addSubview:cellTitleLabel];
   [bgView addSubview:wastePointImageView];
+  [bgView addSubview:spinner];
   
   self.height = 5 + userImageView.bounds.size.height + 6 + self.cellSubtitleLabel.bounds.size.height + 5 + wastePointImageView.bounds.size.height;
   

@@ -24,6 +24,8 @@
 
 #define kLanguageCodeKey @"language_code"
 
+#define kImageURLPath @"ldiw_waste_map/photo/"
+
 #define kNotifycationUserDidExitRegion @"kNotifycatoinUserDidExitRegion"
 
 #define kAccessTokenKey @"access_token"
