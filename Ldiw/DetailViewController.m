@@ -286,12 +286,12 @@
   [self.dimView removeFromSuperview];
   
   if ([self.myTextInputView isFirstResponder]) {
-    [self.wastePoint setValue:self.myTextInputView.text forCustomField:self.selectedFieldName];
-    [self.wastePointViews setValue:self.myTextInputView.text forField:selectedFieldName];
+    NSString *str = [self.wastePoint setValue:self.myTextInputView.text forCustomField:self.selectedFieldName];
+    [self.wastePointViews setValue:str forField:selectedFieldName];
     [myTextInputView resignFirstResponder];
   } else {
-    [self.wastePoint setValue:self.textInputField.text forCustomField:self.selectedFieldName];
-    [self.wastePointViews setValue:self.textInputField.text forField:selectedFieldName];
+    NSString *str = [self.wastePoint setValue:self.textInputField.text forCustomField:self.selectedFieldName];
+    [self.wastePointViews setValue:str forField:selectedFieldName];
     [textInputField resignFirstResponder];
   }
   
