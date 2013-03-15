@@ -23,36 +23,48 @@
 #define kButtonContentWidth 320.0f
 
 @implementation FieldView
-@synthesize wastePointField, delegate, tickButtonArray, valueLabel;
+@synthesize wastePointField, delegate, tickButtonArray, valueLabel, enableEditing;
 
-- (id)initWithWPField:(WPField *)field {  
-
+- (id)initWithWPField:(WPField *)field forEditing:(BOOL)allowEdit {
   CGRect frame = CGRectMake(0, 0, 320, kWPFieldHeight);
   self = [super initWithFrame:frame];
   if (self) {
+    [self setEnableEditing:allowEdit];
     [self setWastePointField:field];
-    [self setBackgroundColor:kWPFieldBgColor];
-    UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kWPFieldHeight - kTopPadding)];
-    [bg setBackgroundColor:kWPFieldFGColor];
-    bg.layer.cornerRadius = 5;
-    bg.layer.masksToBounds = YES;
-    [self addSubview:bg];
-    
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kLabelTextLength, 30)];
-    [nameLabel setText:field.label];
-    [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
-    [nameLabel setBackgroundColor:[UIColor clearColor]];
-    [bg addSubview:nameLabel];
-    
-    UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kDescriptionTopPadding, kLabelTextLength, kWPDescripttionTextSize)];
-    [descriptionLabel setText:field.edit_instructions];
-    [descriptionLabel setFont:[UIFont fontWithName:kFontName size:kWPDescripttionTextSize]];
-    [descriptionLabel setBackgroundColor:[UIColor clearColor]];
-    [descriptionLabel setTextColor:kFieldDescriptionTextColor];
-    [self setValueLabel:descriptionLabel];
-    [bg addSubview:descriptionLabel];
-    
-    if (!field.allowedValues.count > 0) {
+    [self addContent];
+  }
+  return self;
+}
+
+- (id)initWithWPField:(WPField *)field {
+  self = [self initWithWPField:field forEditing:YES];
+  return self;
+}
+
+- (void)addContent {
+  [self setBackgroundColor:kWPFieldBgColor];
+  UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kWPFieldHeight - kTopPadding)];
+  [bg setBackgroundColor:kWPFieldFGColor];
+  bg.layer.cornerRadius = 5;
+  bg.layer.masksToBounds = YES;
+  [self addSubview:bg];
+  
+  UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kLabelTextLength, 30)];
+  [nameLabel setText:self.wastePointField.label];
+  [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
+  [nameLabel setBackgroundColor:[UIColor clearColor]];
+  [bg addSubview:nameLabel];
+  
+  UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kDescriptionTopPadding, kLabelTextLength, kWPDescripttionTextSize)];
+  [descriptionLabel setText:self.wastePointField.edit_instructions];
+  [descriptionLabel setFont:[UIFont fontWithName:kFontName size:kWPDescripttionTextSize]];
+  [descriptionLabel setBackgroundColor:[UIColor clearColor]];
+  [descriptionLabel setTextColor:kFieldDescriptionTextColor];
+  [self setValueLabel:descriptionLabel];
+  [bg addSubview:descriptionLabel];
+  
+  if (enableEditing) {
+    if (!self.wastePointField.allowedValues.count > 0) {
       UIButton *addDataBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
       [addDataBtn setImage:[UIImage imageNamed:@"plus_btn_normal"] forState:UIControlStateNormal];
       [addDataBtn setImage:[UIImage imageNamed:@"plus_btn_pressed"] forState:UIControlStateSelected];
@@ -60,13 +72,10 @@
       [bg addSubviewToRightBottomCorner:addDataBtn withPadding:kContentPaddingFromSide];
     }
     
-    
-    if ([field.typicalValues count] > 0 || [field.allowedValues count] > 0) {
+    if ([self.wastePointField.typicalValues count] > 0 || [self.wastePointField.allowedValues count] > 0) {
       [self addTypicalValueFields];
     }
-    
   }
-  return self;
 }
 
 - (void)addTypicalValueFields {

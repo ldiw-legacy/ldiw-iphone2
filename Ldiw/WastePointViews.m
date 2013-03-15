@@ -13,6 +13,7 @@
 #import "WPField.h"
 #import "FieldView.h"
 #import "CompositionView.h"
+#import "CustomValue.h"
 
 @implementation WastePointViews
 @synthesize wastePoint, fieldDelegate, fieldsDictionary;
@@ -23,10 +24,31 @@
     [self setFieldsDictionary:[NSMutableDictionary dictionary]];
     [self setWastePoint:wp];
     [self setFieldDelegate:delegate];
-    [self addNonCompFields];
+    
+    // If id=0, then let user edit fields
+    if (wastePoint.idValue == 0) {
+      [self addNonCompFields];
+    } else {
+    // Else show only fields that have a value
+      [self addOnlyFieldsWithData];
+    }
 //    [self addCompFields];
   }
   return self;
+}
+
+- (void)addOnlyFieldsWithData {
+  for (CustomValue *value in wastePoint.customValues) {
+    NSString *fieldname = value.fieldName;
+    NSString *data = value.value;
+    BOOL dataPresent = (![data isEqualToString:@"0"] && [data length] > 0);
+    WPField *fieldToAdd = [[Database sharedInstance] findWPFieldWithFieldName:fieldname orLabel:nil];
+    if (fieldToAdd && dataPresent) {
+      FieldView *fieldView = [[FieldView alloc] initWithWPField:fieldToAdd forEditing:NO];
+      [fieldView.valueLabel setText:data];
+      [self addSubviewToBottom:fieldView];
+    }
+  }
 }
 
 - (void)addNonCompFields {

@@ -28,5 +28,6 @@
 - (IBAction)takePicture:(id)sender;
 
 - (id)initWithImage:(UIImage *)image;
+- (id)initWithWastePoint:(WastePoint *)point;
 
 @end
