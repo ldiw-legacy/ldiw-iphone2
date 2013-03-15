@@ -26,10 +26,14 @@
 #import "Constants.h"
 #import "WastePointUploader.h"
 
+#define kCellHeightWithPicture 186
+#define kCellHeightNoPicture 86
+
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
 @property (strong, nonatomic) SuccessView *successView;
-@property (strong,nonatomic) NSArray *wastPointResultsArray;
+@property (strong, nonatomic) NSArray *wastPointResultsArray;
+@property (strong, nonatomic) NSMutableArray *cellHeightArray;
 @end
 
 @implementation ActivityViewController
@@ -210,19 +214,19 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+  ActivityCustomCell *cell=[self.tableView dequeueReusableCellWithIdentifier:@"Cell"forIndexPath:indexPath];
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   } 
   cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
 
-  NSDictionary *dict = [self.wastPointResultsArray objectAtIndex:indexPath.row];
- // NSLog(@"dict %@",dict );
-  NSString *wastpointID = [NSString stringWithFormat:@"%@", [dict valueForKey:@"id"]];
+  WastePoint *point=[wastPointResultsArray objectAtIndex:indexPath.row];
+  //NSLog(@"dict %@",point);
+  NSString *wastpointID = [NSString stringWithFormat:@"%@",point.id];
   cell.cellNameTitleLabel.text = wastpointID;
-  NSString *photosString = [NSString stringWithFormat:@"%@", [dict valueForKey:@"photos"]];
+  NSString *photosString = [NSString stringWithFormat:@"%@",point.photos];
   NSString *trimmedString = nil;
-  MSLog(@"Photos %@",photosString);
+  
     if (photosString.length>3) {
       cell.wastePointImageView.image=nil;
       [cell.spinner startAnimating];
@@ -245,7 +249,7 @@
       });
  
   [cell.cellNameTitleLabel sizeToFit];
-  cell.cellSubtitleLabel.text = @"2 days ago, 3km from here";
+ // cell.cellSubtitleLabel.text = desc;
   [cell.cellSubtitleLabel sizeToFit];
   cell.cellTitleLabel.text = @"Location - Estonia";
   [cell.cellTitleLabel sizeToFit];
