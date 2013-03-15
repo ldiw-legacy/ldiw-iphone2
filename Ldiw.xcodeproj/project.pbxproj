@@ -1194,7 +1194,6 @@
 				535C37DC16E0845B00131F50 /* Database+Image.m in Sources */,
 				535C37DF16E0D1E000131F50 /* CompositionView.m in Sources */,
 				13E84D8816E77450003F7E34 /* Reachability.m in Sources */,
-<<<<<<< HEAD
 				C5844BCC16F25E7800359E0C /* AFHTTPClient.m in Sources */,
 				C5844BCD16F25E7800359E0C /* AFHTTPRequestOperation.m in Sources */,
 				C5844BCE16F25E7800359E0C /* AFImageRequestOperation.m in Sources */,
@@ -1204,9 +1203,8 @@
 				C5844BD216F25E7800359E0C /* AFURLConnectionOperation.m in Sources */,
 				C5844BD316F25E7800359E0C /* AFXMLRequestOperation.m in Sources */,
 				C5844BD416F25E7800359E0C /* UIImageView+AFNetworking.m in Sources */,
-=======
+
 				535A730D16F1EF55007B2CB7 /* LogOutRequest.m in Sources */,
->>>>>>> 957329f6b8a08def71f1b001ed6be11af9c25128
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

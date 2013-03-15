@@ -159,7 +159,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  self.tabBarController.selectedIndex = 0;  
+  //self.tabBarController.selectedIndex = 0;
   if (buttonIndex == 1) {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
