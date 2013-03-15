@@ -56,4 +56,9 @@
   [fieldView setValue:value];
 }
 
+- (void) deselectAllTicsForField:(NSString *)fieldname {
+  FieldView *fieldView = (FieldView *)[fieldsDictionary objectForKey:fieldname];
+  [fieldView deselctAllTics];
+}
+
 @end

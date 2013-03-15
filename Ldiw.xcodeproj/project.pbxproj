@@ -56,6 +56,7 @@
 		534CCF7616D34D450004532F /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7516D34D450004532F /* ServerRequest.m */; };
 		534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7816D3725C0004532F /* WastepointRequest.m */; };
 		534CCF7C16D39F6E0004532F /* CSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CCF7B16D39F6E0004532F /* CSVParser.m */; };
+		535A730D16F1EF55007B2CB7 /* LogOutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 535A730C16F1EF55007B2CB7 /* LogOutRequest.m */; };
 		535C37D216DE4BA600131F50 /* FieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37D116DE4BA600131F50 /* FieldView.m */; };
 		535C37D516DF830200131F50 /* UIView+addSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37D416DF830200131F50 /* UIView+addSubView.m */; };
 		535C37DC16E0845B00131F50 /* Database+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 535C37DB16E0845700131F50 /* Database+Image.m */; };
@@ -271,6 +272,8 @@
 		534CCF7816D3725C0004532F /* WastepointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastepointRequest.m; sourceTree = "<group>"; };
 		534CCF7A16D39F6E0004532F /* CSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSVParser.h; path = Ldiw/apis/CCsvParser/CSVParser.h; sourceTree = "<group>"; };
 		534CCF7B16D39F6E0004532F /* CSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSVParser.m; path = Ldiw/apis/CCsvParser/CSVParser.m; sourceTree = "<group>"; };
+		535A730B16F1EF55007B2CB7 /* LogOutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogOutRequest.h; sourceTree = "<group>"; };
+		535A730C16F1EF55007B2CB7 /* LogOutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogOutRequest.m; sourceTree = "<group>"; };
 		535C37D016DE4BA600131F50 /* FieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldView.h; sourceTree = "<group>"; };
 		535C37D116DE4BA600131F50 /* FieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldView.m; sourceTree = "<group>"; };
 		535C37D316DF830200131F50 /* UIView+addSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+addSubView.h"; sourceTree = "<group>"; };
@@ -678,6 +681,8 @@
 				534CCF7816D3725C0004532F /* WastepointRequest.m */,
 				5A1FAA6716DFAAF800751FFF /* WastePointUploader.h */,
 				5A1FAA6816DFAAF800751FFF /* WastePointUploader.m */,
+				535A730B16F1EF55007B2CB7 /* LogOutRequest.h */,
+				535A730C16F1EF55007B2CB7 /* LogOutRequest.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1189,6 +1194,7 @@
 				535C37DC16E0845B00131F50 /* Database+Image.m in Sources */,
 				535C37DF16E0D1E000131F50 /* CompositionView.m in Sources */,
 				13E84D8816E77450003F7E34 /* Reachability.m in Sources */,
+<<<<<<< HEAD
 				C5844BCC16F25E7800359E0C /* AFHTTPClient.m in Sources */,
 				C5844BCD16F25E7800359E0C /* AFHTTPRequestOperation.m in Sources */,
 				C5844BCE16F25E7800359E0C /* AFImageRequestOperation.m in Sources */,
@@ -1198,6 +1204,9 @@
 				C5844BD216F25E7800359E0C /* AFURLConnectionOperation.m in Sources */,
 				C5844BD316F25E7800359E0C /* AFXMLRequestOperation.m in Sources */,
 				C5844BD416F25E7800359E0C /* UIImageView+AFNetworking.m in Sources */,
+=======
+				535A730D16F1EF55007B2CB7 /* LogOutRequest.m in Sources */,
+>>>>>>> 957329f6b8a08def71f1b001ed6be11af9c25128
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

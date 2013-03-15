@@ -17,4 +17,6 @@
 
 - (id)initWithWPField:(WPField *)field;
 - (void)setValue:(NSString *)value;
+-(void) deselctAllTics;
+
 @end

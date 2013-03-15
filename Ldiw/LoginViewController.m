@@ -75,8 +75,6 @@
    [[self view] endEditing:YES];
 }
 
-
-
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
   if (textField == loginUserLabel) {
     [loginPasswordLabel becomeFirstResponder];

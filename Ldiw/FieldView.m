@@ -52,11 +52,14 @@
     [self setValueLabel:descriptionLabel];
     [bg addSubview:descriptionLabel];
     
-    UIButton *addDataBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    [addDataBtn setImage:[UIImage imageNamed:@"plus_btn_normal"] forState:UIControlStateNormal];
-    [addDataBtn setImage:[UIImage imageNamed:@"plus_btn_pressed"] forState:UIControlStateSelected];
-    [addDataBtn addTarget:self action:@selector(addDataPressed) forControlEvents:UIControlEventTouchUpInside];
-    [bg addSubviewToRightBottomCorner:addDataBtn withPadding:kContentPaddingFromSide];
+    if (!field.allowedValues.count > 0) {
+      UIButton *addDataBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+      [addDataBtn setImage:[UIImage imageNamed:@"plus_btn_normal"] forState:UIControlStateNormal];
+      [addDataBtn setImage:[UIImage imageNamed:@"plus_btn_pressed"] forState:UIControlStateSelected];
+      [addDataBtn addTarget:self action:@selector(addDataPressed) forControlEvents:UIControlEventTouchUpInside];
+      [bg addSubviewToRightBottomCorner:addDataBtn withPadding:kContentPaddingFromSide];
+    }
+    
     
     if ([field.typicalValues count] > 0 || [field.allowedValues count] > 0) {
       [self addTypicalValueFields];
@@ -100,10 +103,14 @@
   [delegate addDataPressedForField:self.wastePointField.field_name];
 }
 
-- (void)checkPressed:(UIButton *)sender {
+-(void) deselctAllTics {
   for (UIButton *button in tickButtonArray) {
     [button setSelected:NO];
   }
+}
+
+- (void)checkPressed:(UIButton *)sender {
+  [self deselctAllTics];
   [sender setSelected:YES];
   
   NSArray *tvArray = [[Database sharedInstance] typicalValuesForField:self.wastePointField];

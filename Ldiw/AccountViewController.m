@@ -11,6 +11,7 @@
 #import "MySettingsViewController.h"
 #import "Database+Server.h"
 #import "FBHelper.h"
+#import "LogOutRequest.h"
 
 @interface AccountViewController ()
 
@@ -52,24 +53,31 @@
   [DesignHelper setBarButtonTitleAttributes:logoutButton];
   UIBarButtonItem *logoutBarButton = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
   self.navigationItem.leftBarButtonItem = logoutBarButton;
-
 }
 
 - (void)logoutPressed:(UIButton *)sender
 {
   NSLog(@"LogOut Pressed");
-  // Implement logOut
-  User *userinfo = [[Database sharedInstance] currentUser];
-  userinfo.sessid=nil;
-  userinfo.session_name=nil;
-  userinfo.token=nil;
-  [FBSession.activeSession close];
-  [[Database sharedInstance] saveContext];
-  self.tabBarController.selectedIndex=0;
   
+  [LogOutRequest logOutUserWithSuccess:^(NSDictionary *responseDict) {
+    MSLog(@"Logoutrequst response %@", responseDict);
+    [self logout];
+  } failure:^(NSError *error){
+    MSLog(@"Logoutrequest error %@", error);
+    [self logout];  
+  }];
 }
 
-
+- (void)logout {
+  // Implement logOut
+  User *userinfo = [[Database sharedInstance] currentUser];
+  userinfo.sessid = nil;
+  userinfo.session_name = nil;
+  userinfo.token = nil;
+  [FBSession.activeSession closeAndClearTokenInformation];
+  [[Database sharedInstance] saveContext];
+  self.tabBarController.selectedIndex = 0;
+}
 
 - (void)didReceiveMemoryWarning
 {
