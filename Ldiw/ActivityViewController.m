@@ -212,12 +212,18 @@
   return self.wastPointResultsArray.count;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  WastePoint *selectedPoint = [self.wastPointResultsArray objectAtIndex:indexPath.row];
+  DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedPoint];
+  [self.navigationController pushViewController:detailView animated:YES];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   ActivityCustomCell *cell=[self.tableView dequeueReusableCellWithIdentifier:@"Cell"forIndexPath:indexPath];
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-  } 
+  }
   cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
 
   WastePoint *point=[wastPointResultsArray objectAtIndex:indexPath.row];

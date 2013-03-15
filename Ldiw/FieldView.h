@@ -14,9 +14,11 @@
 @property (nonatomic, strong) WPField *wastePointField;
 @property (nonatomic, strong) NSMutableArray *tickButtonArray;
 @property (nonatomic, strong) UILabel *valueLabel;
+@property (nonatomic, assign) BOOL enableEditing;
 
 - (id)initWithWPField:(WPField *)field;
+- (id)initWithWPField:(WPField *)field forEditing:(BOOL)enableEditing;
 - (void)setValue:(NSString *)value;
--(void) deselctAllTics;
+- (void)deselctAllTics;
 
 @end

@@ -31,7 +31,6 @@
 
 @implementation DetailViewController
 
-
 @synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, pictureLoading;
 
 - (id)initWithImage:(UIImage *)image {
@@ -43,8 +42,15 @@
     if (image) {
       [self addImageAsynchronously:image];
       self.pictureLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-      
     }
+  }
+  return self;
+}
+
+- (id)initWithWastePoint:(WastePoint *)point {
+  self = [super initWithNibName:nil bundle:nil];
+  if (self) {
+    [self setWastePoint:point];
   }
   return self;
 }
