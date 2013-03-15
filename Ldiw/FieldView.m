@@ -120,8 +120,11 @@
 }
 
 - (void)setValue:(NSString *)value {
-  [valueLabel setText:value];
-  [valueLabel setTextColor:[UIColor darkGrayColor]];
+  if (!self.wastePointField.allowedValues.count > 0) {
+    [valueLabel setText:value];
+    [valueLabel setTextColor:[UIColor darkGrayColor]];
+  }
+  
 }
 
 @end
