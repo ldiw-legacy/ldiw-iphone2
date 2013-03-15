@@ -94,7 +94,7 @@
       [f setNumberStyle:NSNumberFormatterDecimalStyle];
       NSNumber *myNumber = [f numberFromString:[responseWP objectForKey:kKeyId]];
       [wp setId:myNumber];
-      [wp setPhotos:[responseWP objectForKey:kKeyPhotos]];
+//      [wp setPhotos:[responseWP objectForKey:kKeyPhotos]];
       [WPs removeObject:wp];
       if (WPs.count > 0) {
         [self uploadAllLocalWPsWithArray:WPs];        

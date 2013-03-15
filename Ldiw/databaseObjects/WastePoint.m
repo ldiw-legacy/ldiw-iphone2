@@ -67,7 +67,7 @@
 }
 
 - (NSString *)description {
-  NSString *returnString = [NSString stringWithFormat:@"id = %d\nlat = %f\nlon = %f\nphotos = %@", self.idValue, self.latitudeValue, self.longitudeValue, self.photos];
+  NSString *returnString = [NSString stringWithFormat:@"id = %d\nlat = %f\nlon = %f\nnrPhotos = %d", self.idValue, self.latitudeValue, self.longitudeValue, [self.images count]];
   NSMutableString *customValuesString = [NSMutableString string];
   
   for (CustomValue *value in self.customValues) {

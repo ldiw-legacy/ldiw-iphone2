@@ -33,7 +33,6 @@
       NSNumber *mix = [wpDict objectForKey:kMinKey];
       NSArray *typicalValues = [wpDict objectForKey:kTypicalValuesKey];
       NSArray *allowedValues = [wpDict objectForKey:kAllowedValuesKey];
-      MSLog(@"\n%@", fieldName);
       WPField *fieldToAdd = [[Database sharedInstance] createWPFieldWithFieldName:fieldName andEditInstructions:editInstructions andLabel:label andMaxValue:max andMinValue:mix andSuffix:suffix andType:type andTypicalValues:typicalValues andAllowedValues:allowedValues andIndex:[NSNumber numberWithInt:index]];
       [server addFieldsObject:fieldToAdd];
       index++;

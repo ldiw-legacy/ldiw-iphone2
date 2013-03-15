@@ -10,6 +10,7 @@
 #import "CSVParser.h"
 #import "CustomValue.h"
 #import "PictureHelper.h"
+#import "Database+Image.h"
 
 @implementation Database (WP)
 
@@ -58,17 +59,29 @@
   [wpDict removeObjectForKey:kKeyPhotos];
   
   WastePoint *point = [self wastepointWithId:wpId];
+  
   if (!point) {
     point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
     [point setIdValue:wpId.intValue];
     [point setLatitudeValue:[wpLat floatValue]];
     [point setLongitudeValue:[wpLon floatValue]];
-    [point setPhotos:wpPhotos];
-    
-    for (NSString *key in [wpDict allKeys]) {
-      NSString *value = [wpDict objectForKey:key];
-      CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
-      [point addCustomValuesObject:valueToAdd];
+  }
+  
+  [point setCustomValues:nil];
+  for (NSString *key in [wpDict allKeys]) {
+    NSString *value = [wpDict objectForKey:key];
+    CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
+    [point addCustomValuesObject:valueToAdd];
+  }
+  
+  // Create correct image objects
+  [point setImages:nil];
+  if ([wpPhotos length] > 0) {
+    NSRange photoNameRange = [wpPhotos rangeOfString:@":"];
+    NSString *photoname = [wpPhotos substringToIndex:photoNameRange.location];
+    Image *newImage = [self imageWithRemoteUrl:photoname];
+    if (![point.images containsObject:newImage]) {
+      [point addImagesObject:newImage];
     }
   }
   return point;

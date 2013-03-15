@@ -88,9 +88,7 @@
       }
     }
     
-    [self saveContext];
   }
-  
   return wpField;
 }
 

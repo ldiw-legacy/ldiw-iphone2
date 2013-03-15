@@ -226,7 +226,8 @@
  // NSLog(@"dict %@",dict );
   NSString *wastpointID = [NSString stringWithFormat:@"%@", [dict valueForKey:@"id"]];
   cell.cellNameTitleLabel.text = wastpointID;
-  NSString *photosString = [NSString stringWithFormat:@"%@", [dict valueForKey:@"photos"]];
+  NSString *photosString = nil;
+//  [NSString stringWithFormat:@"%@", [dict valueForKey:@"photos"]];
   NSString *trimmedString = nil;
   MSLog(@"Photos %@",photosString);
     if (photosString.length>3) {

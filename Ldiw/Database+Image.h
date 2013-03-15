@@ -12,5 +12,6 @@
 @interface Database (Image)
 
 - (Image *)newImageWithLocalUrl:(NSString*)localURL;
+- (Image *)imageWithRemoteUrl:(NSString *)remoteUrl;
 
 @end
