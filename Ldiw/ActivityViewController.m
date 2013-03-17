@@ -120,11 +120,38 @@
   }
 }
 
+- (void)setUpTabelview
+{
+  CGRect tableframe = CGRectMake(0, 49, 320, 499);
+  self.tableView = [[UITableView alloc]initWithFrame:tableframe];
+  self.tableView.dataSource = self;
+  self.tableView.delegate = self;
+  [self.view addSubview:tableView];
+  UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
+  [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
+  self.tableView.backgroundColor = kDarkBackgroundColor;
+  self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  [self.tableView reloadData];
+}
+
 - (void)nearbyPressed:(UIButton *)sender
 {
   self.headerView.nearbyButton.selected = YES;
   self.headerView.friendsButton.selected = NO;
   self.headerView.showMapButton.selected = NO;
+  if (!self.tableView) {
+    [self setUpTabelview];
+  }
+}
+
+- (void)setUpMapView
+{
+  CGRect mapRect = CGRectMake(0, 49, 320, 449);
+  MapView *mapview = [[MapView alloc] init];
+  mapview.frame=mapRect;
+  [self.view addSubview:mapview];
+
+
 }
 
 - (void)friendsPressed:(UIButton *)sender
@@ -139,6 +166,9 @@
   self.headerView.nearbyButton.selected = NO;
   self.headerView.friendsButton.selected = NO;
   self.headerView.showMapButton.selected = YES;
+  [self.tableView removeFromSuperview];
+  self.tableView=nil;
+  [self setUpMapView];
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
