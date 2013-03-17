@@ -64,7 +64,7 @@
   cellNameTitleLabel = [[UILabel alloc] initWithFrame:namelabelrect];
   [DesignHelper setActivityViewNametitle:cellNameTitleLabel];
 
-  CGRect titlelabelrect=CGRectOffset(namelabelrect, 0 ,14);
+  CGRect titlelabelrect=CGRectOffset(namelabelrect, 0 ,15);
   cellTitleLabel = [[UILabel alloc] initWithFrame:titlelabelrect];
   [DesignHelper setActivityViewActiontitle:cellTitleLabel];
 

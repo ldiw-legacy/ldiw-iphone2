@@ -255,17 +255,16 @@
   NSSet *set2 = [point.customValues filteredSetUsingPredicate:predicate2];
   CustomValue *cv;
   if (set2.count == 1) {
-    cv = [set anyObject];
+    cv = [set2 anyObject];
   }
-  NSError* error;
-  NSData* data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
+  NSError *error;
+  NSData *data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary* json = [NSJSONSerialization
                         JSONObjectWithData:data
 
                         options:kNilOptions
                         error:&error];
   NSString *country = [json objectForKey:@"Country"];
-  NSLog(@"country %@",country);
 
   cell.cellTitleLabel.text = country;
   [cell.cellTitleLabel sizeToFit];
@@ -274,9 +273,9 @@
       [cell.spinner startAnimating];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-    UIImage *thumbinal=[PictureHelper thumbinalForWastePoint:point];
+    UIImage *thumbinal = [PictureHelper thumbinalForWastePoint:point];
     dispatch_async(dispatch_get_main_queue(), ^{
-      cell.wastePointImageView.image=thumbinal;
+      cell.wastePointImageView.image = thumbinal;
       [cell.spinner stopAnimating];
     });
   });
