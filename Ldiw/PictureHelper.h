@@ -14,4 +14,7 @@
 
 + (UIImage*) saveImage:(UIImage*)image forWastePoint:(WastePoint*)wp;
 + (UIImage *)loadImageForWP:(WastePoint*)wp;
++ (void) saveImage:(UIImage *)image withFileName:(NSString *)imageName;
++ (UIImage *)thumbinalForWastePoint:(WastePoint *)point;
+
 @end

@@ -25,6 +25,9 @@
 #import "SuccessView.h"
 #import "Constants.h"
 #import "WastePointUploader.h"
+#import "Image.h"
+#import "CustomValue.h"
+#import "PictureHelper.h"
 
 #define kCellHeightWithPicture 186
 #define kCellHeightNoPicture 86
@@ -226,42 +229,58 @@
   }
   cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
 
-  WastePoint *point=[wastPointResultsArray objectAtIndex:indexPath.row];
-  //NSLog(@"dict %@",point);
+  WastePoint *point=[self.wastPointResultsArray objectAtIndex:indexPath.row];
   NSString *wastpointID = [NSString stringWithFormat:@"%@",point.id];
   cell.cellNameTitleLabel.text = wastpointID;
-  NSString *photosString = nil;
-//  [NSString stringWithFormat:@"%@", [dict valueForKey:@"photos"]];
-  NSString *trimmedString = nil;
-  
-    if (photosString.length>3) {
-      cell.wastePointImageView.image=nil;
-      [cell.spinner startAnimating];
-      NSRange range = NSMakeRange(0, 4);
-      trimmedString = [photosString substringWithRange:range];
-      NSString *imageUrlString = [kFirstServerUrl stringByAppendingString:[kImageURLPath stringByAppendingString:wastpointID]];
-      NSString *imageUrlExtended = [imageUrlString stringByAppendingString:@"/"];
-      NSString *imageUrlFullString = [imageUrlExtended stringByAppendingString:trimmedString];
-     
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSURL *imageUrl = [NSURL URLWithString:imageUrlFullString];
-        NSData *data = [NSData dataWithContentsOfURL:imageUrl];
-        dispatch_async(dispatch_get_main_queue(), ^{
-          UIImage *image = [UIImage imageWithData:data];
-          cell.wastePointImageView.image = [DesignHelper wastePointImage:image];
-      [cell.spinner stopAnimating];
-          
-        });
-      });
- 
   [cell.cellNameTitleLabel sizeToFit];
- // cell.cellSubtitleLabel.text = desc;
+
+
+  //Description
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fieldName == %@", @"description"];
+  NSSet *set = [point.customValues filteredSetUsingPredicate:predicate];
+  CustomValue *customvalue;
+  if (set.count == 1) {
+    customvalue = [set anyObject];
+  }
+  
+  NSString *descript= customvalue.value;
+  cell.cellSubtitleLabel.text = descript;
   [cell.cellSubtitleLabel sizeToFit];
-  cell.cellTitleLabel.text = @"Location - Estonia";
+  if (cell.cellSubtitleLabel.frame.size.width > 300) {
+    cell.cellSubtitleLabel.frame = CGRectMake(cell.cellSubtitleLabel.frame.origin.x, cell.cellSubtitleLabel.frame.origin.y,300, cell.cellSubtitleLabel.frame.size.height) ;
+  }
+  
+  //Country
+  NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"fieldName == %@", @"geo_areas_json"];
+  NSSet *set2 = [point.customValues filteredSetUsingPredicate:predicate2];
+  CustomValue *cv;
+  if (set2.count == 1) {
+    cv = [set anyObject];
+  }
+  NSError* error;
+  NSData* data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary* json = [NSJSONSerialization
+                        JSONObjectWithData:data
+
+                        options:kNilOptions
+                        error:&error];
+  NSString *country = [json objectForKey:@"Country"];
+  NSLog(@"country %@",country);
+
+  cell.cellTitleLabel.text = country;
   [cell.cellTitleLabel sizeToFit];
 
-    }
+  //Thumbinal for view
+      [cell.spinner startAnimating];
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+    UIImage *thumbinal=[PictureHelper thumbinalForWastePoint:point];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      cell.wastePointImageView.image=thumbinal;
+      [cell.spinner stopAnimating];
+    });
+  });
+
   cell.wastePointImageView.image=nil;
   return cell;
 }
