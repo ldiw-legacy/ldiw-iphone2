@@ -147,11 +147,8 @@
 - (void)setUpMapView
 {
   CGRect mapRect = CGRectMake(0, 49, 320, 449);
-  MapView *mapview = [[MapView alloc] init];
-  mapview.frame=mapRect;
+  MapView *mapview = [[MapView alloc] initWithFrame:mapRect];
   [self.view addSubview:mapview];
-
-
 }
 
 - (void)friendsPressed:(UIButton *)sender
