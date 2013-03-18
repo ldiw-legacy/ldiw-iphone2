@@ -186,8 +186,7 @@
 
 - (IBAction)addPressed:(id)sender
 {
-  if([CLLocationManager locationServicesEnabled] &&
-     [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+  if ([[LocationManager sharedManager] locationServicesEnabled]) {
     [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
       [wastePoint setLatitudeValue:location.coordinate.latitude];
       [wastePoint setLongitudeValue:location.coordinate.longitude];
