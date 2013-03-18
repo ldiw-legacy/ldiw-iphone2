@@ -24,10 +24,11 @@
 @property (nonatomic, strong) WastePoint *wastePoint;
 @property (weak, nonatomic) ActivityViewController *controller;
 @property (nonatomic, strong) WastePointViews *wastePointViews;
+@property (nonatomic, assign) BOOL editingMode;
 
 - (IBAction)takePicture:(id)sender;
 
 - (id)initWithImage:(UIImage *)image;
-- (id)initWithWastePoint:(WastePoint *)point;
+- (id)initWithWastePoint:(WastePoint *)point andEnableEditing:(BOOL)editingAllowed;
 
 @end

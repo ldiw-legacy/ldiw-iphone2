@@ -31,7 +31,7 @@
 
 @implementation DetailViewController
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, pictureLoading;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, pictureLoading, editingMode;
 
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
@@ -47,10 +47,11 @@
   return self;
 }
 
-- (id)initWithWastePoint:(WastePoint *)point {
+- (id)initWithWastePoint:(WastePoint *)point andEnableEditing:(BOOL)editingAllowed {
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
     [self setWastePoint:point];
+    [self setEditingMode:editingAllowed];
   }
   return self;
 }
@@ -58,7 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [self.navigationItem setHidesBackButton:YES];
-  self.tabBarController.tabBar.hidden=YES;
+  self.tabBarController.tabBar.hidden = YES;
   [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
   
   if (self.pictureLoading) {
@@ -91,35 +92,56 @@
   
   self.imageView.backgroundColor = kButtonBackgroundColor;
   
-  UIImage *image = [UIImage imageNamed:@"cancel_normal.png"];
-  UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-  cancelButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
-  [cancelButton setBackgroundImage:image forState:UIControlStateNormal];
-  [cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel_pressed.png"] forState:UIControlStateHighlighted];
-  [cancelButton addTarget:self action:@selector(cancelPressed:) forControlEvents:UIControlEventTouchUpInside];
-  [cancelButton setTitle:NSLocalizedString(@"cancel",nil) forState:UIControlStateNormal];
-  [DesignHelper setBarButtonTitleAttributes:cancelButton];
-  
-  UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
-  self.navigationItem.leftBarButtonItem = cancelBarButton;
-  
-  UIImage *addimage = [UIImage imageNamed:@"blue_normal.png"];
-  UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-  addButton.bounds = CGRectMake( 0, 0, addimage.size.width, addimage.size.height );
-  [addButton setBackgroundImage:addimage forState:UIControlStateNormal];
-  [addButton setBackgroundImage:[UIImage imageNamed:@"blue_pressed.png"] forState:UIControlStateHighlighted];
-  [addButton addTarget:self action:@selector(addPressed:) forControlEvents:UIControlEventTouchUpInside];
-  [addButton setTitle:NSLocalizedString(@"add", nil)  forState:UIControlStateNormal];
-  [DesignHelper setBarButtonTitleAttributes:addButton];
-  
-  UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
-  self.navigationItem.rightBarButtonItem = addBarButton;
-  
-  UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-  title.text = NSLocalizedString(@"addNewTitle", nil);
-  [DesignHelper setNavigationTitleStyle:title];
-  [title sizeToFit];
-  self.navigationItem.titleView = title;
+  if (!editingMode) {
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    title.text = NSLocalizedString(@"wastespot",nil);
+    [DesignHelper setNavigationTitleStyle:title];
+    [title sizeToFit];
+    self.navigationItem.titleView = title;
+    [self.navigationItem setHidesBackButton:NO];
+    
+    UIImage *image = [UIImage imageNamed:@"back_normal.png"];
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+    [cancelButton setBackgroundImage:image forState:UIControlStateNormal];
+    [cancelButton setBackgroundImage:[UIImage imageNamed:@"back_pressed.png"] forState:UIControlStateHighlighted];
+    [cancelButton addTarget:self action:@selector(backPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setTitle:NSLocalizedString(@"back",nil) forState:UIControlStateNormal];
+    [DesignHelper setBarButtonTitleAttributes:cancelButton];
+    
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.leftBarButtonItem = cancelBarButton;
+  } else {
+    UIImage *image = [UIImage imageNamed:@"cancel_normal.png"];
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+    [cancelButton setBackgroundImage:image forState:UIControlStateNormal];
+    [cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel_pressed.png"] forState:UIControlStateHighlighted];
+    [cancelButton addTarget:self action:@selector(cancelPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setTitle:NSLocalizedString(@"cancel",nil) forState:UIControlStateNormal];
+    [DesignHelper setBarButtonTitleAttributes:cancelButton];
+    
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.leftBarButtonItem = cancelBarButton;
+    
+    UIImage *addimage = [UIImage imageNamed:@"blue_normal.png"];
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    addButton.bounds = CGRectMake( 0, 0, addimage.size.width, addimage.size.height );
+    [addButton setBackgroundImage:addimage forState:UIControlStateNormal];
+    [addButton setBackgroundImage:[UIImage imageNamed:@"blue_pressed.png"] forState:UIControlStateHighlighted];
+    [addButton addTarget:self action:@selector(addPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [addButton setTitle:NSLocalizedString(@"add", nil)  forState:UIControlStateNormal];
+    [DesignHelper setBarButtonTitleAttributes:addButton];
+    
+    UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+    self.navigationItem.rightBarButtonItem = addBarButton;
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    title.text = NSLocalizedString(@"addNewTitle", nil);
+    [DesignHelper setNavigationTitleStyle:title];
+    [title sizeToFit];
+    self.navigationItem.titleView = title;
+  }
   
   [self addWastePointViews];
   
@@ -129,7 +151,6 @@
     [mapView centerToUserLocation];
   }
 }
-
 
 - (void) addImageAsynchronouslyShowingSpinner:(UIImage*)image {
   [self pictureLoadingAppearance];
@@ -178,8 +199,17 @@
 
 - (IBAction)cancelPressed:(id)sender
 {
-  //Do some cleaning here
   [self.navigationController popViewControllerAnimated:NO];
+  [self unHideTabbar];
+}
+
+- (IBAction)backPressed:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+  [self unHideTabbar];
+}
+
+- (void)unHideTabbar {
   self.tabBarController.tabBar.hidden = NO;
   self.tabBarController.selectedIndex = 0;
 }
@@ -192,7 +222,7 @@
       [wastePoint setLongitudeValue:location.coordinate.longitude];
       [WastePointUploader uploadAllLocalWPs];
       self.controller.wastePointAddedSuccessfully = YES;
-      [self.navigationController popViewControllerAnimated:NO];      
+      [self.navigationController popViewControllerAnimated:NO];
     } errorBlock:^(NSError *error) {
       MSLog(@"Could not get location for map");
       [self.navigationController popViewControllerAnimated:NO];
@@ -240,9 +270,6 @@
   [self dismissViewControllerAnimated:YES completion:nil];
   [self addImageAsynchronouslyShowingSpinner:cameraImage];
 }
-
-
-
 
 - (UIView *)keyboardAccessoryView {
   //Leftimage

@@ -243,7 +243,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   WastePoint *selectedPoint = [self.wastPointResultsArray objectAtIndex:indexPath.row];
-  DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedPoint];
+  DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedPoint andEnableEditing:NO];
   [self.navigationController pushViewController:detailView animated:YES];
 }
 
