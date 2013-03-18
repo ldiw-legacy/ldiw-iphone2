@@ -76,4 +76,9 @@
   return [NSString stringWithFormat:@"%@\n%@", returnString, customValuesString];
 }
 
+- (CLLocation *)location {
+  CLLocation *returnLocation = [[CLLocation alloc] initWithLatitude:self.latitudeValue longitude:self.longitudeValue];
+  return returnLocation;
+}
+
 @end

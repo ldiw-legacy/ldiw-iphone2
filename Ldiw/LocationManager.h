@@ -27,6 +27,7 @@ typedef void (^LocationBlock)(CLLocation *currentLocation);
 - (void)reverseGeoCodeLocation:(CLLocation *)locationToCode withBlock:(void (^)(NSArray *placemarks)) geocodeBlock errorBlock:(void (^)(NSError *error))errorBlock;
 - (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result)) booleanResultBlock;
 - (BOOL)location:(CLLocation *)location IsInsideBox:(NSString *)box;
+- (BOOL)locationServicesEnabled;
 
 +(NSString*) getPhoneLanguage;
 @end

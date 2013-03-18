@@ -172,12 +172,11 @@
 {
   if (viewController==[tabBarController.viewControllers objectAtIndex:1]) {
     {
-      if (([CLLocationManager locationServicesEnabled] &&
-           [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)) {
-        UIActionSheet  *sheet = [[UIActionSheet alloc]
+      if ([[LocationManager sharedManager] locationServicesEnabled]) {
+      UIActionSheet  *sheet = [[UIActionSheet alloc]
                                  initWithTitle:NSLocalizedString(@"pleaseAddPhotoTitle", nil)
                                  delegate:self
-                                 cancelButtonTitle:NSLocalizedString(@"cancel",nil)                                   destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
+                                 cancelButtonTitle:NSLocalizedString(@"cancel",nil) destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
                                  otherButtonTitles:NSLocalizedString(@"takePhoto",nil),NSLocalizedString(@"chooseFromLibrary",nil), nil];
         sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
         [sheet showInView:self.tabBarController.tabBar];

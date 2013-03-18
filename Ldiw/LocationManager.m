@@ -174,4 +174,13 @@
   }
 }
 
+- (BOOL)locationServicesEnabled {
+  if (([CLLocationManager locationServicesEnabled] &&
+       [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
 @end

@@ -19,6 +19,7 @@
   self = [super initWithFrame:frame];
   if (self) {
     [self setup];
+    [self centerToUserLocation];
   }
   return self;
 }
@@ -35,10 +36,9 @@
 {
   [self setDelegate:self];
   [self setShowsUserLocation:YES];
-  [self setupMapView];
 }
 
-- (void)setupMapView {
+- (void)centerToUserLocation {
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     [self createMapViewWithCoordinate:location];
   } errorBlock:^(NSError *error) {
@@ -46,10 +46,14 @@
   }];
 }
 
+- (void)centerToLocation:(CLLocation *)center {
+  [self setUserTrackingMode:MKUserTrackingModeNone];
+  [self createMapViewWithCoordinate:center];
+}
+
 - (void)createMapViewWithCoordinate:(CLLocation *)location {
-  MSLog(@"Zoom map to region");
-  //  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.002, 0.004);
-  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.01, 0.01);
+  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.002, 0.004);
+//  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.01, 0.01);
   MKCoordinateRegion mapRegion = MKCoordinateRegionMake(location.coordinate, mapSpan);
   [self setRegion:mapRegion animated:NO];
   [self loadPoints];
