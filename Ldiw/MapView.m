@@ -18,7 +18,8 @@
 {
   self = [super initWithFrame:frame];
   if (self) {
-    // Initialization code
+    [self setup];
+    [self centerToUserLocation];
   }
   return self;
 }
@@ -26,14 +27,18 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   if (self) {
-    [self setDelegate:self];
-    [self setShowsUserLocation:YES];
+   [self setup];
   }
   return self;
 }
 
+- (void)setup
+{
+  [self setDelegate:self];
+  [self setShowsUserLocation:YES];
+}
+
 - (void)centerToUserLocation {
-  MSLog(@"Center mapview to user location");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     [self createMapViewWithCoordinate:location];
   } errorBlock:^(NSError *error) {
@@ -42,15 +47,13 @@
 }
 
 - (void)centerToLocation:(CLLocation *)center {
-  MSLog(@"Center mapview to wastepoint location");
   [self setUserTrackingMode:MKUserTrackingModeNone];
   [self createMapViewWithCoordinate:center];
 }
 
 - (void)createMapViewWithCoordinate:(CLLocation *)location {
-  MSLog(@"Zoom map to region");
-  //  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.002, 0.004);
-  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.01, 0.01);
+  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.002, 0.004);
+//  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.01, 0.01);
   MKCoordinateRegion mapRegion = MKCoordinateRegionMake(location.coordinate, mapSpan);
   [self setRegion:mapRegion animated:NO];
   [self loadPoints];
@@ -74,12 +77,4 @@
   [self addAnnotations:tmpAnnotationsArray];
 }
 
-#pragma mark - MKMapViewDelegate
-- (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated {
-  MSLog(@"Mapview changed user tracking mode to %d", mode);
-}
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-  MSLog(@"Mapview didUpdateUserLocation");  
-}
 @end
