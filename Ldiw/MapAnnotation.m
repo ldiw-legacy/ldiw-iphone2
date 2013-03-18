@@ -13,7 +13,7 @@
 - (id)initWithWastePoint:(WastePoint *)wastePoint {
   self = [super init];
   if (self) {
-    [self setTitle:[NSString stringWithFormat:@"WP id %d", wastePoint.idValue]];
+    [self setTitle:[NSString stringWithFormat:@"%d", wastePoint.idValue]];
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(wastePoint.latitudeValue, wastePoint.longitudeValue);
     [self setCoordinate:coordinate];
   }

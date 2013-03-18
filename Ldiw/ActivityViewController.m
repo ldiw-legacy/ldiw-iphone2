@@ -40,7 +40,7 @@
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView,wastPointResultsArray;
+@synthesize tableView, headerView, successView,wastPointResultsArray, mapview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -154,7 +154,8 @@
 
 - (void)setUpMapView
 {
-  MapView *mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
+  mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
+  self.mapview.delegate=self;
   [self.view addSubview:mapview];
 }
 
@@ -378,5 +379,49 @@
 - (void)removeViewController {
   [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+
+  static NSString *identifier = @"MyLoc";
+  if (annotation != self.mapview.userLocation) {
+
+    MKPinAnnotationView *annotationView =
+    (MKPinAnnotationView *)[self.mapview dequeueReusableAnnotationViewWithIdentifier:identifier];
+
+    if (annotationView == nil) {
+      annotationView = [[MKPinAnnotationView alloc]
+                        initWithAnnotation:annotation
+                        reuseIdentifier:identifier];
+    } else {
+      annotationView.annotation = annotation;
+    }
+
+    annotationView.enabled = YES;
+    annotationView.canShowCallout = YES;
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+    [annotationView setRightCalloutAccessoryView:rightButton];
+
+    return annotationView;
+  }
+
+  return nil;
+}
+
+
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+
+  if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
+    
+    NSString *wp = [view.annotation title];
+    WastePoint *selectedWP = [[Database sharedInstance] wastepointWithId:[wp integerValue]];
+    NSLog(@"Wastepoint %@", selectedWP);
+    DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedWP andEnableEditing:NO];
+    [self.navigationController pushViewController:detailView animated:YES];
+  }
+}
+
 
 @end
