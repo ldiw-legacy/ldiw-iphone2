@@ -28,17 +28,23 @@
   if (self) {
     [self setDelegate:self];
     [self setShowsUserLocation:YES];
-    [self setupMapView];
   }
   return self;
 }
 
-- (void)setupMapView {
+- (void)centerToUserLocation {
+  MSLog(@"Center mapview to user location");
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     [self createMapViewWithCoordinate:location];
   } errorBlock:^(NSError *error) {
     MSLog(@"Could not get location for map");
   }];
+}
+
+- (void)centerToLocation:(CLLocation *)center {
+  MSLog(@"Center mapview to wastepoint location");
+  [self setUserTrackingMode:MKUserTrackingModeNone];
+  [self createMapViewWithCoordinate:center];
 }
 
 - (void)createMapViewWithCoordinate:(CLLocation *)location {
@@ -68,4 +74,12 @@
   [self addAnnotations:tmpAnnotationsArray];
 }
 
+#pragma mark - MKMapViewDelegate
+- (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated {
+  MSLog(@"Mapview changed user tracking mode to %d", mode);
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+  MSLog(@"Mapview didUpdateUserLocation");  
+}
 @end

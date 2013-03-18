@@ -9,6 +9,8 @@
 #import <MapKit/MapKit.h>
 
 @interface MapView : MKMapView <MKMapViewDelegate>
+- (void)centerToLocation:(CLLocation *)center;
+- (void)centerToUserLocation;
 
 - (void)loadPoints;
 @end

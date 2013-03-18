@@ -122,6 +122,12 @@
   self.navigationItem.titleView = title;
   
   [self addWastePointViews];
+  
+  if (wastePoint.idValue != 0) {
+    [mapView centerToLocation:wastePoint.location];
+  } else {
+    [mapView centerToUserLocation];
+  }
 }
 
 
