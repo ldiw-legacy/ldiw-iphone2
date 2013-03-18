@@ -77,4 +77,44 @@
   [self addAnnotations:tmpAnnotationsArray];
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+
+  static NSString *identifier = @"MyLoc";
+  if (annotation != mapView.userLocation) {
+
+    MKPinAnnotationView *annotationView =
+    (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+
+    if (annotationView == nil) {
+      annotationView = [[MKPinAnnotationView alloc]
+                        initWithAnnotation:annotation
+                        reuseIdentifier:identifier];
+    } else {
+      annotationView.annotation = annotation;
+    }
+
+    annotationView.enabled = YES;
+    annotationView.canShowCallout = YES;
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+    [annotationView setRightCalloutAccessoryView:rightButton];
+
+    return annotationView;
+  }
+  
+  return nil;
+}
+
+
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+
+  if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
+    NSLog(@"Button");
+
+    
+  }
+}
+
+
 @end

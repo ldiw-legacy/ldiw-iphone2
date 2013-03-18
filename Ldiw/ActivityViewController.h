@@ -12,7 +12,7 @@
 @interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) MapView *mapView;
+@property (strong, nonatomic) MKMapView *mapView;
 @property (nonatomic) BOOL  wastePointAddedSuccessfully;
 
 @end
