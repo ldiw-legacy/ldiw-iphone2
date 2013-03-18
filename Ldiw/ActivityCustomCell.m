@@ -52,7 +52,7 @@
   UIImageView *secondImageView = [[UIImageView alloc] initWithFrame:secondrect];
   self.userImageView.image = dummy;
   
-  secondImageView.image=[UIImage imageNamed:@"pointmarker_feed"];
+  //secondImageView.image=[UIImage imageNamed:@"pointmarker_feed"];
   
   CGRect subtitlelabelrect = CGRectOffset(firstrect, 0, dummy.size.height +5);
   cellSubtitleLabel=[[UILabel alloc] initWithFrame:subtitlelabelrect];
@@ -60,7 +60,7 @@
   [cellSubtitleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
   [DesignHelper setActivityViewSubtitle:cellSubtitleLabel];
 
-  CGRect namelabelrect = CGRectOffset(secondrect, secondrect.size.width + 4, 0);
+  CGRect namelabelrect = CGRectOffset(firstrect, firstrect.size.width + 4, 0);
   cellNameTitleLabel = [[UILabel alloc] initWithFrame:namelabelrect];
   [DesignHelper setActivityViewNametitle:cellNameTitleLabel];
 

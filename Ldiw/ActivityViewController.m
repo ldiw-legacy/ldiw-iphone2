@@ -254,7 +254,6 @@
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
-  cell.userImageView.image = [DesignHelper userIconImage:[UIImage imageNamed:@"someface.jpg"]];
 
   WastePoint *point=[self.wastPointResultsArray objectAtIndex:indexPath.row];
   NSString *wastpointID = [NSString stringWithFormat:@"%@",point.id];
