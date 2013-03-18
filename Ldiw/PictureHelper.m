@@ -53,39 +53,29 @@
 + (UIImage *)thumbinalForWastePoint:(WastePoint *)point
 {
   NSString *wastpointID = [NSString stringWithFormat:@"%@",point.id];
-  UIImage *thumbinal=nil;
+  UIImage *thumbinal = nil;
   NSString *cachedImageName = [wastpointID stringByAppendingString:@".png"];
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
   NSString *cachePath = [paths objectAtIndex:0];
-  NSString *uniquePath = [cachePath stringByAppendingPathComponent: cachedImageName];
-  if([[NSFileManager defaultManager] fileExistsAtPath: uniquePath])
+  NSString *uniquePath = [cachePath stringByAppendingPathComponent:cachedImageName];
+  if([[NSFileManager defaultManager] fileExistsAtPath:uniquePath])
   {
-      thumbinal=[UIImage imageWithContentsOfFile:uniquePath];
-    
+    thumbinal = [UIImage imageWithContentsOfFile:uniquePath];
   } else {
-
     Image *wpImage = [point.images anyObject];
     NSString *trimmedString = wpImage.remoteURL;
-
     if (trimmedString.length > 3) {
-      
       NSString *imageUrlString = [kFirstServerUrl stringByAppendingString:[kImageURLPath stringByAppendingString:wastpointID]];
       NSString *imageUrlExtended = [imageUrlString stringByAppendingString:@"/"];
       NSString *imageUrlFullString = [imageUrlExtended stringByAppendingString:trimmedString];
       NSURL *imageUrl = [NSURL URLWithString:imageUrlFullString];
-    
       NSData *data = [NSData dataWithContentsOfURL:imageUrl];
-
-        
-          UIImage *image = [UIImage imageWithData:data];
-          thumbinal=[DesignHelper wastePointImage:image];
-          
-          [PictureHelper saveImage:thumbinal withFileName:wastpointID];
-          
+      UIImage *image = [UIImage imageWithData:data];
+      thumbinal = [DesignHelper wastePointImage:image];
+      
+      [PictureHelper saveImage:thumbinal withFileName:wastpointID];
     }
-
-    }
-
+  }
   return thumbinal;
 }
 
