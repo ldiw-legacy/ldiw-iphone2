@@ -16,8 +16,7 @@
 @end
 
 @implementation ActivityCustomCell
-@synthesize cellNameTitleLabel, cellSubtitleLabel, cellTitleLabel, height, wastePointImageView,userImageView,spinner;
-
+@synthesize cellNameTitleLabel, cellSubtitleLabel, cellTitleLabel, height, wastePointImageView, userImageView,spinner;
 
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -33,8 +32,6 @@
   if (self) {
     [self layoutSetup];
   }
-  
-
   return self;
 }
 
@@ -59,25 +56,20 @@
   cellSubtitleLabel.text = @"Subtitle";
   [cellSubtitleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
   [DesignHelper setActivityViewSubtitle:cellSubtitleLabel];
-
+  
   CGRect namelabelrect = CGRectOffset(firstrect, firstrect.size.width + 4, 0);
   cellNameTitleLabel = [[UILabel alloc] initWithFrame:namelabelrect];
   [DesignHelper setActivityViewNametitle:cellNameTitleLabel];
-
+  
   CGRect titlelabelrect=CGRectOffset(namelabelrect, 0 ,15);
   cellTitleLabel = [[UILabel alloc] initWithFrame:titlelabelrect];
   [DesignHelper setActivityViewActiontitle:cellTitleLabel];
-
   
   CGRect wastepointImageRect = CGRectOffset(subtitlelabelrect, -5, cellSubtitleLabel.bounds.size.height + 5);
   CGRect realwastepointImageRect = CGRectMake(wastepointImageRect.origin.x, wastepointImageRect.origin.y, 300, 100);
   self.wastePointImageView = [[UIImageView alloc] initWithFrame:realwastepointImageRect];
-
-
   self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-  
   spinner.center = CGPointMake(wastePointImageView.center.x, wastePointImageView.center.y);
-
   
   [bgView addSubview:userImageView];
   [bgView addSubview:secondImageView];
@@ -90,16 +82,14 @@
   self.height = 5 + userImageView.bounds.size.height + 6 + self.cellSubtitleLabel.bounds.size.height + 5 + wastePointImageView.bounds.size.height;
   
   bgView.frame = CGRectMake(bgView.frame.origin.x, bgView.frame.origin.y, bgView.frame.size.width, self.height);
-  
-                  
-  }
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+  [super setSelected:selected animated:animated];
+  
+  // Configure the view for the selected state
 }
 
 @end

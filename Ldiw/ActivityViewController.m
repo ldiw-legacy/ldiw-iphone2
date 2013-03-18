@@ -79,7 +79,6 @@
   UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   
-  
   [self loadServerInformation];
 }
 
@@ -91,7 +90,7 @@
   if (self.wastePointAddedSuccessfully) {
     [self showSuccessBanner];
   }
-  [self showLoginViewIfNeeded]; 
+  [self showLoginViewIfNeeded];
 }
 
 -(void)showSuccessBanner
@@ -155,7 +154,6 @@
 
 - (void)setUpMapView
 {
- 
   MapView *mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
   [self.view addSubview:mapview];
 }
@@ -173,16 +171,16 @@
   self.headerView.friendsButton.selected = NO;
   self.headerView.showMapButton.selected = YES;
   [self.tableView removeFromSuperview];
-  self.tableView=nil;
+  self.tableView = nil;
   [self setUpMapView];
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-  if (viewController==[tabBarController.viewControllers objectAtIndex:1]) {
+  if (viewController == [tabBarController.viewControllers objectAtIndex:1]) {
     {
       if ([[LocationManager sharedManager] locationServicesEnabled]) {
-      UIActionSheet  *sheet = [[UIActionSheet alloc]
+        UIActionSheet  *sheet = [[UIActionSheet alloc]
                                  initWithTitle:NSLocalizedString(@"pleaseAddPhotoTitle", nil)
                                  delegate:self
                                  cancelButtonTitle:NSLocalizedString(@"cancel",nil) destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
@@ -238,12 +236,10 @@
 }
 
 - (void)didReceiveMemoryWarning
-
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -258,17 +254,16 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  ActivityCustomCell *cell=[self.tableView dequeueReusableCellWithIdentifier:@"Cell"forIndexPath:indexPath];
+  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
-
-  WastePoint *point=[self.wastPointResultsArray objectAtIndex:indexPath.row];
+  
+  WastePoint *point = [self.wastPointResultsArray objectAtIndex:indexPath.row];
   NSString *wastpointID = [NSString stringWithFormat:@"%@",point.id];
   cell.cellNameTitleLabel.text = wastpointID;
   [cell.cellNameTitleLabel sizeToFit];
-
-
+  
   //Description
   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fieldName == %@", @"description"];
   NSSet *set = [point.customValues filteredSetUsingPredicate:predicate];
@@ -276,8 +271,7 @@
   if (set.count == 1) {
     customvalue = [set anyObject];
   }
-  
-  NSString *descript= customvalue.value;
+  NSString *descript = customvalue.value;
   cell.cellSubtitleLabel.text = descript;
   [cell.cellSubtitleLabel sizeToFit];
   if (cell.cellSubtitleLabel.frame.size.width > 300) {
@@ -295,25 +289,25 @@
   NSData *data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary* json = [NSJSONSerialization
                         JSONObjectWithData:data
-
+                        
                         options:kNilOptions
                         error:&error];
   NSString *country = [json objectForKey:@"Country"];
-
+  
   cell.cellTitleLabel.text = country;
   [cell.cellTitleLabel sizeToFit];
-
-  //Thumbinal for view
-      [cell.spinner startAnimating];
+  
+  //Thumbnail for view
+  [cell.spinner startAnimating];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
+    
     UIImage *thumbinal = [PictureHelper thumbinalForWastePoint:point];
     dispatch_async(dispatch_get_main_queue(), ^{
       cell.wastePointImageView.image = thumbinal;
       [cell.spinner stopAnimating];
     });
   });
-
+  
   cell.wastePointImageView.image=nil;
   return cell;
 }
@@ -325,22 +319,18 @@
   
   [self.view addSubview:hud];
   hud.delegate = self;
-  hud.customView = [[UIImageView alloc] initWithImage:
-                    [UIImage imageNamed:@"pin_1"]];
+  hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin_1"]];
   hud.mode = MBProgressHUDModeCustomView;
   hud.opacity = 0.8;
   hud.color=[UIColor colorWithRed:0.75 green:0.75 blue:0.72 alpha:1];
   hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
   hud.detailsLabelFont = [UIFont fontWithName:kFontNameBold size:17];
-  [hud showWhileExecuting:@selector(waitForSomeSeconds)
-                 onTarget:self withObject:nil animated:YES];
-  
+  [hud showWhileExecuting:@selector(waitForSomeSeconds) onTarget:self withObject:nil animated:YES];
 }
 
 - (void)waitForSomeSeconds {
   sleep(3);
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -355,8 +345,7 @@
   
   [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
-    //MSLog(@"Response array first object %@", [responseArray objectAtIndex:1] );
-    self.wastPointResultsArray=[[NSArray alloc] initWithArray:responseArray];
+    self.wastPointResultsArray = [[NSArray alloc] initWithArray:responseArray];
     [self.tableView reloadData];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
