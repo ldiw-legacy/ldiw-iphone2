@@ -120,10 +120,18 @@
   }
 }
 
+- (CGRect)tableViewRect
+{
+  CGRect screenRect = [[UIScreen mainScreen] bounds];
+  CGFloat screenHeight = screenRect.size.height;
+  CGFloat tableviewheight = screenHeight - self.navigationController.navigationBar.bounds.size.height-self.tabBarController.tabBar.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.headerView.bounds.size.height;
+  CGRect rect = CGRectMake(0, self.headerView.bounds.size.height, screenRect.size.width, tableviewheight);
+  return rect;
+}
+
 - (void)setUpTabelview
 {
-  CGRect tableframe = CGRectMake(0, 49, 320, 499);
-  self.tableView = [[UITableView alloc]initWithFrame:tableframe];
+  self.tableView = [[UITableView alloc]initWithFrame:[self tableViewRect]];
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
   [self.view addSubview:tableView];
@@ -144,10 +152,11 @@
   }
 }
 
+
 - (void)setUpMapView
 {
-  CGRect mapRect = CGRectMake(0, 49, 320, 449);
-  MapView *mapview = [[MapView alloc] initWithFrame:mapRect];
+ 
+  MapView *mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
   [self.view addSubview:mapview];
 }
 
