@@ -255,7 +255,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+  ActivityCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
   if (!cell) {
     cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
@@ -326,7 +326,7 @@
   hud.color=[UIColor colorWithRed:0.75 green:0.75 blue:0.72 alpha:1];
   hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
   hud.detailsLabelFont = [UIFont fontWithName:kFontNameBold size:17];
-  [hud showWhileExecuting:@selector(waitForSomeSeconds) onTarget:self withObject:nil animated:YES];
+  [hud showWhileExecuting:@selector(waitForSomeSeconds) onTarget:self.tabBarController withObject:nil animated:YES];
 }
 
 - (void)waitForSomeSeconds {
