@@ -36,6 +36,7 @@
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
+    [self setEditingMode:YES];
     self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:nil];
     [self.wastePoint setIdValue:0];
     self.view.backgroundColor = kViewBackroundColor;
@@ -239,8 +240,7 @@
   
   [self.view addSubview:hud];
   hud.delegate = self;
-  hud.customView = [[UIImageView alloc] initWithImage:
-                    [UIImage imageNamed:@"pin_1"]];
+  hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin_1"]];
   hud.mode = MBProgressHUDModeCustomView;
   hud.opacity = 0.5;
   hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
