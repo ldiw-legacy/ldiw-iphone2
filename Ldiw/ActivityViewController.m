@@ -209,13 +209,16 @@
       [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
     picker.delegate = self;
+    self.tabBarController.selectedIndex = 0;
     [self presentViewController:picker animated:YES completion:nil];
   } else if (buttonIndex == 2) {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
+    self.tabBarController.selectedIndex = 0;
   } else if (buttonIndex != 3) {
+    self.tabBarController.selectedIndex = 0;
     [self openDetailViewWithImage:nil];
   }
 }
