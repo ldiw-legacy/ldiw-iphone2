@@ -12,6 +12,7 @@
 #import "Database+WP.h"
 #import "User.h"
 #import "Reachability.h"
+#import "Image.h"
 
 #define kCreateNewWPPath @"?q=api/wp.json"
 
@@ -25,11 +26,15 @@
   
   [parameters setObject:lat forKey:@"lat"];
   [parameters setObject:lon forKey:@"lon"];
+
+  Image *image = point.images.anyObject;
+  NSData *imgData = [NSData dataWithContentsOfFile:image.localURL];
   
-//  NSURL *url = [NSURL URLWithString:kCreateNewWPPath];
-  
-  NSMutableURLRequest *request = [[LoginClient sharedLoginClient] requestWithMethod:@"POST" path:kCreateNewWPPath parameters:parameters];
-  
+  NSMutableURLRequest *request = [[LoginClient sharedLoginClient] multipartFormRequestWithMethod:@"POST" path:kCreateNewWPPath parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    if (imgData) {
+      [formData appendPartWithFormData:imgData name:@"photo_file_1"];
+    }
+  }];
   AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
   
   User *user = [[Database sharedInstance] currentUser];

@@ -29,11 +29,11 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    // Custom initialization
+  }
+  return self;
 }
 
 
@@ -50,13 +50,13 @@
 - (IBAction)signin:(UIButton *)sender {
   [self resignFirstResponder];
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
-
+  
   [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
-//    MSLog(@"ResultArray count: %i",success.count);
+    //    MSLog(@"ResultArray count: %i",success.count);
     MSLog(@"SUCCESS:: %@", success);
-     [self closeLoginView];
+    [self closeLoginView];
   } failure:^(NSError *e) {
-     MSLog(@"Login Error  %@",e);
+    MSLog(@"Login Error  %@",e);
   }];
 }
 
@@ -65,14 +65,14 @@
 }
 
 - (IBAction)registerAccount:(UIButton *)sender {
-    [[UIApplication sharedApplication] openURL: [NSURL URLWithString:kExternalWebLink]];
+  [[UIApplication sharedApplication] openURL: [NSURL URLWithString:kExternalWebLink]];
 }
 
 - (IBAction)loginFB:(id)sender {
   [FBHelper openSession];
 }
 - (IBAction)backgroundTap:(id)sender {
-   [[self view] endEditing:YES];
+  [[self view] endEditing:YES];
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
@@ -88,8 +88,8 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark Facebook

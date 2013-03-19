@@ -23,8 +23,8 @@
   return wp;
 }
 
-- (WastePoint *)wastepointWithId:(NSString *)remoteId {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id = %@", remoteId];
+- (WastePoint *)wastepointWithId:(int)remoteId {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id = %i", remoteId];
   WastePoint *result = [self findCoreDataObjectNamed:@"WastePoint" withPredicate:predicate];
   return result;
 }
@@ -58,7 +58,7 @@
   NSString *wpPhotos = [wpDict objectForKey:kKeyPhotos];
   [wpDict removeObjectForKey:kKeyPhotos];
   
-  WastePoint *point = [self wastepointWithId:wpId];
+  WastePoint *point = [self wastepointWithId:wpId.intValue];
   
   if (!point) {
     point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];

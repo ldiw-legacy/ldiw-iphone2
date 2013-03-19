@@ -35,11 +35,10 @@
 @property (strong, nonatomic) HeaderView *headerView;
 @property (strong, nonatomic) SuccessView *successView;
 @property (strong, nonatomic) NSArray *wastPointResultsArray;
-@property (strong, nonatomic) NSMutableArray *cellHeightArray;
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView, wastPointResultsArray;
+@synthesize tableView, headerView, successView, wastPointResultsArray, mapview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,7 +77,6 @@
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   
-  
   [self loadServerInformation];
 }
 
@@ -90,7 +88,7 @@
   if (self.wastePointAddedSuccessfully) {
     [self showSuccessBanner];
   }
-  [self showLoginViewIfNeeded]; 
+  [self showLoginViewIfNeeded];
 }
 
 -(void)showSuccessBanner
@@ -154,8 +152,8 @@
 
 - (void)setUpMapView
 {
- 
-  MapView *mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
+  mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
+  self.mapview.delegate=self;
   [self.view addSubview:mapview];
 }
 
@@ -172,16 +170,16 @@
   self.headerView.friendsButton.selected = NO;
   self.headerView.showMapButton.selected = YES;
   [self.tableView removeFromSuperview];
-  self.tableView=nil;
+  self.tableView = nil;
   [self setUpMapView];
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-  if (viewController==[tabBarController.viewControllers objectAtIndex:1]) {
+  if (viewController == [tabBarController.viewControllers objectAtIndex:1]) {
     {
       if ([[LocationManager sharedManager] locationServicesEnabled]) {
-      UIActionSheet  *sheet = [[UIActionSheet alloc]
+        UIActionSheet  *sheet = [[UIActionSheet alloc]
                                  initWithTitle:NSLocalizedString(@"pleaseAddPhotoTitle", nil)
                                  delegate:self
                                  cancelButtonTitle:NSLocalizedString(@"cancel",nil) destructiveButtonTitle:NSLocalizedString(@"skipPhoto",nil)
@@ -209,13 +207,16 @@
       [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
     picker.delegate = self;
+    self.tabBarController.selectedIndex = 0;
     [self presentViewController:picker animated:YES completion:nil];
   } else if (buttonIndex == 2) {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [picker setDelegate:self];
     [self presentViewController:picker animated:YES completion:nil];
+    self.tabBarController.selectedIndex = 0;
   } else if (buttonIndex != 3) {
+    self.tabBarController.selectedIndex = 0;
     [self openDetailViewWithImage:nil];
   }
 }
@@ -238,9 +239,7 @@
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -267,20 +266,17 @@
 
 - (void)showHudWarning
 {
-  MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+  MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.tabBarController.selectedViewController.view];
   
-  [self.view addSubview:hud];
+  [self.tabBarController.selectedViewController.view addSubview:hud];
   hud.delegate = self;
-  hud.customView = [[UIImageView alloc] initWithImage:
-                    [UIImage imageNamed:@"pin_1"]];
+  hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin_1"]];
   hud.mode = MBProgressHUDModeCustomView;
   hud.opacity = 0.8;
   hud.color=[UIColor colorWithRed:0.75 green:0.75 blue:0.72 alpha:1];
   hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
   hud.detailsLabelFont = [UIFont fontWithName:kFontNameBold size:17];
-  [hud showWhileExecuting:@selector(waitForSomeSeconds)
-                 onTarget:self withObject:nil animated:YES];
-  
+  [hud showWhileExecuting:@selector(waitForSomeSeconds) onTarget:self withObject:nil animated:YES];
 }
 
 - (void)waitForSomeSeconds {
@@ -338,5 +334,49 @@
 - (void)removeViewController {
   [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+
+  static NSString *identifier = @"MyLoc";
+  if (annotation != self.mapview.userLocation) {
+
+    MKPinAnnotationView *annotationView =
+    (MKPinAnnotationView *)[self.mapview dequeueReusableAnnotationViewWithIdentifier:identifier];
+
+    if (annotationView == nil) {
+      annotationView = [[MKPinAnnotationView alloc]
+                        initWithAnnotation:annotation
+                        reuseIdentifier:identifier];
+    } else {
+      annotationView.annotation = annotation;
+    }
+
+    annotationView.enabled = YES;
+    annotationView.canShowCallout = YES;
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+    [annotationView setRightCalloutAccessoryView:rightButton];
+
+    return annotationView;
+  }
+
+  return nil;
+}
+
+
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+
+  if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
+    
+    NSString *wp = [view.annotation title];
+    WastePoint *selectedWP = [[Database sharedInstance] wastepointWithId:[wp integerValue]];
+    NSLog(@"Wastepoint %@", selectedWP);
+    DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedWP andEnableEditing:NO];
+    [self.navigationController pushViewController:detailView animated:YES];
+  }
+}
+
 
 @end

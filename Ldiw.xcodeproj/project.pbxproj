@@ -66,7 +66,6 @@
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
 		539C093416F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 539C093316F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m */; };
 		539C093616F879F300FCF1DF /* raam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 539C093516F879F200FCF1DF /* raam@2x.png */; };
-		539C093816F889A900FCF1DF /* laiendita in Resources */ = {isa = PBXBuildFile; fileRef = 539C093716F889A900FCF1DF /* laiendita */; };
 		53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DD16DBB2C100AC8E35 /* _CustomValue.m */; };
 		53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DF16DBB2C100AC8E35 /* CustomValue.m */; };
 		53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E316DCB6F000AC8E35 /* AccountViewController.m */; };
@@ -293,7 +292,6 @@
 		539C093216F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworkingJSAdditions.h"; sourceTree = "<group>"; };
 		539C093316F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworkingJSAdditions.m"; sourceTree = "<group>"; };
 		539C093516F879F200FCF1DF /* raam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raam@2x.png"; sourceTree = "<group>"; };
-		539C093716F889A900FCF1DF /* laiendita */ = {isa = PBXFileReference; lastKnownFileType = file; path = laiendita; sourceTree = "<group>"; };
 		53A7BE1616E4880B003036DC /* FieldDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldDelegate.h; sourceTree = "<group>"; };
 		53E729DC16DBB2C100AC8E35 /* _CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CustomValue.h; sourceTree = "<group>"; };
 		53E729DD16DBB2C100AC8E35 /* _CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CustomValue.m; sourceTree = "<group>"; };
@@ -936,7 +934,6 @@
 		C583438916D76E4F005F3330 /* TestImages */ = {
 			isa = PBXGroup;
 			children = (
-				539C093716F889A900FCF1DF /* laiendita */,
 				539C093516F879F200FCF1DF /* raam@2x.png */,
 				C583438C16D77583005F3330 /* garbage005.jpg */,
 				C583438D16D77583005F3330 /* garbage01.jpg */,
@@ -1123,7 +1120,6 @@
 				13F544F616E9FD6600C6C3C4 /* tick_inactive_wide@2x.png in Resources */,
 				13F544F816E9FF1A00C6C3C4 /* tick_active_wide@2x.png in Resources */,
 				539C093616F879F300FCF1DF /* raam@2x.png in Resources */,
-				539C093816F889A900FCF1DF /* laiendita in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
