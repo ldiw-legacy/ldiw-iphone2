@@ -31,7 +31,9 @@
   NSData *imgData = [NSData dataWithContentsOfFile:image.localURL];
   
   NSMutableURLRequest *request = [[LoginClient sharedLoginClient] multipartFormRequestWithMethod:@"POST" path:kCreateNewWPPath parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-    [formData appendPartWithFormData:imgData name:@"photo_file_1"];
+    if (imgData) {
+      [formData appendPartWithFormData:imgData name:@"photo_file_1"];
+    }
   }];
   AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
   
