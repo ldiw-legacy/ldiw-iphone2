@@ -30,19 +30,19 @@
 }
 
 - (NSArray *)WPListFromData:(NSData *)csvData {
-  
+
   NSString *csvString = [[NSString alloc] initWithData:csvData encoding:NSUTF8StringEncoding];
   CSVParser *parser = [[CSVParser alloc] initWithString:csvString];
   NSArray *parsedArray = [parser arrayOfParsedRows];
   
   MSLog(@"Parsed %i objects", parsedArray.count);
   NSMutableArray *resultArray = [NSMutableArray array];
-  
+
   for (NSDictionary *elementDict in parsedArray) {
     WastePoint *point = [self wastePointFromDictionary:elementDict];
     [resultArray addObject:point];
   }
-  
+
   return resultArray;
 }
 
@@ -65,23 +65,21 @@
     [point setIdValue:wpId.intValue];
     [point setLatitudeValue:[wpLat floatValue]];
     [point setLongitudeValue:[wpLon floatValue]];
-  }
-  
-  [point setCustomValues:nil];
-  for (NSString *key in [wpDict allKeys]) {
-    NSString *value = [wpDict objectForKey:key];
-    CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
-    [point addCustomValuesObject:valueToAdd];
-  }
-  
-  // Create correct image objects
-  [point setImages:nil];
-  if ([wpPhotos length] > 0) {
-    NSRange photoNameRange = [wpPhotos rangeOfString:@":"];
-    NSString *photoname = [wpPhotos substringToIndex:photoNameRange.location];
-    Image *newImage = [self imageWithRemoteUrl:photoname];
-    if (![point.images containsObject:newImage]) {
-      [point addImagesObject:newImage];
+    
+    for (NSString *key in [wpDict allKeys]) {
+      NSString *value = [wpDict objectForKey:key];
+      CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
+      [point addCustomValuesObject:valueToAdd];
+    }
+    
+    // Create correct image objects
+    if ([wpPhotos length] > 0) {
+      NSRange photoNameRange = [wpPhotos rangeOfString:@":"];
+      NSString *photoname = [wpPhotos substringToIndex:photoNameRange.location];
+      Image *newImage = [self imageWithRemoteUrl:photoname];
+      if (![point.images containsObject:newImage]) {
+        [point addImagesObject:newImage];
+      }
     }
   }
   return point;
@@ -90,6 +88,10 @@
 - (NSArray *)listWastePointsWithNoId {
   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == 0"];
   return [self listCoreObjectsNamed:@"WastePoint" withPredicate:predicate];
+}
+
+- (NSArray *)listAllWastePoints {
+  return [self listCoreObjectsNamed:@"WastePoint" withPredicate:nil];
 }
 
 - (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value {

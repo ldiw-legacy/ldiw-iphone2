@@ -16,6 +16,7 @@
 - (NSArray *)WPListFromData:(NSData *)csvData;
 - (WastePoint *)wastepointWithId:(int)remoteId;
 - (NSArray *)listWastePointsWithNoId;
+- (NSArray *)listAllWastePoints;
 - (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value;
 - (CustomValue *)customValueWithKey:(NSString *)fieldName andValue:(NSString *)newValue;
 @end
