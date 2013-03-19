@@ -100,7 +100,6 @@
 }
 
 - (CustomValue *)customValueWithKey:(NSString *)key andValue:(NSString *)newValue {
-  
   CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
   [aValue setValue:newValue];
   [aValue setFieldName:key];

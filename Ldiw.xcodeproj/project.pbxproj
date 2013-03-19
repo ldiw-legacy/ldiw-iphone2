@@ -64,6 +64,9 @@
 		538DC21416D3AF08002D7925 /* Database+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21316D3AF08002D7925 /* Database+WP.m */; };
 		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
+		539C093416F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 539C093316F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m */; };
+		539C093616F879F300FCF1DF /* raam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 539C093516F879F200FCF1DF /* raam@2x.png */; };
+		539C093816F889A900FCF1DF /* laiendita in Resources */ = {isa = PBXBuildFile; fileRef = 539C093716F889A900FCF1DF /* laiendita */; };
 		53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DD16DBB2C100AC8E35 /* _CustomValue.m */; };
 		53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DF16DBB2C100AC8E35 /* CustomValue.m */; };
 		53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E316DCB6F000AC8E35 /* AccountViewController.m */; };
@@ -159,8 +162,8 @@
 		C581F30C16D27B04003A2FA2 /* ActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C581F30A16D27B04003A2FA2 /* ActivityViewController.xib */; };
 		C581F31116D308D3003A2FA2 /* DesignHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31016D308D3003A2FA2 /* DesignHelper.m */; };
 		C581F31516D30F3C003A2FA2 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31416D30F3C003A2FA2 /* HeaderView.m */; };
-		C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31716D36952003A2FA2 /* ActivityCustomCell.m */; };
-		C581F31A16D36993003A2FA2 /* ActivityCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */; };
+		C581F31816D36952003A2FA2 /* WastePointCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C581F31716D36952003A2FA2 /* WastePointCell.m */; };
+		C581F31A16D36993003A2FA2 /* WastePointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C581F31916D36993003A2FA2 /* WastePointCell.xib */; };
 		C583437716D3B312005F3330 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437416D3B312005F3330 /* Default.png */; };
 		C583437816D3B312005F3330 /* Default5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437516D3B312005F3330 /* Default5@2x.png */; };
 		C583437916D3B312005F3330 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C583437616D3B312005F3330 /* Default@2x.png */; };
@@ -287,6 +290,10 @@
 		538DC21516D4B04A002D7925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		538DC21716D5063D002D7925 /* Database+WPField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Database+WPField.h"; sourceTree = "<group>"; };
 		538DC21816D5063E002D7925 /* Database+WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WPField.m"; sourceTree = "<group>"; };
+		539C093216F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworkingJSAdditions.h"; sourceTree = "<group>"; };
+		539C093316F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworkingJSAdditions.m"; sourceTree = "<group>"; };
+		539C093516F879F200FCF1DF /* raam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raam@2x.png"; sourceTree = "<group>"; };
+		539C093716F889A900FCF1DF /* laiendita */ = {isa = PBXFileReference; lastKnownFileType = file; path = laiendita; sourceTree = "<group>"; };
 		53A7BE1616E4880B003036DC /* FieldDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldDelegate.h; sourceTree = "<group>"; };
 		53E729DC16DBB2C100AC8E35 /* _CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CustomValue.h; sourceTree = "<group>"; };
 		53E729DD16DBB2C100AC8E35 /* _CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CustomValue.m; sourceTree = "<group>"; };
@@ -398,9 +405,9 @@
 		C581F31016D308D3003A2FA2 /* DesignHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignHelper.m; sourceTree = "<group>"; };
 		C581F31316D30F3C003A2FA2 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		C581F31416D30F3C003A2FA2 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
-		C581F31616D36952003A2FA2 /* ActivityCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCustomCell.h; sourceTree = "<group>"; };
-		C581F31716D36952003A2FA2 /* ActivityCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCustomCell.m; sourceTree = "<group>"; };
-		C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCustomCell.xib; sourceTree = "<group>"; };
+		C581F31616D36952003A2FA2 /* WastePointCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePointCell.h; sourceTree = "<group>"; };
+		C581F31716D36952003A2FA2 /* WastePointCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePointCell.m; sourceTree = "<group>"; };
+		C581F31916D36993003A2FA2 /* WastePointCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WastePointCell.xib; sourceTree = "<group>"; };
 		C583437416D3B312005F3330 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C583437516D3B312005F3330 /* Default5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default5@2x.png"; sourceTree = "<group>"; };
 		C583437616D3B312005F3330 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -700,6 +707,8 @@
 				5AD08AEA16DD0CCC00566B04 /* PictureHelper.m */,
 				535C37D316DF830200131F50 /* UIView+addSubView.h */,
 				535C37D416DF830200131F50 /* UIView+addSubView.m */,
+				539C093216F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.h */,
+				539C093316F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -893,9 +902,9 @@
 				535C37D616DFBAEB00131F50 /* WPListViews */,
 				C581F31316D30F3C003A2FA2 /* HeaderView.h */,
 				C581F31416D30F3C003A2FA2 /* HeaderView.m */,
-				C581F31616D36952003A2FA2 /* ActivityCustomCell.h */,
-				C581F31716D36952003A2FA2 /* ActivityCustomCell.m */,
-				C581F31916D36993003A2FA2 /* ActivityCustomCell.xib */,
+				C581F31616D36952003A2FA2 /* WastePointCell.h */,
+				C581F31716D36952003A2FA2 /* WastePointCell.m */,
+				C581F31916D36993003A2FA2 /* WastePointCell.xib */,
 				53E729EA16DCFD5800AC8E35 /* MapView.h */,
 				53E729EB16DCFD5800AC8E35 /* MapView.m */,
 				53E729ED16DD021A00AC8E35 /* MapAnnotation.h */,
@@ -927,6 +936,8 @@
 		C583438916D76E4F005F3330 /* TestImages */ = {
 			isa = PBXGroup;
 			children = (
+				539C093716F889A900FCF1DF /* laiendita */,
+				539C093516F879F200FCF1DF /* raam@2x.png */,
 				C583438C16D77583005F3330 /* garbage005.jpg */,
 				C583438D16D77583005F3330 /* garbage01.jpg */,
 				C583438E16D77583005F3330 /* someface2.jpg */,
@@ -1092,7 +1103,7 @@
 				C581F30616D278E6003A2FA2 /* subtab_right_pressed@2x.png in Resources */,
 				C581F30716D278E6003A2FA2 /* titlebar_bg@2x.png in Resources */,
 				C581F30C16D27B04003A2FA2 /* ActivityViewController.xib in Resources */,
-				C581F31A16D36993003A2FA2 /* ActivityCustomCell.xib in Resources */,
+				C581F31A16D36993003A2FA2 /* WastePointCell.xib in Resources */,
 				C583437716D3B312005F3330 /* Default.png in Resources */,
 				C583437816D3B312005F3330 /* Default5@2x.png in Resources */,
 				C583437916D3B312005F3330 /* Default@2x.png in Resources */,
@@ -1111,6 +1122,8 @@
 				139E721A16DF6CD9008EDEE3 /* MySettingsViewController.xib in Resources */,
 				13F544F616E9FD6600C6C3C4 /* tick_inactive_wide@2x.png in Resources */,
 				13F544F816E9FF1A00C6C3C4 /* tick_active_wide@2x.png in Resources */,
+				539C093616F879F300FCF1DF /* raam@2x.png in Resources */,
+				539C093816F889A900FCF1DF /* laiendita in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1154,7 +1167,7 @@
 				13B6C7EA16D3D35300B72B4A /* WPField.m in Sources */,
 				534CCF7916D3725C0004532F /* WastepointRequest.m in Sources */,
 				534CCF7C16D39F6E0004532F /* CSVParser.m in Sources */,
-				C581F31816D36952003A2FA2 /* ActivityCustomCell.m in Sources */,
+				C581F31816D36952003A2FA2 /* WastePointCell.m in Sources */,
 				13A42DD816D4A16000B92C17 /* _Server.m in Sources */,
 				13A42DD916D4A16000B92C17 /* _TypicalValue.m in Sources */,
 				13A42DDA16D4A16000B92C17 /* _WastePoint.m in Sources */,
@@ -1204,6 +1217,7 @@
 				C5844BD316F25E7800359E0C /* AFXMLRequestOperation.m in Sources */,
 				C5844BD416F25E7800359E0C /* UIImageView+AFNetworking.m in Sources */,
 				535A730D16F1EF55007B2CB7 /* LogOutRequest.m in Sources */,
+				539C093416F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,6 +1308,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1314,6 +1329,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

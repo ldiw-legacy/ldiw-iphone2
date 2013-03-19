@@ -4,6 +4,7 @@
 #import "Database+WP.h"
 #import "Database+WPField.h"
 #import "WPField.h"
+#import "Image.h"
 
 @implementation WastePoint
 
@@ -79,6 +80,45 @@
 - (CLLocation *)location {
   CLLocation *returnLocation = [[CLLocation alloc] initWithLatitude:self.latitudeValue longitude:self.longitudeValue];
   return returnLocation;
+}
+
+- (NSString *)displayDescription {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fieldName == %@", @"description"];
+  NSSet *set = [self.customValues filteredSetUsingPredicate:predicate];
+  CustomValue *customvalue;
+  if (set.count == 1) {
+    customvalue = [set anyObject];
+  }
+  return customvalue.value;
+}
+
+- (NSString *)country {
+  NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"fieldName == %@", @"geo_areas_json"];
+  NSSet *set2 = [self.customValues filteredSetUsingPredicate:predicate2];
+
+  CustomValue *cv;
+  if (set2.count == 1) {
+    cv = [set2 anyObject];
+  }
+  NSError *error;
+  NSData *data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+  NSString *country = [json objectForKey:@"Country"];
+  return country;
+}
+
+- (NSURL *)imageRemoteUrl {
+  Image *wpImage = [self.images anyObject];
+  if (wpImage) {
+    NSString *imageUrlString = [kFirstServerUrl stringByAppendingString:[kImageURLPath stringByAppendingString:[NSString stringWithFormat:@"%d", self.idValue]]];
+    NSString *imageUrlExtended = [imageUrlString stringByAppendingString:@"/"];
+    NSString *imageUrlFullString = [imageUrlExtended stringByAppendingString:wpImage.remoteURL];
+    NSString *escapedUrl = [imageUrlFullString stringByAddingPercentEscapesUsingEncoding:NSUnicodeStringEncoding];
+    NSURL *imageUrl = [NSURL URLWithString:escapedUrl];
+    return imageUrl;
+  } else {
+    return nil;
+  }
 }
 
 @end

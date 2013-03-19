@@ -18,5 +18,4 @@
 - (NSArray *)listWastePointsWithNoId;
 - (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value;
 - (CustomValue *)customValueWithKey:(NSString *)fieldName andValue:(NSString *)newValue;
-
 @end

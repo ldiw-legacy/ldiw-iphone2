@@ -44,7 +44,6 @@
   label.font=[UIFont fontWithName:@"HelveticaNeue" size:13];
   label.textColor=kTextSubtitleColor;
   label.backgroundColor = [UIColor clearColor];
-  [label sizeToFit];
 }
 
 +(void)setActivityViewNametitle:(UILabel *)label
@@ -52,8 +51,6 @@
   label.font=[UIFont fontWithName:kBoldThemeFont size:14];
   label.textColor = [UIColor whiteColor];
   label.backgroundColor = [UIColor clearColor];
-  [label sizeToFit];
-  
 }
 
 +(void)setActivityViewActiontitle:(UILabel *)label
@@ -61,7 +58,6 @@
   label.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
   label.textColor = [UIColor whiteColor];
   label.backgroundColor = [UIColor clearColor];
-  [label sizeToFit];
 }
 
 +(void)setActivityViewLocationtitle:(UILabel *)label

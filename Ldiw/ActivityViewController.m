@@ -13,13 +13,12 @@
 #import "Database+WPField.h"
 #import "Database+WP.h"
 #import "WastepointRequest.h"
-#import "ActivityCustomCell.h"
+#import "WastePointCell.h"
 #import "BaseUrlRequest.h"
 #import "LoginViewController.h"
 #import "DesignHelper.h"
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
-#import "WastePoint.h"
 #import "WastePoint.h"
 #import "Image.h"
 #import "SuccessView.h"
@@ -29,8 +28,8 @@
 #import "CustomValue.h"
 #import "PictureHelper.h"
 
-#define kCellHeightWithPicture 186
-#define kCellHeightNoPicture 86
+#define kCellHeightWithPicture 160
+#define kCellHeightNoPicture 80
 
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
@@ -40,7 +39,7 @@
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView,wastPointResultsArray;
+@synthesize tableView, headerView, successView, wastPointResultsArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,7 +75,7 @@
   self.tableView.backgroundColor = kDarkBackgroundColor;
   
   //Tabelview
-  UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
+  UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   
   
@@ -237,9 +236,7 @@
   [self.navigationController pushViewController:detail animated:NO];
 }
 
-- (void)didReceiveMemoryWarning
-
-{
+- (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
@@ -258,66 +255,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  ActivityCustomCell *cell=[self.tableView dequeueReusableCellWithIdentifier:@"Cell"forIndexPath:indexPath];
+  WastePointCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
   if (!cell) {
-    cell = [[ActivityCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    cell = [[WastePointCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
 
-  WastePoint *point=[self.wastPointResultsArray objectAtIndex:indexPath.row];
-  NSString *wastpointID = [NSString stringWithFormat:@"%@",point.id];
-  cell.cellNameTitleLabel.text = wastpointID;
-  [cell.cellNameTitleLabel sizeToFit];
-
-
-  //Description
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fieldName == %@", @"description"];
-  NSSet *set = [point.customValues filteredSetUsingPredicate:predicate];
-  CustomValue *customvalue;
-  if (set.count == 1) {
-    customvalue = [set anyObject];
-  }
-  
-  NSString *descript= customvalue.value;
-  cell.cellSubtitleLabel.text = descript;
-  [cell.cellSubtitleLabel sizeToFit];
-  if (cell.cellSubtitleLabel.frame.size.width > 300) {
-    cell.cellSubtitleLabel.frame = CGRectMake(cell.cellSubtitleLabel.frame.origin.x, cell.cellSubtitleLabel.frame.origin.y,300, cell.cellSubtitleLabel.frame.size.height) ;
-  }
-  
-  //Country
-  NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"fieldName == %@", @"geo_areas_json"];
-  NSSet *set2 = [point.customValues filteredSetUsingPredicate:predicate2];
-  CustomValue *cv;
-  if (set2.count == 1) {
-    cv = [set2 anyObject];
-  }
-  NSError *error;
-  NSData *data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary* json = [NSJSONSerialization
-                        JSONObjectWithData:data
-
-                        options:kNilOptions
-                        error:&error];
-  NSString *country = [json objectForKey:@"Country"];
-
-  cell.cellTitleLabel.text = country;
-  [cell.cellTitleLabel sizeToFit];
-
-  //Thumbinal for view
-      [cell.spinner startAnimating];
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-    UIImage *thumbinal = [PictureHelper thumbinalForWastePoint:point];
-    dispatch_async(dispatch_get_main_queue(), ^{
-      cell.wastePointImageView.image = thumbinal;
-      [cell.spinner stopAnimating];
-    });
-  });
-
-  cell.wastePointImageView.image=nil;
+  WastePoint *point = [self.wastPointResultsArray objectAtIndex:indexPath.row];
+  [cell setWastePoint:point];
   return cell;
 }
-
 
 - (void)showHudWarning
 {
@@ -341,11 +287,14 @@
   sleep(3);
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  //To Do cell height
-  return 186;
+  WastePoint *point = [wastPointResultsArray objectAtIndex:indexPath.row];
+  if ([point.images count] > 0) {
+    return kCellHeightWithPicture;
+  } else {
+    return kCellHeightNoPicture;
+  }
 }
 
 - (void)loadWastePointList {
@@ -356,7 +305,7 @@
   [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
     //MSLog(@"Response array first object %@", [responseArray objectAtIndex:1] );
-    self.wastPointResultsArray=[[NSArray alloc] initWithArray:responseArray];
+    self.wastPointResultsArray = [NSArray arrayWithArray:responseArray];
     [self.tableView reloadData];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");

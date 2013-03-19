@@ -185,14 +185,14 @@ static dispatch_queue_t image_request_operation_processing_queue() {
 #pragma mark - AFHTTPRequestOperation
 
 + (NSSet *)acceptableContentTypes {
-    return [NSSet setWithObjects:@"image/tiff", @"image/jpeg", @"image/gif", @"image/png", @"image/ico", @"image/x-icon", @"image/bmp", @"image/x-bmp", @"image/x-xbitmap", @"image/x-win-bitmap", nil];
+    return [NSSet setWithObjects:@"image/tiff", @"image/jpeg", @"image/gif", @"image/png", @"image/ico", @"image/x-icon", @"image/bmp", @"image/x-bmp", @"image/x-xbitmap", @"image/x-win-bitmap", @"application/octet-stream", nil];
 }
 
 + (BOOL)canProcessRequest:(NSURLRequest *)request {
     static NSSet * _acceptablePathExtension = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _acceptablePathExtension = [[NSSet alloc] initWithObjects:@"tif", @"tiff", @"jpg", @"jpeg", @"gif", @"png", @"ico", @"bmp", @"cur", nil];
+        _acceptablePathExtension = [[NSSet alloc] initWithObjects:@"tif", @"tiff", @"jpg", @"jpeg", @"gif", @"png", @"ico", @"bmp", @"cur", @"", nil];
     });
 
     return [_acceptablePathExtension containsObject:[[request URL] pathExtension]] || [super canProcessRequest:request];
