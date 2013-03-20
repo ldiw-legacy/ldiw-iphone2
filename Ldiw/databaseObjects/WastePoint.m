@@ -52,8 +52,6 @@
 
   }
   
-  
-  
   for (CustomValue* value in self.customValues) {
     if ([value.fieldName isEqualToString:fieldName]) {
       MSLog(@"Change value for field '%@' to '%@'", fieldName, newValue);

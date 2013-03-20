@@ -38,7 +38,7 @@
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView, wastPointResultsArray, mapview;
+@synthesize tableView, headerView, successView, wastPointResultsArray, mapview, refreshHeaderView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +52,12 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  self.refreshHeaderView.delegate = self;
+  [self.tableView addSubview:self.refreshHeaderView];
+  [self.refreshHeaderView refreshLastUpdatedDate];
+  [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeViewController) name:kNotificationDismissLoginView object:nil];
@@ -308,8 +314,10 @@
     MSLog(@"Response array count: %i", responseArray.count);
     self.wastPointResultsArray = [NSArray arrayWithArray:responseArray];
     [self.tableView reloadData];
+    [self doneLoadingTableViewData];    
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
+    [self doneLoadingTableViewData];
   }];
 }
 
@@ -321,6 +329,7 @@
         [self loadWastePointList];
       } failure:^(void) {
         MSLog(@"Server info loading fail");
+        [self doneLoadingTableViewData];
       }];
     }
   }];
@@ -376,6 +385,48 @@
     DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedWP andEnableEditing:NO];
     [self.navigationController pushViewController:detailView animated:YES];
   }
+}
+
+#pragma mark - EGORefreshTableHeaderView delegate
+- (EGORefreshTableHeaderView *)refreshHeaderView
+{
+  if (!refreshHeaderView){
+    self.refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
+  }
+  return refreshHeaderView;
+}
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+  MSLog(@"Refresh triggered");
+  [self loadServerInformation];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+  return NO;
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
+{
+  return [NSDate date];
+}
+
+- (void)doneLoadingTableViewData {
+  MSLog(@"Refresh Done");  
+	[refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  [self.refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+  [self.refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
 
