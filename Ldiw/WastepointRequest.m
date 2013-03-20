@@ -15,7 +15,7 @@
 #define kGetWPListPath @"waste_points.csv"
 #define kCreateNewWPPath @"wp.json"
 
-#define kResultsToReturn 1000
+#define kResultsToReturn 100
 #define kMaxResultsKey @"max_results" //default 10
 #define kNearestPointToKey @"nearest_points_to" //optional coordinates (lon,lat in WGS84): "-74,30". If set, then returns individual WPs (not clusters) nearest to the coordinates given, and also adds a distance_meters field to results.
 #define kBBoxKey @"BBOX" // optional
