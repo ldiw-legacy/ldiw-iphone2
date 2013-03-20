@@ -75,4 +75,9 @@
   }
 }
 
+- (void)dealloc {
+  MSLog(@"Dealloc wastepointCell");
+  [wastePointImageView setImage:nil];
+}
+
 @end
