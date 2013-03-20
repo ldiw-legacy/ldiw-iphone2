@@ -132,7 +132,7 @@
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
   [self.view addSubview:tableView];
-  UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
+  UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   self.tableView.backgroundColor = kDarkBackgroundColor;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -166,12 +166,17 @@
 
 - (void)showMapPressed:(UIButton *)sender
 {
+  if ([[LocationManager sharedManager] locationServicesEnabled])
+  {
   self.headerView.nearbyButton.selected = NO;
   self.headerView.friendsButton.selected = NO;
   self.headerView.showMapButton.selected = YES;
   [self.tableView removeFromSuperview];
   self.tableView = nil;
   [self setUpMapView];
+  } else {
+     [self showHudWarning];
+  }
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
@@ -241,7 +246,7 @@
   [super didReceiveMemoryWarning];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionamm
 {
   return self.wastPointResultsArray.count;
 }
@@ -274,7 +279,7 @@
   hud.mode = MBProgressHUDModeCustomView;
   hud.opacity = 0.8;
   hud.color=[UIColor colorWithRed:0.75 green:0.75 blue:0.72 alpha:1];
-  hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
+  hud.detailsLabelText = @"LDIW needs permission to see your location to add/see wastepoints";
   hud.detailsLabelFont = [UIFont fontWithName:kFontNameBold size:17];
   [hud showWhileExecuting:@selector(waitForSomeSeconds) onTarget:self withObject:nil animated:YES];
 }
@@ -300,16 +305,16 @@
   
   [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
-    //MSLog(@"Response array first object %@", [responseArray objectAtIndex:1] );
     self.wastPointResultsArray = [NSArray arrayWithArray:responseArray];
     [self.tableView reloadData];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
+      self.wastPointResultsArray = [[Database sharedInstance] listAllWastePoints];
+      [self.tableView reloadData];
   }];
 }
 
 - (void)loadServerInformation {
-  //  if ([[Database sharedInstance] userIsLoggedIn]) {
   [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
     if (result) {
       MSLog(@"Need to load base server information");
@@ -317,10 +322,12 @@
         [self loadWastePointList];
       } failure:^(void) {
         MSLog(@"Server info loading fail");
+        [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
+        // reload tableview
+        [self.tableView reloadData];
       }];
     }
   }];
-  //  }
 }
 
 - (void)showHud {
@@ -337,39 +344,36 @@
 
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-
+  
   static NSString *identifier = @"MyLoc";
   if (annotation != self.mapview.userLocation) {
-
+    
     MKPinAnnotationView *annotationView =
     (MKPinAnnotationView *)[self.mapview dequeueReusableAnnotationViewWithIdentifier:identifier];
-
+    
     if (annotationView == nil) {
-      annotationView = [[MKPinAnnotationView alloc]
-                        initWithAnnotation:annotation
-                        reuseIdentifier:identifier];
+      annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
     } else {
       annotationView.annotation = annotation;
     }
-
+    
     annotationView.enabled = YES;
     annotationView.canShowCallout = YES;
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     [rightButton setTitle:annotation.title forState:UIControlStateNormal];
     [annotationView setRightCalloutAccessoryView:rightButton];
-
+    
     return annotationView;
   }
-
+  
   return nil;
 }
 
 
 - (void)mapView:(MKMapView *)mapView
  annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-
-  if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
-    
+  
+  if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure) {
     NSString *wp = [view.annotation title];
     WastePoint *selectedWP = [[Database sharedInstance] wastepointWithId:[wp integerValue]];
     NSLog(@"Wastepoint %@", selectedWP);
