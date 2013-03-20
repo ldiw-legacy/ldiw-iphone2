@@ -132,7 +132,7 @@
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
   [self.view addSubview:tableView];
-  UINib *myNib = [UINib nibWithNibName:@"ActivityCustomCell" bundle:nil];
+  UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   self.tableView.backgroundColor = kDarkBackgroundColor;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
