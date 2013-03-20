@@ -76,7 +76,8 @@
   //Tabelview
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
-  
+  [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
+  [self.tableView reloadData];
   [self loadServerInformation];
 }
 
@@ -309,8 +310,6 @@
     [self.tableView reloadData];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
-      self.wastPointResultsArray = [[Database sharedInstance] listAllWastePoints];
-      [self.tableView reloadData];
   }];
 }
 
@@ -322,9 +321,6 @@
         [self loadWastePointList];
       } failure:^(void) {
         MSLog(@"Server info loading fail");
-        [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
-        // reload tableview
-        [self.tableView reloadData];
       }];
     }
   }];
