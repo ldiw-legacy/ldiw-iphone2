@@ -31,7 +31,7 @@
 
 @implementation DetailViewController
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, editingMode, spinner;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, editingMode, spinner, takePictureButton;
 
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
@@ -61,8 +61,10 @@
   [self.navigationItem setHidesBackButton:YES];
   self.tabBarController.tabBar.hidden = YES;
   [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
+  [spinner stopAnimating];
   
   if (wastePoint.idValue > 0) {
+    [takePictureButton setHidden:YES];
     [self displayImage];
   }
 
@@ -72,18 +74,20 @@
 }
 
 - (void)displayImage {
-  
   UIImage *placeholder = [UIImage imageNamed:@"Default"];
+  [imageView setImage:placeholder];
   __weak UIImageView *blockSelf = imageView;
-  [spinner startAnimating];
   NSURL *imageUrl = [wastePoint imageRemoteUrl];
-  [imageView setImageWithURL:imageUrl placeholderImage:placeholder fadeIn:YES finished:^(UIImage *image) {
-    MSLog(@"Image loaded %@", imageUrl);
-    [spinner stopAnimating];
-
-    // TODO: Why this is necessary???
-    [blockSelf setImage:image];
-  }];
+  if (imageUrl) {
+    [spinner startAnimating];
+    [imageView setImageWithURL:imageUrl placeholderImage:placeholder fadeIn:YES finished:^(UIImage *image) {
+      MSLog(@"Image loaded %@", imageUrl);
+      [spinner stopAnimating];
+      
+      // TODO: Why this is necessary???
+      [blockSelf setImage:image];
+    }];
+  }
 }
 
 - (void) pictureLoadingAppearance {

@@ -32,6 +32,7 @@
   [DesignHelper setActivityViewNametitle:titleLabel];
   [DesignHelper setActivityViewLocationtitle:locationLabel];
   [DesignHelper setActivityViewSubtitle:descriptionLabel];
+  [spinner stopAnimating];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
