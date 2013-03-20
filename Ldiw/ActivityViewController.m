@@ -166,12 +166,17 @@
 
 - (void)showMapPressed:(UIButton *)sender
 {
+  if ([[LocationManager sharedManager] locationServicesEnabled])
+  {
   self.headerView.nearbyButton.selected = NO;
   self.headerView.friendsButton.selected = NO;
   self.headerView.showMapButton.selected = YES;
   [self.tableView removeFromSuperview];
   self.tableView = nil;
   [self setUpMapView];
+  } else {
+     [self showHudWarning];
+  }
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
@@ -274,7 +279,7 @@
   hud.mode = MBProgressHUDModeCustomView;
   hud.opacity = 0.8;
   hud.color=[UIColor colorWithRed:0.75 green:0.75 blue:0.72 alpha:1];
-  hud.detailsLabelText = @"LDIW needs permission to see your location to add wastepoint";
+  hud.detailsLabelText = @"LDIW needs permission to see your location to add/see wastepoints";
   hud.detailsLabelFont = [UIFont fontWithName:kFontNameBold size:17];
   [hud showWhileExecuting:@selector(waitForSomeSeconds) onTarget:self withObject:nil animated:YES];
 }
