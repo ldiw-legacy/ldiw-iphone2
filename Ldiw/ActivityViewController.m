@@ -52,12 +52,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-  self.refreshHeaderView.delegate = self;
-  [self.tableView addSubview:self.refreshHeaderView];
-  [self.refreshHeaderView refreshLastUpdatedDate];
-  [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-  
+  [self setupPullToRefresh];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeViewController) name:kNotificationDismissLoginView object:nil];
@@ -79,7 +74,7 @@
   self.headerView.nearbyButton.selected = YES;
   self.tableView.backgroundColor = kDarkBackgroundColor;
   
-  //Tabelview
+  //Tableview
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
@@ -96,6 +91,13 @@
     [self showSuccessBanner];
   }
   [self showLoginViewIfNeeded];
+}
+
+- (void)setupPullToRefresh {
+  self.refreshHeaderView.delegate = self;
+  [self.tableView addSubview:self.refreshHeaderView];
+  [self.refreshHeaderView refreshLastUpdatedDate];
+  [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
 
 -(void)showSuccessBanner
@@ -135,7 +137,7 @@
 
 - (void)setUpTabelview
 {
-  self.tableView = [[UITableView alloc]initWithFrame:[self tableViewRect]];
+  self.tableView = [[UITableView alloc] initWithFrame:[self tableViewRect]];
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
   [self.view addSubview:tableView];
@@ -143,6 +145,7 @@
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   self.tableView.backgroundColor = kDarkBackgroundColor;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  [self setupPullToRefresh];
   [self.tableView reloadData];
 }
 
@@ -160,7 +163,7 @@
 - (void)setUpMapView
 {
   mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
-  self.mapview.delegate=self;
+  self.mapview.delegate = self;
   [self.view addSubview:mapview];
 }
 
@@ -398,7 +401,6 @@
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
 {
-  MSLog(@"Refresh triggered");
   [self loadServerInformation];
 }
 
@@ -413,7 +415,6 @@
 }
 
 - (void)doneLoadingTableViewData {
-  MSLog(@"Refresh Done");  
 	[refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
 }
 
