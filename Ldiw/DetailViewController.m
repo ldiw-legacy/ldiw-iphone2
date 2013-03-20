@@ -18,6 +18,7 @@
 #import "Database+Server.h"
 #import "Constants.h"
 #import "CustomValue.h"
+#import "UIImageView+AFNetworkingJSAdditions.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -25,13 +26,12 @@
 @property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UILabel *insertTextLabel;
 @property (strong, nonatomic) NSString *selectedFieldName;
-@property (strong, nonatomic) UIActivityIndicatorView *pictureLoading;
 
 @end
 
 @implementation DetailViewController
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, pictureLoading, editingMode;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, editingMode, spinner;
 
 - (id)initWithImage:(UIImage *)image {
   self = [super initWithNibName:nil bundle:nil];
@@ -42,7 +42,6 @@
     self.view.backgroundColor = kViewBackroundColor;
     if (image) {
       [self addImageAsynchronously:image];
-      self.pictureLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
   }
   return self;
@@ -52,7 +51,6 @@
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
     [self setWastePoint:point];
-    [self addImageAsynchronously:[PictureHelper thumbinalForWastePoint:wastePoint]];
     [self setEditingMode:editingAllowed];
   }
   return self;
@@ -64,27 +62,33 @@
   self.tabBarController.tabBar.hidden = YES;
   [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
   
-  if (self.pictureLoading) {
+  if (wastePoint.idValue > 0) {
+    [self displayImage];
+  }
+
+  if ([spinner isAnimating]) {
     [self pictureLoadingAppearance];
   }
 }
 
-- (void) pictureLoadingAppearance {
-  self.takePictureButton.alpha = 0;
-  if (!self.pictureLoading) {
-    self.pictureLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-  }
-  self.pictureLoading.frame = self.imageView.frame;
-  [self.imageView addSubview:self.pictureLoading];
-  [self.pictureLoading startAnimating];
+- (void)displayImage {
+  
+  UIImage *placeholder = [UIImage imageNamed:@"Default"];
+  __weak UIImageView *blockSelf = imageView;
+  [spinner startAnimating];
+  NSURL *imageUrl = [wastePoint imageRemoteUrl];
+  [imageView setImageWithURL:imageUrl placeholderImage:placeholder fadeIn:YES finished:^(UIImage *image) {
+    MSLog(@"Image loaded %@", imageUrl);
+    [spinner stopAnimating];
+
+    // TODO: Why this is necessary???
+    [blockSelf setImage:image];
+  }];
 }
 
-- (void) pictureLoaded {
-  if (self.pictureLoading) {
-    [self.pictureLoading stopAnimating];
-    [self.pictureLoading removeFromSuperview];
-    self.pictureLoading = nil;
-  }
+- (void) pictureLoadingAppearance {
+  self.takePictureButton.alpha = 0;
+  [spinner startAnimating];
 }
 
 - (void)viewDidLoad
@@ -160,11 +164,12 @@
 }
 
 - (void) addImageAsynchronously:(UIImage*)image {
+  [spinner startAnimating];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     UIImage *smallImage = [PictureHelper saveImage:image forWastePoint:self.wastePoint];
     dispatch_sync(dispatch_get_main_queue(), ^{
       [self setImageinImageView:smallImage];
-      [self pictureLoaded];
+      [spinner stopAnimating];
     });
   });
 }

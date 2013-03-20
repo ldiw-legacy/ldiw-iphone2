@@ -19,8 +19,9 @@
 @property (weak, nonatomic) id delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet MapView *mapView;
+@property (weak, nonatomic) IBOutlet MapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) WastePoint *wastePoint;
 @property (weak, nonatomic) ActivityViewController *controller;
 @property (nonatomic, strong) WastePointViews *wastePointViews;
