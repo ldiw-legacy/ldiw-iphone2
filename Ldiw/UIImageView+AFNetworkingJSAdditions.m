@@ -57,7 +57,8 @@ static char imageURLKey;
 
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest placeholderImage:(UIImage *)placeholderImage fadeIn:(BOOL)fadeIn success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-  NSURL *newImageURL = urlRequest.URL;
+   NSURL *newImageURL = urlRequest.URL;
+  __weak UIImageView *iv=self;
   
   if (![self.imageURL isEqual:newImageURL])
   {
@@ -65,9 +66,10 @@ static char imageURLKey;
     {
       self.imageURL = nil;
       
+      
       [self setImageWithURLRequest:urlRequest placeholderImage:placeholderImage success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         
-        self.imageURL = newImageURL;
+        iv.imageURL = newImageURL;
         
 				BOOL cachedImage = !request && !response;
 				
@@ -75,9 +77,9 @@ static char imageURLKey;
         
         if (shouldFadeIn)
         {
-          self.alpha = 0.0f;
+          iv.alpha = 0.0f;
           [UIView animateWithDuration:kImageFadeInAnimationDuration delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.alpha = 1.0f;
+            iv.alpha = 1.0f;
           } completion:NULL];
         }
         
@@ -87,9 +89,9 @@ static char imageURLKey;
         }
       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"Error loading image with URL: %@", urlRequest.URL);
-        self.imageURL = nil;
+        iv.imageURL = nil;
         
-        self.alpha = 1.0f;
+        iv.alpha = 1.0f;
         if (failure)
         {
           failure(request, response, error);
