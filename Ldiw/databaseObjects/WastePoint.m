@@ -109,7 +109,7 @@
 
 - (NSURL *)imageRemoteUrl {
   Image *wpImage = [self.images anyObject];
-  if (wpImage) {
+  if (wpImage.remoteURL) {
     NSString *imageUrlString = [kFirstServerUrl stringByAppendingString:[kImageURLPath stringByAppendingString:[NSString stringWithFormat:@"%d", self.idValue]]];
     NSString *imageUrlExtended = [imageUrlString stringByAppendingString:@"/"];
     NSString *imageUrlFullString = [imageUrlExtended stringByAppendingString:wpImage.remoteURL];
