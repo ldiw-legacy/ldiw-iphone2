@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signinButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
 
@@ -49,13 +50,16 @@
 
 - (IBAction)signin:(UIButton *)sender {
   [self resignFirstResponder];
+  [self.spinner startAnimating];
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
   
   [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
     //    MSLog(@"ResultArray count: %i",success.count);
     MSLog(@"SUCCESS:: %@", success);
+    [self.spinner stopAnimating];
     [self closeLoginView];
   } failure:^(NSError *e) {
+    [self.spinner stopAnimating];
     NSString *errorstring;
      if (e.code==0)
      {
@@ -114,4 +118,8 @@
   
 }
 
+- (void)viewDidUnload {
+  [self setSpinner:nil];
+  [super viewDidUnload];
+}
 @end
