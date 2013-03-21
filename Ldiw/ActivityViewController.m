@@ -360,6 +360,10 @@
   DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:wastePoint andEnableEditing:NO];
   [self.navigationController pushViewController:detailView animated:YES];
 }
+-(void)mapView:(MapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+  [mapView loadPoints];
+}
 
 #pragma mark - EGORefreshTableHeaderView delegate
 - (EGORefreshTableHeaderView *)refreshHeaderView
