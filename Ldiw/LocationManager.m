@@ -183,4 +183,8 @@
   }
 }
 
+- (void)stopLocationManager {
+  [locManager stopMonitoringSignificantLocationChanges];
+  [locManager stopUpdatingLocation];
+}
 @end

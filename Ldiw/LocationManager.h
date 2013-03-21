@@ -28,6 +28,7 @@ typedef void (^LocationBlock)(CLLocation *currentLocation);
 - (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result)) booleanResultBlock;
 - (BOOL)location:(CLLocation *)location IsInsideBox:(NSString *)box;
 - (BOOL)locationServicesEnabled;
+- (void)stopLocationManager;
 
-+(NSString*) getPhoneLanguage;
++ (NSString *)getPhoneLanguage;
 @end
