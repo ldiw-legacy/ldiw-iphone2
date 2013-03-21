@@ -38,7 +38,7 @@
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView, wastPointResultsArray, mapview;
+@synthesize tableView, headerView, successView, wastPointResultsArray, mapview, refreshHeaderView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +52,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [self setupPullToRefresh];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeViewController) name:kNotificationDismissLoginView object:nil];
@@ -73,10 +74,11 @@
   self.headerView.nearbyButton.selected = YES;
   self.tableView.backgroundColor = kDarkBackgroundColor;
   
-  //Tabelview
+  //Tableview
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
-  
+  [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
+  [self.tableView reloadData];
   [self loadServerInformation];
 }
 
@@ -89,6 +91,13 @@
     [self showSuccessBanner];
   }
   [self showLoginViewIfNeeded];
+}
+
+- (void)setupPullToRefresh {
+  self.refreshHeaderView.delegate = self;
+  [self.tableView addSubview:self.refreshHeaderView];
+  [self.refreshHeaderView refreshLastUpdatedDate];
+  [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
 
 -(void)showSuccessBanner
@@ -128,7 +137,7 @@
 
 - (void)setUpTabelview
 {
-  self.tableView = [[UITableView alloc]initWithFrame:[self tableViewRect]];
+  self.tableView = [[UITableView alloc] initWithFrame:[self tableViewRect]];
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
   [self.view addSubview:tableView];
@@ -136,6 +145,7 @@
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   self.tableView.backgroundColor = kDarkBackgroundColor;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  [self setupPullToRefresh];
   [self.tableView reloadData];
 }
 
@@ -153,7 +163,7 @@
 - (void)setUpMapView
 {
   mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
-  self.mapview.delegate=self;
+  self.mapview.delegate = self;
   [self.view addSubview:mapview];
 }
 
@@ -307,10 +317,10 @@
     MSLog(@"Response array count: %i", responseArray.count);
     self.wastPointResultsArray = [NSArray arrayWithArray:responseArray];
     [self.tableView reloadData];
+    [self doneLoadingTableViewData];    
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
-      self.wastPointResultsArray = [[Database sharedInstance] listAllWastePoints];
-      [self.tableView reloadData];
+    [self doneLoadingTableViewData];
   }];
 }
 
@@ -322,9 +332,7 @@
         [self loadWastePointList];
       } failure:^(void) {
         MSLog(@"Server info loading fail");
-        [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
-        // reload tableview
-        [self.tableView reloadData];
+        [self doneLoadingTableViewData];
       }];
     }
   }];
@@ -380,6 +388,46 @@
     DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedWP andEnableEditing:NO];
     [self.navigationController pushViewController:detailView animated:YES];
   }
+}
+
+#pragma mark - EGORefreshTableHeaderView delegate
+- (EGORefreshTableHeaderView *)refreshHeaderView
+{
+  if (!refreshHeaderView){
+    self.refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
+  }
+  return refreshHeaderView;
+}
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+  [self loadServerInformation];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+  return NO;
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
+{
+  return [NSDate date];
+}
+
+- (void)doneLoadingTableViewData {
+	[refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  [self.refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+  [self.refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
 
