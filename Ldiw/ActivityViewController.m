@@ -79,7 +79,6 @@
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
   [self.tableView reloadData];
-  [self loadServerInformation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,6 +90,7 @@
     [self showSuccessBanner];
   }
   [self showLoginViewIfNeeded];
+  [self loadServerInformation];
 }
 
 - (void)setupPullToRefresh {
@@ -137,16 +137,17 @@
 
 - (void)setUpTabelview
 {
-  self.tableView = [[UITableView alloc] initWithFrame:[self tableViewRect]];
-  self.tableView.dataSource = self;
-  self.tableView.delegate = self;
-  [self.view addSubview:tableView];
-  UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
-  [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
-  self.tableView.backgroundColor = kDarkBackgroundColor;
-  self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-  [self setupPullToRefresh];
-  [self.tableView reloadData];
+  if (!tableView) {
+    self.tableView = [[UITableView alloc] initWithFrame:[self tableViewRect]];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:tableView];
+    UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
+    [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
+    self.tableView.backgroundColor = kDarkBackgroundColor;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self setupPullToRefresh];
+  }
 }
 
 - (void)nearbyPressed:(UIButton *)sender
@@ -154,17 +155,19 @@
   self.headerView.nearbyButton.selected = YES;
   self.headerView.friendsButton.selected = NO;
   self.headerView.showMapButton.selected = NO;
-  if (!self.tableView) {
-    [self setUpTabelview];
-  }
+  [mapview setHidden:YES];
+  [tableView setHidden:NO];
+  [self setUpTabelview];
 }
-
 
 - (void)setUpMapView
 {
-  mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
-  self.mapview.delegate = self;
-  [self.view addSubview:mapview];
+  if (!mapview) {
+    self.mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
+    [self.view addSubview:mapview];
+    [mapview setAnnotationDelegate:self];
+    [mapview centerToUserLocation];
+  }
 }
 
 - (void)friendsPressed:(UIButton *)sender
@@ -178,14 +181,14 @@
 {
   if ([[LocationManager sharedManager] locationServicesEnabled])
   {
-  self.headerView.nearbyButton.selected = NO;
-  self.headerView.friendsButton.selected = NO;
-  self.headerView.showMapButton.selected = YES;
-  [self.tableView removeFromSuperview];
-  self.tableView = nil;
-  [self setUpMapView];
+    self.headerView.nearbyButton.selected = NO;
+    self.headerView.friendsButton.selected = NO;
+    self.headerView.showMapButton.selected = YES;
+    [self setUpMapView];
+    [tableView setHidden:YES];
+    [mapview setHidden:NO];
   } else {
-     [self showHudWarning];
+    [self showHudWarning];
   }
 }
 
@@ -325,17 +328,19 @@
 }
 
 - (void)loadServerInformation {
-  [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
-    if (result) {
-      MSLog(@"Need to load base server information");
-      [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-        [self loadWastePointList];
-      } failure:^(void) {
-        MSLog(@"Server info loading fail");
-        [self doneLoadingTableViewData];
-      }];
-    }
-  }];
+  if ([[LocationManager sharedManager] locationServicesEnabled]) {
+    [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
+      if (result) {
+        MSLog(@"Need to load base server information");
+        [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+          [self loadWastePointList];
+        } failure:^(void) {
+          MSLog(@"Server info loading fail");
+          [self doneLoadingTableViewData];
+        }];
+      }
+    }];
+  }
 }
 
 - (void)showHud {
@@ -350,44 +355,10 @@
   [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-  
-  static NSString *identifier = @"MyLoc";
-  if (annotation != self.mapview.userLocation) {
-    
-    MKPinAnnotationView *annotationView =
-    (MKPinAnnotationView *)[self.mapview dequeueReusableAnnotationViewWithIdentifier:identifier];
-    
-    if (annotationView == nil) {
-      annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-    } else {
-      annotationView.annotation = annotation;
-    }
-    
-    annotationView.enabled = YES;
-    annotationView.canShowCallout = YES;
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [rightButton setTitle:annotation.title forState:UIControlStateNormal];
-    [annotationView setRightCalloutAccessoryView:rightButton];
-    
-    return annotationView;
-  }
-  
-  return nil;
-}
-
-
-- (void)mapView:(MKMapView *)mapView
- annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-  
-  if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure) {
-    NSString *wp = [view.annotation title];
-    WastePoint *selectedWP = [[Database sharedInstance] wastepointWithId:[wp integerValue]];
-    NSLog(@"Wastepoint %@", selectedWP);
-    DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedWP andEnableEditing:NO];
-    [self.navigationController pushViewController:detailView animated:YES];
-  }
+#pragma mark - AnnotationDelegate
+- (void)pressedAnnotationForWastePoint:(WastePoint *)wastePoint {
+  DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:wastePoint andEnableEditing:NO];
+  [self.navigationController pushViewController:detailView animated:YES];
 }
 
 #pragma mark - EGORefreshTableHeaderView delegate

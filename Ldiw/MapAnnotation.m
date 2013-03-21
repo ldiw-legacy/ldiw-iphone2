@@ -9,15 +9,23 @@
 #import "MapAnnotation.h"
 
 @implementation MapAnnotation
+@synthesize wastePoint;
 
-- (id)initWithWastePoint:(WastePoint *)wastePoint {
+- (id)initWithWastePoint:(WastePoint *)aWastePoint {
   self = [super init];
   if (self) {
-    [self setTitle:[NSString stringWithFormat:@"%d", wastePoint.idValue]];
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(wastePoint.latitudeValue, wastePoint.longitudeValue);
-    [self setCoordinate:coordinate];
+    [self setWastePoint:aWastePoint];
   }
   return self;
+}
+
+#pragma mark - MKAnnotation delegate
+- (NSString *)title {
+  return [NSString stringWithFormat:@"%d", wastePoint.idValue];
+}
+
+- (CLLocationCoordinate2D)coordinate {
+  return CLLocationCoordinate2DMake(wastePoint.latitudeValue, wastePoint.longitudeValue);
 }
 
 @end

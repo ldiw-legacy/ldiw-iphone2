@@ -7,8 +7,18 @@
 //
 
 #import <MapKit/MapKit.h>
+#import "WastePoint.h"
+
+@protocol AnnotationDelegate <NSObject>
+
+- (void)pressedAnnotationForWastePoint:(WastePoint *)wastePoint;
+
+@end
 
 @interface MapView : MKMapView <MKMapViewDelegate>
+
+@property (nonatomic, assign) id <AnnotationDelegate> annotationDelegate;
+
 - (void)centerToLocation:(CLLocation *)center;
 - (void)centerToUserLocation;
 

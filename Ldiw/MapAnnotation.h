@@ -10,8 +10,7 @@
 #import "WastePoint.h"
 @interface MapAnnotation : NSObject <MKAnnotation>
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, strong) WastePoint *wastePoint;
 
 - (id)initWithWastePoint:(WastePoint *)wastePoint;
 @end

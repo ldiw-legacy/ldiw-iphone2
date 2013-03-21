@@ -26,7 +26,8 @@
   
   [parameters setObject:lat forKey:@"lat"];
   [parameters setObject:lon forKey:@"lon"];
-
+  [parameters setObject:@"WP" forKey:@"title"];
+  
   Image *image = point.images.anyObject;
   NSData *imgData = [NSData dataWithContentsOfFile:image.localURL];
   

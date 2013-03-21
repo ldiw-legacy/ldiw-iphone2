@@ -10,16 +10,14 @@
 #import "LocationManager.h"
 #import "WastepointRequest.h"
 #import "MapAnnotation.h"
-#import "WastePoint.h"
 
 @implementation MapView
+@synthesize annotationDelegate;
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
     [self setup];
-    [self centerToUserLocation];
   }
   return self;
 }
@@ -32,8 +30,7 @@
   return self;
 }
 
-- (void)setup
-{
+- (void)setup {
   [self setDelegate:self];
   [self setShowsUserLocation:YES];
 }
@@ -77,5 +74,41 @@
   [self addAnnotations:tmpAnnotationsArray];
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+  
+  static NSString *identifier = @"MyLoc";
+  if (annotation != self.userLocation) {
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[self dequeueReusableAnnotationViewWithIdentifier:identifier];
+    
+    if (annotationView == nil) {
+      annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+    } else {
+      annotationView.annotation = annotation;
+    }
+    
+    annotationView.enabled = YES;
+    annotationView.canShowCallout = YES;
+
+    if (annotationDelegate) {
+      UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+      [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+      [annotationView setRightCalloutAccessoryView:rightButton];
+    }
+    
+    return annotationView;
+  }
+  
+  return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+  
+  if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure) {
+    MapAnnotation *annotation = (MapAnnotation *)view.annotation;
+    WastePoint *wp = annotation.wastePoint;
+    [annotationDelegate pressedAnnotationForWastePoint:wp];
+  }
+}
 
 @end

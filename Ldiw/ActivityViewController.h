@@ -8,12 +8,11 @@
 #import "MBProgressHUD.h"
 #import "MapView.h"
 #import "EGORefreshTableHeaderView.h"
-#import <MapKit/MapKit.h>
 
-@interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, EGORefreshTableHeaderDelegate>
+@interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate, AnnotationDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) MKMapView *mapview;
+@property (strong, nonatomic) MapView *mapview;
 @property (nonatomic) BOOL  wastePointAddedSuccessfully;
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
 
