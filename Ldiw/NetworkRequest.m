@@ -66,6 +66,7 @@
 }
 - (void)enqueueHTTPRequestOperation:(AFHTTPRequestOperation *)operation
 {
+  MSLog(@"Enque operation with method %@ and header %@", operation.request.HTTPMethod, operation.request.allHTTPHeaderFields);
   [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRea)
    {
      // NSLog(@"DOWNLOAD PROGRESS %i, %lld, %lld", bytesRead, totalBytesRead, totalBytesExpectedToRead);

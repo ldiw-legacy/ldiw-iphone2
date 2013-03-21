@@ -18,7 +18,6 @@
 
 + (void) loadServerInfoForCurrentLocationWithSuccess:(void (^)())success failure:(void (^)())failure {
   
-  MSLog(@"Got location");
   CLLocation *location = [[Database sharedInstance] currentLocation];
   
   NSString *latitude = [NSString stringWithFormat:@"%g", location.coordinate.latitude];

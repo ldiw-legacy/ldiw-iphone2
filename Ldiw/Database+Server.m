@@ -58,9 +58,6 @@
 
 - (Server *)currentServer {
   Server *server = [self findCoreDataObjectNamed:@"Server" withPredicate:nil];
-  if (!server) {
-    server = [self addServerWithBaseUrl:nil andSafeBBox:nil];
-  }
   return server;
 }
 
@@ -90,7 +87,7 @@
   MSLog(@"NeedToLoadServerInformationWithBlock");
   [[LocationManager sharedManager] currentLocationIsInsideBox:[self bBox] withResultBlock:^(BOOL locationIsInsideBox) {
     NSString *baseUrl = [self serverBaseUrl];
-    BOOL serverInfoIsAvailable = (baseUrl.length == 0);
+    BOOL serverInfoIsAvailable = (baseUrl.length > 0);
     BOOL needToLoadServerInfo = !serverInfoIsAvailable || !locationIsInsideBox;
     resultBlock(needToLoadServerInfo);
   }];
