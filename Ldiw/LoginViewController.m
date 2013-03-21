@@ -56,8 +56,25 @@
     MSLog(@"SUCCESS:: %@", success);
     [self closeLoginView];
   } failure:^(NSError *e) {
-    MSLog(@"Login Error  %@",e);
+    NSString *errorstring;
+     if (e.code==0)
+     {
+       errorstring=[e.userInfo objectForKey:@"NSLocalizedDescription"];
+   
+       
+     } else {
+       NSString *strg=[[e.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"] description];
+       NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
+       errorstring=[[strg componentsSeparatedByCharactersInSet:set] componentsJoinedByString: @""];
+     }
+   
+    UIAlertView *av=[[UIAlertView alloc] initWithTitle:nil
+                                               message:errorstring
+                                              delegate:self
+                                     cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [av show];
   }];
+  
 }
 
 - (void)closeLoginView {
