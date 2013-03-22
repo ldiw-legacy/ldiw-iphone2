@@ -11,11 +11,11 @@
 #import "HeaderView.h"
 #import "Database+Server.h"
 #import "Database+WPField.h"
+#import "Database+User.h"
 #import "Database+WP.h"
 #import "WastepointRequest.h"
 #import "WastePointCell.h"
 #import "BaseUrlRequest.h"
-#import "LoginViewController.h"
 #import "DesignHelper.h"
 #import "FBHelper.h"
 #import "MBProgressHUD.h"
@@ -55,7 +55,6 @@
   [self setupPullToRefresh];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeViewController) name:kNotificationDismissLoginView object:nil];
   
   [self.tabBarController setDelegate:self];
   
@@ -77,8 +76,7 @@
   //Tableview
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
-  [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
-  [self.tableView reloadData];
+  [[[LocationManager sharedManager] locManager] startUpdatingLocation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -90,7 +88,6 @@
     [self showSuccessBanner];
   }
   [self showLoginViewIfNeeded];
-  [self loadServerInformation];
 }
 
 - (void)setupPullToRefresh {
@@ -122,7 +119,11 @@
   if (openLoginView) {
     MSLog(@"User logged in %d, FBsessionOpen %d, open login view", userLoggedIn, FBSessionOpen);
     LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [loginVC setDelegate:self];
     [self presentViewController:loginVC animated:YES completion:nil];
+  } else {
+    [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
+    [self.tableView reloadData];
   }
 }
 
@@ -135,7 +136,7 @@
   return rect;
 }
 
-- (void)setUpTabelview
+- (void)setUpTableview
 {
   if (!tableView) {
     self.tableView = [[UITableView alloc] initWithFrame:[self tableViewRect]];
@@ -157,7 +158,7 @@
   self.headerView.showMapButton.selected = NO;
   [mapview setHidden:YES];
   [tableView setHidden:NO];
-  [self setUpTabelview];
+  [self setUpTableview];
 }
 
 - (void)setUpMapView
@@ -276,7 +277,7 @@
   if (!cell) {
     cell = [[WastePointCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
-
+  
   WastePoint *point = [self.wastPointResultsArray objectAtIndex:indexPath.row];
   [cell setWastePoint:point];
   return cell;
@@ -312,7 +313,7 @@
 }
 
 - (void)loadWastePointList {
-  CLLocation *currentLocation = [[Database sharedInstance] currentLocation];
+  CLLocation *currentLocation = [[Database sharedInstance] currentUserLocation];
   MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
   MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, span);
   
@@ -320,7 +321,7 @@
     MSLog(@"Response array count: %i", responseArray.count);
     self.wastPointResultsArray = [NSArray arrayWithArray:responseArray];
     [self.tableView reloadData];
-    [self doneLoadingTableViewData];    
+    [self doneLoadingTableViewData];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
     [self doneLoadingTableViewData];
@@ -329,7 +330,7 @@
 
 - (void)loadServerInformation {
   if ([[LocationManager sharedManager] locationServicesEnabled]) {
-    [[Database sharedInstance] needToLoadServerInfotmationWithBlock:^(BOOL result) {
+    [[Database sharedInstance] needToLoadServerInformationWithBlock:^(BOOL result) {
       if (result) {
         MSLog(@"Need to load base server information");
         [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
@@ -338,6 +339,8 @@
           MSLog(@"Server info loading fail");
           [self doneLoadingTableViewData];
         }];
+      } else {
+        [self loadWastePointList];
       }
     }];
   }
@@ -349,10 +352,6 @@
 
 - (void)removeHud {
   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-}
-
-- (void)removeViewController {
-  [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
 #pragma mark - AnnotationDelegate
@@ -391,6 +390,7 @@
 
 - (void)doneLoadingTableViewData {
 	[refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
+  [self removeHud];
 }
 
 #pragma mark - UIScrollView delegate
@@ -405,5 +405,12 @@
   [self.refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
-
+#pragma mark - Login Delegate
+- (void)loginSuccessful {
+  [self dismissViewControllerAnimated:YES completion:^(void){
+    MBProgressHUD *MBPhud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBPhud setLabelText:NSLocalizedString(@"first.loading.wastepoints", nil)];
+    [self loadServerInformation];
+  }];
+}
 @end

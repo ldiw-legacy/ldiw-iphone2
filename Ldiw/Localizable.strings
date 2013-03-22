@@ -17,6 +17,8 @@ activities.nearbyButton = "Nearby";
 activities.friendsButton = "Friends";
 activities.showMapButton = "Show Map";
 
+first.loading.wastepoints = "Loading wastepoints...";
+
 // Login Buttons
 
 login.register = "Register new account";

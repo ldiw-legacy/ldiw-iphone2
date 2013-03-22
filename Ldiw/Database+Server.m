@@ -70,6 +70,7 @@
 }
 
 - (void)setCurrentLocation:(CLLocation *)currentLocation {
+  MSLog(@"--- SET Location");
   Server *server = [self currentServer];
   [server setLocationLatValue:currentLocation.coordinate.latitude];
   [server setLocationLonValue:currentLocation.coordinate.longitude];
@@ -80,11 +81,12 @@
   double lon = server.locationLonValue;
   double lat = server.locationLatValue;
   CLLocation *returnLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+  
   return  returnLocation;
 }
 
-- (void)needToLoadServerInfotmationWithBlock:(void (^)(BOOL))resultBlock {
-  MSLog(@"NeedToLoadServerInformationWithBlock");
+- (void)needToLoadServerInformationWithBlock:(void (^)(BOOL))resultBlock {
+  MSLog(@"Need To Load Server Information With Block");
   [[LocationManager sharedManager] currentLocationIsInsideBox:[self bBox] withResultBlock:^(BOOL locationIsInsideBox) {
     NSString *baseUrl = [self serverBaseUrl];
     BOOL serverInfoIsAvailable = (baseUrl.length > 0);

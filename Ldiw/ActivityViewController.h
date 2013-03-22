@@ -8,8 +8,9 @@
 #import "MBProgressHUD.h"
 #import "MapView.h"
 #import "EGORefreshTableHeaderView.h"
+#import "LoginViewController.h"
 
-@interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate, AnnotationDelegate>
+@interface ActivityViewController : UIViewController <UITabBarControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate, AnnotationDelegate, LoginDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) MapView *mapview;

@@ -34,6 +34,8 @@
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uploadWifiOnly" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="userLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="userLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <entity name="WastePoint" representedClassName="WastePoint" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -62,7 +64,7 @@
         <element name="Image" positionX="304" positionY="387" width="128" height="88"/>
         <element name="Server" positionX="-441" positionY="159" width="128" height="165"/>
         <element name="TypicalValue" positionX="322" positionY="126" width="128" height="90"/>
-        <element name="User" positionX="160" positionY="240" width="128" height="120"/>
+        <element name="User" positionX="160" positionY="240" width="128" height="150"/>
         <element name="WastePoint" positionX="90" positionY="413" width="128" height="120"/>
         <element name="WPField" positionX="-243" positionY="99" width="128" height="223"/>
     </elements>

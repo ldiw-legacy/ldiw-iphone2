@@ -10,6 +10,7 @@
 #import "LocationManager.h"
 #import "Database+Server.h"
 #import "ServerRequest.h"
+#import "Database+User.h"
 
 #define kBaseUrlKey @"api_base_url"
 #define kSafeBBoxKey @"safe_bbox"
@@ -18,7 +19,7 @@
 
 + (void) loadServerInfoForCurrentLocationWithSuccess:(void (^)())success failure:(void (^)())failure {
   
-  CLLocation *location = [[Database sharedInstance] currentLocation];
+  CLLocation *location = [[Database sharedInstance] currentUserLocation];
   
   NSString *latitude = [NSString stringWithFormat:@"%g", location.coordinate.latitude];
   NSString *longtitude = [NSString stringWithFormat:@"%g", location.coordinate.longitude];

@@ -8,6 +8,7 @@
 
 #import "LocationManager.h"
 #import "Database+Server.h"
+#import "Database+User.h"
 
 @implementation LocationManager
 @synthesize locManager, geocoder, locationManagerStart;
@@ -73,14 +74,14 @@
 {
   MSLog(@"LocationManager didUpdateToLocation %@", newLocation);
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
+    [[Database sharedInstance] setUserCurrentLocation:newLocation];
     if (_locationBlock) {
-      [locManager stopUpdatingLocation];
       _locationBlock(newLocation);
       _locationBlock = nil;
     } else {
       [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
     }
-    
+    [locManager stopUpdatingLocation];           
   } else {
     MSLog(@"Bad location info %@", newLocation);
   }
@@ -155,13 +156,8 @@
 
 - (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result))resultBlock {
   //    box = "26.2167,57.8833,27.2167,58.8833";
-  [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-    [[Database sharedInstance] setCurrentLocation:location];
-    BOOL isInsideBox = [self location:location IsInsideBox:box];
+    BOOL isInsideBox = [self location:[[Database sharedInstance] currentLocation] IsInsideBox:box];
     resultBlock(isInsideBox);
-  } errorBlock:^(NSError *error) {
-    resultBlock(NO);
-  }];
 }
 
 

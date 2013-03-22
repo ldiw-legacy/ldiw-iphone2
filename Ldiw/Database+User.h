@@ -7,7 +7,12 @@
 //
 
 #import "Database.h"
+#import "Database+Server.h"
+#import "LocationManager.h"
 
 @interface Database (User)
+
+- (void)setUserCurrentLocation:(CLLocation *)currentLocation;
+- (CLLocation *)currentUserLocation;
 
 @end
