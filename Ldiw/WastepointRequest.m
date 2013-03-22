@@ -61,8 +61,8 @@
   [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSData *responseData = (NSData *)responseObject;
     NSArray *resultArray = [[Database sharedInstance] WPListFromData:responseData];
-    success(resultArray);
     
+    success(resultArray);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Things go boom. %@", [error localizedDescription]);
     failure(error);

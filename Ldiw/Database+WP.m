@@ -42,7 +42,7 @@
     WastePoint *point = [self wastePointFromDictionary:elementDict];
     [resultArray addObject:point];
   }
-
+  [[Database sharedInstance] saveContext];
   return resultArray;
 }
 

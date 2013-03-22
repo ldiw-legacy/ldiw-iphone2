@@ -122,7 +122,7 @@
     [loginVC setDelegate:self];
     [self presentViewController:loginVC animated:YES completion:nil];
   } else {
-    [self setWastPointResultsArray:[[Database sharedInstance] listAllWastePoints]];
+    [self setWastPointResultsArray:[NSArray arrayWithArray:[[Database sharedInstance] listAllWastePoints]]];
     [self.tableView reloadData];
   }
 }

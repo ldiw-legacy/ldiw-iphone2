@@ -74,7 +74,6 @@
 		538DC21616D4B04A002D7925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538DC21516D4B04A002D7925 /* MapKit.framework */; };
 		538DC21916D5063F002D7925 /* Database+WPField.m in Sources */ = {isa = PBXBuildFile; fileRef = 538DC21816D5063E002D7925 /* Database+WPField.m */; };
 		539C093416F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 539C093316F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m */; };
-		539C093616F879F300FCF1DF /* raam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 539C093516F879F200FCF1DF /* raam@2x.png */; };
 		53E729E016DBB2C100AC8E35 /* _CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DD16DBB2C100AC8E35 /* _CustomValue.m */; };
 		53E729E116DBB2C100AC8E35 /* CustomValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729DF16DBB2C100AC8E35 /* CustomValue.m */; };
 		53E729E516DCB6F200AC8E35 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729E316DCB6F000AC8E35 /* AccountViewController.m */; };
@@ -181,10 +180,6 @@
 		C583438216D3ED90005F3330 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C583438116D3ED8F005F3330 /* QuartzCore.framework */; };
 		C583438516D4018C005F3330 /* Caecilia-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C583438416D4018C005F3330 /* Caecilia-Heavy.otf */; };
 		C583438816D4CF98005F3330 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C583438716D4CF97005F3330 /* LoginRequest.m */; };
-		C583438B16D76ED3005F3330 /* someface.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438A16D76ED3005F3330 /* someface.jpg */; };
-		C583438F16D77583005F3330 /* garbage005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438C16D77583005F3330 /* garbage005.jpg */; };
-		C583439016D77583005F3330 /* garbage01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438D16D77583005F3330 /* garbage01.jpg */; };
-		C583439116D77583005F3330 /* someface2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C583438E16D77583005F3330 /* someface2.jpg */; };
 		C583439516DBBB80005F3330 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C583439316DBBB7C005F3330 /* DetailViewController.m */; };
 		C583439616DBBB80005F3330 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C583439416DBBB7E005F3330 /* DetailViewController.xib */; };
 		C5844BCC16F25E7800359E0C /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C5844BBA16F25E7800359E0C /* AFHTTPClient.m */; };
@@ -196,6 +191,7 @@
 		C5844BD216F25E7800359E0C /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C5844BC716F25E7800359E0C /* AFURLConnectionOperation.m */; };
 		C5844BD316F25E7800359E0C /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C5844BC916F25E7800359E0C /* AFXMLRequestOperation.m */; };
 		C5844BD416F25E7800359E0C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = C5844BCB16F25E7800359E0C /* UIImageView+AFNetworking.m */; };
+		C5B326A116FB4A48004E3964 /* raam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5B326A016FB4A48004E3964 /* raam@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -310,7 +306,6 @@
 		538DC21816D5063E002D7925 /* Database+WPField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Database+WPField.m"; sourceTree = "<group>"; };
 		539C093216F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworkingJSAdditions.h"; sourceTree = "<group>"; };
 		539C093316F752F500FCF1DF /* UIImageView+AFNetworkingJSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworkingJSAdditions.m"; sourceTree = "<group>"; };
-		539C093516F879F200FCF1DF /* raam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raam@2x.png"; sourceTree = "<group>"; };
 		53A7BE1616E4880B003036DC /* FieldDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldDelegate.h; sourceTree = "<group>"; };
 		53E729DC16DBB2C100AC8E35 /* _CustomValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CustomValue.h; sourceTree = "<group>"; };
 		53E729DD16DBB2C100AC8E35 /* _CustomValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CustomValue.m; sourceTree = "<group>"; };
@@ -436,10 +431,6 @@
 		C583438416D4018C005F3330 /* Caecilia-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Caecilia-Heavy.otf"; sourceTree = "<group>"; };
 		C583438616D4CF96005F3330 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
 		C583438716D4CF97005F3330 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
-		C583438A16D76ED3005F3330 /* someface.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = someface.jpg; sourceTree = "<group>"; };
-		C583438C16D77583005F3330 /* garbage005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = garbage005.jpg; sourceTree = "<group>"; };
-		C583438D16D77583005F3330 /* garbage01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = garbage01.jpg; sourceTree = "<group>"; };
-		C583438E16D77583005F3330 /* someface2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = someface2.jpg; sourceTree = "<group>"; };
 		C583439216DBBB7B005F3330 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		C583439316DBBB7C005F3330 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		C583439416DBBB7E005F3330 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -462,6 +453,7 @@
 		C5844BC916F25E7800359E0C /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		C5844BCA16F25E7800359E0C /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		C5844BCB16F25E7800359E0C /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		C5B326A016FB4A48004E3964 /* raam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raam@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -805,7 +797,7 @@
 		C581F26516D278E6003A2FA2 /* iOS ASSETS */ = {
 			isa = PBXGroup;
 			children = (
-				C583438916D76E4F005F3330 /* TestImages */,
+				C5B326A016FB4A48004E3964 /* raam@2x.png */,
 				C583438316D4016B005F3330 /* Font */,
 				C583437316D3B312005F3330 /* splash */,
 				C581F26616D278E6003A2FA2 /* 020 Empty Friends */,
@@ -992,18 +984,6 @@
 			name = Font;
 			sourceTree = "<group>";
 		};
-		C583438916D76E4F005F3330 /* TestImages */ = {
-			isa = PBXGroup;
-			children = (
-				539C093516F879F200FCF1DF /* raam@2x.png */,
-				C583438C16D77583005F3330 /* garbage005.jpg */,
-				C583438D16D77583005F3330 /* garbage01.jpg */,
-				C583438E16D77583005F3330 /* someface2.jpg */,
-				C583438A16D76ED3005F3330 /* someface.jpg */,
-			);
-			name = TestImages;
-			sourceTree = "<group>";
-		};
 		C5844BB816F25E7800359E0C /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1171,16 +1151,11 @@
 				5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */,
 				13A42DE916D4EEE300B92C17 /* FacebookSDKResources.bundle in Resources */,
 				13A42DEA16D4EEE300B92C17 /* FBUserSettingsViewResources.bundle in Resources */,
-				C583438B16D76ED3005F3330 /* someface.jpg in Resources */,
-				C583438F16D77583005F3330 /* garbage005.jpg in Resources */,
-				C583439016D77583005F3330 /* garbage01.jpg in Resources */,
-				C583439116D77583005F3330 /* someface2.jpg in Resources */,
 				C583439616DBBB80005F3330 /* DetailViewController.xib in Resources */,
 				53E729E616DCB6F200AC8E35 /* AccountViewController.xib in Resources */,
 				139E721A16DF6CD9008EDEE3 /* MySettingsViewController.xib in Resources */,
 				13F544F616E9FD6600C6C3C4 /* tick_inactive_wide@2x.png in Resources */,
 				13F544F816E9FF1A00C6C3C4 /* tick_active_wide@2x.png in Resources */,
-				539C093616F879F300FCF1DF /* raam@2x.png in Resources */,
 				13E1D2A916F9EE38001E9042 /* blackArrow.png in Resources */,
 				13E1D2AA16F9EE38001E9042 /* blackArrow@2x.png in Resources */,
 				13E1D2AB16F9EE38001E9042 /* blueArrow.png in Resources */,
@@ -1189,6 +1164,7 @@
 				13E1D2AE16F9EE38001E9042 /* grayArrow@2x.png in Resources */,
 				13E1D2AF16F9EE38001E9042 /* whiteArrow.png in Resources */,
 				13E1D2B016F9EE38001E9042 /* whiteArrow@2x.png in Resources */,
+				C5B326A116FB4A48004E3964 /* raam@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

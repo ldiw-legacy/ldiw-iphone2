@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signinButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
 
@@ -52,14 +53,34 @@
 
 - (IBAction)signin:(UIButton *)sender {
   [self resignFirstResponder];
+  [self.spinner startAnimating];
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
   
   [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
     MSLog(@"SUCCESS:: %@", success);
+    [self.spinner stopAnimating];
     [self closeLoginView];
   } failure:^(NSError *e) {
-    MSLog(@"Login Error  %@",e);
+    [self.spinner stopAnimating];
+    NSString *errorstring;
+     if (e.code==0)
+     {
+       errorstring=[e.userInfo objectForKey:@"NSLocalizedDescription"];
+   
+       
+     } else {
+       NSString *strg=[[e.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"] description];
+       NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
+       errorstring=[[strg componentsSeparatedByCharactersInSet:set] componentsJoinedByString: @""];
+     }
+   
+    UIAlertView *av=[[UIAlertView alloc] initWithTitle:nil
+                                               message:errorstring
+                                              delegate:self
+                                     cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [av show];
   }];
+  
 }
 
 - (void)closeLoginView {
@@ -77,6 +98,7 @@
 }
 
 - (IBAction)loginFB:(id)sender {
+  [self.spinner startAnimating];
   [FBHelper openSession];
 }
 - (IBAction)backgroundTap:(id)sender {
@@ -99,12 +121,22 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+-(void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  [self.spinner stopAnimating];
+}
 
 #pragma mark Facebook
 - (void)loginFailed {
   if (delegate) {
     [delegate loginFailed];
   }
+  [self.spinner stopAnimating];
 }
 
+- (void)viewDidUnload {
+  [self setSpinner:nil];
+  [super viewDidUnload];
+}
 @end
