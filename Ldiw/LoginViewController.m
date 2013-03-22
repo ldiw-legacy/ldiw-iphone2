@@ -90,6 +90,7 @@
 }
 
 - (IBAction)loginFB:(id)sender {
+  [self.spinner startAnimating];
   [FBHelper openSession];
 }
 - (IBAction)backgroundTap:(id)sender {
@@ -112,10 +113,17 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+-(void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  [self.spinner stopAnimating];
+  
+  
+}
 
 #pragma mark Facebook
 - (void)loginFailed {
-  
+  [self.spinner stopAnimating];
 }
 
 - (void)viewDidUnload {
