@@ -16,5 +16,6 @@
 @property (strong, nonatomic) MapView *mapview;
 @property (nonatomic) BOOL  wastePointAddedSuccessfully;
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
+@property (nonatomic, assign) BOOL firstTime;
 
 @end

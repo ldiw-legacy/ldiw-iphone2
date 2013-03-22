@@ -38,7 +38,7 @@
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView, wastPointResultsArray, mapview, refreshHeaderView;
+@synthesize tableView, headerView, successView, wastPointResultsArray, mapview, refreshHeaderView, firstTime;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,6 +77,9 @@
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   [[[LocationManager sharedManager] locManager] startUpdatingLocation];
+  [self setWastPointResultsArray:[NSArray arrayWithArray:[[Database sharedInstance] listAllWastePoints]]];
+  [self.tableView reloadData];
+  firstTime = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -121,9 +124,10 @@
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     [loginVC setDelegate:self];
     [self presentViewController:loginVC animated:YES completion:nil];
-  } else {
-    [self setWastPointResultsArray:[NSArray arrayWithArray:[[Database sharedInstance] listAllWastePoints]]];
-    [self.tableView reloadData];
+  } else if (firstTime){
+    [self showHud];
+    firstTime = NO;
+    [self loadServerInformation];
   }
 }
 
