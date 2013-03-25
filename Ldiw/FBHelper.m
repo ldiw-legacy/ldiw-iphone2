@@ -19,7 +19,7 @@
     [FBHelper openSession];
     result = YES;
   } else {
-    result = NO;
+    result = FBSession.activeSession.isOpen;
   }
   return result;
 }
