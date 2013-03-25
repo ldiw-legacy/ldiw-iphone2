@@ -66,10 +66,13 @@
      if (e.code==0)
      {
        errorstring=[e.userInfo objectForKey:@"NSLocalizedDescription"];
-   
-       
      } else {
-       NSString *strg=[[e.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"] description];
+       NSString *strg = [[e.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"] description];
+       
+       if (![strg length] > 0) {
+         strg = @"Sorry, our servers are too busy. Try again later.";
+       }
+       
        NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
        errorstring=[[strg componentsSeparatedByCharactersInSet:set] componentsJoinedByString: @""];
      }
