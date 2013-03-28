@@ -52,7 +52,7 @@
 }
 
 - (IBAction)signin:(UIButton *)sender {
-  [self resignFirstResponder];
+  [self.view endEditing:YES];
   [self.spinner startAnimating];
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
   
