@@ -11,6 +11,7 @@
 #import "WastepointRequest.h"
 #import "MapAnnotation.h"
 
+#define kscaleConstantForMapView 100000
 @implementation MapView
 @synthesize annotationDelegate;
 
@@ -49,8 +50,7 @@
 }
 
 - (void)createMapViewWithCoordinate:(CLLocation *)location {
-  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.002, 0.004);
-//  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(0.01, 0.01);
+  MKCoordinateSpan mapSpan = MKCoordinateSpanMake(self.frame.size.width / kscaleConstantForMapView, self.frame.size.width / kscaleConstantForMapView);
   MKCoordinateRegion mapRegion = MKCoordinateRegionMake(location.coordinate, mapSpan);
   [self setRegion:mapRegion animated:NO];
   [self loadPoints];

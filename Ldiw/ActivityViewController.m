@@ -417,4 +417,8 @@
     [self loadServerInformation];
   }];
 }
+
+- (void)loginFailed {
+  MSLog(@"Login Failed");
+}
 @end
