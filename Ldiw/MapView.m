@@ -111,4 +111,9 @@
   }
 }
 
+-(void)mapView:(MapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+  [mapView loadPoints];
+}
+
 @end
