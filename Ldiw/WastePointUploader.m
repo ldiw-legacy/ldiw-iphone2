@@ -13,6 +13,7 @@
 #import "User.h"
 #import "Reachability.h"
 #import "Image.h"
+#import "CustomValue.h"
 
 #define kCreateNewWPPath @"?q=api/wp.json"
 
@@ -26,16 +27,23 @@
   
   [parameters setObject:lat forKey:@"lat"];
   [parameters setObject:lon forKey:@"lon"];
-  [parameters setObject:@"WP" forKey:@"title"];
+  
+  for (CustomValue *val in point.customValues) {
+    [parameters setObject:val.value forKey:val.fieldName];
+  }
   
   Image *image = point.images.anyObject;
   NSData *imgData = [NSData dataWithContentsOfFile:image.localURL];
   
   NSMutableURLRequest *request = [[LoginClient sharedLoginClient] multipartFormRequestWithMethod:@"POST" path:kCreateNewWPPath parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     if (imgData) {
-      [formData appendPartWithFormData:imgData name:@"photo_file_1"];
+      [formData appendPartWithFileData:imgData name:@"photo_file_1" fileName:@"file" mimeType:@"application/octet-stream"];
     }
   }];
+  
+  //Temporary fix, authentication with cookies stopped working after server update
+  [request setHTTPShouldHandleCookies:NO];
+  
   AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
   
   User *user = [[Database sharedInstance] currentUser];
