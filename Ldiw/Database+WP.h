@@ -12,6 +12,7 @@
 @interface Database (WP)
 
 - (WastePoint *)addWastePointUsingImage:(UIImage *)image;
+- (WastePoint *)wastePointFromDictionary:(NSDictionary *)inDict;
 
 - (NSArray *)WPListFromData:(NSData *)csvData;
 - (WastePoint *)wastepointWithId:(int)remoteId;

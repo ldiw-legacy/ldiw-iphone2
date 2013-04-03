@@ -100,16 +100,16 @@
     WastePoint *wp = [WPs objectAtIndex:0];
     [WastePointUploader uploadWP:wp withSuccess:^(NSDictionary* result) {
       NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
-      NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-      [f setNumberStyle:NSNumberFormatterDecimalStyle];
-      NSNumber *myNumber = [f numberFromString:[responseWP objectForKey:kKeyId]];
-      [wp setId:myNumber];
-//      [wp setPhotos:[responseWP objectForKey:kKeyPhotos]];
+      
+      WastePoint *newPoint = [[Database sharedInstance] wastePointFromDictionary:responseWP];
+      
       [WPs removeObject:wp];
+      [[[Database sharedInstance] managedObjectContext] deleteObject:wp];
+
       if (WPs.count > 0) {
         [self uploadAllLocalWPsWithArray:WPs];        
       }
-      MSLog(@"UPLOAD SUCCESSFUL FOR WP WITH ID: %@", wp.id);
+      MSLog(@"UPLOAD SUCCESSFUL FOR WP WITH ID: %@", newPoint.id);
     } failure:^(NSError *error) {
       MSLog(@"UPLOAD FAILED FOR: %@", wp);
     }];

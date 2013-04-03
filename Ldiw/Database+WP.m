@@ -65,23 +65,28 @@
     [point setIdValue:wpId.intValue];
     [point setLatitudeValue:[wpLat floatValue]];
     [point setLongitudeValue:[wpLon floatValue]];
-    
-    for (NSString *key in [wpDict allKeys]) {
-      NSString *value = [wpDict objectForKey:key];
-      CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
-      [point addCustomValuesObject:valueToAdd];
-    }
-    
-    // Create correct image objects
-    if ([wpPhotos length] > 0) {
-      NSRange photoNameRange = [wpPhotos rangeOfString:@":"];
-      NSString *photoname = [wpPhotos substringToIndex:photoNameRange.location];
-      Image *newImage = [self imageWithRemoteUrl:photoname];
-      if (![point.images containsObject:newImage]) {
-        [point addImagesObject:newImage];
-      }
+  }
+
+  // Create correct image objects
+  if ([wpPhotos length] > 0) {
+    point.images = nil;
+    NSRange photoNameRange = [wpPhotos rangeOfString:@":"];
+    NSString *photoname = [wpPhotos substringToIndex:photoNameRange.location];
+    Image *newImage = [self imageWithRemoteUrl:photoname];
+    if (![point.images containsObject:newImage]) {
+      [point addImagesObject:newImage];
     }
   }
+  
+  [point setCustomValues:nil];
+  for (NSString *key in [wpDict allKeys]) {
+    NSString *value = [wpDict objectForKey:key];
+    CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
+    if (valueToAdd) {
+      [point addCustomValuesObject:valueToAdd];
+    }
+  }
+  
   return point;
 }
 
@@ -95,10 +100,15 @@
 }
 
 - (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value {
-  CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
-  [aValue setFieldName:key];
-  [aValue setValue:value];
-  return aValue;
+  if ([value isKindOfClass:[NSString class]]) {
+    CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
+    [aValue setFieldName:key];
+    [aValue setValue:value];
+    return aValue;
+  } else {
+    return nil;
+    
+  }
 }
 
 - (CustomValue *)customValueWithKey:(NSString *)key andValue:(NSString *)newValue {

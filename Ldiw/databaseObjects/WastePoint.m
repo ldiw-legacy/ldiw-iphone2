@@ -46,10 +46,10 @@
       num = [self capFloat:num from:[wpF.min doubleValue] toMax:[wpF.max doubleValue]];
       
       NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+      [nf setDecimalSeparator:@"."];
       [nf setMaximumFractionDigits:5];
       newValue = [nf stringFromNumber:[NSNumber numberWithDouble:num]];
     }
-
   }
   
   for (CustomValue* value in self.customValues) {
