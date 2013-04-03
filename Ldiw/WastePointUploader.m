@@ -7,6 +7,7 @@
 //
 
 #import "WastePointUploader.h"
+#import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 #import "Database+Server.h"
 #import "Database+WP.h"
@@ -35,24 +36,18 @@
   Image *image = point.images.anyObject;
   NSData *imgData = [NSData dataWithContentsOfFile:image.localURL];
   
-  NSMutableURLRequest *request = [[LoginClient sharedLoginClient] multipartFormRequestWithMethod:@"POST" path:kCreateNewWPPath parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+  NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
+  AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:serverBaseUrl];
+
+  NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:kCreateNewWPPath parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     if (imgData) {
       [formData appendPartWithFileData:imgData name:@"photo_file_1" fileName:@"file" mimeType:@"application/octet-stream"];
     }
   }];
-  
-  //Temporary fix, authentication with cookies stopped working after server update
-  [request setHTTPShouldHandleCookies:NO];
-  
+  [request setHTTPShouldHandleCookies:YES];
+    
   AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
   
-  User *user = [[Database sharedInstance] currentUser];
-
-  if (user.token) {
-    [request setValue:user.token forHTTPHeaderField:user.uid];
-  }
-  
-
   [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
     if ([responseObject isKindOfClass:[NSData class]]) {
       NSError *error;
@@ -67,7 +62,8 @@
     failure(error);
   }];
   
-  [[LoginClient sharedLoginClient] enqueueHTTPRequestOperation:operation];
+  MSLog(@"All header fields: %@", request.allHTTPHeaderFields);
+  [httpClient enqueueHTTPRequestOperation:operation];
 }
 
 + (void)uploadAllLocalWPs {

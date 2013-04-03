@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 Mobi Solutions. All rights reserved.
 //
 
-#import "LoginClient.h"
 #import "WastePoint.h"
 
-@interface WastePointUploader : LoginClient
+@interface WastePointUploader : NSObject;
 
 + (void)uploadWP:(WastePoint *)point withSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
 
