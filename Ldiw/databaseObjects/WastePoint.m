@@ -93,15 +93,16 @@
 - (NSString *)country {
   NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"fieldName == %@", @"geo_areas_json"];
   NSSet *set2 = [self.customValues filteredSetUsingPredicate:predicate2];
-
+  NSString *country = nil;
   CustomValue *cv;
   if (set2.count == 1) {
     cv = [set2 anyObject];
+    NSError *error;
+    NSData *data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    country = [json objectForKey:@"Country"];
   }
-  NSError *error;
-  NSData *data = [cv.value dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-  NSString *country = [json objectForKey:@"Country"];
   return country;
 }
 
