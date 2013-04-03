@@ -11,7 +11,6 @@
 @implementation Database (User)
 
 - (void)setUserCurrentLocation:(CLLocation *)currentLocation {
-  MSLog(@"--- SET Location");
   User *currentUser = [[Database sharedInstance] currentUser];
   [currentUser setUserLatitudeValue:currentLocation.coordinate.latitude];
   [currentUser setUserLongitudeValue:currentLocation.coordinate.longitude];

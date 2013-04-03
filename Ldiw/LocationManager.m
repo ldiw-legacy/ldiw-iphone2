@@ -42,7 +42,6 @@
 }
 
 - (void)locationWithBlock:(void (^)(CLLocation *currentLocation)) locationBlock errorBlock:(void (^)(NSError *error))errorBlock {
-  MSLog(@"Get location with block");
   _locationBlock = [locationBlock copy];  
   _errorBlock = [errorBlock copy];
   [locManager startUpdatingLocation];
@@ -72,7 +71,6 @@
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-  MSLog(@"LocationManager didUpdateToLocation %@", newLocation);
   if ([self isValidLocation:newLocation withOldLocation:oldLocation]) {
     [[Database sharedInstance] setUserCurrentLocation:newLocation];
     if (_locationBlock) {

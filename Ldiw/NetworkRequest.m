@@ -43,11 +43,6 @@
     
   [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
   self.parameterEncoding = AFJSONParameterEncoding;
-  
-//  [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingOperationDidStartNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-//    AFHTTPRequestOperation *operation = (AFHTTPRequestOperation *)[note object];
-//  }];
-  
   return self;
 }
 
@@ -55,15 +50,16 @@
 {
   NSString *pathWithPrefix = [NSString stringWithFormat:@"%@/%@", [[Database sharedInstance] serverSuffix], path];
   NSMutableURLRequest *request = [super requestWithMethod:method path:pathWithPrefix parameters:parameters];
-//  [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+
   NSString *language = [LocationManager getPhoneLanguage];
   if (language) {
     [request setValue:language forHTTPHeaderField:kLanguageCodeKey];
   }
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [request setHTTPShouldHandleCookies:YES];
   return request;
 }
+
 - (void)enqueueHTTPRequestOperation:(AFHTTPRequestOperation *)operation
 {
   MSLog(@"Enque operation with method %@ and header %@", operation.request.HTTPMethod, operation.request.allHTTPHeaderFields);

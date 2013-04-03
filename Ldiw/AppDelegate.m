@@ -71,6 +71,5 @@
 }
 
 - (void)locationChanged:(NSNotification *)notification {
-  MSLog(@"Got location changed notification");
 }
 @end

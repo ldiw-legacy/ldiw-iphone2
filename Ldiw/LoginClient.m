@@ -10,8 +10,7 @@
 #import "AFJSONRequestOperation.h"
 #import "Database+Server.h"
 
-#define kLoginServerUrl  @"http://test.letsdoitworld.org/"
-
+#define kLoginServerUrl @"http://test.letsdoitworld.org/"
 
 @implementation LoginClient
 

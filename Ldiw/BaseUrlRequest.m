@@ -32,7 +32,7 @@
   AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
   [httpClient setParameterEncoding:AFFormURLParameterEncoding];
   NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:kServerRequestPath parameters:parameters];
-  
+  MSLog(@"Get server information requst: %@", request);
   AFHTTPRequestOperation *operation = [httpClient HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSError *jsonError;
     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&jsonError];
