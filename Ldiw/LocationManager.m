@@ -9,6 +9,7 @@
 #import "LocationManager.h"
 #import "Database+Server.h"
 #import "Database+User.h"
+#import <MapKit/MapKit.h>
 
 @implementation LocationManager
 @synthesize locManager, geocoder, locationManagerStart;
@@ -77,7 +78,7 @@
       _locationBlock(newLocation);
       _locationBlock = nil;
     } else {
-      [[NSNotificationCenter defaultCenter] postNotificationName:kNotifycationUserDidExitRegion object:newLocation];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserDidExitRegion object:newLocation];
     }
     [locManager stopUpdatingLocation];           
   } else {
@@ -154,7 +155,7 @@
 
 - (void)currentLocationIsInsideBox:(NSString *)box withResultBlock:(void (^)(BOOL result))resultBlock {
   //    box = "26.2167,57.8833,27.2167,58.8833";
-    BOOL isInsideBox = [self location:[[Database sharedInstance] currentLocation] IsInsideBox:box];
+    BOOL isInsideBox = [self location:[[Database sharedInstance] currentUserLocation] IsInsideBox:box];
     resultBlock(isInsideBox);
 }
 
@@ -181,4 +182,15 @@
   [locManager stopMonitoringSignificantLocationChanges];
   [locManager stopUpdatingLocation];
 }
+
+- (NSString *)currentBoundingBox {
+  CLLocationCoordinate2D currentCoordinate = [[[Database sharedInstance] currentUserLocation] coordinate];
+  MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
+  
+  CLLocationCoordinate2D topLeft = CLLocationCoordinate2DMake(currentCoordinate.latitude - span.latitudeDelta, currentCoordinate.longitude - span.longitudeDelta);
+  CLLocationCoordinate2D botRight = CLLocationCoordinate2DMake(currentCoordinate.latitude + span.latitudeDelta, currentCoordinate.longitude + span.longitudeDelta);
+  NSString *bBoxString = [NSString stringWithFormat:@"%g,%g,%g,%g", topLeft.longitude, topLeft.latitude, botRight.longitude, botRight.latitude];
+  return bBoxString;
+}
+
 @end

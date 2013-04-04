@@ -22,9 +22,6 @@
 - (Server *)currentServer;
 - (User *)currentUser;
 
-- (void)setCurrentLocation:(CLLocation *)currentLocation;
-- (CLLocation *)currentLocation;
-
 - (void)needToLoadServerInformationWithBlock:(void (^)(BOOL result)) resultBlock;
 
 - (BOOL)userIsLoggedIn;

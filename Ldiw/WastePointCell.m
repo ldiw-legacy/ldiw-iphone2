@@ -53,8 +53,13 @@
   //Description
   descriptionLabel.text = wastePoint.displayDescription;
   
-  //Country
-  locationLabel.text = [wastePoint country];
+  //Country + distance
+  NSMutableString *locationString = [NSMutableString string];
+  if ([wastePoint country]) {
+    [locationString appendFormat:@"%@ ",[wastePoint country]];
+  }
+  [locationString appendString:[wastePoint distanceString]];
+  locationLabel.text = locationString;
 
   NSURL *imageUrl = [wastePoint imageRemoteUrl];
 

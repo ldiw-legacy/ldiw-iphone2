@@ -8,6 +8,7 @@
 
 #import "WastepointRequest.h"
 #import "Database+Server.h"
+#import "Database+User.h"
 #import "Database+WP.h"
 #import "AFHTTPRequestOperation.h"
 #import "LocationManager.h"
@@ -21,6 +22,19 @@
 #define kBBoxKey @"BBOX" // optional
 
 @implementation WastepointRequest
+
++ (void)getWPListForCurrentAreaWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+  NSString *bbox = [[LocationManager sharedManager] currentBoundingBox];
+  CLLocationCoordinate2D currentLocation = [[[Database sharedInstance] currentUserLocation] coordinate];
+  NSString *locationString = [NSString stringWithFormat:@"%g,%g", currentLocation.longitude, currentLocation.latitude];
+
+  [self getWPListWithBbox:bbox andCoordinates:locationString withSuccess:^(NSArray* responseArray) {
+    success(responseArray);
+  } failure:^(NSError *error) {
+    failure(error);
+  }];
+}
+
 
 + (void)getWPListForArea:(MKCoordinateRegion)region withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
   CLLocationCoordinate2D center = region.center;

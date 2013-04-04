@@ -27,7 +27,7 @@
   
   [self.window setRootViewController:tabBar];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotifycationUserDidExitRegion object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChanged:) name:kNotificationUserDidExitRegion object:nil];
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];

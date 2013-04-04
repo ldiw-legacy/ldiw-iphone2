@@ -34,11 +34,11 @@
 @interface ActivityViewController ()
 @property (strong, nonatomic) HeaderView *headerView;
 @property (strong, nonatomic) SuccessView *successView;
-@property (strong, nonatomic) NSArray *wastPointResultsArray;
+@property (strong, nonatomic) NSArray *wastePointsArray;
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView, wastPointResultsArray, mapview, refreshHeaderView, firstTime;
+@synthesize tableView, headerView, successView, wastePointsArray, mapview, refreshHeaderView, firstTime;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +55,7 @@
   [self setupPullToRefresh];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableview) name:kNotificationUploadsComplete object:nil];
   
   [self.tabBarController setDelegate:self];
   
@@ -77,7 +78,7 @@
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   [[[LocationManager sharedManager] locManager] startUpdatingLocation];
-  [self setWastPointResultsArray:[NSArray arrayWithArray:[[Database sharedInstance] listAllWastePoints]]];
+  [self setWastePointsArray:[[Database sharedInstance] listWastepointsWithDistance]];
   [self.tableView reloadData];
   firstTime = YES;
 }
@@ -266,11 +267,11 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionamm
 {
-  return self.wastPointResultsArray.count;
+  return wastePointsArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  WastePoint *selectedPoint = [self.wastPointResultsArray objectAtIndex:indexPath.row];
+  WastePoint *selectedPoint = [wastePointsArray objectAtIndex:indexPath.row];
   DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:selectedPoint andEnableEditing:NO];
   [self.navigationController pushViewController:detailView animated:YES];
 }
@@ -282,7 +283,7 @@
     cell = [[WastePointCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
   
-  WastePoint *point = [self.wastPointResultsArray objectAtIndex:indexPath.row];
+  WastePoint *point = [wastePointsArray objectAtIndex:indexPath.row];
   [cell setWastePoint:point];
   return cell;
 }
@@ -308,7 +309,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  WastePoint *point = [wastPointResultsArray objectAtIndex:indexPath.row];
+  WastePoint *point = [wastePointsArray objectAtIndex:indexPath.row];
   if ([point.images count] > 0) {
     return kCellHeightWithPicture;
   } else {
@@ -316,15 +317,16 @@
   }
 }
 
+- (void)reloadTableview {
+  [self setWastePointsArray:[[Database sharedInstance] listWastepointsWithDistance]];
+  [self.tableView reloadData];
+}
+
 - (void)loadWastePointList {
-  CLLocation *currentLocation = [[Database sharedInstance] currentUserLocation];
-  MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
-  MKCoordinateRegion region = MKCoordinateRegionMake(currentLocation.coordinate, span);
   
-  [WastepointRequest getWPListForArea:region withSuccess:^(NSArray* responseArray) {
+  [WastepointRequest getWPListForCurrentAreaWithSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
-    self.wastPointResultsArray = [NSArray arrayWithArray:responseArray];
-    [self.tableView reloadData];
+    [self reloadTableview];
     [self doneLoadingTableViewData];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");

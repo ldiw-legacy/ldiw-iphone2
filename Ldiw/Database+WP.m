@@ -11,6 +11,7 @@
 #import "CustomValue.h"
 #import "PictureHelper.h"
 #import "Database+Image.h"
+#import "Database+User.h"
 
 @implementation Database (WP)
 
@@ -29,24 +30,29 @@
   return result;
 }
 
-- (NSArray *)WPListFromData:(NSData *)csvData {
+- (void)deleteAllDistances {
+  NSArray *points = [self listAllWastePoints];
+  for (WastePoint *point in points) {
+    [point setDistanceValue:CGFLOAT_MAX];
+  }
+}
 
+- (NSArray *)WPListFromData:(NSData *)csvData {
   NSString *csvString = [[NSString alloc] initWithData:csvData encoding:NSUTF8StringEncoding];
   CSVParser *parser = [[CSVParser alloc] initWithString:csvString];
   NSArray *parsedArray = [parser arrayOfParsedRows];
   
   MSLog(@"Parsed %i objects", parsedArray.count);
-  NSMutableArray *resultArray = [NSMutableArray array];
 
   for (NSDictionary *elementDict in parsedArray) {
-    WastePoint *point = [self wastePointFromDictionary:elementDict];
-    [resultArray addObject:point];
+    [self createWastePointWithDictionary:elementDict];
   }
+  
   [[Database sharedInstance] saveContext];
-  return resultArray;
+  return [self listWastepointsWithDistance];
 }
 
-- (WastePoint *)wastePointFromDictionary:(NSDictionary *)inDict {
+- (void)createWastePointWithDictionary:(NSDictionary *)inDict {
   NSMutableDictionary *wpDict = [NSMutableDictionary dictionaryWithDictionary:inDict];
   
   NSString *wpId = [wpDict objectForKey:kKeyId];
@@ -57,6 +63,8 @@
   [wpDict removeObjectForKey:kKeyLon];
   NSString *wpPhotos = [wpDict objectForKey:kKeyPhotos];
   [wpDict removeObjectForKey:kKeyPhotos];
+  NSString *distanceString = [wpDict objectForKey:@"distance_meters"];
+  [wpDict removeObjectForKey:@"distance_meters"];
   
   WastePoint *point = [self wastepointWithId:wpId.intValue];
   
@@ -66,7 +74,9 @@
     [point setLatitudeValue:[wpLat floatValue]];
     [point setLongitudeValue:[wpLon floatValue]];
   }
-
+  
+  [point setDistanceValue:[distanceString floatValue]];
+  
   // Create correct image objects
   if ([wpPhotos length] > 0) {
     point.images = nil;
@@ -86,8 +96,6 @@
       [point addCustomValuesObject:valueToAdd];
     }
   }
-  
-  return point;
 }
 
 - (NSArray *)listWastePointsWithNoId {
@@ -99,6 +107,13 @@
   return [self listCoreObjectsNamed:@"WastePoint" withPredicate:nil];
 }
 
+- (NSArray *)listWastepointsWithDistance {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"distance < %f", CGFLOAT_MAX];
+  NSArray *pointsArray = [self listCoreObjectsNamed:@"WastePoint" withPredicate:predicate];
+  NSArray *sortedArray = [pointsArray sortedArrayUsingSelector:@selector(sortByDistance:)];
+  return sortedArray;
+}
+
 - (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value {
   if ([value isKindOfClass:[NSString class]]) {
     CustomValue *aValue = [CustomValue insertInManagedObjectContext:self.managedObjectContext];
@@ -107,7 +122,6 @@
     return aValue;
   } else {
     return nil;
-    
   }
 }
 

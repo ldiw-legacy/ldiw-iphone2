@@ -13,5 +13,6 @@
 @interface WastepointRequest : NetworkRequest
 
 + (void)getWPListForArea:(MKCoordinateRegion)region withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)getWPListForCurrentAreaWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 @end

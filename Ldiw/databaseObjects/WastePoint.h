@@ -9,5 +9,7 @@
 - (NSString *)displayDescription;
 - (NSString *)country;
 - (NSURL *)imageRemoteUrl;
+- (NSString *)distanceString;
 
+- (NSComparisonResult)sortByDistance:(WastePoint *)otherPoint;
 @end

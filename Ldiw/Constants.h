@@ -26,7 +26,8 @@
 
 #define kImageURLPath @"ldiw_waste_map/photo/"
 
-#define kNotifycationUserDidExitRegion @"kNotifycatoinUserDidExitRegion"
+#define kNotificationUserDidExitRegion @"kNotifycatoinUserDidExitRegion"
+#define kNotificationUploadsComplete @"kNotificationUploadsComplete"
 
 #define kAccessTokenKey @"access_token"
 #define kFBUIDKey @"fb_uid"

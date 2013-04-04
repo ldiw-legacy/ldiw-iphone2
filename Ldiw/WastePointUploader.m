@@ -101,15 +101,18 @@
     [WastePointUploader uploadWP:wp withSuccess:^(NSDictionary* result) {
       NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
       
-      WastePoint *newPoint = [[Database sharedInstance] wastePointFromDictionary:responseWP];
+      [[Database sharedInstance] createWastePointWithDictionary:responseWP];
       
       [WPs removeObject:wp];
       [[[Database sharedInstance] managedObjectContext] deleteObject:wp];
+      [[Database sharedInstance] saveContext];
+      MSLog(@"UPLOAD SUCCESSFUL FOR WP");
 
       if (WPs.count > 0) {
         [self uploadAllLocalWPsWithArray:WPs];        
+      } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUploadsComplete object:nil];
       }
-      MSLog(@"UPLOAD SUCCESSFUL FOR WP WITH ID: %@", newPoint.id);
     } failure:^(NSError *error) {
       MSLog(@"UPLOAD FAILED FOR: %@", wp);
     }];

@@ -3,6 +3,7 @@
 #import "Database.h"
 #import "Database+WP.h"
 #import "Database+WPField.h"
+#import "Database+User.h"
 #import "WPField.h"
 #import "Image.h"
 
@@ -66,7 +67,7 @@
 }
 
 - (NSString *)description {
-  NSString *returnString = [NSString stringWithFormat:@"id = %d\nlat = %f\nlon = %f\nnrPhotos = %d", self.idValue, self.latitudeValue, self.longitudeValue, [self.images count]];
+  NSString *returnString = [NSString stringWithFormat:@"id = %d\nlat = %f\nlon = %f\nnrPhotos = %d\nDistance = %f", self.idValue, self.latitudeValue, self.longitudeValue, [self.images count], self.distanceValue];
   NSMutableString *customValuesString = [NSMutableString string];
   
   for (CustomValue *value in self.customValues) {
@@ -118,6 +119,14 @@
   } else {
     return nil;
   }
+}
+
+- (NSComparisonResult)sortByDistance:(WastePoint *)otherPoint {
+  return self.distanceValue > otherPoint.distanceValue;
+}
+
+- (NSString *)distanceString {
+  return [NSString stringWithFormat:@"%1.0f m", self.distanceValue];
 }
 
 @end

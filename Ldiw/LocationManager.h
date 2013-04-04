@@ -31,4 +31,6 @@ typedef void (^LocationBlock)(CLLocation *currentLocation);
 - (void)stopLocationManager;
 
 + (NSString *)getPhoneLanguage;
+
+- (NSString *)currentBoundingBox;
 @end
