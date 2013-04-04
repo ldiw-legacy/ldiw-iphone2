@@ -128,7 +128,7 @@
   } else if (firstTime){
     [self showHud];
     firstTime = NO;
-    [self loadServerInformation];
+    [self loadWastePointList];
   }
 }
 
@@ -334,24 +334,6 @@
   }];
 }
 
-- (void)loadServerInformation {
-  if ([[LocationManager sharedManager] locationServicesEnabled]) {
-    [[Database sharedInstance] needToLoadServerInformationWithBlock:^(BOOL result) {
-      if (result) {
-        MSLog(@"Need to load base server information");
-        [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-          [self loadWastePointList];
-        } failure:^(void) {
-          MSLog(@"Server info loading fail");
-          [self doneLoadingTableViewData];
-        }];
-      } else {
-        [self loadWastePointList];
-      }
-    }];
-  }
-}
-
 - (void)showHud {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
@@ -381,7 +363,7 @@
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
 {
-  [self loadServerInformation];
+  [self loadWastePointList];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
@@ -416,7 +398,7 @@
   [self dismissViewControllerAnimated:YES completion:^(void){
     MBProgressHUD *MBPhud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [MBPhud setLabelText:NSLocalizedString(@"first.loading.wastepoints", nil)];
-    [self loadServerInformation];
+    
   }];
 }
 

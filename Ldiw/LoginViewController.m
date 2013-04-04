@@ -14,6 +14,7 @@
 #import "LocationManager.h"
 #import "Database+Server.h"
 #import "Database+User.h"
+#import "BaseUrlRequest.h"
 
 @interface LoginViewController ()
 
@@ -51,9 +52,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeLoginView) name:kNotificationDismissLoginView object:nil];
 }
 
-- (IBAction)signin:(UIButton *)sender {
-  [self.view endEditing:YES];
-  [self.spinner startAnimating];
+- (void)loginUser {
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.loginPasswordLabel.text, @"password", self.loginUserLabel.text, @"username", nil];
   
   [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
@@ -63,27 +62,48 @@
   } failure:^(NSError *e) {
     [self.spinner stopAnimating];
     NSString *errorstring;
-     if (e.code==0)
-     {
-       errorstring=[e.userInfo objectForKey:@"NSLocalizedDescription"];
-     } else {
-       NSString *strg = [[e.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"] description];
-       
-       if (![strg length] > 0) {
-         strg = @"Sorry, our servers are too busy. Try again later.";
-       }
-       
-       NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
-       errorstring=[[strg componentsSeparatedByCharactersInSet:set] componentsJoinedByString: @""];
-     }
-   
-    UIAlertView *av=[[UIAlertView alloc] initWithTitle:nil
-                                               message:errorstring
-                                              delegate:self
-                                     cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [av show];
+    if (e.code==0)
+    {
+      errorstring=[e.userInfo objectForKey:@"NSLocalizedDescription"];
+    } else {
+      NSString *strg = [[e.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"] description];
+      
+      if (![strg length] > 0) {
+        strg = @"Sorry, our servers are too busy. Try again later.";
+      }
+      
+      NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
+      errorstring=[[strg componentsSeparatedByCharactersInSet:set] componentsJoinedByString: @""];
+    }
+    [self showAlertWithText:errorstring];
   }];
-  
+}
+
+- (void)showAlertWithText:(NSString *)alertText {
+  UIAlertView *av=[[UIAlertView alloc] initWithTitle:nil
+                                             message:alertText
+                                            delegate:self
+                                   cancelButtonTitle:@"OK" otherButtonTitles: nil];
+  [av show];
+}
+
+- (IBAction)signin:(UIButton *)sender {
+  [self.view endEditing:YES];
+  [self.spinner startAnimating];
+    if ([[LocationManager sharedManager] locationServicesEnabled]) {
+      [[Database sharedInstance] needToLoadServerInformationWithBlock:^(BOOL result) {
+        if (result) {
+          MSLog(@"Need to load base server information");
+          [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+            [self loginUser];
+          } failure:^(void) {
+            [self showAlertWithText:@"Network error"];
+          }];
+        } else {
+          [self showAlertWithText:@"Network error"];
+        }
+      }];
+    }
 }
 
 - (void)closeLoginView {
