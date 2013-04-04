@@ -71,7 +71,6 @@
     [wastePointImageView setImageWithURL:imageUrl placeholderImage:placeholder fadeIn:YES finished:^(UIImage *image) {
       MSLog(@"Image loaded %@", imageUrl);
       [spinner stopAnimating];
-      
       // TODO: Why this is necessary???
       [blockSelf setImage:image];
     }];

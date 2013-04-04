@@ -104,13 +104,16 @@
       [[Database sharedInstance] createWastePointWithDictionary:responseWP];
       
       [WPs removeObject:wp];
-      [[[Database sharedInstance] managedObjectContext] deleteObject:wp];
-      [[Database sharedInstance] saveContext];
       MSLog(@"UPLOAD SUCCESSFUL FOR WP");
 
       if (WPs.count > 0) {
         [self uploadAllLocalWPsWithArray:WPs];        
       } else {
+        NSArray *nullIdArray = [[Database sharedInstance] listWastePointsWithNoId];
+        for (WastePoint *point in nullIdArray) {
+          [[[Database sharedInstance] managedObjectContext] deleteObject:point];
+        }
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUploadsComplete object:nil];
       }
     } failure:^(NSError *error) {

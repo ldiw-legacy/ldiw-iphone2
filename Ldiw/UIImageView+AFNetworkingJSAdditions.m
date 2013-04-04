@@ -60,8 +60,8 @@ static char imageURLKey;
    NSURL *newImageURL = urlRequest.URL;
   __weak UIImageView *iv=self;
   
-  if (![self.imageURL isEqual:newImageURL])
-  {
+//  if (![self.imageURL isEqual:newImageURL])
+//  {
     if (urlRequest.URL)
     {
       self.imageURL = nil;
@@ -108,14 +108,14 @@ static char imageURLKey;
         failure(nil, nil, nil);
       }
     }
-  }
-  else
-  {
-    if (success)
-    {
-      success(nil, nil, self.image);
-    }
-  }
+//  }
+//  else
+//  {
+//    if (success)
+//    {
+//      success(nil, nil, self.image);
+//    }
+//  }
 }
 
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholderImage fadeIn:(BOOL)fadeIn success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
