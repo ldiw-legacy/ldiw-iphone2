@@ -108,7 +108,7 @@
 }
 
 - (NSArray *)listWastepointsWithDistance {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"distance < %f", CGFLOAT_MAX];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"distance < %f && id > 0", CGFLOAT_MAX];
   NSArray *pointsArray = [self listCoreObjectsNamed:@"WastePoint" withPredicate:predicate];
   NSArray *sortedArray = [pointsArray sortedArrayUsingSelector:@selector(sortByDistance:)];
   return sortedArray;
