@@ -73,4 +73,4 @@
 
 // Upload settings
 #define kUploadWifiOnly 1
-#define kUploadWifiAnd3G 2
+#define kUploadWifiAnd3G 3
