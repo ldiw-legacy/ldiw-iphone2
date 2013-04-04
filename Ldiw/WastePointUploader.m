@@ -84,15 +84,17 @@
     //No internet
     MSLog(@"No Internet connection");
   }
-  else if (status == ReachableViaWiFi && (userUploadSetting == ReachableViaWiFi || userUploadSetting == ReachableViaWWAN))
+  else if (status == ReachableViaWiFi && userUploadSetting == ReachableViaWiFi)
   {
-    //WiFi and 3G
-    MSLog(@"-- WIFI is Active!");
+    MSLog(@"Only WIFI");
     [WastePointUploader uploadAllLocalWPsWithArray:localWPs];
   }
-  else
+  else if (status == ReachableViaWWAN && userUploadSetting == ReachableViaWWAN)
   {
-    MSLog(@"-- No 3G upload is allowed!");
+    MSLog(@"Only 3G available and allowed");
+    [WastePointUploader uploadAllLocalWPsWithArray:localWPs];
+  } else {
+    MSLog(@"No 3G or WIFI reachable");
   }
 }
 
