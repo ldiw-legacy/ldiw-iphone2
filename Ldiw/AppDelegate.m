@@ -72,4 +72,5 @@
 
 - (void)locationChanged:(NSNotification *)notification {
 }
+
 @end

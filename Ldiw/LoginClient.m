@@ -10,16 +10,15 @@
 #import "AFJSONRequestOperation.h"
 #import "Database+Server.h"
 
-#define kLoginServerUrl @"http://test.letsdoitworld.org/"
-
 @implementation LoginClient
 
 + (id)sharedLoginClient
 {
   static LoginClient *_sharedClient = nil;
   static dispatch_once_t onceToken;
+  NSURL *serverUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
   dispatch_once(&onceToken, ^{
-    _sharedClient = [[LoginClient alloc] initWithBaseURL:[NSURL URLWithString:kLoginServerUrl]];
+    _sharedClient = [[LoginClient alloc] initWithBaseURL:serverUrl];
   });
   return _sharedClient;
 }

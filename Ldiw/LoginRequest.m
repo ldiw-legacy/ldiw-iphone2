@@ -17,7 +17,7 @@
 @implementation LoginRequest
 
 #define kLoginPath @"?q=api/user/login.json"
-#define kFBLoginPath @"http://test.letsdoitworld.org/?q=api/user/fbconnect.json"
+#define kFBLoginPath @"?q=api/user/fbconnect.json"
 
 + (void)logInWithParameters:(NSDictionary *)parameters andFacebook:(BOOL)faceBookLogin success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
 {
