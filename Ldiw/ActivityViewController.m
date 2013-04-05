@@ -53,8 +53,6 @@
 {
   [super viewDidLoad];
   [self setupPullToRefresh];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadWastePointList) name:kNotificationShowHud object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableview) name:kNotificationUploadsComplete object:nil];
   
   [self.tabBarController setDelegate:self];
@@ -117,10 +115,8 @@
 
 - (void)showLoginViewIfNeeded {
   BOOL userLoggedIn = [[Database sharedInstance] userIsLoggedIn];
-  BOOL FBSessionOpen = [FBHelper FBSessionOpen];
-  BOOL openLoginView = !(userLoggedIn || FBSessionOpen);
-  if (openLoginView) {
-    MSLog(@"User logged in %d, FBsessionOpen %d, open login view", userLoggedIn, FBSessionOpen);
+  if (!userLoggedIn) {
+    MSLog(@"User not logged in. Open login screen");
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     [loginVC setDelegate:self];
     [self presentViewController:loginVC animated:YES completion:nil];

@@ -50,6 +50,7 @@
 
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeLoginView) name:kNotificationDismissLoginView object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showErrorAlert) name:kNotificationFBLoginError object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeLoginView) name:kNotificationFBLoginSuccess object:nil];
 }
 
 - (void)loginUser {
@@ -113,7 +114,11 @@
           [self showAlertWithText:@"Network error"];
         }];
       } else {
-        [self closeLoginView];
+        if (facebookLogin) {
+          [FBHelper openSession];
+        } else {
+          [self loginUser];
+        }
       }
     }];
   }
