@@ -23,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *signinButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
 
@@ -50,6 +49,7 @@
   [self.facebookLoginButton setTitle:NSLocalizedString(@"login.facebook", nil) forState:UIControlStateNormal];
 
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeLoginView) name:kNotificationDismissLoginView object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showErrorAlert) name:kNotificationFBLoginError object:nil];
 }
 
 - (void)loginUser {
@@ -59,7 +59,7 @@
     MSLog(@"SUCCESS:: %@", success);
     [self closeLoginView];
   } failure:^(NSError *e) {
-    [self.spinner stopAnimating];
+    [self removeHud];
     NSString *errorstring;
     if (e.code==0)
     {
@@ -78,7 +78,12 @@
   }];
 }
 
+- (void)showErrorAlert {
+  [self showAlertWithText:@"Network error"];
+}
+
 - (void)showAlertWithText:(NSString *)alertText {
+  [self removeHud];
   UIAlertView *av=[[UIAlertView alloc] initWithTitle:nil
                                              message:alertText
                                             delegate:self
@@ -92,7 +97,7 @@
 
 - (void)signInWithFacebook:(BOOL)facebookLogin {
   [self.view endEditing:YES];
-  [self.spinner startAnimating];
+  [self showHudWithText:@"Logging in"];
   if ([[LocationManager sharedManager] locationServicesEnabled]) {
     [[Database sharedInstance] needToLoadServerInformationWithBlock:^(BOOL result) {
       if (result) {
@@ -114,7 +119,7 @@
 }
 
 - (void)closeLoginView {
-  [self.spinner stopAnimating];
+  [self removeHud];
 
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     [[Database sharedInstance] setUserCurrentLocation:location];
@@ -156,7 +161,7 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
   [super viewDidDisappear:animated];
-  [self.spinner stopAnimating];
+  [self removeHud];
 }
 
 #pragma mark Facebook
@@ -164,11 +169,25 @@
   if (delegate) {
     [delegate loginFailed];
   }
-  [self.spinner stopAnimating];
+  [self removeHud];
 }
 
 - (void)viewDidUnload {
-  [self setSpinner:nil];
   [super viewDidUnload];
 }
+
+- (void)showHudWithText:(NSString *)text {
+  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+  if (!hud) {
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  }
+  if ([text length] > 0) {
+    [hud setLabelText:text];
+  }
+}
+
+- (void)removeHud {
+  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
 @end

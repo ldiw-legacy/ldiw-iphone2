@@ -70,6 +70,7 @@
 #define kNotificationShowHud @"showHud"
 #define kNotificationRemoveHud @"removeHud"
 #define kNotificationDismissLoginView @"dismissLoginView"
+#define kNotificationFBLoginError @"fbLoginError"
 
 // Upload settings
 #define kUploadWifiOnly 1

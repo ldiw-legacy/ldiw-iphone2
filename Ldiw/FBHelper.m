@@ -56,11 +56,11 @@
              if (error.code == kUserAlreadyLoggedInErrorCode) {
                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRemoveHud object:nil];
              }
-             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRemoveHud object:nil];
+             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFBLoginError object:nil];
            }];
          } else {
            MSLog(@"%@", error);
-           [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRemoveHud object:nil];
+           [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFBLoginError object:nil];
          }
        }];
     }

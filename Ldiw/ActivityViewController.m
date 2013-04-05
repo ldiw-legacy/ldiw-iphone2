@@ -38,7 +38,7 @@
 @end
 
 @implementation ActivityViewController
-@synthesize tableView, headerView, successView, wastePointsArray, mapview, refreshHeaderView, firstTime;
+@synthesize tableView, headerView, successView, wastePointsArray, mapview, refreshHeaderView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,7 +80,6 @@
   [[[LocationManager sharedManager] locManager] startUpdatingLocation];
   [self setWastePointsArray:[[Database sharedInstance] listWastepointsWithDistance]];
   [self.tableView reloadData];
-  firstTime = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,7 +91,6 @@
     [self showSuccessBanner];
   }
   [self showLoginViewIfNeeded];
-  [self removeHud];
 }
 
 - (void)setupPullToRefresh {
@@ -126,9 +124,8 @@
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     [loginVC setDelegate:self];
     [self presentViewController:loginVC animated:YES completion:nil];
-  } else if (firstTime){
-    firstTime = NO;
-    [self loadWastePointList];
+  } else {
+    [self reloadTableview];
   }
 }
 
