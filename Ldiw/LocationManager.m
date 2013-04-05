@@ -139,15 +139,16 @@
     MSLog(@"Wrong number of box objects. Have %d, need 4. String: %@", [boxObjects count], box);
     return NO;
   }
+  CLLocationCoordinate2D coordinate = location.coordinate;
   
   double topLeftX = [[boxObjects objectAtIndex:0] doubleValue];
   double topLeftY = [[boxObjects objectAtIndex:1] doubleValue];
   double botRightX = [[boxObjects objectAtIndex:2] doubleValue];
   double botRightY = [[boxObjects objectAtIndex:3] doubleValue];
 
-  BOOL betweenXCoordinates = ( ((topLeftX < location.coordinate.latitude) && (location.coordinate.latitude < botRightX)) || ((topLeftX > location.coordinate.latitude) && (location.coordinate.latitude > botRightX)) );
+  BOOL betweenXCoordinates = ( ((topLeftX < coordinate.longitude) && (coordinate.longitude < botRightX)) || ((topLeftX > coordinate.longitude) && (coordinate.longitude > botRightX)) );
   
-  BOOL betweenYCoordinates = ( ((topLeftY < location.coordinate.longitude) && (location.coordinate.longitude < botRightY)) || ((topLeftY > location.coordinate.longitude) && (location.coordinate.longitude > botRightY)) );
+  BOOL betweenYCoordinates = ( ((topLeftY < coordinate.latitude) && (coordinate.latitude < botRightY)) || ((topLeftY > coordinate.latitude) && (coordinate.latitude > botRightY)) );
 
   BOOL isInsideBox = (betweenXCoordinates && betweenYCoordinates);
   return isInsideBox;

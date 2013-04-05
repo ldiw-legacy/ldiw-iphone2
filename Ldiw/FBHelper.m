@@ -81,13 +81,7 @@
   }
   
   if (error) {
-    UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"facebook.error.title",nil)
-                              message:NSLocalizedString(@"facebook.error.login", nil)
-                              delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"button.ok", nil)
-                              otherButtonTitles:nil];
-    [alertView show];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFBLoginError object:nil];
   }
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRemoveHud object:nil];
 }

@@ -70,11 +70,11 @@
 }
 
 - (void)needToLoadServerInformationWithBlock:(void (^)(BOOL))resultBlock {
-  MSLog(@"Need To Load Server Information With Block");
   [[LocationManager sharedManager] currentLocationIsInsideBox:[self bBox] withResultBlock:^(BOOL locationIsInsideBox) {
     NSString *baseUrl = [self serverBaseUrl];
     BOOL serverInfoIsAvailable = (baseUrl.length > 0);
     BOOL needToLoadServerInfo = !serverInfoIsAvailable || !locationIsInsideBox;
+    MSLog(@"ServerInfoIsAvailable %d locationInsideBox %d", serverInfoIsAvailable, locationIsInsideBox);
     resultBlock(needToLoadServerInfo);
   }];
 }

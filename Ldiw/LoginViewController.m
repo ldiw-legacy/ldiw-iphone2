@@ -79,6 +79,7 @@
 }
 
 - (void)showErrorAlert {
+
   [self showAlertWithText:@"Network error"];
 }
 
