@@ -29,6 +29,7 @@
   }
   
   NSURL *url = [[[LoginClient sharedLoginClient] baseURL] URLByAppendingPathComponent:loginPath];
+  MSLog(@"Login url %@", url);
   NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];
   for (NSHTTPCookie *cookie in cookies)
   {
@@ -53,9 +54,6 @@
     MSLog(@"%d", [operation.response statusCode]);
     NSError *myError = [[NSError alloc] initWithDomain:error
                         .domain code:[operation.response statusCode] userInfo:error.userInfo];
-//    if (myError.code == kUserAlreadyLoggedInErrorCode) {
-//      [self loginUserToDatabaseWithDictionary:nil];
-//    }
 
     failure(myError);
   }];

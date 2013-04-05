@@ -70,7 +70,7 @@
   }
   
   NSURLRequest *request = [[[AFHTTPClient alloc] init] requestWithMethod:@"GET" path:url parameters:parameters];
-  
+  MSLog(@"Start list WP request %@", request);
   AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
   [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSData *responseData = (NSData *)responseObject;

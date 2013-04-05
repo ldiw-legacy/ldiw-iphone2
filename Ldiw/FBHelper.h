@@ -12,4 +12,5 @@
 
 + (BOOL)FBSessionOpen;
 + (void)openSession;
+
 @end

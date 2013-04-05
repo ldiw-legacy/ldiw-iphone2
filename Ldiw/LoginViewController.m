@@ -57,7 +57,6 @@
   
   [LoginRequest logInWithParameters:parameters andFacebook:NO success:^(NSDictionary *success) {
     MSLog(@"SUCCESS:: %@", success);
-    [self.spinner stopAnimating];
     [self closeLoginView];
   } failure:^(NSError *e) {
     [self.spinner stopAnimating];
@@ -88,25 +87,35 @@
 }
 
 - (IBAction)signin:(UIButton *)sender {
+  [self signInWithFacebook:NO];
+}
+
+- (void)signInWithFacebook:(BOOL)facebookLogin {
   [self.view endEditing:YES];
   [self.spinner startAnimating];
-    if ([[LocationManager sharedManager] locationServicesEnabled]) {
-      [[Database sharedInstance] needToLoadServerInformationWithBlock:^(BOOL result) {
-        if (result) {
-          MSLog(@"Need to load base server information");
-          [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
-            [self loginUser];
-          } failure:^(void) {
-            [self showAlertWithText:@"Network error"];
-          }];
-        } else {
+  if ([[LocationManager sharedManager] locationServicesEnabled]) {
+    [[Database sharedInstance] needToLoadServerInformationWithBlock:^(BOOL result) {
+      if (result) {
+        MSLog(@"Need to load base server information");
+        [BaseUrlRequest loadServerInfoForCurrentLocationWithSuccess:^(void) {
+          if (facebookLogin) {
+            [FBHelper openSession];
+          } else {
+            [self loginUser];          
+          }
+        } failure:^(void) {
           [self showAlertWithText:@"Network error"];
-        }
-      }];
-    }
+        }];
+      } else {
+        [self closeLoginView];
+      }
+    }];
+  }
 }
 
 - (void)closeLoginView {
+  [self.spinner stopAnimating];
+
   [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
     [[Database sharedInstance] setUserCurrentLocation:location];
     [delegate loginSuccessful];
@@ -121,9 +130,9 @@
 }
 
 - (IBAction)loginFB:(id)sender {
-  [self.spinner startAnimating];
-  [FBHelper openSession];
+  [self signInWithFacebook:YES];
 }
+
 - (IBAction)backgroundTap:(id)sender {
   [[self view] endEditing:YES];
 }

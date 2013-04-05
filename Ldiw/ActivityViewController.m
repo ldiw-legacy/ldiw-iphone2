@@ -53,7 +53,7 @@
 {
   [super viewDidLoad];
   [self setupPullToRefresh];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHud) name:kNotificationShowHud object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadWastePointList) name:kNotificationShowHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHud) name:kNotificationRemoveHud object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableview) name:kNotificationUploadsComplete object:nil];
   
@@ -92,6 +92,7 @@
     [self showSuccessBanner];
   }
   [self showLoginViewIfNeeded];
+  [self removeHud];
 }
 
 - (void)setupPullToRefresh {
@@ -126,7 +127,6 @@
     [loginVC setDelegate:self];
     [self presentViewController:loginVC animated:YES completion:nil];
   } else if (firstTime){
-    [self showHud];
     firstTime = NO;
     [self loadWastePointList];
   }
@@ -323,7 +323,7 @@
 }
 
 - (void)loadWastePointList {
-  
+  [self showHudWithText:NSLocalizedString(@"first.loading.wastepoints", nil)];
   [WastepointRequest getWPListForCurrentAreaWithSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
     [self reloadTableview];
@@ -334,8 +334,14 @@
   }];
 }
 
-- (void)showHud {
-  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+- (void)showHudWithText:(NSString *)text {
+  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+  if (!hud) {
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  }
+  if ([text length] > 0) {
+    [hud setLabelText:text];
+  }
 }
 
 - (void)removeHud {
@@ -396,9 +402,7 @@
 #pragma mark - Login Delegate
 - (void)loginSuccessful {
   [self dismissViewControllerAnimated:YES completion:^(void){
-    MBProgressHUD *MBPhud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [MBPhud setLabelText:NSLocalizedString(@"first.loading.wastepoints", nil)];
-    
+    [self loadWastePointList];
   }];
 }
 
