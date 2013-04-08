@@ -8,12 +8,12 @@
     <entity name="CustomValue" representedClassName="CustomValue" syncable="YES">
         <attribute name="fieldName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="point" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="customValues" inverseEntity="WastePoint" syncable="YES"/>
+        <relationship name="point" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="WastePoint" inverseName="customValues" inverseEntity="WastePoint" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
         <attribute name="localURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="wastepoint" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WastePoint" inverseName="images" inverseEntity="WastePoint" syncable="YES"/>
+        <relationship name="wastepoint" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="WastePoint" inverseName="images" inverseEntity="WastePoint" syncable="YES"/>
     </entity>
     <entity name="Server" representedClassName="Server" syncable="YES">
         <attribute name="baseUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -43,7 +43,7 @@
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="customValues" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CustomValue" inverseName="point" inverseEntity="CustomValue" syncable="YES"/>
-        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="wastepoint" inverseEntity="Image" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="wastepoint" inverseEntity="Image" syncable="YES"/>
     </entity>
     <entity name="WPField" representedClassName="WPField" syncable="YES">
         <attribute name="edit_instructions" optional="YES" attributeType="String" syncable="YES"/>
@@ -61,8 +61,8 @@
     </entity>
     <elements>
         <element name="AllowedValue" positionX="-47" positionY="81" width="128" height="90"/>
-        <element name="CustomValue" positionX="-144" positionY="479" width="128" height="88"/>
-        <element name="Image" positionX="304" positionY="387" width="128" height="88"/>
+        <element name="CustomValue" positionX="-144" positionY="479" width="128" height="90"/>
+        <element name="Image" positionX="304" positionY="387" width="128" height="90"/>
         <element name="Server" positionX="-441" positionY="159" width="128" height="165"/>
         <element name="TypicalValue" positionX="322" positionY="126" width="128" height="90"/>
         <element name="User" positionX="160" positionY="240" width="128" height="150"/>
