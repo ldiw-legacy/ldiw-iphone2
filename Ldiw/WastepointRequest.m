@@ -11,6 +11,8 @@
 #import "Database+User.h"
 #import "Database+WP.h"
 #import "AFHTTPRequestOperation.h"
+#import "AFJSONRequestOperation.h"
+#import "AFHTTPClient.h"
 #import "LocationManager.h"
 
 #define kGetWPListPath @"waste_points.csv"
@@ -21,7 +23,39 @@
 #define kNearestPointToKey @"nearest_points_to" //optional coordinates (lon,lat in WGS84): "-74,30". If set, then returns individual WPs (not clusters) nearest to the coordinates given, and also adds a distance_meters field to results.
 #define kBBoxKey @"BBOX" // optional
 
+#define kErrorRequestCancelled -999
+
 @implementation WastepointRequest
+
++ (AFHTTPClient *)sharedWastepointClient {
+  static WastepointRequest *_sharedClient = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
+    _sharedClient = [[WastepointRequest alloc] initWithBaseURL:serverBaseUrl];
+  });
+  
+  NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
+  if (![_sharedClient.baseURL isEqual:serverBaseUrl]) {
+    MSLog(@"Change base url for shared client");
+    _sharedClient = [[WastepointRequest alloc] initWithBaseURL:serverBaseUrl];
+  }
+  
+  return _sharedClient;
+}
+
+
+- (id)initWithBaseURL:(NSURL *)url {
+  if (!url) {
+    return nil;
+  }
+  self = [super initWithBaseURL:url];
+  if (self) {
+    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    self.parameterEncoding = AFJSONParameterEncoding;
+  }
+  return self;
+}
 
 + (void)getWPListForCurrentAreaWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
   NSString *bbox = [[LocationManager sharedManager] currentBoundingBox];
@@ -44,6 +78,7 @@
   CLLocationCoordinate2D botRight = CLLocationCoordinate2DMake(region.center.latitude + span.latitudeDelta, region.center.longitude + span.longitudeDelta);
   NSString *bBoxString = [NSString stringWithFormat:@"%g,%g,%g,%g", topLeft.longitude, topLeft.latitude, botRight.longitude, botRight.latitude];
   NSString *locationString = [NSString stringWithFormat:@"%g,%g", center.longitude, center.latitude];
+
   [self getWPListWithBbox:bBoxString andCoordinates:locationString withSuccess:^(NSArray* responseArray) {
     success(responseArray);
   } failure:^(NSError *error) {
@@ -56,34 +91,34 @@
   // ONLY CSV is supported
   
   // http://api.letsdoitworld.org/?q=api/waste_points.csv&max_results=10&nearest_points_to=26.7167,58.3833
-  NSString *path = [NSString stringWithFormat:@"%@&%@=%d&%@=%@&%@=%@", kGetWPListPath, kMaxResultsKey, kResultsToReturn, kNearestPointToKey, coordinates, kBBoxKey, box];
+
+  // Cancel all previous operations
+  MSLog(@"Cancel previous List Wastepoints operation");
+  [[[WastepointRequest sharedWastepointClient] operationQueue] cancelAllOperations];
   
-  NSString *baseUrlString = [[Database sharedInstance] serverBaseUrl];
   NSString *baseUrlSuffix = [[Database sharedInstance] serverSuffix];
-  
-  NSString *url = [NSString stringWithFormat:@"%@%@/%@", baseUrlString, baseUrlSuffix, path];
+  NSString *path = [NSString stringWithFormat:@"%@/%@&%@=%d&%@=%@&%@=%@", baseUrlSuffix, kGetWPListPath, kMaxResultsKey, kResultsToReturn, kNearestPointToKey, coordinates, kBBoxKey, box];
   
   NSString *language = [LocationManager getPhoneLanguage];
   NSDictionary *parameters;
   if (language) {
     parameters = [NSDictionary dictionaryWithObject:language forKey:kLanguageCodeKey];
   }
-  
-  NSURLRequest *request = [[[AFHTTPClient alloc] init] requestWithMethod:@"GET" path:url parameters:parameters];
-  MSLog(@"Start list WP request %@", request);
-  AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-  [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+  [[WastepointRequest sharedWastepointClient] getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSData *responseData = (NSData *)responseObject;
     NSArray *resultArray = [[Database sharedInstance] WPListFromData:responseData];
-    
+    MSLog(@"List wastepoints request done");
     success(resultArray);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"Things go boom. %@", [error localizedDescription]);
-    failure(error);
+    NSInteger errorCode = error.code;
+    if (errorCode == kErrorRequestCancelled) {
+      MSLog(@"Previous request cancelled");
+    } else {
+      NSLog(@"Things go boom. %@", error);
+      failure(error);
+    }
   }];
-  [operation start];
 }
-
-
 
 @end

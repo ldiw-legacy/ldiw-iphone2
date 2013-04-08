@@ -7,10 +7,10 @@
 //
 
 #import <MapKit/MapKit.h>
-#import "NetworkRequest.h"
 #import "WastePoint.h"
+#import "AFHTTPClient.h"
 
-@interface WastepointRequest : NetworkRequest
+@interface WastepointRequest : AFHTTPClient
 
 + (void)getWPListForArea:(MKCoordinateRegion)region withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 + (void)getWPListForCurrentAreaWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
