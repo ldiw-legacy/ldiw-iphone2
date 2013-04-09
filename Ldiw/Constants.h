@@ -77,6 +77,7 @@
 
 typedef NS_ENUM(NSInteger, ViewType) {
   ViewTypeList,
+  ViewTypeNewPoint,
   ViewTypeLargeMap,
   ViewTypeSmallMap
 };

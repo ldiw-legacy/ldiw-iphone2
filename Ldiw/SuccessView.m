@@ -71,8 +71,6 @@
 {
   self.controller.navigationController.navigationBarHidden = NO;
   self.controller.tabBarController.tabBar.hidden = NO;
-  
-  NSLog(@"Call");
   [self removeFromSuperview];
 }
 

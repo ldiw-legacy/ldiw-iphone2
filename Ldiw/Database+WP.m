@@ -76,7 +76,13 @@
   NSString *distanceString = [wpDict objectForKey:@"distance_meters"];
   [wpDict removeObjectForKey:@"distance_meters"];
   
-  WastePoint *point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
+  WastePoint *point = nil;
+  if (viewType == ViewTypeNewPoint) {
+    point = [[Database sharedInstance] wastepointWithId:wpId];
+    viewType = ViewTypeList;
+  } else {
+    point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
+  }
   [point setId:wpId];
   [point setViewTypeValue:viewType];
   [point setLatitudeValue:[wpLat floatValue]];
@@ -113,7 +119,7 @@
 }
 
 - (NSArray *)listWastePointsWithNoId {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == 0"];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == nil"];
   return [self listCoreObjectsNamed:@"WastePoint" withPredicate:predicate];
 }
 
