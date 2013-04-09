@@ -103,7 +103,7 @@
     [WastePointUploader uploadWP:wp withSuccess:^(NSDictionary* result) {
       NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
       
-      [[Database sharedInstance] createWastePointWithDictionary:responseWP];
+      [[Database sharedInstance] createWastePointWithDictionary:responseWP forViewType:ViewTypeList];
       
       [WPs removeObject:wp];
       MSLog(@"UPLOAD SUCCESSFUL FOR WP");

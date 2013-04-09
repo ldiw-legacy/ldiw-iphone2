@@ -12,14 +12,15 @@
 @interface Database (WP)
 
 - (WastePoint *)addWastePointUsingImage:(UIImage *)image;
-- (void)createWastePointWithDictionary:(NSDictionary *)inDict;
+- (void)createWastePointWithDictionary:(NSDictionary *)inDict forViewType:(ViewType)viewType;
 
-- (NSArray *)WPListFromData:(NSData *)csvData;
-- (WastePoint *)wastepointWithId:(int)remoteId;
+- (NSArray *)WPListFromData:(NSData *)csvData forViewType:(ViewType)viewType;
+- (WastePoint *)wastepointWithId:(NSString *)remoteId andViewType:(ViewType)viewType;
+
 - (NSArray *)listWastePointsWithNoId;
-- (NSArray *)listAllWastePoints;
+- (NSArray *)listWastepointsWithViewType:(ViewType)viewType;
+
 - (CustomValue *)addCustomValueWithKey:(NSString *)key andValue:(NSString *)value;
 - (CustomValue *)customValueWithKey:(NSString *)fieldName andValue:(NSString *)newValue;
 
-- (NSArray *)listWastepointsWithDistance;
 @end

@@ -74,3 +74,9 @@
 // Upload settings
 #define kUploadWifiOnly 1
 #define kUploadWifiAnd3G 3
+
+typedef NS_ENUM(NSInteger, ViewType) {
+  ViewTypeList,
+  ViewTypeLargeMap,
+  ViewTypeSmallMap
+};

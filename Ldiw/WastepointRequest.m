@@ -18,7 +18,8 @@
 #define kGetWPListPath @"waste_points.csv"
 #define kCreateNewWPPath @"wp.json"
 
-#define kResultsToReturn 100
+#define kNrOfResultsForMap 20
+#define kNrOfResultsForList 100
 #define kMaxResultsKey @"max_results" //default 10
 #define kNearestPointToKey @"nearest_points_to" //optional coordinates (lon,lat in WGS84): "-74,30". If set, then returns individual WPs (not clusters) nearest to the coordinates given, and also adds a distance_meters field to results.
 #define kBBoxKey @"BBOX" // optional
@@ -57,12 +58,12 @@
   return self;
 }
 
-+ (void)getWPListForCurrentAreaWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
++ (void)getWPListForCurrentAreaForViewType:(ViewType)viewType withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
   NSString *bbox = [[LocationManager sharedManager] currentBoundingBox];
   CLLocationCoordinate2D currentLocation = [[[Database sharedInstance] currentUserLocation] coordinate];
   NSString *locationString = [NSString stringWithFormat:@"%g,%g", currentLocation.longitude, currentLocation.latitude];
 
-  [self getWPListWithBbox:bbox andCoordinates:locationString withSuccess:^(NSArray* responseArray) {
+  [self getWPListWithBbox:bbox andCoordinates:locationString andViewType:ViewTypeList withSuccess:^(NSArray* responseArray) {
     success(responseArray);
   } failure:^(NSError *error) {
     failure(error);
@@ -70,45 +71,55 @@
 }
 
 
-+ (void)getWPListForArea:(MKCoordinateRegion)region withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-  CLLocationCoordinate2D center = region.center;
++ (void)getWPListForArea:(MKCoordinateRegion)region andViewType:(ViewType)viewType withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
   MKCoordinateSpan span = region.span;
   
   CLLocationCoordinate2D topLeft = CLLocationCoordinate2DMake(region.center.latitude - span.latitudeDelta, region.center.longitude - span.longitudeDelta);
   CLLocationCoordinate2D botRight = CLLocationCoordinate2DMake(region.center.latitude + span.latitudeDelta, region.center.longitude + span.longitudeDelta);
   NSString *bBoxString = [NSString stringWithFormat:@"%g,%g,%g,%g", topLeft.longitude, topLeft.latitude, botRight.longitude, botRight.latitude];
-  NSString *locationString = [NSString stringWithFormat:@"%g,%g", center.longitude, center.latitude];
 
-  [self getWPListWithBbox:bBoxString andCoordinates:locationString withSuccess:^(NSArray* responseArray) {
+  [self getWPListWithBbox:bBoxString andCoordinates:nil andViewType:viewType withSuccess:^(NSArray* responseArray) {
     success(responseArray);
   } failure:^(NSError *error) {
     failure(error);
   }];
 }
 
-+ (void)getWPListWithBbox:(NSString *)box andCoordinates:(NSString *)coordinates withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
++ (void)getWPListWithBbox:(NSString *)box andCoordinates:(NSString *)coordinates andViewType:(ViewType)viewType withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
   //  URL: GET/POST <api_base_url>/waste_points.{json,csv,kml}
   // ONLY CSV is supported
   
   // http://api.letsdoitworld.org/?q=api/waste_points.csv&max_results=10&nearest_points_to=26.7167,58.3833
 
   // Cancel all previous operations
-  MSLog(@"Cancel previous List Wastepoints operation");
   [[[WastepointRequest sharedWastepointClient] operationQueue] cancelAllOperations];
   
   NSString *baseUrlSuffix = [[Database sharedInstance] serverSuffix];
-  NSString *path = [NSString stringWithFormat:@"%@/%@&%@=%d&%@=%@&%@=%@", baseUrlSuffix, kGetWPListPath, kMaxResultsKey, kResultsToReturn, kNearestPointToKey, coordinates, kBBoxKey, box];
+
+  int maxResults = 0;
+  if (viewType == ViewTypeList) {
+    maxResults = kNrOfResultsForList;
+  } else if (viewType == ViewTypeLargeMap || viewType == ViewTypeSmallMap) {
+    maxResults = kNrOfResultsForMap;
+  }
+  
+  NSMutableString *path = [NSMutableString stringWithFormat:@"%@/%@&%@=%d&%@=%@", baseUrlSuffix, kGetWPListPath, kMaxResultsKey, maxResults, kBBoxKey, box];
+  
+  if (coordinates) {
+    [path appendFormat:@"&%@=%@", kNearestPointToKey, coordinates];
+  }
   
   NSString *language = [LocationManager getPhoneLanguage];
   NSDictionary *parameters;
   if (language) {
     parameters = [NSDictionary dictionaryWithObject:language forKey:kLanguageCodeKey];
   }
-
+  MSLog(@"List wp request to path %@", path);
+  
   [[WastepointRequest sharedWastepointClient] getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSData *responseData = (NSData *)responseObject;
-    NSArray *resultArray = [[Database sharedInstance] WPListFromData:responseData];
-    MSLog(@"List wastepoints request done");
+    NSArray *resultArray = [[Database sharedInstance] WPListFromData:responseData forViewType:viewType];
+    MSLog(@"List wastepoints request done with %d objects", [resultArray count]);
     success(resultArray);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSInteger errorCode = error.code;

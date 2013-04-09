@@ -76,7 +76,7 @@
   UINib *myNib = [UINib nibWithNibName:@"WastePointCell" bundle:nil];
   [self.tableView registerNib:myNib forCellReuseIdentifier:@"Cell"];
   [[[LocationManager sharedManager] locManager] startUpdatingLocation];
-  [self setWastePointsArray:[[Database sharedInstance] listWastepointsWithDistance]];
+  [self setWastePointsArray:[[Database sharedInstance] listWastepointsWithViewType:ViewTypeList]];
   [self.tableView reloadData];
 }
 
@@ -164,6 +164,7 @@
   if (!mapview) {
     self.mapview = [[MapView alloc] initWithFrame:[self tableViewRect]];
     [self.view addSubview:mapview];
+    [mapview setViewType:ViewTypeLargeMap];
     [mapview setAnnotationDelegate:self];
     [mapview centerToUserLocation];
   }
@@ -311,13 +312,13 @@
 }
 
 - (void)reloadTableview {
-  [self setWastePointsArray:[[Database sharedInstance] listWastepointsWithDistance]];
+  [self setWastePointsArray:[[Database sharedInstance] listWastepointsWithViewType:ViewTypeList]];
   [self.tableView reloadData];
 }
 
 - (void)loadWastePointList {
   [self showHudWithText:NSLocalizedString(@"first.loading.wastepoints", nil)];
-  [WastepointRequest getWPListForCurrentAreaWithSuccess:^(NSArray* responseArray) {
+  [WastepointRequest getWPListForCurrentAreaForViewType:ViewTypeList withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
     [self reloadTableview];
     [self doneLoadingTableViewData];
@@ -346,6 +347,7 @@
   DetailViewController *detailView = [[DetailViewController alloc] initWithWastePoint:wastePoint andEnableEditing:NO];
   [self.navigationController pushViewController:detailView animated:YES];
 }
+
 -(void)mapView:(MapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
   [mapView loadPoints];

@@ -16,6 +16,7 @@
 @end
 
 @interface MapView : MKMapView <MKMapViewDelegate>
+@property (nonatomic, assign) ViewType viewType;
 
 @property (nonatomic, assign) id <AnnotationDelegate> annotationDelegate;
 

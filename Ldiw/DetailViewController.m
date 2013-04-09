@@ -38,7 +38,7 @@
   if (self) {
     [self setEditingMode:YES];
     self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:nil];
-    [self.wastePoint setIdValue:0];
+    [self.wastePoint setId:nil];
     self.view.backgroundColor = kViewBackroundColor;
     if (image) {
       [self addImageAsynchronously:image];
@@ -63,7 +63,7 @@
   [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:[[UIScreen mainScreen] bounds]];
   [spinner stopAnimating];
   
-  if (wastePoint.idValue > 0) {
+  if (wastePoint.id) {
     [takePictureButton setHidden:YES];
     [self displayImage];
   }
@@ -154,8 +154,9 @@
   }
   
   [self addWastePointViews];
-  
-  if (wastePoint.idValue != 0) {
+  [mapView setViewType:ViewTypeSmallMap];
+  [mapView setUserInteractionEnabled:NO];
+  if (wastePoint.id) {
     [mapView centerToLocation:wastePoint.location];
   } else {
     [mapView centerToUserLocation];

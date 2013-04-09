@@ -13,7 +13,7 @@
 
 #define kscaleConstantForMapView 100000
 @implementation MapView
-@synthesize annotationDelegate;
+@synthesize annotationDelegate, viewType;
 
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
@@ -57,7 +57,7 @@
 }
 
 - (void)loadPoints {
-  [WastepointRequest getWPListForArea:self.region withSuccess:^(NSArray* responseArray) {
+  [WastepointRequest getWPListForArea:self.region andViewType:viewType withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
     [self createAnnotationsWithArray:responseArray];
   } failure:^(NSError *error){
@@ -86,13 +86,19 @@
       annotationView.annotation = annotation;
     }
     
+    MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
     annotationView.enabled = YES;
     annotationView.canShowCallout = YES;
 
     if (annotationDelegate) {
-      UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-      [rightButton setTitle:annotation.title forState:UIControlStateNormal];
-      [annotationView setRightCalloutAccessoryView:rightButton];
+      
+      if (mapAnnotation.wastePoint.nrOfNodesValue == 0) {
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+        [annotationView setRightCalloutAccessoryView:rightButton];
+      } else {
+        [annotationView setRightCalloutAccessoryView:nil];
+      }
     }
     
     return annotationView;

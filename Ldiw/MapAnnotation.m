@@ -21,7 +21,11 @@
 
 #pragma mark - MKAnnotation delegate
 - (NSString *)title {
-  return [NSString stringWithFormat:@"%d", wastePoint.idValue];
+  NSString *returnString = wastePoint.id;
+  if (wastePoint.nrOfNodesValue > 0) {
+    returnString = [NSString stringWithFormat:@"Node count %d", wastePoint.nrOfNodesValue];
+  }
+  return returnString;
 }
 
 - (CLLocationCoordinate2D)coordinate {

@@ -39,9 +39,11 @@
     </entity>
     <entity name="WastePoint" representedClassName="WastePoint" syncable="YES">
         <attribute name="distance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="nrOfNodes" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="viewType" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <relationship name="customValues" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CustomValue" inverseName="point" inverseEntity="CustomValue" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="wastepoint" inverseEntity="Image" syncable="YES"/>
     </entity>
@@ -66,7 +68,7 @@
         <element name="Server" positionX="-441" positionY="159" width="128" height="165"/>
         <element name="TypicalValue" positionX="322" positionY="126" width="128" height="90"/>
         <element name="User" positionX="160" positionY="240" width="128" height="150"/>
-        <element name="WastePoint" positionX="90" positionY="413" width="128" height="135"/>
+        <element name="WastePoint" positionX="90" positionY="413" width="128" height="165"/>
         <element name="WPField" positionX="-243" positionY="99" width="128" height="223"/>
     </elements>
 </model>

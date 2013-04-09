@@ -67,7 +67,7 @@
 }
 
 - (NSString *)description {
-  NSString *returnString = [NSString stringWithFormat:@"id = %d\nlat = %f\nlon = %f\nnrPhotos = %d\nDistance = %f", self.idValue, self.latitudeValue, self.longitudeValue, [self.images count], self.distanceValue];
+  NSString *returnString = [NSString stringWithFormat:@"id = %@\nlat = %f\nlon = %f\nnrPhotos = %d\nDistance = %f\nnrNodes = %d\nviewType = %d", self.id, self.latitudeValue, self.longitudeValue, [self.images count], self.distanceValue, self.nrOfNodesValue, self.viewTypeValue];
   NSMutableString *customValuesString = [NSMutableString string];
   
   for (CustomValue *value in self.customValues) {
@@ -110,7 +110,7 @@
 - (NSURL *)imageRemoteUrl {
   Image *wpImage = [self.images anyObject];
   if (wpImage.remoteURL) {
-    NSString *imageUrlString = [kFirstServerUrl stringByAppendingString:[kImageURLPath stringByAppendingString:[NSString stringWithFormat:@"%d", self.idValue]]];
+    NSString *imageUrlString = [kFirstServerUrl stringByAppendingString:[kImageURLPath stringByAppendingString:self.id]];
     NSString *imageUrlExtended = [imageUrlString stringByAppendingString:@"/"];
     NSString *imageUrlFullString = [imageUrlExtended stringByAppendingString:wpImage.remoteURL];
     NSString *escapedUrl = [imageUrlFullString stringByAddingPercentEscapesUsingEncoding:NSUnicodeStringEncoding];

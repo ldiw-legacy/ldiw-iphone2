@@ -47,7 +47,7 @@
 }
 
 - (void)setWastePoint:(WastePoint *)wastePoint {
-  NSString *wastpointID = [NSString stringWithFormat:@"%@", wastePoint.id];
+  NSString *wastpointID = wastePoint.id;
   titleLabel.text = wastpointID;
   
   //Description

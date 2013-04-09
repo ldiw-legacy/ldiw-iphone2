@@ -52,7 +52,7 @@
 
 + (UIImage *)thumbinalForWastePoint:(WastePoint *)point
 {
-  NSString *wastpointID = [NSString stringWithFormat:@"%@",point.id];
+  NSString *wastpointID = [NSString stringWithFormat:@"%@", point.id];
   UIImage *thumbinal = nil;
   NSString *cachedImageName = [wastpointID stringByAppendingString:@".png"];
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);

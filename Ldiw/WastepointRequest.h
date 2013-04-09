@@ -12,7 +12,7 @@
 
 @interface WastepointRequest : AFHTTPClient
 
-+ (void)getWPListForArea:(MKCoordinateRegion)region withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
-+ (void)getWPListForCurrentAreaWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)getWPListForArea:(MKCoordinateRegion)region andViewType:(ViewType)viewType withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)getWPListForCurrentAreaForViewType:(ViewType)viewType withSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 @end
