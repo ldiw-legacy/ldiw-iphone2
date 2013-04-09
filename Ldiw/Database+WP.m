@@ -79,10 +79,14 @@
   WastePoint *point = nil;
   if (viewType == ViewTypeNewPoint) {
     point = [[Database sharedInstance] wastepointWithId:wpId];
+    if (!point) {
+      point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
+    }
     viewType = ViewTypeList;
   } else {
     point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
   }
+  
   [point setId:wpId];
   [point setViewTypeValue:viewType];
   [point setLatitudeValue:[wpLat floatValue]];
