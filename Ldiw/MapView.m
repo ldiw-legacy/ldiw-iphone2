@@ -10,10 +10,11 @@
 #import "LocationManager.h"
 #import "WastepointRequest.h"
 #import "MapAnnotation.h"
+#import "Database+WP.h"
 
 #define kscaleConstantForMapView 100000
 @implementation MapView
-@synthesize annotationDelegate, viewType;
+@synthesize annotationDelegate, viewType,contentArray;
 
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
@@ -59,19 +60,30 @@
 - (void)loadPoints {
   [WastepointRequest getWPListForArea:self.region andViewType:viewType withSuccess:^(NSArray* responseArray) {
     MSLog(@"Response array count: %i", responseArray.count);
-    [self createAnnotationsWithArray:responseArray];
+    [self setContentArray:responseArray];
+    [self createAnnotations];
   } failure:^(NSError *error){
     MSLog(@"Failed to load WP list");
   }];
 }
 
-- (void)createAnnotationsWithArray:(NSArray *)WPArray {
+- (void)removePreviousAnnotations {
+  for (id annotation in self.annotations) {
+    if (![annotation isKindOfClass:[MKUserLocation class]]){
+      [self removeAnnotation:annotation];
+    }
+  }
+}
+
+- (void)createAnnotations {
   NSMutableArray *tmpAnnotationsArray = [NSMutableArray array];
-  for (WastePoint *point in WPArray) {
+  NSArray *tmpContentArray = [contentArray copy];
+  for (WastePoint *point in tmpContentArray) {
     MapAnnotation *annotation = [[MapAnnotation alloc] initWithWastePoint:point];
     [tmpAnnotationsArray addObject:annotation];
   }
-  [self addAnnotations:tmpAnnotationsArray];
+  [self removePreviousAnnotations];
+  [self addAnnotations:[NSArray arrayWithArray:tmpAnnotationsArray]];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -91,8 +103,7 @@
     annotationView.canShowCallout = YES;
 
     if (annotationDelegate) {
-      
-      if (mapAnnotation.wastePoint.nrOfNodesValue == 0) {
+      if (mapAnnotation.nrOfNodes == 0) {
         UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         [rightButton setTitle:annotation.title forState:UIControlStateNormal];
         [annotationView setRightCalloutAccessoryView:rightButton];
@@ -100,10 +111,8 @@
         [annotationView setRightCalloutAccessoryView:nil];
       }
     }
-    
     return annotationView;
   }
-  
   return nil;
 }
 
@@ -112,7 +121,7 @@
   
   if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure) {
     MapAnnotation *annotation = (MapAnnotation *)view.annotation;
-    WastePoint *wp = annotation.wastePoint;
+    WastePoint *wp = [[Database sharedInstance] wastepointWithId:annotation.pointId];
     [annotationDelegate pressedAnnotationForWastePoint:wp];
   }
 }

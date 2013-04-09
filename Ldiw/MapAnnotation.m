@@ -7,29 +7,44 @@
 //
 
 #import "MapAnnotation.h"
+#import "WastePoint.h"
 
 @implementation MapAnnotation
-@synthesize wastePoint;
+@synthesize titleString, latitude, longitude, pointId;
 
 - (id)initWithWastePoint:(WastePoint *)aWastePoint {
   self = [super init];
   if (self) {
-    [self setWastePoint:aWastePoint];
+    if (aWastePoint.nrOfNodesValue > 0) {
+      [self setTitleString:[NSString stringWithFormat:@"Node count %d", aWastePoint.nrOfNodesValue]];
+    } else {
+      [self setTitleString:[NSString stringWithFormat:@"Id %@", aWastePoint.id]];
+    }
+    [self setPointId:aWastePoint.id];
+    self.longitude = aWastePoint.longitudeValue;
+    self.latitude = aWastePoint.latitudeValue;
+    self.nrOfNodes = aWastePoint.nrOfNodesValue;
   }
   return self;
 }
 
 #pragma mark - MKAnnotation delegate
 - (NSString *)title {
-  NSString *returnString = wastePoint.id;
-  if (wastePoint.nrOfNodesValue > 0) {
-    returnString = [NSString stringWithFormat:@"Node count %d", wastePoint.nrOfNodesValue];
-  }
-  return returnString;
+  return titleString;
 }
 
 - (CLLocationCoordinate2D)coordinate {
-  return CLLocationCoordinate2DMake(wastePoint.latitudeValue, wastePoint.longitudeValue);
+  CLLocationCoordinate2D returnCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+  if (CLLocationCoordinate2DIsValid(returnCoordinate)) {
+    return returnCoordinate;
+  } else {
+    MSLog(@"Not-valid coordinate");
+    return CLLocationCoordinate2DMake(0, 0);
+  }
+}
+
+- (NSString *)description {
+  return [NSString stringWithFormat:@"lat:%g lon:%g title: %@", latitude, longitude, titleString];
 }
 
 @end

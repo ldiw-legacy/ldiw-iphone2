@@ -25,8 +25,8 @@
     [self setWastePoint:wp];
     [self setFieldDelegate:delegate];
     
-    // If point has no, then let user edit fields
-    if (wastePoint.id) {
+    // If point has no id, then let user edit fields
+    if (!wastePoint.id) {
       [self addNonCompFields];
     } else {
     // Else show only fields that have a value

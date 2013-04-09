@@ -17,7 +17,7 @@
 
 @interface MapView : MKMapView <MKMapViewDelegate>
 @property (nonatomic, assign) ViewType viewType;
-
+@property (nonatomic, strong) NSArray *contentArray;
 @property (nonatomic, assign) id <AnnotationDelegate> annotationDelegate;
 
 - (void)centerToLocation:(CLLocation *)center;

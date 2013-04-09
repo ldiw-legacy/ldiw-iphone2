@@ -12,6 +12,7 @@
 #import "Database+WP.h"
 #import "AFHTTPRequestOperation.h"
 #import "AFJSONRequestOperation.h"
+#import "AFNetworkActivityIndicatorManager.h"
 #import "AFHTTPClient.h"
 #import "LocationManager.h"
 
@@ -35,13 +36,6 @@
     NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
     _sharedClient = [[WastepointRequest alloc] initWithBaseURL:serverBaseUrl];
   });
-  
-  NSURL *serverBaseUrl = [NSURL URLWithString:[[Database sharedInstance] serverBaseUrl]];
-  if (![_sharedClient.baseURL isEqual:serverBaseUrl]) {
-    MSLog(@"Change base url for shared client");
-    _sharedClient = [[WastepointRequest alloc] initWithBaseURL:serverBaseUrl];
-  }
-  
   return _sharedClient;
 }
 
@@ -54,6 +48,7 @@
   if (self) {
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     self.parameterEncoding = AFJSONParameterEncoding;
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
   }
   return self;
 }

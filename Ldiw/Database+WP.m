@@ -24,8 +24,8 @@
   return wp;
 }
 
-- (WastePoint *)wastepointWithId:(NSString *)remoteId andViewType:(ViewType)viewType {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@ && viewType == %d", remoteId, viewType];
+- (WastePoint *)wastepointWithId:(NSString *)remoteId {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", remoteId];
   WastePoint *result = [self findCoreDataObjectNamed:@"WastePoint" withPredicate:predicate];
   return result;
 }
