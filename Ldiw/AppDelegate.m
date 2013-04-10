@@ -16,6 +16,7 @@
 #import "WastePointUploader.h"
 
 @implementation AppDelegate
+@synthesize bgTaskIdentifier;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,6 +40,7 @@
 {
   [[Database sharedInstance] saveContext];
   [[LocationManager sharedManager] stopLocationManager];
+  [self presentNotificationWithText:@"Application will resign active"];
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
   // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
@@ -57,6 +59,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationUploadsComplete object:nil];
   [FBSession.activeSession handleDidBecomeActive];
   [WastePointUploader uploadAllLocalWPs];
 }
@@ -70,7 +73,41 @@
   return [FBSession.activeSession handleOpenURL:url];
 }
 
+- (void)presentNotificationWithText:(NSString *)text {
+  UILocalNotification *notification = [[UILocalNotification alloc] init];
+  [notification setAlertBody:@"Location changed"];
+  [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+}
+
+- (void)uploadsComplete {
+  [self presentNotificationWithText:@"Uploads complete"];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationUploadsComplete object:nil];
+  [[UIApplication sharedApplication] endBackgroundTask:bgTaskIdentifier];
+  [self setBgTaskIdentifier:0];
+}
+
 - (void)locationChanged:(NSNotification *)notification {
+  MSLog(@"location changed");
+  
+  if (bgTaskIdentifier != 0) {
+    MSLog(@"A upload is in progress");
+    return;
+  }
+  
+  [self setBgTaskIdentifier:0];
+  UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+  if (state == UIApplicationStateBackground) {
+    MSLog(@"Application is in backround");
+    // Fire local notification for testing
+    [self presentNotificationWithText:@"Location changed in background"];
+    
+    [self setBgTaskIdentifier:[[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+      [[UIApplication sharedApplication] endBackgroundTask:bgTaskIdentifier];
+      }]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadsComplete) name:kNotificationUploadsComplete object:nil];
+    [WastePointUploader uploadAllLocalWPs];
+  }
+
 }
 
 @end

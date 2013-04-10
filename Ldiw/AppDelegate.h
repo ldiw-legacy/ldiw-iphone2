@@ -11,5 +11,9 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, assign) UIBackgroundTaskIdentifier bgTaskIdentifier;
+
+
+- (void)presentNotificationWithText:(NSString *)text;
 
 @end
