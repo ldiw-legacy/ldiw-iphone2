@@ -36,9 +36,46 @@
   return self;
 }
 
+- (id)initWithCustomValue:(CustomValue *)customValue {
+  CGRect frame = CGRectMake(0, 0, 320, kWPFieldHeight);
+  self = [super initWithFrame:frame];
+  if (self) {
+    [self addContentBasedCustomValue:customValue];
+  }
+  return self;
+}
+
 - (id)initWithWPField:(WPField *)field {
   self = [self initWithWPField:field forEditing:YES];
   return self;
+}
+
+- (void)addContentBasedCustomValue:(CustomValue *)customValue {
+  [self setBackgroundColor:kWPFieldBgColor];
+  UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kWPFieldHeight - kTopPadding)];
+  [bg setBackgroundColor:kWPFieldFGColor];
+  bg.layer.cornerRadius = 5;
+  bg.layer.masksToBounds = YES;
+  [self addSubview:bg];
+  
+  UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kLabelTextLength, 30)];
+  NSString *fieldString = [[Database sharedInstance] nameOfTheCustomValue:customValue];
+  if ([fieldString isEqualToString:@""]) {
+    [nameLabel setText:fieldString];
+  } else {
+    [nameLabel setText:customValue.fieldName];
+  }
+  [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
+  [nameLabel setBackgroundColor:[UIColor clearColor]];
+  [bg addSubview:nameLabel];
+  
+  UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kDescriptionTopPadding, kLabelTextLength, kWPDescripttionTextSize)];
+  [descriptionLabel setText:customValue.value];
+  [descriptionLabel setFont:[UIFont fontWithName:kFontName size:kWPDescripttionTextSize]];
+  [descriptionLabel setBackgroundColor:[UIColor clearColor]];
+  [descriptionLabel setTextColor:kFieldDescriptionTextColor];
+  [self setValueLabel:descriptionLabel];
+  [bg addSubview:descriptionLabel];
 }
 
 - (void)addContent {

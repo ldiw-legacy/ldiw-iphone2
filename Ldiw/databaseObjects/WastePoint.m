@@ -50,7 +50,7 @@
     if (wpF.min || wpF.max) {
       num = [self capFloat:num from:[wpF.min floatValue] toMax:[wpF.max floatValue]];
     }
-
+    
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setAllowsFloats:YES];
     [formatter setMaximumFractionDigits:5];
@@ -70,7 +70,7 @@
   CustomValue *value = [[Database sharedInstance] customValueWithKey:fieldName andValue:valueString];
   [self addCustomValuesObject:value];
   MSLog(@"Added new customValue '%@' to point", fieldName);
-
+  
   return returnString;
 }
 

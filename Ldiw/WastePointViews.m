@@ -32,19 +32,16 @@
     // Else show only fields that have a value
       [self addOnlyFieldsWithData];
     }
-//    [self addCompFields];
   }
   return self;
 }
 
 - (void)addOnlyFieldsWithData {
   for (CustomValue *value in wastePoint.customValues) {
-    NSString *fieldname = value.fieldName;
     NSString *data = value.value;
     BOOL dataPresent = (![data isEqualToString:@"0"] && [data length] > 0);
-    WPField *fieldToAdd = [[Database sharedInstance] findWPFieldWithFieldName:fieldname orLabel:nil];
-    if (fieldToAdd && dataPresent) {
-      FieldView *fieldView = [[FieldView alloc] initWithWPField:fieldToAdd forEditing:NO];
+    if (dataPresent) {
+      FieldView *fieldView = [[FieldView alloc] initWithCustomValue:value];
       [fieldView.valueLabel setText:data];
       [self addSubviewToBottom:fieldView];
     }
@@ -52,7 +49,6 @@
 }
 
 - (void)addNonCompFields {
-  
   NSArray *nonCompFields = [[Database sharedInstance] listAllWPFields];
   for (WPField *wpField in nonCompFields) {
     FieldView *field = [[FieldView alloc] initWithWPField:wpField];

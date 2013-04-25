@@ -29,22 +29,23 @@
   self = [super initWithFrame:CGRectMake(0, 0, 320, 0)];
   if (self) {
     [self setField:aField];
-    UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, 0)];
-    [bg setBackgroundColor:kWPFieldFGColor];
-    bg.layer.cornerRadius = 5;
-    bg.layer.masksToBounds = YES;
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kLabelHeight)];
-    [nameLabel setText:field.label];
-    [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
-    [nameLabel setBackgroundColor:[UIColor clearColor]];
-
-    [bg addSubviewToBottom:nameLabel];
-    
-    [self addSubviewToBottom:bg];
-
+    [self setupView];
     [self addAllowedValueViews];
   }
   return self;
+}
+
+- (void) setupView {
+  UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, 0)];
+  [bg setBackgroundColor:kWPFieldFGColor];
+  bg.layer.cornerRadius = 5;
+  bg.layer.masksToBounds = YES;
+  UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(kContentPaddingFromSide, kTopPadding, kContentWidth, kLabelHeight)];
+  [nameLabel setText:field.label];
+  [nameLabel setFont:[UIFont fontWithName:kCustomFont size:kWPLabelTextSize]];
+  [nameLabel setBackgroundColor:[UIColor clearColor]];
+  [bg addSubviewToBottom:nameLabel];
+  [self addSubviewToBottom:bg];
 }
 
 - (void)addAllowedValueViews {

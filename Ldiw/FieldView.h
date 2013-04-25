@@ -8,6 +8,7 @@
 
 #import "WPField.h"
 #import "FieldDelegate.h"
+#import "CustomValue.h"
 
 @interface FieldView : UIView
 @property (nonatomic, assign) id<FieldDelegate> delegate;
@@ -17,6 +18,7 @@
 @property (nonatomic, assign) BOOL enableEditing;
 
 - (id)initWithWPField:(WPField *)field;
+- (id)initWithCustomValue:(CustomValue *)customValue;
 - (id)initWithWPField:(WPField *)field forEditing:(BOOL)enableEditing;
 - (void)setValue:(NSString *)value;
 - (void)deselctAllTics;

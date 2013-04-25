@@ -180,4 +180,10 @@
   return sortedArray;
 }
 
+- (NSString *)nameOfTheCustomValue:(CustomValue *)customValue {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"value == %@", customValue.fieldName];
+  AllowedValue *allowedValue = [self findCoreDataObjectNamed:@"AllowedValue" withPredicate:predicate];
+  return allowedValue.key;
+}
+
 @end
