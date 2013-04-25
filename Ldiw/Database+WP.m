@@ -25,7 +25,7 @@
 }
 
 - (WastePoint *)wastepointWithId:(NSString *)remoteId {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", remoteId];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@ && viewType == %d", remoteId, ViewTypeList];
   WastePoint *result = [self findCoreDataObjectNamed:@"WastePoint" withPredicate:predicate];
   return result;
 }
@@ -64,7 +64,7 @@
 
 - (void)createWastePointWithDictionary:(NSDictionary *)inDict forViewType:(ViewType)viewType {
   NSMutableDictionary *wpDict = [NSMutableDictionary dictionaryWithDictionary:inDict];
-  
+  MSLog(@"Create wp with dict: %@", inDict);
   NSString *wpId = [wpDict objectForKey:kKeyId];
   [wpDict removeObjectForKey:kKeyId];
   NSString *wpLat = [wpDict objectForKey:kKeyLat];

@@ -229,15 +229,18 @@
 - (IBAction)addPressed:(id)sender
 {
   if ([[LocationManager sharedManager] locationServicesEnabled]) {
+    __block WastePoint *blockWastepoint = wastePoint;
+    __block DetailViewController *blockSelf = self;
+    
     [[LocationManager sharedManager] locationWithBlock:^(CLLocation *location) {
-      [wastePoint setLatitudeValue:location.coordinate.latitude];
-      [wastePoint setLongitudeValue:location.coordinate.longitude];
+      [blockWastepoint setLatitudeValue:location.coordinate.latitude];
+      [blockWastepoint setLongitudeValue:location.coordinate.longitude];
       [WastePointUploader uploadAllLocalWPs];
-      self.controller.wastePointAddedSuccessfully = YES;
-      [self.navigationController popViewControllerAnimated:NO];
+      blockSelf.controller.wastePointAddedSuccessfully = YES;
+      [blockSelf.navigationController popViewControllerAnimated:NO];
     } errorBlock:^(NSError *error) {
       MSLog(@"Could not get location for map");
-      [self.navigationController popViewControllerAnimated:NO];
+      [blockSelf.navigationController popViewControllerAnimated:NO];
     }];
   } else {
     [self showHudWarning];

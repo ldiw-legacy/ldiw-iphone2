@@ -52,10 +52,8 @@
     if ([responseObject isKindOfClass:[NSData class]]) {
       NSError *error;
       responseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
-      
     }
-    MSLog(@"New WP created!");
-    MSLog(@"Response %@", responseObject);
+    MSLog(@"Wastepoint upload request response Response %@", responseObject);
     success(responseObject);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     MSLog(@"Error: %@", error);
@@ -67,8 +65,9 @@
 }
 
 + (void)uploadAllLocalWPs {
-  MSLog(@"LOCAL WPs COUNT: %i", [[Database sharedInstance] listWastePointsWithNoId].count);
   NSMutableArray *localWPs = [NSMutableArray arrayWithArray:[[Database sharedInstance] listWastePointsWithNoId]];
+  MSLog(@"LOCAL WPs COUNT: %i", localWPs.count);
+
   if (localWPs.count <= 0 ) {
     return;
   }
@@ -99,28 +98,25 @@
 }
 
 + (void)uploadAllLocalWPsWithArray:(NSMutableArray *)WPs {
-    WastePoint *wp = [WPs objectAtIndex:0];
-    [WastePointUploader uploadWP:wp withSuccess:^(NSDictionary* result) {
-      NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
-      
-      [[Database sharedInstance] createWastePointWithDictionary:responseWP forViewType:ViewTypeNewPoint];
-      
-      [WPs removeObject:wp];
-      MSLog(@"UPLOAD SUCCESSFUL FOR WP");
-
-      if (WPs.count > 0) {
-        [self uploadAllLocalWPsWithArray:WPs];        
-      } else {
-        NSArray *nullIdArray = [[Database sharedInstance] listWastePointsWithNoId];
-        for (WastePoint *point in nullIdArray) {
-          [[[Database sharedInstance] managedObjectContext] deleteObject:point];
-        }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUploadsComplete object:nil];
-      }
-    } failure:^(NSError *error) {
-      MSLog(@"UPLOAD FAILED FOR: %@", wp);
-    }];
+  WastePoint *wp = [WPs objectAtIndex:0];
+  [WPs removeObject:wp];
+  __block WastePoint *blockWP = wp;
+  
+  [WastePointUploader uploadWP:wp withSuccess:^(NSDictionary* result) {
+    NSDictionary *responseWP = [result objectForKey:[result.allKeys objectAtIndex:0]];
+    [[[Database sharedInstance] managedObjectContext] deleteObject:blockWP];
+    [[Database sharedInstance] createWastePointWithDictionary:responseWP forViewType:ViewTypeNewPoint];
+    
+    MSLog(@"UPLOAD SUCCESSFUL FOR WP");
+    
+    if (WPs.count > 0) {
+      [self uploadAllLocalWPsWithArray:WPs];
+    } else {
+      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUploadsComplete object:nil];
+    }
+  } failure:^(NSError *error) {
+    MSLog(@"UPLOAD FAILED FOR: %@", wp);
+  }];
 }
 
 @end

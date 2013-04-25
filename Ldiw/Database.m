@@ -107,6 +107,7 @@
   if ([objects count] != 1) {
     if ([objects count] > 1) {
       MSLog(@"WARNING: findCoreDataObjectNamed:%@ withPredicate:%@ - found %d items", coreName, predicate, [objects count]);
+      abort();
     } else {
       return nil;
     }
