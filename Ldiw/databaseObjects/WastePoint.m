@@ -21,7 +21,7 @@
 }
 
 
--(double) capFloat:(double)num from:(double)min toMax:(double)max {
+-(float)capFloat:(float)num from:(float)min toMax:(float)max {
   if (num >= max) {
     num = max;
   } else if (num <= min) {
@@ -36,33 +36,42 @@
 - (NSString*)setValue:(NSString *)newValue forCustomField:(NSString *)fieldName {
   
   WPField *wpF = [[Database sharedInstance] findWPFieldWithFieldName:fieldName orLabel:nil];
-  if (wpF.min || wpF.max) {
-    
-    if ([wpF.type isEqualToString:@"integer"]) {
-      int num = [newValue intValue];
+  NSString *returnString = newValue;
+  
+  if ([wpF.type isEqualToString:@"integer"]) {
+    int num = [newValue intValue];
+    if (wpF.min || wpF.max) {
       num = [self capInt:num from:wpF.minValue toMax:wpF.maxValue];
-      newValue = [NSString stringWithFormat:@"%d", num];
-    } else if ([wpF.type isEqualToString:@"float"]) {
-      double num = [newValue doubleValue];
-      num = [self capFloat:num from:[wpF.min doubleValue] toMax:[wpF.max doubleValue]];
-      NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-      [nf setDecimalSeparator:@"."];
-      [nf setMaximumFractionDigits:5];
-      newValue = [nf stringFromNumber:[NSNumber numberWithDouble:num]];
     }
+    returnString = [NSString stringWithFormat:@"%d", num];
+  } else if ([wpF.type isEqualToString:@"float"]) {
+    NSString *replacedString = [newValue stringByReplacingOccurrencesOfString:@"," withString:@"."];
+    float num = [replacedString floatValue];
+    if (wpF.min || wpF.max) {
+      num = [self capFloat:num from:[wpF.min floatValue] toMax:[wpF.max floatValue]];
+    }
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setAllowsFloats:YES];
+    [formatter setMaximumFractionDigits:5];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    returnString = [formatter stringFromNumber:[NSNumber numberWithFloat:num]];
   }
   
+  NSString *valueString = [returnString stringByReplacingOccurrencesOfString:@"," withString:@"."];
   for (CustomValue* value in self.customValues) {
     if ([value.fieldName isEqualToString:fieldName]) {
-      MSLog(@"Change value for field '%@' to '%@'", fieldName, newValue);
-      [value setValue:newValue];
+      MSLog(@"Change value for field '%@' to '%@'", fieldName, valueString);
+      [value setValue:valueString];
       return newValue;
     }
   }
-  CustomValue *value = [[Database sharedInstance] customValueWithKey:fieldName andValue:newValue];
+  
+  CustomValue *value = [[Database sharedInstance] customValueWithKey:fieldName andValue:valueString];
   [self addCustomValuesObject:value];
   MSLog(@"Added new customValue '%@' to point", fieldName);
-  return newValue;
+  
+  return returnString;
 }
 
 - (NSString *)description {
