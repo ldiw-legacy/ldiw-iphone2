@@ -45,7 +45,6 @@
     } else if ([wpF.type isEqualToString:@"float"]) {
       double num = [newValue doubleValue];
       num = [self capFloat:num from:[wpF.min doubleValue] toMax:[wpF.max doubleValue]];
-      
       NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
       [nf setDecimalSeparator:@"."];
       [nf setMaximumFractionDigits:5];

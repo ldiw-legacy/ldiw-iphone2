@@ -8,6 +8,7 @@
 
 #import "Database.h"
 #import "WPField.h"
+#import "CustomValue.h"
 
 @interface Database (WPField)
 
@@ -20,7 +21,7 @@
 - (WPField *)createWPFieldWithFieldName:(NSString *)fieldName andEditInstructions:(NSString *)editInstructions andLabel:(NSString *)label andMaxValue:(NSNumber *)max andMinValue:(NSNumber *)min andSuffix:(NSString *)suffix andType:(NSString *)type andTypicalValues:(NSArray *)typicalValues andAllowedValues:(NSArray *)allowedValues andIndex:(NSNumber *)index;
 - (AllowedValue *)createAllowedValueWithKey:(NSString *)key andValue:(NSString *)value forWPField:(WPField *)wpField;
 - (TypicalValue *)createTypicalValueWithKey:(NSString *)key andValue:(NSString *)value forWPField:(WPField *)wpField;
-
+- (NSString *)nameOfTheCustomValue:(CustomValue *)customValue;
 
 - (NSArray *)listAllNonCompositionFields;
 - (NSArray *)listAllCompositionFields;

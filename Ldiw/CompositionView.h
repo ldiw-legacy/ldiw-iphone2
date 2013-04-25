@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WPField.h"
 #import "FieldDelegate.h"
+#import "CustomValue.h"
 
 @interface CompositionView : UIView
 
