@@ -32,6 +32,7 @@
   for (CustomValue *val in point.customValues) {
     [parameters setObject:val.value forKey:val.fieldName];
   }
+  MSLog(@"UPLOADING NEW WP WITH INFO:%@", parameters);
   
   Image *image = point.images.anyObject;
   NSData *imgData = [NSData dataWithContentsOfFile:image.localURL];

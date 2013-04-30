@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet MapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet __block UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) WastePoint *wastePoint;
 @property (weak, nonatomic) ActivityViewController *controller;
 @property (nonatomic, strong) WastePointViews *wastePointViews;
@@ -29,7 +29,7 @@
 
 - (IBAction)takePicture:(id)sender;
 
-- (id)initWithImage:(UIImage *)image;
+- (id)initWithImageInfo:(NSDictionary *)info;
 - (id)initWithWastePoint:(WastePoint *)point andEnableEditing:(BOOL)editingAllowed;
 
 @end

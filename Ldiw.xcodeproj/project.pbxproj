@@ -82,6 +82,7 @@
 		53E729EC16DCFD5800AC8E35 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729EB16DCFD5800AC8E35 /* MapView.m */; };
 		53E729EF16DD021A00AC8E35 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E729EE16DD021A00AC8E35 /* MapAnnotation.m */; };
 		5A1FAA6916DFAAF800751FFF /* WastePointUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1FAA6816DFAAF800751FFF /* WastePointUploader.m */; };
+		5A9E47DF172A73EB00CF87E1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A9E47DE172A73EB00CF87E1 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5AAAF96F16D3CB90005DAAF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */; };
 		5AAC2FBC16D62735008FEB66 /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC2FBB16D62735008FEB66 /* LoginClient.m */; };
 		5AD08AEB16DD0CCC00566B04 /* PictureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD08AEA16DD0CCC00566B04 /* PictureHelper.m */; };
@@ -322,6 +323,7 @@
 		53E729EE16DD021A00AC8E35 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		5A1FAA6716DFAAF800751FFF /* WastePointUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WastePointUploader.h; sourceTree = "<group>"; };
 		5A1FAA6816DFAAF800751FFF /* WastePointUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WastePointUploader.m; sourceTree = "<group>"; };
+		5A9E47DE172A73EB00CF87E1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		5AAAF96E16D3CB90005DAAF6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5AAC2FBA16D62735008FEB66 /* LoginClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginClient.h; sourceTree = "<group>"; };
 		5AAC2FBB16D62735008FEB66 /* LoginClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginClient.m; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A9E47DF172A73EB00CF87E1 /* AssetsLibrary.framework in Frameworks */,
 				13A42DF016D4EF2B00B92C17 /* Accounts.framework in Frameworks */,
 				13A42DEE16D4EF2000B92C17 /* Social.framework in Frameworks */,
 				13A42DEC16D4EF1A00B92C17 /* AdSupport.framework in Frameworks */,
@@ -597,6 +600,7 @@
 		534CCF0216D210580004532F = {
 			isa = PBXGroup;
 			children = (
+				5A9E47DE172A73EB00CF87E1 /* AssetsLibrary.framework */,
 				C583437A16D3B335005F3330 /* Default-568h@2x.png */,
 				534CCF1616D210590004532F /* Ldiw */,
 				534CCF0D16D210590004532F /* Frameworks */,

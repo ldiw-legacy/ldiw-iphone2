@@ -235,21 +235,20 @@
     self.tabBarController.selectedIndex = 0;
   } else if (buttonIndex != 3) {
     self.tabBarController.selectedIndex = 0;
-    [self openDetailViewWithImage:nil];
+    [self openDetailViewWithImageInfo:nil];
   }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  DetailViewController *detail = [[DetailViewController alloc] initWithImage:cameraImage];
+  DetailViewController *detail = [[DetailViewController alloc] initWithImageInfo:info];
   detail.controller = self;
   [self.navigationController pushViewController:detail animated:NO];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)openDetailViewWithImage:(UIImage *)image {
-  DetailViewController *detail = [[DetailViewController alloc] initWithImage:image];
+- (void)openDetailViewWithImageInfo:(NSDictionary *)info {
+  DetailViewController *detail = [[DetailViewController alloc] initWithImageInfo:info];
   detail.takePictureButton.alpha = 1.0;
   detail.controller = self;
   [self.navigationController pushViewController:detail animated:NO];

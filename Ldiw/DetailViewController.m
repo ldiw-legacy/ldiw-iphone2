@@ -19,6 +19,8 @@
 #import "Constants.h"
 #import "CustomValue.h"
 #import "UIImageView+AFNetworkingJSAdditions.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UITextField *textInputField;
@@ -33,18 +35,46 @@
 
 @synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, editingMode, spinner, takePictureButton;
 
-- (id)initWithImage:(UIImage *)image {
+
+- (id)initWithImageInfo:(NSDictionary *)info {
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
     [self setEditingMode:YES];
     self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:nil];
     [self.wastePoint setId:nil];
     self.view.backgroundColor = kViewBackroundColor;
-    if (image) {
+    if (info) {
+      UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
       [self addImageAsynchronously:image];
+      
+      [self setWPLocationFromPictureInfo:info];
+      
     }
   }
+  
+  
   return self;
+}
+
+
+- (void) setWPLocationFromPictureInfo:(NSDictionary*)info {
+  NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+  
+  ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+  
+  __block WastePoint *bWastepoint = wastePoint;
+  
+  [library assetForURL:assetURL
+           resultBlock:^(ALAsset *asset)  {
+             NSDictionary *metadata = asset.defaultRepresentation.metadata;
+             NSDictionary *gps = [metadata objectForKey:@"{GPS}"];
+             if (gps) {
+               bWastepoint.latitude = [gps objectForKey:@"Latitude"];
+               bWastepoint.longitude = [gps objectForKey:@"Longitude"];
+             }
+           }
+          failureBlock:^(NSError *error) {
+          }];
 }
 
 - (id)initWithWastePoint:(WastePoint *)point andEnableEditing:(BOOL)editingAllowed {
@@ -170,10 +200,13 @@
 
 - (void) addImageAsynchronously:(UIImage*)image {
   [spinner startAnimating];
+  __block DetailViewController *blockSelf = self;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     UIImage *smallImage = [PictureHelper saveImage:image forWastePoint:self.wastePoint];
+    MSLog(@"IMGGG%@", image);
+    
     dispatch_sync(dispatch_get_main_queue(), ^{
-      [self setImageinImageView:smallImage];
+      [blockSelf setImageinImageView:smallImage];
       [spinner stopAnimating];
     });
   });
@@ -228,7 +261,11 @@
 
 - (IBAction)addPressed:(id)sender
 {
-  if ([[LocationManager sharedManager] locationServicesEnabled]) {
+  if (self.wastePoint.latitudeValue != 0 && self.wastePoint.longitudeValue != 0) {
+    [WastePointUploader uploadAllLocalWPs];
+    self.controller.wastePointAddedSuccessfully = YES;
+    [self.navigationController popViewControllerAnimated:NO];
+  } else if ([[LocationManager sharedManager] locationServicesEnabled]) {
     __block WastePoint *blockWastepoint = wastePoint;
     __block DetailViewController *blockSelf = self;
     
