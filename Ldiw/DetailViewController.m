@@ -63,6 +63,7 @@
   ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
   
   __block WastePoint *bWastepoint = wastePoint;
+  __block MapView *bMapView = mapView;
   
   [library assetForURL:assetURL
            resultBlock:^(ALAsset *asset)  {
@@ -71,6 +72,8 @@
              if (gps) {
                bWastepoint.latitude = [gps objectForKey:@"Latitude"];
                bWastepoint.longitude = [gps objectForKey:@"Longitude"];
+               CLLocation *loc = [[CLLocation alloc] initWithLatitude:[bWastepoint.latitude doubleValue] longitude:[bWastepoint.longitude doubleValue]];
+               [bMapView centerToLocation:loc];
              }
            }
           failureBlock:^(NSError *error) {
