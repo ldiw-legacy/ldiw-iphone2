@@ -72,9 +72,10 @@
              if (gps) {
                bWastepoint.latitude = [gps objectForKey:@"Latitude"];
                bWastepoint.longitude = [gps objectForKey:@"Longitude"];
+               MSLog(@"GPS location detected from image, latitude:%@, longitude: %@",[gps objectForKey:@"Latitude"], [gps objectForKey:@"Longitude"]);
                CLLocation *loc = [[CLLocation alloc] initWithLatitude:[bWastepoint.latitude doubleValue] longitude:[bWastepoint.longitude doubleValue]];
                [bMapView centerToLocation:loc];
-             }
+             } else MSLog(@"NO GPS data detected from image");
            }
           failureBlock:^(NSError *error) {
           }];
