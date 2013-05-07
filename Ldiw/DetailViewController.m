@@ -75,7 +75,10 @@
                MSLog(@"GPS location detected from image, latitude:%@, longitude: %@",[gps objectForKey:@"Latitude"], [gps objectForKey:@"Longitude"]);
                CLLocation *loc = [[CLLocation alloc] initWithLatitude:[bWastepoint.latitude doubleValue] longitude:[bWastepoint.longitude doubleValue]];
                [bMapView centerToLocation:loc];
-             } else MSLog(@"NO GPS data detected from image");
+             } else {
+               MSLog(@"NO GPS data detected from image");
+               [bMapView centerToUserLocation];
+             }
            }
           failureBlock:^(NSError *error) {
           }];
@@ -199,7 +202,7 @@
   if (wastePoint.id) {
     [mapView centerToLocation:wastePoint.location];
   } else {
-    if ( self.picInfo && self.wastePoint.latitudeValue != 0 && self.wastePoint.longitudeValue != 0) {
+    if (self.picInfo) {
       [self setWPLocationFromPictureInfo:picInfo];
     } else {
       [mapView centerToUserLocation];
@@ -334,8 +337,8 @@
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   
   self.picInfo = info;
+  [self setMapviewPosition];
   [self setWPLocationFromPictureInfo:info];
-  
   [self dismissViewControllerAnimated:YES completion:nil];
   [self addImageAsynchronouslyShowingSpinner:cameraImage];
 }
