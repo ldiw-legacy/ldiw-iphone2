@@ -190,18 +190,22 @@
   [self addWastePointViews];
   [mapView setViewType:ViewTypeSmallMap];
   [mapView setUserInteractionEnabled:NO];
+  
+  [self setMapviewPosition];
+  
+}
+
+-(void) setMapviewPosition {
   if (wastePoint.id) {
     [mapView centerToLocation:wastePoint.location];
   } else {
-    if (self.picInfo) {
+    if ( self.picInfo && self.wastePoint.latitudeValue != 0 && self.wastePoint.longitudeValue != 0) {
       [self setWPLocationFromPictureInfo:picInfo];
     } else {
       [mapView centerToUserLocation];
     }
     
   }
-  
-  
 }
 
 - (void) addImageAsynchronouslyShowingSpinner:(UIImage*)image {
@@ -272,7 +276,7 @@
 
 - (IBAction)addPressed:(id)sender
 {
-  if (self.picInfo) {
+  if (self.wastePoint.latitudeValue != 0 && self.wastePoint.longitudeValue != 0) {
     [WastePointUploader uploadAllLocalWPs];
     self.controller.wastePointAddedSuccessfully = YES;
     [self.navigationController popViewControllerAnimated:NO];
@@ -330,7 +334,8 @@
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   
   self.picInfo = info;
-  [self setWPLocationFromPictureInfo:picInfo];
+  [self setWPLocationFromPictureInfo:info];
+  
   [self dismissViewControllerAnimated:YES completion:nil];
   [self addImageAsynchronouslyShowingSpinner:cameraImage];
 }
