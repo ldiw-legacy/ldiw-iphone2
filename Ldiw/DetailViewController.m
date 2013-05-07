@@ -28,12 +28,13 @@
 @property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UILabel *insertTextLabel;
 @property (strong, nonatomic) NSString *selectedFieldName;
+@property (strong, nonatomic) NSDictionary *picInfo;
 
 @end
 
 @implementation DetailViewController
 
-@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, editingMode, spinner, takePictureButton;
+@synthesize scrollView, imageView, mapView, textInputField, dimView, myTextInputView, insertTextLabel, wastePoint, selectedFieldName, wastePointViews, editingMode, spinner, takePictureButton, picInfo;
 
 
 - (id)initWithImageInfo:(NSDictionary *)info {
@@ -42,12 +43,11 @@
     [self setEditingMode:YES];
     self.wastePoint = [[Database sharedInstance] addWastePointUsingImage:nil];
     [self.wastePoint setId:nil];
-    self.view.backgroundColor = kViewBackroundColor;
     if (info) {
+      self.picInfo = info;
+      
       UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
       [self addImageAsynchronously:image];
-      
-      [self setWPLocationFromPictureInfo:info];
       
     }
   }
@@ -193,8 +193,15 @@
   if (wastePoint.id) {
     [mapView centerToLocation:wastePoint.location];
   } else {
-    [mapView centerToUserLocation];
+    if (self.picInfo) {
+      [self setWPLocationFromPictureInfo:picInfo];
+    } else {
+      [mapView centerToUserLocation];
+    }
+    
   }
+  
+  
 }
 
 - (void) addImageAsynchronouslyShowingSpinner:(UIImage*)image {
@@ -265,7 +272,7 @@
 
 - (IBAction)addPressed:(id)sender
 {
-  if (self.wastePoint.latitudeValue != 0 && self.wastePoint.longitudeValue != 0) {
+  if (self.picInfo) {
     [WastePointUploader uploadAllLocalWPs];
     self.controller.wastePointAddedSuccessfully = YES;
     [self.navigationController popViewControllerAnimated:NO];
@@ -322,6 +329,8 @@
 {
   UIImage *cameraImage = [info objectForKey:UIImagePickerControllerOriginalImage];
   
+  self.picInfo = info;
+  [self setWPLocationFromPictureInfo:picInfo];
   [self dismissViewControllerAnimated:YES completion:nil];
   [self addImageAsynchronouslyShowingSpinner:cameraImage];
 }
