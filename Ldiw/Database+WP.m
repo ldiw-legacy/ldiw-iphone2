@@ -24,8 +24,8 @@
   return wp;
 }
 
-- (WastePoint *)wastepointWithId:(NSString *)remoteId {
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@ && viewType == %d", remoteId, ViewTypeList];
+- (WastePoint *)wastepointWithId:(NSString *)remoteId forViewType:(ViewType)viewType {
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@ && viewType == %d", remoteId, viewType];
   WastePoint *result = [self findCoreDataObjectNamed:@"WastePoint" withPredicate:predicate];
   return result;
 }
@@ -78,7 +78,7 @@
   
   WastePoint *point = nil;
   if (viewType == ViewTypeNewPoint) {
-    point = [[Database sharedInstance] wastepointWithId:wpId];
+    point = [[Database sharedInstance] wastepointWithId:wpId forViewType:ViewTypeList];
     if (!point) {
       point = [WastePoint insertInManagedObjectContext:self.managedObjectContext];
     }

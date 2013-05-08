@@ -121,7 +121,7 @@
   
   if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure) {
     MapAnnotation *annotation = (MapAnnotation *)view.annotation;
-    WastePoint *wp = [[Database sharedInstance] wastepointWithId:annotation.pointId];
+    WastePoint *wp = [[Database sharedInstance] wastepointWithId:annotation.pointId forViewType:ViewTypeLargeMap];
     [annotationDelegate pressedAnnotationForWastePoint:wp];
   }
 }

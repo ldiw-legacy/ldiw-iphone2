@@ -15,7 +15,7 @@
 - (void)createWastePointWithDictionary:(NSDictionary *)inDict forViewType:(ViewType)viewType;
 
 - (NSArray *)WPListFromData:(NSData *)csvData forViewType:(ViewType)viewType;
-- (WastePoint *)wastepointWithId:(NSString *)remoteId;
+- (WastePoint *)wastepointWithId:(NSString *)remoteId forViewType:(ViewType)viewType;
 
 - (NSArray *)listWastePointsWithNoId;
 - (NSArray *)listWastepointsWithViewType:(ViewType)viewType;
