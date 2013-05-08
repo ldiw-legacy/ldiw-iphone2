@@ -262,6 +262,10 @@
 
 - (IBAction)cancelPressed:(id)sender
 {
+  WastePoint *aWastepoint = wastePoint;
+  [self setWastePoint:nil];
+  [[[Database sharedInstance] managedObjectContext] deleteObject:aWastepoint];
+  [[Database sharedInstance] saveContext];
   [self.navigationController popViewControllerAnimated:NO];
   [self unHideTabbar];
 }
