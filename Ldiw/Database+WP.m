@@ -95,30 +95,27 @@
   NSInteger nrOfNodes = [[wpDict objectForKey:@"nr_of_nodes"] integerValue];
   [wpDict removeObjectForKey:@"nr_of_nodes"];
   
-  if (viewType == ViewTypeList) {
-    [point setDistanceValue:[distanceString floatValue]];
-    
-    // Create correct image objects
-    if ([wpPhotos length] > 0) {
-      point.images = nil;
-      NSRange photoNameRange = [wpPhotos rangeOfString:@":"];
-      NSString *photoname = [wpPhotos substringToIndex:photoNameRange.location];
-      Image *newImage = [self imageWithRemoteUrl:photoname];
-      if (![point.images containsObject:newImage]) {
-        [point addImagesObject:newImage];
-      }
+  [point setDistanceValue:[distanceString floatValue]];
+  [point setNrOfNodesValue:nrOfNodes];
+  
+  // Create correct image objects
+  if ([wpPhotos length] > 0) {
+    point.images = nil;
+    NSRange photoNameRange = [wpPhotos rangeOfString:@":"];
+    NSString *photoname = [wpPhotos substringToIndex:photoNameRange.location];
+    Image *newImage = [self imageWithRemoteUrl:photoname];
+    if (![point.images containsObject:newImage]) {
+      [point addImagesObject:newImage];
     }
-    
-    [point setCustomValues:nil];
-    for (NSString *key in [wpDict allKeys]) {
-      NSString *value = [wpDict objectForKey:key];
-      CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
-      if (valueToAdd) {
-        [point addCustomValuesObject:valueToAdd];
-      }
+  }
+  
+  [point setCustomValues:nil];
+  for (NSString *key in [wpDict allKeys]) {
+    NSString *value = [wpDict objectForKey:key];
+    CustomValue *valueToAdd = [self addCustomValueWithKey:key andValue:value];
+    if (valueToAdd) {
+      [point addCustomValuesObject:valueToAdd];
     }
-  } else if (viewType == ViewTypeLargeMap || viewType == ViewTypeSmallMap){
-    [point setNrOfNodesValue:nrOfNodes];
   }
 }
 
